@@ -1,0 +1,160 @@
+
+<?php
+session_start();
+
+
+/* Tell mysqli to throw an exception if an error occurs */
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+
+$mysql_conn = mysqli_connect('localhost', 'root', '', 'kleinerzeugernetzwerk');
+if ($mysql_conn->connect_error) {
+    die("Connection failed: " . $mysql_conn->connect_error);
+}
+echo "Connected successfully, ";
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    echo('Post method hit,');
+    $email = $mysql_conn->real_escape_string($_POST['email']);
+    $password = $mysql_conn->real_escape_string($_POST['password']);
+    $select_user = mysqli_query($mysql_conn, "SELECT `user_id` FROM `user_credential` WHERE `user_name` = '$email' && password = '$password'") or exit(mysqli_error($connectionID));
+    if(mysqli_num_rows($select_user)) {
+        $row = mysqli_fetch_array($select_user);
+        $userId = $row['user_id'];
+        echo "User_Found $userId";
+    }else{
+        echo "User not found";
+    }
+}
+
+$SIGN_UP_LOC = '/Kleinerzeugernetzwerk/php/sign_up.php';
+$LOGO_LOC = '/Kleinerzeugernetzwerk/images/logo.svg';
+$HOME_LOC = '/Kleinerzeugernetzwerk/index.php';
+
+?>
+
+
+<div>
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+        <a class="navbar-brand" href="<?php echo $HOME_LOC ?>">
+
+
+            <img src= "<?php echo $LOGO_LOC?>" width="160" height="33" class="d-inline-block align-center" alt="" loading="lazy">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <!--Content-->
+                <div class="modal-content form-elegant pb-4">
+                    <!--Header-->
+                    <div class="modal-header text-center">
+                        <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Sign in</strong></h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+
+
+                    <div class="registration_form">
+                        <form action="<?php echo $HOME_LOC ?>" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
+                            <div class="form-row">
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom01">E-mail</label>
+                                    <input type="text" class="form-control" id="validationCustom01" placeholder="Enter your email address" required name="email">
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="validationCustom02">Password</label>
+                                    <input type="password" class="form-control" id="validationCustom02" placeholder="Enter your password" required name="password">
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="text-right">
+                                <p>Forgot password?</p>
+                            </div>
+                            <button class="btn btn-primary btn-block" type="submit">Sign In</button>
+                        </form>
+                        <div class="text-center pt-3">
+                            <p>Not a memeber yet?</p>
+                        </div>
+
+
+
+
+                        <a class="btn btn-secondary btn-block" href="<?php echo $SIGN_UP_LOC ?>"> Register</a>
+
+                        <!--                            <button class="btn btn-secondary btn-block" href="../../php/sign_up.php">Register</button>-->
+
+                        <script>
+                            // Example starter JavaScript for disabling form submissions if there are invalid fields
+                            (function() {
+                                'use strict';
+                                window.addEventListener('load', function() {
+                                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                    var forms = document.getElementsByClassName('needs-validation');
+                                    // Loop over them and prevent submission
+                                    var validation = Array.prototype.filter.call(forms, function(form) {
+                                        form.addEventListener('submit', function(event) {
+                                            if (form.checkValidity() === false) {
+                                                event.preventDefault();
+                                                event.stopPropagation();
+                                            }
+                                            form.classList.add('was-validated');
+                                        }, false);
+                                    });
+                                }, false);
+                            })();
+                        </script>
+                    </div>
+
+
+
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+        <!-- Modal -->
+
+
+
+        <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+            <ul class="navbar-nav font-weight-bold">
+                <div class="navbar-nav">
+                    <li class="nav-item active ml-3">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#">Map<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active ml-3">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#">About Us<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active ml-3">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#">Events<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item active ml-3">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#">Contact Us<span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item active ml-3">
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#elegantModalForm"><span class="glyphicon glyphicon-log-in"></span>Sign In</a>
+                    </li>
+                </div>
+
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
