@@ -1,15 +1,20 @@
 
 <?php
-session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 
 /* Tell mysqli to throw an exception if an error occurs */
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
+$isLoggedIn = true;
+
 $mysql_conn = mysqli_connect('localhost', 'root', '', 'kleinerzeugernetzwerk');
 if ($mysql_conn->connect_error) {
     die("Connection failed: " . $mysql_conn->connect_error);
 }
+$_SESSION["isLoggedIn"] = false;
 echo "Connected successfully, ";
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     echo('Post method hit,');
@@ -19,20 +24,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(mysqli_num_rows($select_user)) {
         $row = mysqli_fetch_array($select_user);
         $userId = $row['user_id'];
+        $_SESSION["isLoggedIn"] = true;
         echo "User_Found $userId";
     }else{
+        $_SESSION["isLoggedIn"] = false;
         echo "User not found";
     }
 }
 
-$SIGN_UP_LOC = '/Kleinerzeugernetzwerk/php/sign_up.php';
-$LOGO_LOC = '/Kleinerzeugernetzwerk/images/logo.svg';
-$HOME_LOC = '/Kleinerzeugernetzwerk/index.php';
+$SIGN_UP_LOC = '/kleinerzeugernetzwerk/php/sign_up.php';
+$LOGO_LOC = '/kleinerzeugernetzwerk/images/logo.svg';
+$HOME_LOC = '/kleinerzeugernetzwerk/index.php';
+$PROFILE_IMAGE_DEFAULT = '/kleinerzeugernetzwerk/images/profile_placeholder.png';
 
 ?>
 
 
-<div>
+<div id="nav_bar" class="shadow-sm">
 
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
@@ -133,7 +141,7 @@ $HOME_LOC = '/Kleinerzeugernetzwerk/index.php';
 
         <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
             <ul class="navbar-nav font-weight-bold">
-                <div class="navbar-nav">
+                <div class="navbar-nav mr-auto">
                     <li class="nav-item active ml-3">
                         <a href="#" class="nav-link" data-toggle="modal" data-target="#">Map<span class="sr-only">(current)</span></a>
                     </li>
@@ -147,12 +155,43 @@ $HOME_LOC = '/Kleinerzeugernetzwerk/index.php';
                         <a href="#" class="nav-link" data-toggle="modal" data-target="#">Contact Us<span class="sr-only">(current)</span></a>
                     </li>
 
-                    <li class="nav-item active ml-3">
-                        <a href="#" class="nav-link" data-toggle="modal" data-target="#elegantModalForm"><span class="glyphicon glyphicon-log-in"></span>Sign In</a>
-                    </li>
+                    <!--
+<li class="nav-item active ml-3">
+<a href="#" class="nav-link" data-toggle="modal" data-target="#elegantModalForm">Sign In</a>
+</li>
+-->
+
                 </div>
 
             </ul>
+            <div class="row mr-3">
+                <div class="bg-white rounded rounded-pill shadow-sm">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i class="fa fa-search"></i></button>
+                        </div>
+                        <input type="search" placeholder="Search" aria-describedby="button-addon2" class="form-control border-0 bg-white  rounded-pill">
+                    </div>
+                </div>
+                
+                <?php 
+                    if ($_SESSION["isLoggedIn"] == false){
+                        echo '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right">Sign In</button>';
+                    }else{
+                        echo '<div  class="rounded-circle bg-info p-1 ml-3">
+                    <img src="'.$PROFILE_IMAGE_DEFAULT.'" class="d-block rounded-circle" width="36px" height="36px"></div>';
+                    }
+                ?>
+<!--
+                <button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right">Sign In</button>
+
+                <div  class="rounded-circle bg-info p-1">
+                    <img src="<?php echo $PROFILE_IMAGE_DEFAULT ?>" class="mx-auto d-block rounded-circle" width="36px" height="36px">
+                                    <button class="btn bg-transparent">Edit</button>
+                </div>
+-->
+
+            </div>           
         </div>
     </nav>
 </div>

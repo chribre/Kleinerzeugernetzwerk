@@ -1,7 +1,7 @@
 <?php
 //session_start();
 
-
+$HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
 /* Tell mysqli to throw an exception if an error occurs */
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
@@ -80,75 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     echo "post method not found!,";
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//
-//
-//
-//
-//
-//$mysql_conn = mysqli_connect('localhost', 'root', '', 'kleinerzeugernetzwerk');
-//
-//if ($mysql_conn->connect_error) {
-//    die("Connection failed: " . $mysql_conn->connect_error);
-//}
-//echo "Connected successfully, ";
-//
-//if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-//    echo('Post method hit,');
-//    $password = $mysql_conn->real_escape_string($_POST['password']);
-//    $repeat_password = $mysql_conn->real_escape_string($_POST['psw-repeat']);
-//    if ($password === $repeat_password){
-//        $email = $mysql_conn->real_escape_string($_POST['email']);
-//        $select = mysqli_query($mysql_conn, "SELECT `email` FROM `user` WHERE `email` = '$email'") or exit(mysqli_error($connectionID));
-//        if(mysqli_num_rows($select)) {
-//            exit('This email is already being used');
-//        }else{
-//            $first_name = $mysql_conn->real_escape_string($_POST['first_name']);
-//            $middle_name = $mysql_conn->real_escape_string($_POST['middle_name']);
-//            $last_name = $mysql_conn->real_escape_string($_POST['last_name']);
-//            $dob = $mysql_conn->real_escape_string($_POST['dob']);
-//            $street = $mysql_conn->real_escape_string($_POST['street']);
-//            $house_number = $mysql_conn->real_escape_string($_POST['house_number']);
-//            $zip = $mysql_conn->real_escape_string($_POST['zip']);
-//            $city = $mysql_conn->real_escape_string($_POST['city']);
-//            $country = $mysql_conn->real_escape_string($_POST['country']);
-//            $phone = $mysql_conn->real_escape_string($_POST['phone']);
-//            $mobile = $mysql_conn->real_escape_string($_POST['mobile']);
-//
-//            
-//            $sql = "INSERT INTO user (salutations, first_name, middle_name, last_name, dob, street, house_number, zip, city, country, phone, mobile, email, user_type, is_active, is_blocked)"
-//                . "VALUES ('Mr.', '$first_name', '$middle_name', '$last_name', '$dob', '$street', '$house_number', '$zip', '$city', '$country', '$phone', '$mobile', '$email', 1, 1, 0)";
-//
-//            echo $sql;
-//
-//
-//            if ($mysql_conn->query($sql) === true){
-//                echo "account created, ";
-//            }else{
-//                echo "user creation failed,";
-//            }
-//        }
-//    }else{
-//        echo "Passwords doesn't match.";
-//    }
-//}else{
-//    echo "post method not found!,";
-//}
 ?>
 
 
@@ -159,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         <meta charset="UTF-8">
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-        <link rel="stylesheet" type="text/css" href="../css/custom/home.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $HOME_CSS_LOC ?>" />
 
         <script
                 src="https://code.jquery.com/jquery-3.5.1.min.js"

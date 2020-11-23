@@ -29,3 +29,11 @@
 .sign_up_head{
     justify-content: center;
 }
+html, body {
+  height: 100%;
+}
+
+.full-height {
+  height: 88%;
+}
+
