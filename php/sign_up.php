@@ -114,8 +114,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         <script src="../assets/date_picker/datedropper.pro.min.js"></script>
     </head>
     <body>
-        <?php $comp_path = "../assets/components/"; include($comp_path."navigation_bar.html"); ?>
+        <?php $comp_path = "../assets/components/"; include($comp_path."navigation_bar.php"); ?>
 
+        <div class="mx-xl-5">
+        
 
         <div class="justify-content-center text-center">
             <h3 class="pt-4">Sign Up</h3>
@@ -299,6 +301,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             </script>
         </div>
 
+</div>
 
 
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

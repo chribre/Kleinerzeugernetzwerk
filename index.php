@@ -47,7 +47,7 @@ $("#mapid").css("height",500px);
 
 
 
-        <?php $comp_path = "./assets/components/"; include($comp_path."navigation_bar.html"); ?>
+        <?php $comp_path = "./assets/components/"; include($comp_path."navigation_bar.php"); ?>
 
         <div id="mapid" class="full-height"></div>
 

@@ -36,6 +36,16 @@ $SIGN_UP_LOC = '/kleinerzeugernetzwerk/php/sign_up.php';
 $LOGO_LOC = '/kleinerzeugernetzwerk/images/logo.svg';
 $HOME_LOC = '/kleinerzeugernetzwerk/index.php';
 $PROFILE_IMAGE_DEFAULT = '/kleinerzeugernetzwerk/images/profile_placeholder.png';
+$LOG_OUT_IMG = '/kleinerzeugernetzwerk/images/logout.png';
+
+
+if(isset($_GET['logOut'])){
+    logOutUser();
+
+}
+function logOutUser(){
+    $_SESSION["isLoggedIn"] = false;
+}
 
 ?>
 
@@ -165,7 +175,7 @@ $PROFILE_IMAGE_DEFAULT = '/kleinerzeugernetzwerk/images/profile_placeholder.png'
 
             </ul>
             <div class="row mr-3">
-                <div class="bg-white rounded rounded-pill shadow-sm">
+                <div class="bg-white rounded rounded-pill shadow-sm mx-sm-4">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i class="fa fa-search"></i></button>
@@ -173,22 +183,30 @@ $PROFILE_IMAGE_DEFAULT = '/kleinerzeugernetzwerk/images/profile_placeholder.png'
                         <input type="search" placeholder="Search" aria-describedby="button-addon2" class="form-control border-0 bg-white rounded-pill align-middle">
                     </div>
                 </div>
-                
-                <?php 
-                    if ($_SESSION["isLoggedIn"] == false){
-                        echo '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right">Sign In</button>';
-                    }else{
-                        echo '<div  class="rounded-circle bg-info p-1 ml-3">
-                    <img src="'.$PROFILE_IMAGE_DEFAULT.'" class="d-block rounded-circle" width="36px" height="36px"></div>';
-                    }
-                ?>
-<!--
-                <button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right">Sign In</button>
 
-                <div  class="rounded-circle bg-info p-1">
-                    <img src="<?php echo $PROFILE_IMAGE_DEFAULT ?>" class="mx-auto d-block rounded-circle" width="36px" height="36px">
-                                    <button class="btn bg-transparent">Edit</button>
-                </div>
+                <?php 
+    if ($_SESSION["isLoggedIn"] == false){
+        echo '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right">Sign In</button>';
+    }else{
+        echo '<div class="dropdown rounded-circle bg-info p-1 ml-3">
+                    <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="rounded-circle bg-info">
+                        <img src="'.$PROFILE_IMAGE_DEFAULT.'" class="d-block rounded-circle" width="36px" height="36px">
+                    </div>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
+                        <a class="dropdown-item" href="#">User Name</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="?logOut=true"><img class="mr-2" src="'.$LOG_OUT_IMG.'" width=20px, height=20px/>Log Out</a>
+                    </div>
+                </div>';
+    }
+                ?>
+                <!--
+<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right">Sign In</button>
+
+<div  class="rounded-circle bg-info p-1">
+<img src="<?php echo $PROFILE_IMAGE_DEFAULT ?>" class="mx-auto d-block rounded-circle" width="36px" height="36px">
+<button class="btn bg-transparent">Edit</button>
+</div>
 -->
 
             </div>           
