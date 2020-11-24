@@ -1,6 +1,8 @@
 <?php 
-
-$HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+ $HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
 
 ?>
 

@@ -1,5 +1,7 @@
 <?php
-//session_start();
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
 $HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
 /* Tell mysqli to throw an exception if an error occurs */
