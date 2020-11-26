@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         <script src="../assets/date_picker/datedropper.pro.min.js"></script>
     </head>
     <body>
-        <?php $comp_path = "../assets/components/"; include($comp_path."navigation_bar.php"); ?>
+        <?php $comp_path = "../assets/components/"; include($comp_path."navigationBar.php"); ?>
 
         <div class="mx-xl-5">
         
@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         </div>
 
         <div class="registration_form">
-            <form action="sign_up.php" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
+            <form action="signUp.php" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
                 <div class="form-row">
                     <div class="col-md-1 mb-3">
                         <label for="exampleFormControlSelect1">Salutation</label>
