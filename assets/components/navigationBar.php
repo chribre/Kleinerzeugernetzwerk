@@ -23,18 +23,12 @@ $loginFailAlert = '<div class="alert alert-success" id="success-alert">
 </div>';
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     echo('Post method hit,');
-    $email = $mysql_conn->real_escape_string($_POST['email']);
-    $password = $mysql_conn->real_escape_string($_POST['password']);
-    $select_user = mysqli_query($mysql_conn, "SELECT `user_id` FROM `user_credential` WHERE `user_name` = '$email' && password = '$password'") or exit(mysqli_error($connectionID));
-    if(mysqli_num_rows($select_user)) {
-        $row = mysqli_fetch_array($select_user);
-        $userId = $row['user_id'];
-        $_SESSION["isLoggedIn"] = true;
-        echo "User_Found $userId";
+    $email = escapeSQLString($_POST['email']);
+    $password = escapeSQLString($_POST['password']);
+    if(loginUser($email, $password)){
+        echo "login success";
     }else{
-        $_SESSION["isLoggedIn"] = false;
-        echo $loginFailAlert;
-
+        echo "login faield. retry!";
     }
 }
 
@@ -120,7 +114,7 @@ function logOutUser(){
                         <img src="'.$PROFILE_IMAGE_DEFAULT.'" class="d-block rounded-circle" width="36px" height="36px">
                     </div>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
-                        <a class="dropdown-item" href="'.$VIEW_PROFILE.'">User Name</a>
+                        <a class="dropdown-item" href="'.$VIEW_PROFILE.'">'.$_SESSION["userName"].'</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="?logOut=true"><img class="mr-2" src="'.$LOG_OUT_IMG.'" width=20px, height=20px/>Log Out</a>
                     </div>

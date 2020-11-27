@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 
 <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/constants.php");
+include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
 $HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
 ?>
 
