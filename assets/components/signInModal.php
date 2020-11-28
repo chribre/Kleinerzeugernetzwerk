@@ -16,7 +16,7 @@
 
 
             <div class="registration_form">
-                <form action="<?php echo $HOME_LOC ?>" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
+                <form enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
                             <label for="validationCustom01">E-mail</label>

@@ -3,6 +3,8 @@
 <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/constants.php");
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
 $HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
+$SIDE_BAR_CSS = '/kleinerzeugernetzwerk/css/custom/sidebar.css';
+$DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min.js';
 ?>
 
 <!doctype html>
@@ -16,6 +18,7 @@ $HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
         <link rel="stylesheet" type="text/css" href="<?php echo $HOME_CSS_LOC ?>" />
+        <link rel="stylesheet" type="text/css" href="<?php echo $SIDE_BAR_CSS ?>" />
 
         <!--    LEAFLET JS-->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -27,6 +30,15 @@ $HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
                 integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
                 crossorigin=""></script>
 
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+        
+        <script
+                src="https://code.jquery.com/jquery-3.5.1.min.js"
+                integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+                crossorigin="anonymous"></script>
+  
+                <script src="https://cdn.datedropper.com/get/xm7ommbtksza213pj1kj2ugzudj0rfxc"></script>
+        <script src="<?php echo $DATE_PICKER_JS ?>"></script>
 
         <title>Kleinerzeuger Netzwerk</title>
 
@@ -34,5 +46,7 @@ $HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
     </head> 
     <body>
 
-
-        <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/navigationBar.php");?>
+        <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/navigationBar.php");
+        
+        ?>
+        

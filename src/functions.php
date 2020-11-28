@@ -1,6 +1,16 @@
 <?php 
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/config.php");
 
+
+function redirect($location){
+
+
+    header("Location:" . $location);
+    exit;
+
+}
+
+
 function createUser($salutation, $fName, $mName, $lName, $dob, $street, $houseNum, $zip, $city, $country, $phone, $mobile, $email, $password, $userType, $isActive, $isBlocked){
 
     global $dbConnection;
@@ -99,6 +109,7 @@ function loginUser($email, $password){
         return true;
     }else{
         $_SESSION["isLoggedIn"] = false;
+        redirect("/kleinerzeugernetzwerk/src/errorPage.php");
         echo $loginFailAlert;
     }
     return false;
@@ -114,11 +125,22 @@ function getUserDetails($userId){
         $mName = $row['middle_name'];
         $lName = $row['last_name'];
         $_SESSION["userName"] = $fName." ".$mName." ".$lName;
-        
+        $email = $row['email'];
+        $_SESSION["email"] = $email;
+        redirect("/kleinerzeugernetzwerk/index.php");
     }else{
         
     }
 }
 function getNameFormatted($firstName, $middleName, $lastName){
+}
+
+
+
+
+function logout(){
+    $_SESSION["isLoggedIn"] = false;
+    $_SESSION["userName"] = "";
+    $_SESSION["email"] = "";
 }
 ?>

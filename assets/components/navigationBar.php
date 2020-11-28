@@ -4,17 +4,11 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-
 /* Tell mysqli to throw an exception if an error occurs */
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $isLoggedIn = true;
 
-$mysql_conn = mysqli_connect('localhost', 'root', '', 'kleinerzeugernetzwerk');
-if ($mysql_conn->connect_error) {
-    die("Connection failed: " . $mysql_conn->connect_error);
-}
-$_SESSION["isLoggedIn"] = false;
 echo "Connected successfully, ";
 
 $loginFailAlert = '<div class="alert alert-success" id="success-alert">
@@ -54,7 +48,7 @@ function logOutUser(){
 <div id="nav_bar" class="shadow-sm">
 
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top my-0">
         <a class="navbar-brand" href="<?php echo $HOME_LOC ?>">
 
 
@@ -104,7 +98,7 @@ function logOutUser(){
                         <input type="search" placeholder="Search" aria-describedby="button-addon2" class="form-control border-0 bg-white rounded-pill align-middle">
                     </div>
                 </div>
-
+ 
                 <?php 
                 if ($_SESSION["isLoggedIn"] == false){
                     echo '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right">Sign In</button>';
@@ -114,7 +108,7 @@ function logOutUser(){
                         <img src="'.$PROFILE_IMAGE_DEFAULT.'" class="d-block rounded-circle" width="36px" height="36px">
                     </div>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
-                        <a class="dropdown-item" href="'.$VIEW_PROFILE.'">'.$_SESSION["userName"].'</a>
+                        <a class="dropdown-item font-weight-bold text-uppercase" href="'.$VIEW_PROFILE.'">'.$_SESSION["userName"].'</br><span class=" text font-weight-light text-lowercase">'.$_SESSION["email"].'</span> </a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="?logOut=true"><img class="mr-2" src="'.$LOG_OUT_IMG.'" width=20px, height=20px/>Log Out</a>
                     </div>

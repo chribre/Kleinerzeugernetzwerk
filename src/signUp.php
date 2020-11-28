@@ -3,7 +3,7 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-$HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
+//$HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.php");
 //include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/config.php");
 //include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
