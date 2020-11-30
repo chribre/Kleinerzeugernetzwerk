@@ -142,5 +142,16 @@ function logout(){
     $_SESSION["isLoggedIn"] = false;
     $_SESSION["userName"] = "";
     $_SESSION["email"] = "";
+    redirect("/kleinerzeugernetzwerk/index.php");
 }
+
+
+//Show profile screen in <div> when clicking on Profile in sidebar
+function showUserProfileScreen() {
+    echo 'I just ran a php function';
+  }
+
+  if (isset($_GET['user'])) {
+    showUserProfileScreen();
+  }
 ?>

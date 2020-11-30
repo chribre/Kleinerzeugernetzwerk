@@ -31,11 +31,11 @@ $LOGO_LOC = '/kleinerzeugernetzwerk/images/logo.svg';
 $HOME_LOC = '/kleinerzeugernetzwerk/index.php';
 $PROFILE_IMAGE_DEFAULT = '/kleinerzeugernetzwerk/images/profile_placeholder.png';
 $LOG_OUT_IMG = '/kleinerzeugernetzwerk/images/logout.png';
-$VIEW_PROFILE = '/kleinerzeugernetzwerk/src/profile.php';
+$VIEW_PROFILE = '/kleinerzeugernetzwerk/src/profile.php?menu=profile';
 
 
 if(isset($_GET['logOut'])){
-    logOutUser();
+    logOut();
 
 }
 function logOutUser(){
@@ -90,7 +90,7 @@ function logOutUser(){
 
             </ul>
             <div class="row mr-3">
-                <div class="bg-white rounded rounded-pill shadow-sm mx-sm-4">
+                <div class="bg-white rounded rounded-pill shadow-sm mx-sm-4 align-items-center">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i class="fa fa-search"></i></button>

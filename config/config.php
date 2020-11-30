@@ -33,7 +33,7 @@ mysqli_query($dbConnection,$query);
 
 if($dbConnection) {
 
-echo "We are connected";
+//echo "We are connected";
 
 }
 
