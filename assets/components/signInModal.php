@@ -37,6 +37,7 @@
                     <div class="text-right">
                         <p>Forgot password?</p>
                     </div>
+                    <input type="hidden" name="signIn" value="true">
                     <button class="btn btn-primary btn-block" type="submit">Sign In</button>
                 </form>
                 <div class="text-center pt-3">

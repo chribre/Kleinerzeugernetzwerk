@@ -15,7 +15,7 @@ $loginFailAlert = '<div class="alert alert-success" id="success-alert">
   <button type="button" class="close" data-dismiss="alert">x</button>
   <strong>Success! </strong> Product have added to your wishlist.
 </div>';
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['signIn'] == "true"){
     echo('Post method hit,');
     $email = escapeSQLString($_POST['email']);
     $password = escapeSQLString($_POST['password']);
@@ -98,12 +98,14 @@ function logOutUser(){
                         <input type="search" placeholder="Search" aria-describedby="button-addon2" class="form-control border-0 bg-white rounded-pill align-middle">
                     </div>
                 </div>
- 
+
                 <?php 
-                if ($_SESSION["isLoggedIn"] == false){
-                    echo '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right">Sign In</button>';
-                }else{
-                    echo '<div class="dropdown rounded-circle bg-info p-1 ml-3">
+                $signInButton = '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right">Sign In</button>';
+                if (isset($_SESSION['isLoggedIn'])) {
+                    if ($_SESSION["isLoggedIn"] == false){
+                        echo $signInButton;
+                    }else{
+                        echo '<div class="dropdown rounded-circle bg-info p-1 ml-3">
                     <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="rounded-circle bg-info">
                         <img src="'.$PROFILE_IMAGE_DEFAULT.'" class="d-block rounded-circle" width="36px" height="36px">
                     </div>
@@ -113,6 +115,9 @@ function logOutUser(){
                         <a class="dropdown-item" href="?logOut=true"><img class="mr-2" src="'.$LOG_OUT_IMG.'" width=20px, height=20px/>Log Out</a>
                     </div>
                 </div>';
+                    }
+                }else{
+                    echo $signInButton;
                 }
                 ?>
 

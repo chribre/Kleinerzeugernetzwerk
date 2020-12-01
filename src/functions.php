@@ -11,15 +11,15 @@ function redirect($location){
 }
 
 
-function createUser($salutation, $fName, $mName, $lName, $dob, $street, $houseNum, $zip, $city, $country, $phone, $mobile, $email, $password, $userType, $isActive, $isBlocked){
+function createUser($salutation, $fName, $mName, $lName, $dob, $street, $houseNum, $zip, $city, $country, $phone, $mobile, $email, $password, $userType, $isActive, $isBlocked, $profileImageName){
 
     global $dbConnection;
     /* Start transaction */
     mysqli_begin_transaction($dbConnection);
 
     echo "going to insert";
-    $sql = "INSERT INTO user (salutations, first_name, middle_name, last_name, dob, street, house_number, zip, city, country, phone, mobile, email, user_type, is_active, is_blocked)"
-        . "VALUES ('$salutation', '$fName', '$mName', '$lName', '$dob', '$street', '$houseNum', '$zip', '$city', '$country', '$phone', '$mobile', '$email', $userType, $isActive, $isBlocked)";
+    $sql = "INSERT INTO user (salutations, first_name, middle_name, last_name, dob, street, house_number, zip, city, country, phone, mobile, email, profile_image_name, user_type, is_active, is_blocked)"
+        . "VALUES ('$salutation', '$fName', '$mName', '$lName', '$dob', '$street', '$houseNum', '$zip', '$city', '$country', '$phone', '$mobile', '$email', '$profileImageName', $userType, $isActive, $isBlocked)";
 
     try{
         echo "trying to insert";
