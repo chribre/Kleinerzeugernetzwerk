@@ -37,3 +37,17 @@ html, body {
   height: 88%;
 }
 
+#productCard{
+    background-color: #fafafa;
+}
+#addNewProduct .modal-dialog {
+    -webkit-transform: translate(0,-50%);
+    -o-transform: translate(0,-50%);
+    transform: translate(0,-50%);
+    top: 50%;
+    margin: 0 auto;
+}
+
+.modal-lg {
+    max-width: 80% !important;
+}

@@ -90,7 +90,7 @@ function logOutUser(){
 
             </ul>
             <div class="row mr-3">
-                <div class="bg-white rounded rounded-pill shadow-sm mx-sm-4 align-items-center">
+                <div class="bg-white rounded rounded-pill shadow-sm mx-sm-4 align-items-center align-self-center">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i class="fa fa-search"></i></button>
