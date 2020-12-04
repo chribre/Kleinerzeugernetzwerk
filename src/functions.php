@@ -1,7 +1,6 @@
 <?php 
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/config.php");
 
-
 function redirect($location){
 
 
@@ -17,7 +16,6 @@ function createUser($salutation, $fName, $mName, $lName, $dob, $street, $houseNu
     /* Start transaction */
     mysqli_begin_transaction($dbConnection);
 
-    echo "going to insert";
     $sql = "INSERT INTO user (salutations, first_name, middle_name, last_name, dob, street, house_number, zip, city, country, phone, mobile, email, profile_image_name, user_type, is_active, is_blocked)"
         . "VALUES ('$salutation', '$fName', '$mName', '$lName', '$dob', '$street', '$houseNum', '$zip', '$city', '$country', '$phone', '$mobile', '$email', '$profileImageName', $userType, $isActive, $isBlocked)";
 
@@ -46,7 +44,7 @@ function saveUserCredentials($userId, $email, $password){
     global $dbConnection;
     $user_credential_query = "INSERT INTO user_credential(user_id, user_name, password)"
         ."VALUES($userId, '$email', '$password')";
-    
+
     try{
         mysqli_query($dbConnection, $user_credential_query);
         confirmQuery($user_credential_query);
@@ -105,6 +103,7 @@ function loginUser($email, $password){
         $userId = $row['user_id'];
         $_SESSION["isLoggedIn"] = true;
         echo "User_Found $userId";
+        insertSignInToken();
         getUserDetails($userId);
         return true;
     }else{
@@ -127,9 +126,10 @@ function getUserDetails($userId){
         $_SESSION["userName"] = $fName." ".$mName." ".$lName;
         $email = $row['email'];
         $_SESSION["email"] = $email;
+        $_SESSION["userId"] = $userId;
         redirect("/kleinerzeugernetzwerk/index.php");
     }else{
-        
+
     }
 }
 function getNameFormatted($firstName, $middleName, $lastName){
@@ -149,9 +149,80 @@ function logout(){
 //Show profile screen in <div> when clicking on Profile in sidebar
 function showUserProfileScreen() {
     echo 'I just ran a php function';
-  }
+}
 
-  if (isset($_GET['user'])) {
+if (isset($_GET['user'])) {
     showUserProfileScreen();
-  }
+
+}
+
+
+function insertSignInToken(){
+    global $dbConnection;
+    $uid = uniqid(php_uname('n'), true);
+    $userId = $_SESSION["userId"];
+    $accessTokenSql = "INSERT INTO access_token (user_id, token)"
+        . "VALUES ($userId,'$uid')";
+    try{
+        mysqli_query($dbConnection, $accessTokenSql);
+        confirmQuery($accessTokenSql);
+        mysqli_commit($dbConnection);
+        $_SESSION["token"] = $uid;
+    }catch(mysqli_sql_exception $exception){
+        mysqli_rollback($dbConnection);
+        var_dump($exception);
+        throw $exception;
+    }   
+
+}
+
+function isTokenValid(){
+    global $dbConnection;
+
+    if (isset($_SESSION["token"]) && isset($_SESSION["userId"])){
+        $token = $_SESSION["token"];
+        $userId = $_SESSION["userId"];
+        $validAccessTokenQuery = mysqli_query($dbConnection, "SELECT * FROM `access_token` WHERE `token` = '$token' AND `user_id` = '$userId'");
+        confirmQuery($validAccessToken);
+        if (mysqli_num_rows($validAccessTokenQuery)){
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        return false;
+    }
+}
+
+function clearAccessToken(){
+    
+}
+
+
+//Add product details to product table
+function addProduct($productName, $productDescription, $productCategory, $productPrice, $priceQuantity, $unit, $isProcessedFood){
+    global $dbConnection;
+    if (isTokenValid()){
+        $producerId = $_SESSION["userId"];
+        mysqli_begin_transaction($dbConnection);
+        $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, is_processed_product, is_available, price_per_unit, unit, product_rating, created_date)"
+            . "VALUES ($producerId, '$productName', '$productDescription', 1, true, true, $productPrice, 1, 0)";
+        
+        try{
+        echo "trying to insert";
+        echo "\n ".$sql."\n";
+        mysqli_query($dbConnection, $productInsertQuery);
+        $productId = $dbConnection->insert_id;
+        echo "inserted";
+        echo "product id is $productId, ";
+    }catch(mysqli_sql_exception $exception){
+        echo "user creation failed,";
+        mysqli_rollback($dbConnection);
+        var_dump($exception);
+        throw $exception;
+    }
+        
+    }
+
+}
 ?>

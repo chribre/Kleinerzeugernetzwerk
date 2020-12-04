@@ -22,6 +22,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 //    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
 
 global $dbConnection;
+//PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['signUp'] == "true"){
     echo('Post method hit,');
     $password = escapeSQLString($_POST['password']);
@@ -89,47 +90,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['signUp'] == "true"){
 
 
 
-
-                createUser($salutation, $first_name, $middle_name, $last_name, $dob, $street, $house_number, $zip, $city, $country, $phone, $mobile, $email, $password, $userType, $isActive, $isBlocked, $fileNameNew);
-                }
-                }else{
-                    echo "Passwords doesn't match.";
-                }
-                }else{
-                    echo "post method not found!,";
-                }
-
-
-                function uploadprofileImage(){
-                    $file = $_FILES['profileImage'];
-                    $fileName = $_FILES['profileImage']['name'];
-                    $fileTmpName = $_FILES['profileImage']['tmp_name'];
-                    $fileSize = $_FILES['profileImage']['size'];
-                    $fileError = $_FILES['profileImage']['error'];
-                    $fileType = $_FILES['profileImage']['type'];
+            //create user function which is written in functions.php to generate query and insert values to the user table
+            createUser($salutation, $first_name, $middle_name, $last_name, $dob, $street, $house_number, $zip, $city, $country, $phone, $mobile, $email, $password, $userType, $isActive, $isBlocked, $fileNameNew);
+        }
+    }else{
+        echo "Passwords doesn't match.";
+    }
+}else{
+    echo "post method not found!,";
+}
 
 
-                    $fileExt = explode('.', $fileName);
-                    $fileActualExt = strtolower(end($fileExt));
+function uploadprofileImage(){
+    $file = $_FILES['profileImage'];
+    $fileName = $_FILES['profileImage']['name'];
+    $fileTmpName = $_FILES['profileImage']['tmp_name'];
+    $fileSize = $_FILES['profileImage']['size'];
+    $fileError = $_FILES['profileImage']['error'];
+    $fileType = $_FILES['profileImage']['type'];
 
-                    $allowed = array('jpeg', 'jpg', 'png');
 
-                    if (in_array($fileActualExt, $allowed)){
-                        if ($fileError === 0){
-                            if ($fileSize < 100000 ){
-                                $fileNameNew = uniqid('', true).".".$fileActualExt;
-                                $fileDestination = '/uploads/'.$fileNameNew;
-                                move_uploaded_file($fileTmpName, $fileDestination);                
-                            }else{
-                                echo "your file size is too high";
-                            }
-                        }else{
-                            echo "There was an error uploading your profile image";
-                        }
-                    }else{
-                        echo "Cannot upload file of this type";
-                    }
-                }
+    $fileExt = explode('.', $fileName);
+    $fileActualExt = strtolower(end($fileExt));
+
+    $allowed = array('jpeg', 'jpg', 'png');
+
+    if (in_array($fileActualExt, $allowed)){
+        if ($fileError === 0){
+            if ($fileSize < 100000 ){
+                $fileNameNew = uniqid('', true).".".$fileActualExt;
+                $fileDestination = '/uploads/'.$fileNameNew;
+                move_uploaded_file($fileTmpName, $fileDestination);                
+            }else{
+                echo "your file size is too high";
+            }
+        }else{
+            echo "There was an error uploading your profile image";
+        }
+    }else{
+        echo "Cannot upload file of this type";
+    }
+}
 ?>
 
 
@@ -150,7 +151,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['signUp'] == "true"){
 
 
 
-
+    <!--Form to capure data from user for registration-->
     <div class="registration_form">
         <form action="signUp.php" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
             <div  class="rounded-circle pb-4" width="152px" height="152px">

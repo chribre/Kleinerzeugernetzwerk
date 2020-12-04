@@ -1,5 +1,91 @@
+
+<?php
+global $dbConnection;
+//PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    echo('add product post method hit,');
+    //    $password = escapeSQLString($_POST['password']);
+    //    $repeat_password = escapeSQLString($_POST['psw-repeat']);
+    //    if ($password === $repeat_password){
+    //        $email = escapeSQLString($_POST['email']);
+    //
+    //        if (isUserAlreadyExist($email)){
+    //            echo "This email is already being used";
+    //            exit('This email is already being used');
+    //        }else{
+    //            $salutation = escapeSQLString($_POST['salutation']);
+    //            $first_name = escapeSQLString($_POST['first_name']);
+    //            $middle_name = escapeSQLString($_POST['middle_name']);
+    //            $last_name = escapeSQLString($_POST['last_name']);
+    //            $dob = escapeSQLString($_POST['dob']);
+    //            $street = escapeSQLString($_POST['street']);
+    //            $house_number = escapeSQLString($_POST['house_number']);
+    //            $zip = escapeSQLString($_POST['zip']);
+    //            $city = escapeSQLString($_POST['city']);
+    //            $country = escapeSQLString($_POST['country']);
+    //            $phone = escapeSQLString($_POST['phone']);
+    //            $mobile = escapeSQLString($_POST['mobile']);
+    //
+    //
+    //            $userType = 1;
+    //            $isActive = 1;
+    //            $isBlocked = 0;
+    //
+    //
+    //            $fileNameNew = null;
+    //            if (isset($_FILES['file'])){
+    //                $file = $_FILES['file'];
+    //                echo $file;
+    //                $fileName = $_FILES['file']['name'];
+    //                $fileTmpName = $_FILES['file']['tmp_name'];
+    //                $fileSize = $_FILES['file']['size'];
+    //                $fileError = $_FILES['file']['error'];
+    //                $fileType = $_FILES['file']['type'];
+    //
+    //
+    //                $fileExt = explode('.', $fileName);
+    //                $fileActualExt = strtolower(end($fileExt));
+    //
+    //                $allowed = array('jpeg', 'jpg', 'png');
+    //                echo $fileActualExt;
+    //                if (in_array($fileActualExt, $allowed)){
+    //                    if ($fileError === 0){
+    //                        if ($fileSize < 100000 ){
+    //                            $fileNameNew = uniqid('', true).".".$fileActualExt;
+    //                            $fileDestination = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/".$fileNameNew;
+    //                            move_uploaded_file($fileTmpName, $fileDestination);  
+    //                            echo "filed upload success";
+    //                        }else{
+    //                            echo "your file size is too high";
+    //                        }
+    //                    }else{
+    //                        echo "There was an error uploading your profile image";
+    //                    }
+    //                }else{
+    //                    echo "Cannot upload file of this type";
+    //                }
+    //            }
+    //
+    //
+    //
+    //
+    //            //create user function which is written in functions.php to generate query and insert values to the user table
+    //            createUser($salutation, $first_name, $middle_name, $last_name, $dob, $street, $house_number, $zip, $city, $country, $phone, $mobile, $email, $password, $userType, $isActive, $isBlocked, $fileNameNew);
+    //        }
+    //    }else{
+    //        echo "Passwords doesn't match.";
+    //    }
+    //}else{
+    //    echo "post method not found!,";
+}
+
+?>
+
+
+
+
 <div class="modal fade" id="addNewProduct">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="form">
         <div class="modal-content">
             <div class="modal-header">
                 <script type="text/javascript">
@@ -90,10 +176,10 @@
             </div>
             <div class="modal-body m-3">
                 <p>Modal body text goes here.</p>
-                <form>
+                <form method="post" id="newProductForm">
                     <div class="form-group">
                         <label for="exampleInputEmail1">Product Name</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Product name">
+                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Product name">
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlTextarea1">Product Description</label>
@@ -182,16 +268,24 @@
                         <div>
                             <button type="submit" class="btn btn-primary">Save</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
                         </div>
 
                     </div>
 
                 </form>
             </div>
-
         </div>
     </div>
 </div>
+
+<!--
+<script>
+$("#newProductForm").submit(function(e) {
+    e.preventDefault();
+});
+</script>
+-->
 
 
 
