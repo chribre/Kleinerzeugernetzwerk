@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2020 at 08:33 PM
+-- Generation Time: Dec 07, 2020 at 05:10 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -25,6 +25,31 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `access_token`
+--
+
+CREATE TABLE `access_token` (
+  `token_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `token` text NOT NULL,
+  `created_time` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `access_token`
+--
+
+INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALUES
+(1, 16, 'AW03330105fca53fce97d87.49003284', '2020-12-04 15:21:32'),
+(2, 16, 'AW03330105fca731fb5e856.97079431', '2020-12-04 17:34:23'),
+(3, 16, 'AW03330105fcddb665bb8d9.90991896', '2020-12-07 07:36:06'),
+(4, 16, 'AW03330105fcde8ba7deb20.27684961', '2020-12-07 08:32:58'),
+(5, 16, 'AW03330105fce30cce97672.39648414', '2020-12-07 13:40:28'),
+(6, 16, 'AW03330105fce4598a9aa41.65503189', '2020-12-07 15:09:12');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `farm_land`
 --
 
@@ -36,6 +61,100 @@ CREATE TABLE `farm_land` (
   `farm_location` point NOT NULL,
   `farm_area` double DEFAULT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feature_type`
+--
+
+CREATE TABLE `feature_type` (
+  `feature_type_id` int(11) NOT NULL,
+  `feature_name` varchar(60) NOT NULL,
+  `feature_description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `feature_type`
+--
+
+INSERT INTO `feature_type` (`feature_type_id`, `feature_name`, `feature_description`) VALUES
+(1, 'Bio', 'Bio food is food produced by methods complying with the standards of organic farming.'),
+(2, 'Vegan', 'Vegan'),
+(3, 'Vegetarian', 'Vegetarian'),
+(4, 'Non-vegetarian', 'Non-vegetarian');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `product_id` int(11) NOT NULL,
+  `producer_id` int(11) NOT NULL,
+  `product_name` varchar(100) NOT NULL,
+  `product_description` text NOT NULL,
+  `product_category` int(11) NOT NULL,
+  `is_processed_product` tinyint(1) NOT NULL,
+  `is_available` tinyint(1) NOT NULL,
+  `price_per_unit` float NOT NULL,
+  `unit` int(11) NOT NULL,
+  `product_rating` float DEFAULT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_description`, `product_category`, `is_processed_product`, `is_available`, `price_per_unit`, `unit`, `product_rating`, `created_date`) VALUES
+(7, 16, 'test', 'test data', 1, 1, 1, 11, 1, 0, '2020-12-07 14:04:40'),
+(8, 16, 'new product', 'test product description', 1, 1, 1, 125.23, 1, 0, '2020-12-07 14:05:48'),
+(9, 16, 'test', 'fgeggfg', 1, 1, 1, 334, 1, 0, '2020-12-07 14:09:06'),
+(10, 16, 'dvsdv', 'vxcvxc', 1, 1, 1, 123, 1, 0, '2020-12-07 14:10:15');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_category`
+--
+
+CREATE TABLE `product_category` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(60) NOT NULL,
+  `category_description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product_category`
+--
+
+INSERT INTO `product_category` (`category_id`, `category_name`, `category_description`) VALUES
+(1, 'Vegitables', 'Vegitables'),
+(2, 'Fruits', 'Fruits'),
+(3, 'Dairy Products', 'Dairy Products'),
+(4, 'Honey', 'Honey'),
+(5, 'Oil', 'Oil'),
+(6, 'Egg', 'Egg'),
+(7, 'Meat', 'Meat'),
+(8, 'Seafood', 'Seafood'),
+(9, 'Desserts', 'Desserts'),
+(10, 'Cereals', 'Cereals'),
+(11, 'Baked goods', 'Baked goods'),
+(12, 'Dried food products', 'Dried foods');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_feature`
+--
+
+CREATE TABLE `product_feature` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `feature_type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -145,11 +264,41 @@ INSERT INTO `user_credential` (`id`, `user_id`, `user_name`, `password`) VALUES
 --
 
 --
+-- Indexes for table `access_token`
+--
+ALTER TABLE `access_token`
+  ADD PRIMARY KEY (`token_id`);
+
+--
 -- Indexes for table `farm_land`
 --
 ALTER TABLE `farm_land`
   ADD PRIMARY KEY (`farm_id`),
   ADD KEY `user_to_farm_land` (`producer_id`);
+
+--
+-- Indexes for table `feature_type`
+--
+ALTER TABLE `feature_type`
+  ADD PRIMARY KEY (`feature_type_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`product_id`);
+
+--
+-- Indexes for table `product_category`
+--
+ALTER TABLE `product_category`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Indexes for table `product_feature`
+--
+ALTER TABLE `product_feature`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user`
@@ -169,10 +318,40 @@ ALTER TABLE `user_credential`
 --
 
 --
+-- AUTO_INCREMENT for table `access_token`
+--
+ALTER TABLE `access_token`
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `farm_land`
 --
 ALTER TABLE `farm_land`
   MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `feature_type`
+--
+ALTER TABLE `feature_type`
+  MODIFY `feature_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `product_category`
+--
+ALTER TABLE `product_category`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `product_feature`
+--
+ALTER TABLE `product_feature`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`

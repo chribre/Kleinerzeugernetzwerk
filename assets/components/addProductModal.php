@@ -4,6 +4,17 @@ global $dbConnection;
 //PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     echo('add product post method hit,');
+    if (isset($_POST['addProductMethod'])){
+        $productName = escapeSQLString($_POST['productName']);
+        $productDesc = escapeSQLString($_POST['productDesc']);
+        $productCategory = escapeSQLString($_POST['productCategory']);
+        $productPrice = floatval(escapeSQLString($_POST['productPrice']));
+        $productQuantity = escapeSQLString($_POST['quantity']);
+        $productUnit = escapeSQLString($_POST['unit']);
+        $isProcessedFood = escapeSQLString($_POST['isProcessed']);
+        
+        addProduct($productName, $productDesc, $productCategory, $productPrice, $productQuantity, $productUnit, $isProcessedFood);
+    }
     //    $password = escapeSQLString($_POST['password']);
     //    $repeat_password = escapeSQLString($_POST['psw-repeat']);
     //    if ($password === $repeat_password){
@@ -169,7 +180,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
                 </script>
-                <h5 class="modal-title">Add a new product</h5>
+                <h5 class="modal-title"><i class="material-icons">&#xE147;</i>Add a new product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -178,16 +189,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                 <p>Modal body text goes here.</p>
                 <form method="post" id="newProductForm">
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Product Name</label>
-                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Product name">
+                        <label for="productName">Product Name</label>
+                        <input type="text" class="form-control" id="productName" aria-describedby="productName01" placeholder="Product name" name="productName">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Product Description</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Write a description about your product."></textarea>
+                        <label for="productDesc">Product Description</label>
+                        <textarea class="form-control" id="productDesc" name="productDesc" rows="4" placeholder="Write a description about your product."></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Product Category</label>
-                        <select class="form-control">
+                        <label for="productCategory">Product Category</label>
+                        <select class="form-control" name="productCategory">
                             <option>Vegitables</option>
                             <option>Fruits</option>
                             <option>Dairy Products</option>
@@ -204,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Product Category</label>
+                        <label for="productFeatures">Product Features</label>
                         <div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
@@ -227,16 +238,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                     <div class="row form-group">
                         <div class="col">
-                            <label for="exampleInputEmail1">Product Price</label>
-                            <input type="text" class="form-control" placeholder="Price in Euro">
+                            <label for="productPrice">Product Price</label>
+                            <input type="text" class="form-control" name="productPrice" placeholder="Price in Euro">
                         </div>
                         <div class="col">
-                            <label for="exampleInputEmail1">Quantity</label>
-                            <input type="text" class="form-control" placeholder="Quantity">
+                            <label for="quantity">Quantity</label>
+                            <input type="text" class="form-control" name="quantity" placeholder="Quantity">
                         </div>
                         <div class="col">
-                            <label for="exampleInputEmail1">Unit</label>
-                            <select class="form-control">
+                            <label for="unit">Unit</label>
+                            <select class="form-control" name="unit">
                                 <option>Liter</option>
                                 <option>Kilogram</option>
                                 <option>Gram</option>
@@ -261,12 +272,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                         <div class="form-group">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="option1">
+                                <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="isProcessed" value="true">
                                 <label class="form-check-label" for="inlineCheckbox5">It is a processed food.</label>
                             </div>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="submit" name="addProductMethod" value="true" class="btn btn-primary">Save</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
                         </div>

@@ -102,6 +102,7 @@ function loginUser($email, $password){
         $row = mysqli_fetch_array($select_user);
         $userId = $row['user_id'];
         $_SESSION["isLoggedIn"] = true;
+        $_SESSION["userId"] = $userId;
         echo "User_Found $userId";
         insertSignInToken();
         getUserDetails($userId);
@@ -126,7 +127,6 @@ function getUserDetails($userId){
         $_SESSION["userName"] = $fName." ".$mName." ".$lName;
         $email = $row['email'];
         $_SESSION["email"] = $email;
-        $_SESSION["userId"] = $userId;
         redirect("/kleinerzeugernetzwerk/index.php");
     }else{
 
@@ -183,7 +183,7 @@ function isTokenValid(){
         $token = $_SESSION["token"];
         $userId = $_SESSION["userId"];
         $validAccessTokenQuery = mysqli_query($dbConnection, "SELECT * FROM `access_token` WHERE `token` = '$token' AND `user_id` = '$userId'");
-        confirmQuery($validAccessToken);
+        confirmQuery($validAccessTokenQuery);
         if (mysqli_num_rows($validAccessTokenQuery)){
             return true;
         }else{
@@ -195,34 +195,43 @@ function isTokenValid(){
 }
 
 function clearAccessToken(){
-    
+
 }
 
 
 //Add product details to product table
 function addProduct($productName, $productDescription, $productCategory, $productPrice, $priceQuantity, $unit, $isProcessedFood){
     global $dbConnection;
+    /* Start transaction */
+    mysqli_begin_transaction($dbConnection);
     if (isTokenValid()){
         $producerId = $_SESSION["userId"];
         mysqli_begin_transaction($dbConnection);
-        $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, is_processed_product, is_available, price_per_unit, unit, product_rating, created_date)"
+        $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, is_processed_product, is_available, price_per_unit, unit, product_rating)"
             . "VALUES ($producerId, '$productName', '$productDescription', 1, true, true, $productPrice, 1, 0)";
-        
+
         try{
-        echo "trying to insert";
-        echo "\n ".$sql."\n";
-        mysqli_query($dbConnection, $productInsertQuery);
-        $productId = $dbConnection->insert_id;
-        echo "inserted";
-        echo "product id is $productId, ";
-    }catch(mysqli_sql_exception $exception){
-        echo "user creation failed,";
-        mysqli_rollback($dbConnection);
-        var_dump($exception);
-        throw $exception;
-    }
-        
+            echo "trying to insert";
+            echo "\n ".$productInsertQuery."\n";
+            if (mysqli_query($dbConnection, $productInsertQuery))
+                echo "   inserted succesfully   ";
+            //            confirmQuery($productInsertQuery);
+            $productId = $dbConnection->insert_id;
+            mysqli_commit($dbConnection);
+
+            echo "inserted";
+            echo "product id is $productId, ";
+        }catch(mysqli_sql_exception $exception){
+            echo "user creation failed,";
+            mysqli_rollback($dbConnection);
+            var_dump($exception);
+            throw $exception;
+
+        }
+
     }
 
 }
+
+
 ?>

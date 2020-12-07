@@ -15,15 +15,18 @@ $loginFailAlert = '<div class="alert alert-success" id="success-alert">
   <button type="button" class="close" data-dismiss="alert">x</button>
   <strong>Success! </strong> Product have added to your wishlist.
 </div>';
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['signIn'] == "true"){
-    echo('Post method hit,');
-    $email = escapeSQLString($_POST['email']);
-    $password = escapeSQLString($_POST['password']);
-    if(loginUser($email, $password)){
-        echo "login success";
-    }else{
-        echo "login faield. retry!";
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    if (isset($_POST['signIn'])){
+        echo('Post method hit,');
+        $email = escapeSQLString($_POST['email']);
+        $password = escapeSQLString($_POST['password']);
+        if(loginUser($email, $password)){
+            echo "login success";
+        }else{
+            echo "login faield. retry!";
+        }
     }
+
 }
 
 $SIGN_UP_LOC = '/kleinerzeugernetzwerk/src/signUp.php';

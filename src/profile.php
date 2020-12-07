@@ -11,4 +11,5 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sideBar
 
 
 
+
 <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/footer.php");?>
