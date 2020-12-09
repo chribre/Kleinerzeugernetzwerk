@@ -11,5 +11,11 @@ $POPPER_JS = '/kleinerzeugernetzwerk/js/popper.js';
 <script src="<?php echo $POPPER_JS ?>"></script>
 <script src="<?php echo $MAIN_JS ?>"></script>
 
+
+<!--EMANTIC JS-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js" integrity="sha512-dqw6X88iGgZlTsONxZK9ePmJEFrmHwpuMrsUChjAw1mRUhUITE5QU9pkcSox+ynfLhL15Sv2al5A0LVyDCmtUw==" crossorigin="anonymous"></script>
+
+
 </body>
 </html>

@@ -10,7 +10,7 @@ $LOGO_LOC = '/kleinerzeugernetzwerk/images/logo.svg';
 $HOME_LOC = '/kleinerzeugernetzwerk/index.php';
 $PROFILE_IMAGE_DEFAULT = '/kleinerzeugernetzwerk/images/profile_placeholder.png';
 $LOG_OUT_IMG = '/kleinerzeugernetzwerk/images/logout.png';
-$VIEW_PROFILE = '/kleinerzeugernetzwerk/src/profile.php';
+$VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php';
 
 
 ?>

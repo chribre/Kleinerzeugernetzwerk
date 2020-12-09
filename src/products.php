@@ -1,3 +1,6 @@
+<style>
+<?php include "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/css/custom/productCard.css"; ?>
+</style>
 <?php
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProductModal.php");
 ?>
@@ -34,7 +37,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
 
     ?>
 
-    <div class="w3-card-4 test m-4 shadow bg-white rounded" id:"productCard">
+    <div class="w3-card-4 test m-4 shadow bg-white rounded productCard" id:"productCard">
         <div class="overflow-hidden" width="280" height="180">
             <img src="/kleinerzeugernetzwerk/images/carrot_1.jpg" alt="Avatar" width="280">
         </div>
@@ -70,7 +73,46 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
 
     ?>
     
-    
+</div>  
 
 
 
+
+<!--
+<div class="row d-flex justify-content-center">
+<?php 
+$carrotImg ="$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/images/carrot_1.jpg";
+$abc = '<div class="w3-card-4 test m-4 shadow bg-white rounded" id:"productCard">
+    <div class="overflow-hidden" width="280" height="180">
+        <img src="/kleinerzeugernetzwerk/images/carrot_1.jpg" alt="Avatar" width="280">
+    </div>
+    <div class="w3-container p-2">
+        <h4><b>Product Name</b></h4>   
+        <p>55% fruit spread suitable for baking also ideal for desserts Our dmBio fruit spread with 55% berries is made from sun-ripened fruits. Delicious on bread, for baking or for desserts.</p> 
+        <div class="row mx-0 mb-2">
+            <div class="rounded-pill border border-secondary align-items-center">
+                <img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
+                <h class="text-gray mx-1">Bio</h>
+            </div>
+            <div class="rounded-pill border border-secondary align-items-center ml-2">
+                <img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/vegan.png" width="20" height="20">
+                <h class="text-gray mx-1">Vegan</h>
+            </div>
+            <div class="rounded-pill border border-secondary align-items-center  ml-2">
+                <img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
+                <h class="text-gray mx-1">Bio</h>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between align-items-center">
+            <button class="btn btn-sm btn-primary rounded-pill px-4">Edit</button>
+            <button class="btn btn-sm btn-danger rounded-pill">Delete</button>
+        </div>
+    </div>
+</div>';
+     $x = 1;
+    while($x <= 7) {
+        echo $abc;
+        $x++;
+    }
+    ?>
+    </div>-->

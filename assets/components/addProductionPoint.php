@@ -1,5 +1,9 @@
 
 <?php
+//MAP to caputure production point locations.
+
+
+
 global $dbConnection;
 //PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -12,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $productQuantity = escapeSQLString($_POST['quantity']);
         $productUnit = escapeSQLString($_POST['unit']);
         $isProcessedFood = escapeSQLString($_POST['isProcessed']);
-        
+
         addProduct($productName, $productDesc, $productCategory, $productPrice, $productQuantity, $productUnit, $isProcessedFood);
     }
 }
@@ -22,10 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 
-<div class="modal fade" id="addNewProduct">
+<div class="modal fade" id="addProductionPoint">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="form">
         <div class="modal-content">
             <div class="modal-header">
+
+
+
+
                 <script type="text/javascript">
                     function readURL(input) {
                         if (input.files && input.files.length > 0) {
@@ -101,88 +109,75 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                     });
 
 
-
-
-
-
-
                 </script>
-                <h5 class="modal-title"><i class="material-icons">&#xE147;</i>Add a new product</h5>
+
+
+
+
+
+
+
+                <div class="text-center"><h5 class="modal-title"><i class="material-icons">&#xE147;</i>Add new production point</h5></div>
+
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body m-3">
                 <p>Modal body text goes here.</p>
-                <form method="post" id="newProductForm">
+                <form method="post" id="newProductionPointForm">
                     <div class="form-group">
-                        <label for="productName">Product Name</label>
-                        <input type="text" class="form-control" id="productName" aria-describedby="productName01" placeholder="Product name" name="productName">
+                        <label for="productionPointName">Production Point Name</label>
+                        <input type="text" class="form-control" id="productionPointName" aria-describedby="productionPointName" placeholder="Production Point Name" name="productionPointName">
                     </div>
                     <div class="form-group">
-                        <label for="productDesc">Product Description</label>
-                        <textarea class="form-control" id="productDesc" name="productDesc" rows="4" placeholder="Write a description about your product."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="productCategory">Product Category</label>
-                        <select class="form-control" name="productCategory">
-                            <option>Vegitables</option>
-                            <option>Fruits</option>
-                            <option>Dairy Products</option>
-                            <option>Honey</option>
-                            <option>Oil</option>
-                            <option>Egg</option>
-                            <option>Meat</option>
-                            <option>Seafood</option>
-                            <option>Desserts</option>
-                            <option>Cereals</option>
-                            <option>Baked goods</option>
-                            <option>Dried foods</option>
-
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="productFeatures">Product Features</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Bio</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Vegan</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                                <label class="form-check-label" for="inlineCheckbox3">Vegetarian</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option3">
-                                <label class="form-check-label" for="inlineCheckbox4">Non-vegetarian</label>
-                            </div>
-                        </div>
+                        <label for="productionPointDesc">Production Point Description</label>
+                        <textarea class="form-control" id="productionPointDesc" name="productionPointDesc" rows="4" placeholder="Write a description about your production point."></textarea>
                     </div>
 
-                    <div class="row form-group">
-                        <div class="col">
-                            <label for="productPrice">Product Price</label>
-                            <input type="text" class="form-control" name="productPrice" placeholder="Price in Euro">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/productionPointMap.php");?>
                         </div>
-                        <div class="col">
-                            <label for="quantity">Quantity</label>
-                            <input type="text" class="form-control" name="quantity" placeholder="Quantity">
-                        </div>
-                        <div class="col">
-                            <label for="unit">Unit</label>
-                            <select class="form-control" name="unit">
-                                <option>Liter</option>
-                                <option>Kilogram</option>
-                                <option>Gram</option>
-                                <option>Millilitre</option>
-                            </select>
+
+
+                        <div class="col-md-6">
+                            <div class="form-row">
+                                <div class="col-md-7 mb-3">
+                                    <label for="validationCustom03">Street</label>
+                                    <input type="text" class="form-control" id="validationCustom03" placeholder="Street" required name="street">
+                                    <div class="invalid-feedback">
+                                        Please provide a valid Street Name.
+                                    </div>
+                                </div>
+                                <div class="col-md-5 mb-3">
+                                    <label for="validationCustom04">House Number</label>
+                                    <input type="text" class="form-control" id="validationCustom04" placeholder="House Number" required name="house_number">
+                                    <div class="invalid-feedback">
+                                        Please provide a valid hosue number.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom03">Zip</label>
+                                    <input type="text" class="form-control" id="validationCustom03" placeholder="Zip" required name="zip">
+                                    <div class="invalid-feedback">
+                                        Please provide a valid Zip.
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="validationCustom04">City</label>
+                                    <input type="text" class="form-control" id="validationCustom04" placeholder="City" required name="city">
+                                    <div class="invalid-feedback">
+                                        Please provide a valid City.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="m-4"><button type="button" class="btn btn-link col-md-12">Locate on map</button></div>
                         </div>
                     </div>
-
 
                     <div class="form-group">
                         <label>Add product images</label>
@@ -220,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 <!--
 <script>
 $("#newProductForm").submit(function(e) {
-    e.preventDefault();
+e.preventDefault();
 });
 </script>
 -->

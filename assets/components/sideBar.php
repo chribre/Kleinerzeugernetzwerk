@@ -4,16 +4,16 @@
 
             <ul class="list-unstyled components mb-5">
                 <li class="active">
-                    <a href='profile.php?menu=profile'><span class="fa fa-user"></span> Profile</a>
+                    <a href='dashboard.php?menu=profile'><span class="fa fa-user"></span> Profile</a>
                 </li>
                 <li>
-                    <a href='profile.php?menu=products'><span class="fa fa-shopping-basket"></span> Products</a>
+                    <a href='dashboard.php?menu=products'><span class="fa fa-shopping-basket"></span> Products</a>
                 </li>
                 <li>
-                    <a href='profile.php?menu=events'><span class="fa fa-calendar"></span> Events</a>
+                    <a href='dashboard.php?menu=events'><span class="fa fa-calendar"></span> Events</a>
                 </li>
                 <li>
-                    <a href='profile.php?menu=services'><span class="fa fa-cogs"></span> Services</a>
+                    <a href='dashboard.php?menu=services'><span class="fa fa-cogs"></span> Services</a>
                 </li>
             </ul>
 
@@ -25,26 +25,56 @@
         <!-- Page Content  -->
         <div id="content" class="p-2 p-md-3">
 
-            <div class="container-fluid row align-items-center">
+            <div class="container-fluid row align-items-center align-middle justify-content-between">
 
-                <button type="button" id="sidebarCollapse" class="btn btn-secondary">
-           
-                    <span class="material-icons">
-                        list
-                    </span>
- 
-                </button>
+                <div>
+                    <button type="button" id="sidebarCollapse" class="btn btn-secondary">
+
+                        <span class="material-icons">
+                            list
+                        </span>
+
+                    </button>
 
 
 
+                    <?php
+                    if (isset($_GET['menu'])) {
+                        switch ($_GET['menu']){
+                            case 'profile':
+                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PROFILE</text></div> <button class="ui basic button" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false">
+                                
+  <i class="edit icon"></i>
+  Edit profile
+</button>';
+                                break;
+                            case 'products':
+                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PRODUCTS</text></div>';
+                                break;
+                            case 'events':
+                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">EVENTS</text></div>';
+                                break;
+                            case 'services':
+                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">SERVICES</text></div>';
+                                break;
+                            default:
+                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PROFILE</text></div>';
+                                break;
+                        }
+
+                    }
+                    ?>
+
+                </div>
                 <?php
+
                 if (isset($_GET['menu'])) {
                     switch ($_GET['menu']){
                         case 'profile':
-                            echo '<h2 class="ml-3">PROFILE</h2>';
+                            include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/profile.php");
                             break;
                         case 'products':
-                            echo '<h2 class="ml-3">PRODUCTS</h2>';
+                            include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/products.php");
                             break;
                         case 'events':
                             echo '<h2 class="ml-3">EVENTS</h2>';
@@ -61,33 +91,6 @@
                 ?>
 
             </div>
-            <?php
-
-            if (isset($_GET['menu'])) {
-                switch ($_GET['menu']){
-                    case 'profile':
-                        echo '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>';
-                        break;
-                    case 'products':
-
-                        include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/products.php");
-                        break;
-                    case 'events':
-                        echo '<h2 class="ml-3">EVENTS</h2>';
-                        break;
-                    case 'services':
-                        echo '<h2 class="ml-3">SERVICES</h2>';
-                        break;
-                    default:
-                        echo '<h2 class="ml-3">PROFILE</h2>';
-                        break;
-                }
-
-            }
-            ?>
-
         </div>
-    </div>
 
-</body>
+        </body>
