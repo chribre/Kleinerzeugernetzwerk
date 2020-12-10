@@ -234,4 +234,37 @@ function addProduct($productName, $productDescription, $productCategory, $produc
 }
 
 
+function addProductionPoint($pointName, $pointDescription, $pointAddress, $latitude, $longitude, $area){
+    global $dbConnection;
+    /* Start transaction */
+    mysqli_begin_transaction($dbConnection);
+    if (isTokenValid()){
+        $producerId = $_SESSION["userId"];
+        mysqli_begin_transaction($dbConnection);
+        $productionPointInsertQuery = "INSERT INTO farm_land (producer_id, farm_name, farm_desc, farm_address, farm_location, farm_area	)"
+            . "VALUES ($producerId, '$pointName', '$pointDescription', '$pointAddress', POINT($latitude, $longitude), $area)";
+
+        try{
+            echo "trying to insert";
+            echo "\n ".$productionPointInsertQuery."\n";
+            if (mysqli_query($dbConnection, $productionPointInsertQuery))
+                echo "   inserted succesfully   ";
+            //            confirmQuery($productInsertQuery);
+            $productionPointId = $dbConnection->insert_id;
+            mysqli_commit($dbConnection);
+
+            echo "inserted";
+            echo "production Point id is $productionPointId, ";
+        }catch(mysqli_sql_exception $exception){
+            echo "faild to add a new production point,";
+            mysqli_rollback($dbConnection);
+            var_dump($exception);
+            throw $exception;
+
+        }
+
+    }
+
+}
+
 ?>

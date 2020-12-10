@@ -7,17 +7,22 @@
 global $dbConnection;
 //PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    echo('add product post method hit,');
-    if (isset($_POST['addProductMethod'])){
-        $productName = escapeSQLString($_POST['productName']);
-        $productDesc = escapeSQLString($_POST['productDesc']);
-        $productCategory = escapeSQLString($_POST['productCategory']);
-        $productPrice = floatval(escapeSQLString($_POST['productPrice']));
-        $productQuantity = escapeSQLString($_POST['quantity']);
-        $productUnit = escapeSQLString($_POST['unit']);
-        $isProcessedFood = escapeSQLString($_POST['isProcessed']);
+    echo('add production point post method hit,');
+    if (isset($_POST['addProductionPointMethod'])){
+        $pointName = escapeSQLString($_POST['productionPointName']);
+        $pointDesc = escapeSQLString($_POST['productionPointDesc']);
+        $pStreet = escapeSQLString($_POST['street']);
+        $pHouseNum = escapeSQLString($_POST['house_number']);
+        $pCity = escapeSQLString($_POST['city']);
+        $pZip = escapeSQLString($_POST['zip']);
+        $pointAddress = $pStreet . " " . $pHouseNum . ", " . $pCity . ", " . $pZip;
 
-        addProduct($productName, $productDesc, $productCategory, $productPrice, $productQuantity, $productUnit, $isProcessedFood);
+        $latitude = floatval(escapeSQLString($_POST['latitude']));
+        $longitude = floatval(escapeSQLString($_POST['longitude']));
+        $pointArea = 0;//escapeSQLString($_POST['pointArea']);
+
+
+        addProductionPoint($pointName, $pointDesc, $pointAddress, $latitude, $longitude, $pointArea);
     }
 }
 
@@ -162,20 +167,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom03">Zip</label>
-                                    <input type="text" class="form-control" id="validationCustom03" placeholder="Zip" required name="zip">
+                                    <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required name="zip">
                                     <div class="invalid-feedback">
                                         Please provide a valid Zip.
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label for="validationCustom04">City</label>
-                                    <input type="text" class="form-control" id="validationCustom04" placeholder="City" required name="city">
+                                    <input type="text" class="form-control" id="validationCustom06" placeholder="City" required name="city">
                                     <div class="invalid-feedback">
                                         Please provide a valid City.
                                     </div>
                                 </div>
                             </div>
-                            <div class="m-4"><button type="button" class="btn btn-link col-md-12">Locate on map</button></div>
+                            <div class="m-4"><button type="button" class="btn btn-link col-md-12" id="locateOnMapBtn" onclick="findLocation()">Locate on map</button>
+                            <input type="hidden" id="latitude" name="latitude" value="" />
+                            <input type="hidden" id="longitude" name="longitude" value="" />
+                            </div>
                         </div>
                     </div>
 
@@ -190,16 +198,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                         </div>
                     </div>
 
-                    <div class="modal-footer justify-content-between">
-
-                        <div class="form-group">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox5" name="isProcessed" value="true">
-                                <label class="form-check-label" for="inlineCheckbox5">It is a processed food.</label>
-                            </div>
-                        </div>
+                    <div class="modal-footer justify-content-end">
                         <div>
-                            <button type="submit" name="addProductMethod" value="true" class="btn btn-primary">Save</button>
+                            <button type="submit" name="addProductionPointMethod" value="true" class="btn btn-primary">Save</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
                         </div>
@@ -211,6 +212,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         </div>
     </div>
 </div>
+
+
 
 <!--
 <script>
