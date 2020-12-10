@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2020 at 05:10 PM
+-- Generation Time: Dec 10, 2020 at 08:07 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -45,7 +45,12 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (3, 16, 'AW03330105fcddb665bb8d9.90991896', '2020-12-07 07:36:06'),
 (4, 16, 'AW03330105fcde8ba7deb20.27684961', '2020-12-07 08:32:58'),
 (5, 16, 'AW03330105fce30cce97672.39648414', '2020-12-07 13:40:28'),
-(6, 16, 'AW03330105fce4598a9aa41.65503189', '2020-12-07 15:09:12');
+(6, 16, 'AW03330105fce4598a9aa41.65503189', '2020-12-07 15:09:12'),
+(7, 16, 'AW03330105fcf30795e4762.52068078', '2020-12-08 07:51:21'),
+(8, 16, 'AW03330105fd07dddc26a63.14003957', '2020-12-09 07:33:49'),
+(9, 16, 'AW03330105fd08515ab4367.44310302', '2020-12-09 08:04:37'),
+(10, 16, 'AW03330105fd09c31bac596.47292057', '2020-12-09 09:43:13'),
+(11, 16, 'AW03330105fd2229d184e37.03329091', '2020-12-10 13:29:01');
 
 -- --------------------------------------------------------
 
@@ -57,11 +62,19 @@ CREATE TABLE `farm_land` (
   `farm_id` int(11) NOT NULL,
   `producer_id` int(11) NOT NULL,
   `farm_name` varchar(50) NOT NULL,
+  `farm_desc` text DEFAULT NULL,
   `farm_address` text NOT NULL,
   `farm_location` point NOT NULL,
   `farm_area` double DEFAULT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `farm_land`
+--
+
+INSERT INTO `farm_land` (`farm_id`, `producer_id`, `farm_name`, `farm_desc`, `farm_address`, `farm_location`, `farm_area`, `created_date`) VALUES
+(1, 16, 'Test Point', 'test', 'Fischerbänk 9, Neubrandenburg, 17033', 0x000000000101000000aa3d30ad18c74a40a50000a0e47e2a40, 0, '2020-12-10 19:05:06');
 
 -- --------------------------------------------------------
 
@@ -80,10 +93,18 @@ CREATE TABLE `feature_type` (
 --
 
 INSERT INTO `feature_type` (`feature_type_id`, `feature_name`, `feature_description`) VALUES
-(1, 'Bio', 'Bio food is food produced by methods complying with the standards of organic farming.'),
+(1, 'Bio EU', 'EU bio label'),
 (2, 'Vegan', 'Vegan'),
 (3, 'Vegetarian', 'Vegetarian'),
-(4, 'Non-vegetarian', 'Non-vegetarian');
+(4, 'Non-vegetarian', 'Non-vegetarian'),
+(8, 'Lactose Free', 'This product is lactose free'),
+(9, 'Bio', 'This product complies with organic guidelines'),
+(10, 'Bio DE', 'The German state organic seal'),
+(11, 'Gluten Free', 'This product doesn\'t contain gluten'),
+(12, 'Naturland', 'Certified farmers and processing companies produce organic food according to the Naturland guidelines'),
+(13, 'No Flavouring', 'No Flavouring'),
+(14, 'No Coloring', 'No Coloring'),
+(15, 'No Preservatives', 'No Preservatives');
 
 -- --------------------------------------------------------
 
@@ -113,7 +134,11 @@ INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_de
 (7, 16, 'test', 'test data', 1, 1, 1, 11, 1, 0, '2020-12-07 14:04:40'),
 (8, 16, 'new product', 'test product description', 1, 1, 1, 125.23, 1, 0, '2020-12-07 14:05:48'),
 (9, 16, 'test', 'fgeggfg', 1, 1, 1, 334, 1, 0, '2020-12-07 14:09:06'),
-(10, 16, 'dvsdv', 'vxcvxc', 1, 1, 1, 123, 1, 0, '2020-12-07 14:10:15');
+(10, 16, 'dvsdv', 'vxcvxc', 1, 1, 1, 123, 1, 0, '2020-12-07 14:10:15'),
+(11, 16, 'Wild cranberries', 'fruity & slightly dry in taste\r\nWild lingonberries from certified wild collection', 1, 1, 1, 11, 1, 0, '2020-12-08 07:57:36'),
+(12, 16, 'Fruit spread forest fruit', '55% fruit spread\r\nsuitable for baking\r\nalso ideal for desserts\r\nOur dmBio fruit spread with 55% berries is made from sun-ripened fruits. Delicious on bread, for baking or for desserts.', 1, 1, 1, 30, 1, 0, '2020-12-08 07:58:25'),
+(13, 16, '', '', 1, 1, 1, 0, 1, 0, '2020-12-10 17:49:46'),
+(14, 16, '', '', 1, 1, 1, 0, 1, 0, '2020-12-10 18:20:17');
 
 -- --------------------------------------------------------
 
@@ -321,25 +346,25 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `farm_land`
 --
 ALTER TABLE `farm_land`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `feature_type`
 --
 ALTER TABLE `feature_type`
-  MODIFY `feature_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `feature_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `product_category`
