@@ -4,7 +4,7 @@
 
             <ul class="list-unstyled components mb-5">
                 <li class="active">
-                    <a href='dashboard.php?menu=profile'><span class="fa fa-user"></span> Profile</a>
+                    <a href='dashboard.php?menu=profile&data=personal'><span class="fa fa-user"></span> Profile</a>
                 </li>
                 <li>
                     <a href='dashboard.php?menu=products'><span class="fa fa-shopping-basket"></span> Products</a>
@@ -42,11 +42,15 @@
                     if (isset($_GET['menu'])) {
                         switch ($_GET['menu']){
                             case 'profile':
-                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PROFILE</text></div> <button class="ui basic button" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false">
-                                
-  <i class="edit icon"></i>
-  Edit profile
-</button>';
+                                $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PROFILE</text></div>';
+                                    if (isset($_GET['data'])){
+                                        if ($_GET['data'] == 'personal'){
+                                            $profileHead = $profileHead . '<button class="ui basic button" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false"><i class="edit icon"></i>Edit profile</button>';
+                                        }elseif ($_GET['data'] == 'productionPoint'){
+                                            $profileHead = $profileHead . '<button class="ui basic button" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Farm Land</button>';
+                                        }
+                                    }
+                                echo $profileHead;
                                 break;
                             case 'products':
                                 echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PRODUCTS</text></div>';
