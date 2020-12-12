@@ -8,18 +8,19 @@
         <?php 
         $carrotImg ="$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/images/carrot_1.jpg";
         global $dbConnection;
-        if (isset($_SESSION['userId'])){
-            $userId = $_SESSION['userId'];
-            $getProductionPointQuery = mysqli_query($dbConnection, "SELECT * FROM `farm_land` WHERE `producer_id` = '$userId'");
-            confirmQuery($getProductionPointQuery);
-            $productCount = mysqli_num_rows($getProductionPointQuery);
-            if ($productCount == 0){
-                echo "<h1> No products availabe. Try adding some products.</h1>";
-            }else{
-                while($row = mysqli_fetch_assoc($getProductionPointQuery)) {
-                    $pointName = $row['farm_name'];
-                    $pointDesc = $row['farm_desc'];
-                    $pointAddress = $row['farm_address'];
+        if (isTokenValid()){
+            if (isset($_SESSION['userId'])){
+                $userId = $_SESSION['userId'];
+                $getProductionPointQuery = mysqli_query($dbConnection, "SELECT * FROM `farm_land` WHERE `producer_id` = '$userId'");
+                confirmQuery($getProductionPointQuery);
+                $productCount = mysqli_num_rows($getProductionPointQuery);
+                if ($productCount == 0){
+                    echo "<h1> No products availabe. Try adding some products.</h1>";
+                }else{
+                    while($row = mysqli_fetch_assoc($getProductionPointQuery)) {
+                        $pointName = $row['farm_name'];
+                        $pointDesc = $row['farm_desc'];
+                        $pointAddress = $row['farm_address'];
 
         ?>
 
@@ -37,7 +38,7 @@
                 <div id="farmDetails" class="flex-grow-1 mx-4">
                     <h3><?php echo $pointName ?></h3>
                     <p><?php echo $pointDesc ?></p>
-                    <p><?php echo $pointAddress ?></p>
+                    <p><small class="text-muted"><?php echo $pointAddress ?></small></p>
                 </div>
                 <div class="mr-0">
                     <div class="ui teal vertical animated button m-2" tabindex="0">
@@ -64,6 +65,7 @@
 
 
         <?php
+                    }
                 }
             }
         }

@@ -45,9 +45,9 @@
                                 $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PROFILE</text></div>';
                                     if (isset($_GET['data'])){
                                         if ($_GET['data'] == 'personal'){
-                                            $profileHead = $profileHead . '<button class="ui basic button" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false"><i class="edit icon"></i>Edit profile</button>';
+                                            $profileHead = $profileHead . '<button class="ui basic blue button" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false"><i class="edit icon"></i>Edit profile</button>';
                                         }elseif ($_GET['data'] == 'productionPoint'){
-                                            $profileHead = $profileHead . '<button class="ui basic button" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Farm Land</button>';
+                                            $profileHead = $profileHead . '<button class="ui basic green button" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Farm Land</button>';
                                         }
                                     }
                                 echo $profileHead;

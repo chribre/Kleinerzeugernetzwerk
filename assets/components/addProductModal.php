@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $productQuantity = escapeSQLString($_POST['quantity']);
         $productUnit = escapeSQLString($_POST['unit']);
         $isProcessedFood = escapeSQLString($_POST['isProcessed']);
-        
+
         addProduct($productName, $productDesc, $productCategory, $productPrice, $productQuantity, $productUnit, $isProcessedFood);
     }
 }
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
                 </script>
-                <h5 class="modal-title"><i class="material-icons">&#xE147;</i>Add a new product</h5>
+                <h5 class="modal-title text-center"><i class="material-icons">&#xE147;</i>Add a new product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
@@ -184,6 +184,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                     </div>
 
 
+
+                    
+
+                    <div class="form-group" id="productionPointSelection">
+                        <label for="productionPoint">Production Point</label>
+                        
+                        <?php echo $_SESSION['farmLand'] ?>
+                        
+                        <input class="form-control" list="productionPoints" name="productionPoint">
+                    <datalist id="productionPoints">
+                        <option value="Farming Land Name">University of Neubrandenburg, Brodaer Straße 2, 17033 Neubrandenburg</option>
+                    </datalist>
+                       
+        
+                    </div>
+
+
                     <div class="form-group">
                         <label>Add product images</label>
                         <div class="mx-4 justify-content-center align-middle row">
@@ -220,7 +237,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 <!--
 <script>
 $("#newProductForm").submit(function(e) {
-    e.preventDefault();
+e.preventDefault();
 });
 </script>
 -->
