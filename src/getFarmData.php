@@ -1,6 +1,5 @@
 <?php 
 session_start();
-include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/config.php");
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
 
 
@@ -8,6 +7,7 @@ echo fetchFarmLandData();
 
 
 function fetchFarmLandData(){
+    ob_start();
     global $dbConnection;
     if (isTokenValid()){
         if (isset($_SESSION['userId'])){
@@ -23,6 +23,7 @@ function fetchFarmLandData(){
                 while($row = mysqli_fetch_assoc($getProductionPointQuery)) {
                     $farmLandArray[] = $row;
                 }
+                ob_end_clean();
                 return json_encode($farmLandArray);
             }
         }

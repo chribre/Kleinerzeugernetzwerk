@@ -11,17 +11,33 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
         <i class="plus icon"></i>
         Add a new product
     </button>
+    
 
     <script>
+        
+        $(document).ready(function(){
+          $('#productionPointDropdown').dropdown();
+    });
+        
+        
+        
         $('#addNewProduct').on('shown.bs.modal', function (e) {
             $.ajax({
                 url:"/kleinerzeugernetzwerk/src/getFarmData.php",    //the page containing php script
                 type: "get",    //request type,
-                dataType: 'html',
+                contentType: "application/json",
+                dataType: 'json',
                 success:function(result){
                     console.log(result)
-                    sessionStorage.setItem("farmLand",result);
-                    $("#productionPointSelection").load(" #productionPointSelection");
+                    $.each(result,function(i,obj){
+                        console.log(obj)
+                        const fName = obj.farm_name;
+                        const fAddress = obj.farm_address;
+                        const fId = obj.farm_id;
+                        var div_data="<div class='item' data-value="+fId+"><h5>"+fName+"</h5><div>"+fAddress+"</div></div>";
+                         $(div_data).appendTo('#productionPointMenu'); 
+                    })
+//                    $("#productionPointSelection").load(" #productionPointSelection");
                 },
                 error: function (request, status, error) {
                     alert(request.responseText);

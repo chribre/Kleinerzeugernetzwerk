@@ -123,45 +123,107 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <label for="productDesc">Product Description</label>
                         <textarea class="form-control" id="productDesc" name="productDesc" rows="4" placeholder="Write a description about your product."></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="productCategory">Product Category</label>
-                        <select class="form-control" name="productCategory">
-                            <option>Vegitables</option>
-                            <option>Fruits</option>
-                            <option>Dairy Products</option>
-                            <option>Honey</option>
-                            <option>Oil</option>
-                            <option>Egg</option>
-                            <option>Meat</option>
-                            <option>Seafood</option>
-                            <option>Desserts</option>
-                            <option>Cereals</option>
-                            <option>Baked goods</option>
-                            <option>Dried foods</option>
 
-                        </select>
-                    </div>
+
+
+
+
+
                     <div class="form-group">
-                        <label for="productFeatures">Product Features</label>
-                        <div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                <label class="form-check-label" for="inlineCheckbox1">Bio</label>
+                       <label for="productCategoryList">Product Category</label>
+                        <div class="ui fluid selection dropdown" id="productCategoryList">
+                            <input type="hidden" name="productCategory">
+                            <i class="dropdown icon"></i>
+                            <div class="default text">Select Product Category</div>
+                            <div class="menu">
+                               
+                               
+                               <?php 
+                                if (isset($_SESSION['productCategories'])){
+                                    $categories = $_SESSION['productCategories'];
+                                    if (count($categories) > 0){
+                                        for ($i = 0; $i < count($categories); $i++) {
+                                            $category = $categories[$i];
+                                                $categoryName = isset($category['category_name']) ? $category['category_name'] : "";
+                                            $categoryId = isset($category['category_id']) ? $category['category_id'] : 0;
+
+                                ?>
+                               
+                               
+                               
+                               
+                                <div class="item" data-value="<?php echo $categoryId ?>">
+                                    <img class="ui mini avatar image" src="/kleinerzeugernetzwerk/images/vegan.png">
+                                    <?php echo $categoryName ?>
+                                </div>
+                                
+                                
+                                <?php 
+                                        }
+                                    }
+                                }else{
+
+                                }
+                                ?>
+                                
                             </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                <label class="form-check-label" for="inlineCheckbox2">Vegan</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3">
-                                <label class="form-check-label" for="inlineCheckbox3">Vegetarian</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="option3">
-                                <label class="form-check-label" for="inlineCheckbox4">Non-vegetarian</label>
+                        </div>
+
+
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label>Product Features</label>
+                        <div class="ui fluid multiple search selection dropdown" id="productFeatureList">
+                            <input type="hidden" name="productFeatures">
+                            <i class="dropdown icon"></i>
+                            <div class="default text" >Select features of the product</div>
+                            <div class="menu">
+
+                                <?php 
+                                if (isset($_SESSION['productFeatures'])){
+                                    $features = $_SESSION['productFeatures'];
+                                    if (count($features) > 0){
+                                        for ($i = 0; $i < count($features); $i++) {
+                                            $feature = $features[$i];
+                                            $FeatureName = isset($feature['feature_name']) ? $feature['feature_name'] : "";
+                                            $FeatureId = isset($feature['feature_type_id']) ? $feature['feature_type_id'] : 0;
+
+                                ?>
+
+
+                                <div class="item" data-value=<?php echo $FeatureId?> data-text="<?php echo $FeatureName?>">
+                                    <img class="ui mini avatar image" src="/kleinerzeugernetzwerk/images/vegan.png">
+                                    <?php echo $FeatureName?>
+                                </div>
+
+
+                                <?php 
+                                        }
+                                    }
+                                }else{
+
+                                }
+                                ?>
+
                             </div>
                         </div>
                     </div>
+
+
+
+                    <script>
+
+                        $(document).ready(function(){
+                            $('#productFeatureList').dropdown({
+                            });
+                            $('#productCategoryList').dropdown({
+                            });
+                        });
+                    </script>
+
 
                     <div class="row form-group">
                         <div class="col">
@@ -169,7 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                             <input type="text" class="form-control" name="productPrice" placeholder="Price in Euro">
                         </div>
                         <div class="col">
-                            <label for="quantity">Quantity</label>
+                            <label for="quantity">Quantity of Price</label>
                             <input type="text" class="form-control" name="quantity" placeholder="Quantity">
                         </div>
                         <div class="col">
@@ -185,19 +247,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 
-                    
-
                     <div class="form-group" id="productionPointSelection">
                         <label for="productionPoint">Production Point</label>
-                        
-                        <?php echo $_SESSION['farmLand'] ?>
-                        
-                        <input class="form-control" list="productionPoints" name="productionPoint">
-                    <datalist id="productionPoints">
-                        <option value="Farming Land Name">University of Neubrandenburg, Brodaer Straße 2, 17033 Neubrandenburg</option>
-                    </datalist>
-                       
-        
+                        <div class="field">
+                            <div class="ui selection dropdown col-12" id="productionPointDropdown">
+                                <input type="hidden" name="productionPoint" >
+                                <i class="dropdown icon"></i>
+                                <div class="default text">Select point of production</div>
+                                <div class="menu" id="productionPointMenu">
+                                    <!--
+<div class="item" data-value="1"><h5>Farm Land Name</h5><div>address</div></div>
+<div class="item" data-value="0">Female</div>
+-->
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
 

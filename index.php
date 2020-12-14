@@ -5,9 +5,10 @@ if (session_status() == PHP_SESSION_NONE) {
 }else{
 }
 
-
 //Header of the HTML page
 include "assets/components/header.php";
+getProductCategories();
+getProductFeatures();
 ?>
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 10, 2020 at 08:07 PM
+-- Generation Time: Dec 14, 2020 at 04:37 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -50,7 +50,14 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (8, 16, 'AW03330105fd07dddc26a63.14003957', '2020-12-09 07:33:49'),
 (9, 16, 'AW03330105fd08515ab4367.44310302', '2020-12-09 08:04:37'),
 (10, 16, 'AW03330105fd09c31bac596.47292057', '2020-12-09 09:43:13'),
-(11, 16, 'AW03330105fd2229d184e37.03329091', '2020-12-10 13:29:01');
+(11, 16, 'AW03330105fd2229d184e37.03329091', '2020-12-10 13:29:01'),
+(12, 16, 'AW03330105fd37a10be2968.31721229', '2020-12-11 13:54:24'),
+(13, 16, 'AW03330105fd4c926b55135.63044160', '2020-12-12 13:44:06'),
+(14, 16, 'AW03330105fd4ff0c579cb7.40426128', '2020-12-12 17:34:04'),
+(15, 16, 'AW03330105fd714d99aeb66.43884836', '2020-12-14 07:31:37'),
+(16, 16, 'AW03330105fd7660bb84e68.59733998', '2020-12-14 13:18:03'),
+(17, 16, 'AW03330105fd770f257f8a3.21193271', '2020-12-14 14:04:34'),
+(18, 16, 'AW03330105fd775bdd26231.39235455', '2020-12-14 14:25:01');
 
 -- --------------------------------------------------------
 
@@ -74,7 +81,8 @@ CREATE TABLE `farm_land` (
 --
 
 INSERT INTO `farm_land` (`farm_id`, `producer_id`, `farm_name`, `farm_desc`, `farm_address`, `farm_location`, `farm_area`, `created_date`) VALUES
-(1, 16, 'Test Point', 'test', 'Fischerbänk 9, Neubrandenburg, 17033', 0x000000000101000000aa3d30ad18c74a40a50000a0e47e2a40, 0, '2020-12-10 19:05:06');
+(2, 16, 'Test Point', 'test farm land', 'Brodaer Straße 2, Neubrandenburg, 17033', 0x000000000101000000456458c51bc74a40bfdd488f957e2a40, 0, '2020-12-11 17:23:45'),
+(3, 16, 'New Farm', 'Test Description of famr land', 'Dükerweg undefined, Neubrandenburg, 17033', 0x00000000010100000000000000000000000000000000000000, 0, '2020-12-12 13:47:09');
 
 -- --------------------------------------------------------
 
@@ -118,6 +126,7 @@ CREATE TABLE `products` (
   `product_name` varchar(100) NOT NULL,
   `product_description` text NOT NULL,
   `product_category` int(11) NOT NULL,
+  `production_location` int(11) NOT NULL,
   `is_processed_product` tinyint(1) NOT NULL,
   `is_available` tinyint(1) NOT NULL,
   `price_per_unit` float NOT NULL,
@@ -130,15 +139,9 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_description`, `product_category`, `is_processed_product`, `is_available`, `price_per_unit`, `unit`, `product_rating`, `created_date`) VALUES
-(7, 16, 'test', 'test data', 1, 1, 1, 11, 1, 0, '2020-12-07 14:04:40'),
-(8, 16, 'new product', 'test product description', 1, 1, 1, 125.23, 1, 0, '2020-12-07 14:05:48'),
-(9, 16, 'test', 'fgeggfg', 1, 1, 1, 334, 1, 0, '2020-12-07 14:09:06'),
-(10, 16, 'dvsdv', 'vxcvxc', 1, 1, 1, 123, 1, 0, '2020-12-07 14:10:15'),
-(11, 16, 'Wild cranberries', 'fruity & slightly dry in taste\r\nWild lingonberries from certified wild collection', 1, 1, 1, 11, 1, 0, '2020-12-08 07:57:36'),
-(12, 16, 'Fruit spread forest fruit', '55% fruit spread\r\nsuitable for baking\r\nalso ideal for desserts\r\nOur dmBio fruit spread with 55% berries is made from sun-ripened fruits. Delicious on bread, for baking or for desserts.', 1, 1, 1, 30, 1, 0, '2020-12-08 07:58:25'),
-(13, 16, '', '', 1, 1, 1, 0, 1, 0, '2020-12-10 17:49:46'),
-(14, 16, '', '', 1, 1, 1, 0, 1, 0, '2020-12-10 18:20:17');
+INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_description`, `product_category`, `production_location`, `is_processed_product`, `is_available`, `price_per_unit`, `unit`, `product_rating`, `created_date`) VALUES
+(7, 16, 'test', 'test data', 1, 2, 1, 1, 11, 1, 0, '2020-12-07 14:04:40'),
+(8, 16, 'new product', 'test product description', 1, 2, 1, 1, 125.23, 1, 0, '2020-12-07 14:05:48');
 
 -- --------------------------------------------------------
 
@@ -311,7 +314,9 @@ ALTER TABLE `feature_type`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
-  ADD PRIMARY KEY (`product_id`);
+  ADD PRIMARY KEY (`product_id`),
+  ADD KEY `category_fk` (`product_category`),
+  ADD KEY `product_location_fk` (`production_location`);
 
 --
 -- Indexes for table `product_category`
@@ -323,7 +328,9 @@ ALTER TABLE `product_category`
 -- Indexes for table `product_feature`
 --
 ALTER TABLE `product_feature`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_feature_type_fk` (`feature_type`),
+  ADD KEY `product_fk` (`product_id`);
 
 --
 -- Indexes for table `user`
@@ -346,13 +353,13 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `farm_land`
 --
 ALTER TABLE `farm_land`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `feature_type`
@@ -364,7 +371,7 @@ ALTER TABLE `feature_type`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `product_category`
@@ -399,6 +406,20 @@ ALTER TABLE `user_credential`
 --
 ALTER TABLE `farm_land`
   ADD CONSTRAINT `user_to_farm_land` FOREIGN KEY (`producer_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `category_fk` FOREIGN KEY (`product_category`) REFERENCES `product_category` (`category_id`),
+  ADD CONSTRAINT `product_location_fk` FOREIGN KEY (`production_location`) REFERENCES `farm_land` (`farm_id`);
+
+--
+-- Constraints for table `product_feature`
+--
+ALTER TABLE `product_feature`
+  ADD CONSTRAINT `product_feature_type_fk` FOREIGN KEY (`feature_type`) REFERENCES `feature_type` (`feature_type_id`),
+  ADD CONSTRAINT `product_fk` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
 
 --
 -- Constraints for table `user_credential`

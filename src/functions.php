@@ -267,4 +267,31 @@ function addProductionPoint($pointName, $pointDescription, $pointAddress, $latit
 
 }
 
+
+function getProductCategories(){
+    global $dbConnection;
+    $productCategoryQuery = mysqli_query($dbConnection, "SELECT * FROM `product_category`");
+    confirmQuery($productCategoryQuery);
+    if ($productCategoryQuery->num_rows > 0){
+        $result = mysqli_fetch_all($productCategoryQuery, MYSQLI_ASSOC);
+        $_SESSION["productCategories"] = $result;
+        print_r($result);
+    }else{
+        echo "No categories found. Try Adding some categories";
+    }
+}
+function getProductFeatures(){
+    global $dbConnection;
+    $productFeatureQuery = mysqli_query($dbConnection, "SELECT * FROM `feature_type`");
+    confirmQuery($productFeatureQuery);
+    if ($productFeatureQuery->num_rows > 0){
+        $result = mysqli_fetch_all($productFeatureQuery, MYSQLI_ASSOC);
+        $_SESSION["productFeatures"] = $result;
+        print_r($result);
+    }else{
+        echo "No Features found. Try Adding some categories";
+    }
+}
+
+
 ?>
