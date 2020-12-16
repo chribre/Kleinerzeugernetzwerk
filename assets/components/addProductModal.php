@@ -5,15 +5,20 @@ global $dbConnection;
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     echo('add product post method hit,');
     if (isset($_POST['addProductMethod'])){
-        $productName = escapeSQLString($_POST['productName']);
-        $productDesc = escapeSQLString($_POST['productDesc']);
-        $productCategory = escapeSQLString($_POST['productCategory']);
-        $productPrice = floatval(escapeSQLString($_POST['productPrice']));
-        $productQuantity = escapeSQLString($_POST['quantity']);
-        $productUnit = escapeSQLString($_POST['unit']);
-        $isProcessedFood = escapeSQLString($_POST['isProcessed']);
+        print_r($_POST);
+        $productName = isset($_POST['productName']) ? escapeSQLString($_POST['productName']) : "";
+        $productDesc = isset($_POST['productDesc']) ? escapeSQLString($_POST['productDesc']) : "";
+        $productCategory = isset($_POST['productCategory']) ? escapeSQLString($_POST['productCategory']) : 0;
+        $productFeatures = isset($_POST['productFeatures']) ? escapeSQLString($_POST['productFeatures']) : null;
+        $productionPoint = isset($_POST['productionPoint']) ? escapeSQLString($_POST['productionPoint']): 0;
+        $productPrice = isset($_POST['productPrice']) ? floatval(escapeSQLString($_POST['productPrice'])) : 0;
+        $productQuantity = isset($_POST['quantity']) ? floatval(escapeSQLString($_POST['quantity'])) : 0;
+        $productUnit = isset($_POST['unit']) ? escapeSQLString($_POST['unit']): 0;
+        $isProcessedFood = isset($_POST['isProcessed']) ? escapeSQLString($_POST['isProcessed']) : false;
+        $isAvailable = true;
+        $productRating = 0;
 
-        addProduct($productName, $productDesc, $productCategory, $productPrice, $productQuantity, $productUnit, $isProcessedFood);
+        addProduct($productName, $productDesc, $productCategory, $productionPoint, $isProcessedFood, $isAvailable, $productPrice, $productQuantity, $productUnit, $productRating);
     }
 }
 
@@ -130,34 +135,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
                     <div class="form-group">
-                       <label for="productCategoryList">Product Category</label>
+                        <label for="productCategoryList">Product Category</label>
                         <div class="ui fluid selection dropdown" id="productCategoryList">
                             <input type="hidden" name="productCategory">
                             <i class="dropdown icon"></i>
                             <div class="default text">Select Product Category</div>
                             <div class="menu">
-                               
-                               
-                               <?php 
+
+
+                                <?php 
                                 if (isset($_SESSION['productCategories'])){
                                     $categories = $_SESSION['productCategories'];
                                     if (count($categories) > 0){
                                         for ($i = 0; $i < count($categories); $i++) {
                                             $category = $categories[$i];
-                                                $categoryName = isset($category['category_name']) ? $category['category_name'] : "";
+                                            $categoryName = isset($category['category_name']) ? $category['category_name'] : "";
                                             $categoryId = isset($category['category_id']) ? $category['category_id'] : 0;
 
                                 ?>
-                               
-                               
-                               
-                               
+
+
+
+
                                 <div class="item" data-value="<?php echo $categoryId ?>">
                                     <img class="ui mini avatar image" src="/kleinerzeugernetzwerk/images/vegan.png">
                                     <?php echo $categoryName ?>
                                 </div>
-                                
-                                
+
+
                                 <?php 
                                         }
                                     }
@@ -165,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                                 }
                                 ?>
-                                
+
                             </div>
                         </div>
 
@@ -237,10 +242,34 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <div class="col">
                             <label for="unit">Unit</label>
                             <select class="form-control" name="unit">
-                                <option>Liter</option>
-                                <option>Kilogram</option>
-                                <option>Gram</option>
-                                <option>Millilitre</option>
+
+                                <?php 
+                                if (isset($_SESSION['productUnits'])){
+                                    $units = $_SESSION['productUnits'];
+                                    if (count($units) > 0){
+                                        for ($i = 0; $i < count($units); $i++) {
+                                            $unit = $units[$i];
+                                            $unitName = isset($unit['unit_name']) ? $unit['unit_name'] : "";
+                                            $unitId = isset($unit['unit_id']) ? $unit['unit_id'] : 0;
+                                            $unitAbbr = isset($unit['unit_abbr']) ? $unit['unit_abbr'] : "";
+
+                                ?>
+
+                                <option value="<?php echo $unitId?>"><?php echo "$unitName ($unitAbbr)" ?></option>
+
+                                <?php 
+                                        }
+                                    }
+                                }else{
+
+                                }
+                                ?>
+
+                                <!--
+<option>Kilogram</option>
+<option>Gram</option>
+<option>Millilitre</option>
+-->
                             </select>
                         </div>
                     </div>
@@ -255,10 +284,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                                 <i class="dropdown icon"></i>
                                 <div class="default text">Select point of production</div>
                                 <div class="menu" id="productionPointMenu">
-                                    <!--
-<div class="item" data-value="1"><h5>Farm Land Name</h5><div>address</div></div>
-<div class="item" data-value="0">Female</div>
--->
                                 </div>
                             </div>
                         </div>

@@ -139,12 +139,31 @@ function getNameFormatted($firstName, $middleName, $lastName){
 
 
 function logout(){
-    $_SESSION["isLoggedIn"] = false;
-    $_SESSION["userName"] = "";
-    $_SESSION["email"] = "";
-    redirect("/kleinerzeugernetzwerk/index.php");
+    removeAuthToken();
 }
 
+function removeAuthToken(){
+    global $dbConnection;
+    $token = $_SESSION["token"];
+    $userId = $_SESSION["userId"];
+    $tokenId = $_SESSION["tokenId"];
+    $clearAccessTokenQuery = "DELETE FROM `access_token` WHERE `token_id` = '$tokenId' AND `user_id` = '$userId'";
+    try{
+        mysqli_query($dbConnection, $clearAccessTokenQuery);
+        confirmQuery($clearAccessTokenQuery);
+        mysqli_commit($dbConnection);
+        $_SESSION["token"] = null;
+        $_SESSION["tokenId"] = null;
+        $_SESSION["isLoggedIn"] = false;
+        $_SESSION["userName"] = "";
+        $_SESSION["email"] = "";
+        redirect("/kleinerzeugernetzwerk/index.php");
+    }catch(mysqli_sql_exception $exception){
+        mysqli_rollback($dbConnection);
+        var_dump($exception);
+        throw $exception;
+    }   
+}
 
 //Show profile screen in <div> when clicking on Profile in sidebar
 function showUserProfileScreen() {
@@ -166,8 +185,10 @@ function insertSignInToken(){
     try{
         mysqli_query($dbConnection, $accessTokenSql);
         confirmQuery($accessTokenSql);
+        $accessTokenId = $dbConnection->insert_id;
         mysqli_commit($dbConnection);
         $_SESSION["token"] = $uid;
+        $_SESSION["tokenId"] = $accessTokenId;
     }catch(mysqli_sql_exception $exception){
         mysqli_rollback($dbConnection);
         var_dump($exception);
@@ -194,21 +215,18 @@ function isTokenValid(){
     }
 }
 
-function clearAccessToken(){
-
-}
 
 
 //Add product details to product table
-function addProduct($productName, $productDescription, $productCategory, $productPrice, $priceQuantity, $unit, $isProcessedFood){
+function addProduct($productName, $productDescription, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating){
     global $dbConnection;
     /* Start transaction */
     mysqli_begin_transaction($dbConnection);
     if (isTokenValid()){
         $producerId = $_SESSION["userId"];
         mysqli_begin_transaction($dbConnection);
-        $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, is_processed_product, is_available, price_per_unit, unit, product_rating)"
-            . "VALUES ($producerId, '$productName', '$productDescription', 1, true, true, $productPrice, 1, 0)";
+        $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, production_location, 	is_processed_product, is_available, price_per_unit, quantity_of_price, unit, product_rating)"
+            . "VALUES ($producerId, '$productName', '$productDescription', $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating)";
 
         try{
             echo "trying to insert";
@@ -222,7 +240,7 @@ function addProduct($productName, $productDescription, $productCategory, $produc
             echo "inserted";
             echo "product id is $productId, ";
         }catch(mysqli_sql_exception $exception){
-            echo "user creation failed,";
+            echo "product creation failed,";
             mysqli_rollback($dbConnection);
             var_dump($exception);
             throw $exception;
@@ -275,7 +293,6 @@ function getProductCategories(){
     if ($productCategoryQuery->num_rows > 0){
         $result = mysqli_fetch_all($productCategoryQuery, MYSQLI_ASSOC);
         $_SESSION["productCategories"] = $result;
-        print_r($result);
     }else{
         echo "No categories found. Try Adding some categories";
     }
@@ -287,9 +304,34 @@ function getProductFeatures(){
     if ($productFeatureQuery->num_rows > 0){
         $result = mysqli_fetch_all($productFeatureQuery, MYSQLI_ASSOC);
         $_SESSION["productFeatures"] = $result;
-        print_r($result);
     }else{
         echo "No Features found. Try Adding some categories";
+    }
+}
+
+function getProductUnits(){
+    global $dbConnection;
+    $unitQuery = mysqli_query($dbConnection, "SELECT * FROM `units`");
+    confirmQuery($unitQuery);
+    if ($unitQuery->num_rows > 0){
+        $result = mysqli_fetch_all($unitQuery, MYSQLI_ASSOC);
+        $_SESSION["productUnits"] = $result;
+    }else{
+        echo "No units found. Try Adding some units";
+    }
+}
+
+function getAllProducts(){
+    ob_start();
+    global $dbConnection;
+    $productsQuery = mysqli_query($dbConnection, "SELECT p.product_id, p.product_name, p.product_description, p.product_category, X(f.farm_location) as Lat, Y(f.farm_location) as Lon FROM `products` p JOIN farm_land f ON p.production_location=f.farm_id");
+    confirmQuery($productsQuery);
+    if ($productsQuery->num_rows > 0){
+        $result = mysqli_fetch_all($productsQuery, MYSQLI_ASSOC);
+        ob_end_clean();
+        return json_encode($result);
+    }else{
+        echo "No products found. Try Adding some products";
     }
 }
 
