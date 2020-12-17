@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 14, 2020 at 04:37 PM
+-- Generation Time: Dec 17, 2020 at 06:24 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -57,7 +57,10 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (15, 16, 'AW03330105fd714d99aeb66.43884836', '2020-12-14 07:31:37'),
 (16, 16, 'AW03330105fd7660bb84e68.59733998', '2020-12-14 13:18:03'),
 (17, 16, 'AW03330105fd770f257f8a3.21193271', '2020-12-14 14:04:34'),
-(18, 16, 'AW03330105fd775bdd26231.39235455', '2020-12-14 14:25:01');
+(18, 16, 'AW03330105fd775bdd26231.39235455', '2020-12-14 14:25:01'),
+(19, 16, 'AW03330105fd9bc93d843a8.43535785', '2020-12-16 07:51:47'),
+(21, 16, 'AW03330105fda1d03792459.65584962', '2020-12-16 14:43:15'),
+(22, 16, 'AW03330105fdb56a3c31c20.24636917', '2020-12-17 13:01:23');
 
 -- --------------------------------------------------------
 
@@ -82,7 +85,9 @@ CREATE TABLE `farm_land` (
 
 INSERT INTO `farm_land` (`farm_id`, `producer_id`, `farm_name`, `farm_desc`, `farm_address`, `farm_location`, `farm_area`, `created_date`) VALUES
 (2, 16, 'Test Point', 'test farm land', 'Brodaer Straße 2, Neubrandenburg, 17033', 0x000000000101000000456458c51bc74a40bfdd488f957e2a40, 0, '2020-12-11 17:23:45'),
-(3, 16, 'New Farm', 'Test Description of famr land', 'Dükerweg undefined, Neubrandenburg, 17033', 0x00000000010100000000000000000000000000000000000000, 0, '2020-12-12 13:47:09');
+(3, 16, 'New Farm', 'Test Description of famr land', 'Dükerweg undefined, Neubrandenburg, 17033', 0x00000000010100000000000000000000000000000000000000, 0, '2020-12-12 13:47:09'),
+(4, 16, 'Test Point 3', 'new test location', 'Brodaer Straße 4, Neubrandenburg, 17033', 0x000000000101000000ced60b4ff9c64a401aea6635137e2a40, 0, '2020-12-16 09:22:04'),
+(5, 16, 'Marketplatz', 'A market, or marketplace, is a location where people regularly gather for the purchase and sale of provisions, livestock, and other goods.[1] In different parts of the world, a market place may be described as a souk (from the Arabic), bazaar (from the Persian), a fixed mercado (Spanish), or itinerant tianguis (Mexico), or palengke (Philippines). Some markets operate daily and are said to be permanent markets while others are held once a week or on less frequent specified days such as festival days and are said to be periodic markets. The form that a market adopts depends on its locality\'s population, culture, ambient and geographic conditions. The term market covers many types of trading, as market squares, market halls and food halls, and their different varieties. Due to this, marketplaces can be situated both outdoors and indoors.', 'Dorfstraße Ost 13, undefined, 16307', 0x0000000001010000002c69ad0130a44a406affff7fa0d12c40, 0, '2020-12-17 13:13:16');
 
 -- --------------------------------------------------------
 
@@ -117,6 +122,26 @@ INSERT INTO `feature_type` (`feature_type_id`, `feature_name`, `feature_descript
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `images`
+--
+
+CREATE TABLE `images` (
+  `image_id` int(11) NOT NULL,
+  `image_type` int(11) NOT NULL,
+  `image_name` text NOT NULL,
+  `entity_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`image_id`, `image_type`, `image_name`, `entity_id`) VALUES
+(1, 1, '74c2578b-b260-4255-8802-0233b32e98b9.jpg', 48);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `products`
 --
 
@@ -130,6 +155,7 @@ CREATE TABLE `products` (
   `is_processed_product` tinyint(1) NOT NULL,
   `is_available` tinyint(1) NOT NULL,
   `price_per_unit` float NOT NULL,
+  `quantity_of_price` float NOT NULL,
   `unit` int(11) NOT NULL,
   `product_rating` float DEFAULT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp()
@@ -139,9 +165,31 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_description`, `product_category`, `production_location`, `is_processed_product`, `is_available`, `price_per_unit`, `unit`, `product_rating`, `created_date`) VALUES
-(7, 16, 'test', 'test data', 1, 2, 1, 1, 11, 1, 0, '2020-12-07 14:04:40'),
-(8, 16, 'new product', 'test product description', 1, 2, 1, 1, 125.23, 1, 0, '2020-12-07 14:05:48');
+INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_description`, `product_category`, `production_location`, `is_processed_product`, `is_available`, `price_per_unit`, `quantity_of_price`, `unit`, `product_rating`, `created_date`) VALUES
+(7, 16, 'test', 'test data', 1, 2, 1, 1, 11, 0, 1, 0, '2020-12-07 14:04:40'),
+(8, 16, 'new product', 'test product description', 1, 2, 1, 1, 125.23, 0, 1, 0, '2020-12-07 14:05:48'),
+(20, 16, 'test', 'test435', 1, 3, 1, 1, 151, 1, 3, 0, '2020-12-16 10:49:34'),
+(21, 16, 'Wild cranberries', 'fruity & slightly dry in taste\r\nWild cranberries from certified wild collection', 8, 3, 1, 1, 1.65, 220, 2, 0, '2020-12-17 13:10:54'),
+(22, 16, 'Fruit spread forest fruit', 'There are many varieties of fruit preserves globally, distinguished by method of preparation, type of fruit used, and place in a meal. Sweet fruit preserves such as jams, jellies and marmalades are often eaten at breakfast on bread or as an ingredient of a pastry or dessert, whereas more savory and acidic preserves made from vegetable fruits such as tomato, squash or zucchini, are eaten alongside savoury foods such as cheese, cold meats, and curries.', 2, 5, 1, 1, 11, 500, 2, 0, '2020-12-17 13:14:49'),
+(23, 16, 'TEST', 'test', 1, 5, 0, 1, 11, 1, 2, 0, '2020-12-17 13:32:44'),
+(24, 16, 'test', 'test', 2, 5, 0, 1, 11, 1, 2, 0, '2020-12-17 13:33:48'),
+(25, 16, 'test', 'test', 1, 3, 0, 1, 11, 1, 3, 0, '2020-12-17 13:34:43'),
+(26, 16, 'test', 'test54545', 1, 3, 1, 1, 151, 1, 5, 0, '2020-12-17 13:40:36'),
+(27, 16, 'Wild cranberries23423', 'teste1231', 1, 2, 1, 1, 11, 1, 2, 0, '2020-12-17 13:51:04'),
+(28, 16, 'test', 'test new 23', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 13:52:45'),
+(29, 16, 'test', 'test123', 1, 2, 0, 1, 11, 1, 1, 0, '2020-12-17 14:28:39'),
+(30, 16, 'uuuu', 'uuu', 1, 2, 0, 1, 11, 1, 3, 0, '2020-12-17 14:30:09'),
+(31, 16, 'Wild cranberries', 'dfsdfs', 1, 2, 0, 1, 11, 1, 3, 0, '2020-12-17 14:31:25'),
+(32, 16, 'Wild cranberries', 'ascasc', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:32:40'),
+(33, 16, 'TEST', 'test', 2, 2, 0, 1, 11, 51, 2, 0, '2020-12-17 14:33:36'),
+(34, 16, 'TEST', 'test', 2, 2, 0, 1, 11, 51, 2, 0, '2020-12-17 14:35:05'),
+(35, 16, 'Fruit spread forest fruit', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:39:16'),
+(36, 16, 'test', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:41:54'),
+(37, 16, 'test', '', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:51:05'),
+(38, 16, 'test', '', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:52:20'),
+(39, 16, 'Fruit spread forest fruit123', '123', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 16:07:43'),
+(40, 16, 'Fruit spread forest fruit123', '123', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 16:07:43'),
+(48, 16, 'Fruit spread forest fruit1234', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 17:14:53');
 
 -- --------------------------------------------------------
 
@@ -184,6 +232,29 @@ CREATE TABLE `product_feature` (
   `product_id` int(11) NOT NULL,
   `feature_type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `units`
+--
+
+CREATE TABLE `units` (
+  `unit_id` int(11) NOT NULL,
+  `unit_abbr` varchar(10) NOT NULL,
+  `unit_name` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `units`
+--
+
+INSERT INTO `units` (`unit_id`, `unit_abbr`, `unit_name`) VALUES
+(1, 'kg', 'kilogram'),
+(2, 'gm', 'gram'),
+(3, 'ltr', 'litre'),
+(4, 'mL', 'milliliter'),
+(5, 'pc.', 'piece');
 
 -- --------------------------------------------------------
 
@@ -311,6 +382,12 @@ ALTER TABLE `feature_type`
   ADD PRIMARY KEY (`feature_type_id`);
 
 --
+-- Indexes for table `images`
+--
+ALTER TABLE `images`
+  ADD PRIMARY KEY (`image_id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -333,6 +410,12 @@ ALTER TABLE `product_feature`
   ADD KEY `product_fk` (`product_id`);
 
 --
+-- Indexes for table `units`
+--
+ALTER TABLE `units`
+  ADD PRIMARY KEY (`unit_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -353,13 +436,13 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `farm_land`
 --
 ALTER TABLE `farm_land`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `feature_type`
@@ -368,10 +451,16 @@ ALTER TABLE `feature_type`
   MODIFY `feature_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `images`
+--
+ALTER TABLE `images`
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `product_category`
@@ -384,6 +473,12 @@ ALTER TABLE `product_category`
 --
 ALTER TABLE `product_feature`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `units`
+--
+ALTER TABLE `units`
+  MODIFY `unit_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
