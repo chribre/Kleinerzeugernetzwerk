@@ -216,17 +216,17 @@ function isTokenValid(){
 }
 
 
-
 //Add product details to product table
-function addProduct($productName, $productDescription, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating){
+function addProduct($productName, $productDescription, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating, $fileNameArray){
     global $dbConnection;
     /* Start transaction */
     mysqli_begin_transaction($dbConnection);
     if (isTokenValid()){
         $producerId = $_SESSION["userId"];
         mysqli_begin_transaction($dbConnection);
-        $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, production_location, 	is_processed_product, is_available, price_per_unit, quantity_of_price, unit, product_rating)"
+        $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, production_location, is_processed_product, is_available, price_per_unit, quantity_of_price, unit, product_rating)"
             . "VALUES ($producerId, '$productName', '$productDescription', $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating)";
+
 
         try{
             echo "trying to insert";
@@ -235,10 +235,27 @@ function addProduct($productName, $productDescription, $productCategory, $produc
                 echo "   inserted succesfully   ";
             //            confirmQuery($productInsertQuery);
             $productId = $dbConnection->insert_id;
-            mysqli_commit($dbConnection);
+            $fileCount = count($fileNameArray);
+            $productImageQuery = "";
+            if ($fileCount > 0){
+                for ($i = 0; $i<$fileCount; $i++){
+                    $imageName = $fileNameArray[$i];
+                    $productImageQuery .= "INSERT INTO images (image_type, image_name, entity_id) VALUES (1, '$imageName', $productId);";
+                }
+                echo $productImageQuery;
+                if (mysqli_query($dbConnection, $productImageQuery)){
+                    echo "  Files inserted succesfully   ";
+                    mysqli_commit($dbConnection);
+                }else{
+                    echo "product creation failed at inserting images,";
+                    mysqli_rollback($dbConnection);
+                }
+            }else{
+                mysqli_commit($dbConnection);
+                echo "inserted";
+                echo "product id is $productId, ";
+            }
 
-            echo "inserted";
-            echo "product id is $productId, ";
         }catch(mysqli_sql_exception $exception){
             echo "product creation failed,";
             mysqli_rollback($dbConnection);

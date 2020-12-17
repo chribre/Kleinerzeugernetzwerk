@@ -1,9 +1,55 @@
 
 <?php
+
+function generateFileName(){
+        $data = random_bytes(16);
+        $data[6] = chr(ord($data[6]) & 0x0f | 0x40); 
+        $data[8] = chr(ord($data[8]) & 0x3f | 0x80); 
+        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+}
+
 global $dbConnection;
 //PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     echo('add product post method hit,');
+    $fileNameArray = [];
+    if (isset($_FILES['file'])){
+        $fileCount = count($_FILES['file']['name']);
+        for ($idx = 0; $idx < $fileCount; $idx++){
+            $fileNameNew = null;
+            $fileName = $_FILES['file']['name'][$idx];
+            $fileTmpName = $_FILES['file']['tmp_name'][$idx];
+            $fileSize = $_FILES['file']['size'][$idx];
+            $fileError = $_FILES['file']['error'][$idx];
+            $fileType = $_FILES['file']['type'][$idx];
+
+
+            $fileExt = explode('.', $fileName);
+            $fileActualExt = strtolower(end($fileExt));
+
+            $allowed = array('jpeg', 'jpg', 'png');
+            echo $fileActualExt;
+            if (in_array($fileActualExt, $allowed)){
+                if ($fileError === 0){
+                    if ($fileSize < 10000000 ){
+                        $fileNameNew = generateFileName().".".$fileActualExt;//uniqid('', true).".".$fileActualExt;
+                        $fileDestination = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/product_img/".$fileNameNew;
+                        move_uploaded_file($fileTmpName, $fileDestination);  
+                        array_push($fileNameArray,$fileNameNew);
+                        echo "filed upload success";
+                    }else{
+                        echo "your file size is too high";
+                    }
+                }else{
+                    echo "There was an error uploading your profile image";
+                }
+            }else{
+                echo "Cannot upload file of this type";
+            }
+        }
+    }
+
+
     if (isset($_POST['addProductMethod'])){
         print_r($_POST);
         $productName = isset($_POST['productName']) ? escapeSQLString($_POST['productName']) : "";
@@ -14,11 +60,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $productPrice = isset($_POST['productPrice']) ? floatval(escapeSQLString($_POST['productPrice'])) : 0;
         $productQuantity = isset($_POST['quantity']) ? floatval(escapeSQLString($_POST['quantity'])) : 0;
         $productUnit = isset($_POST['unit']) ? escapeSQLString($_POST['unit']): 0;
-        $isProcessedFood = isset($_POST['isProcessed']) ? escapeSQLString($_POST['isProcessed']) : false;
+        $isProcessedFood = (isset($_POST['isProcessed']) && $_POST['isProcessed'] === true) ? 1 : 0;
         $isAvailable = true;
         $productRating = 0;
+        $isprocessed = true;
 
-        addProduct($productName, $productDesc, $productCategory, $productionPoint, $isProcessedFood, $isAvailable, $productPrice, $productQuantity, $productUnit, $productRating);
+        addProduct($productName, $productDesc, $productCategory, $productionPoint, $isProcessedFood, $isAvailable, $productPrice, $productQuantity, $productUnit, $productRating, $fileNameArray);
     }
 }
 
@@ -31,6 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     <div class="modal-dialog modal-dialog-centered modal-lg" role="form">
         <div class="modal-content">
             <div class="modal-header">
+
+
                 <script type="text/javascript">
                     function readURL(input) {
                         if (input.files && input.files.length > 0) {
@@ -104,14 +153,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                             imagesPreview(this, 'div.gallery');
                         });
                     });
-
-
-
-
-
-
-
                 </script>
+
+
+
+
                 <h5 class="modal-title text-center"><i class="material-icons">&#xE147;</i>Add a new product</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
@@ -119,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
             <div class="modal-body m-3">
                 <p>Modal body text goes here.</p>
-                <form method="post" id="newProductForm">
+                <form method="post" id="newProductForm" enctype='multipart/form-data'>
                     <div class="form-group">
                         <label for="productName">Product Name</label>
                         <input type="text" class="form-control" id="productName" aria-describedby="productName01" placeholder="Product name" name="productName">
@@ -264,12 +310,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                                 }
                                 ?>
-
-                                <!--
-<option>Kilogram</option>
-<option>Gram</option>
-<option>Millilitre</option>
--->
                             </select>
                         </div>
                     </div>
@@ -295,7 +335,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                         <div class="mx-4 justify-content-center align-middle row">
                             <div class="gallery row"></div>
                             <label class="btn btn-default rounded-circle" id="addBtn">
-                                <i class="fa fa-plus"></i> <input onchange="readURL(this);" type="file" hidden id="gallery-photo-add" name="files" multiple>
+                                <!--                                <i class="fa fa-plus"></i> <input onchange="readURL(this);" type="file" hidden id="gallery-photo-add" name="files[]" multiple>-->
+                                <input type="file" name="file[]" id="file" multiple>
                             </label>
 
                         </div>
