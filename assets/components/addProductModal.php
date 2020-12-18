@@ -1,11 +1,12 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/10.31.0/js/jquery.fileupload.min.js" integrity="sha512-qPkNWpUqYz8bhO5bGNPBvlCB9hPZBil2ez5Mo8yVmpCKI315UDDPQeg/TE7KwZ+U/wdSO8JguwVxYY/Ha7U+vQ==" crossorigin="anonymous"></script>
 
 <?php
 
 function generateFileName(){
-        $data = random_bytes(16);
-        $data[6] = chr(ord($data[6]) & 0x0f | 0x40); 
-        $data[8] = chr(ord($data[8]) & 0x3f | 0x80); 
-        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+    $data = random_bytes(16);
+    $data[6] = chr(ord($data[6]) & 0x0f | 0x40); 
+    $data[8] = chr(ord($data[8]) & 0x3f | 0x80); 
+    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 }
 
 global $dbConnection;
@@ -81,47 +82,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
                 <script type="text/javascript">
-                    function readURL(input) {
-                        if (input.files && input.files.length > 0) {
-
-
-                            var i;
-                            for (i = 0; i < input.files.length; i++) {
-                                text += cars[i] + "<br>";
-                            }
-
-
-
-
-                            var reader = new FileReader();
-                            reader.onload = function (e) {
-                                $('#test').attr('src', e.target.result);
-                            }
-                            reader.readAsDataURL(input.files[0]);
-                        }
-                    }
-
-                    function addImage() {
-                        const div = document.createElement('div');
-
-                        div.className = 'row';
-
-                        div.innerHTML = `
-<input type="text" name="name" value="" />
-<input type="text" name="value" value="" />
-<label> 
-<input type="checkbox" name="check" value="1" /> Checked? 
-                    </label>
-<input type="button" value="-" onclick="removeRow(this)" />
-`;
-
-                        document.getElementById('content').appendChild(div);
-                    }
-
-                    function removeRow(input) {
-                        document.getElementById('content').removeChild(input.parentNode);
-                    }
-
+                    //                    function readURL(input) {
+                    //                        if (input.files && input.files.length > 0) {
+                    //
+                    //
+                    //                            var i;
+                    //                            for (i = 0; i < input.files.length; i++) {
+                    //                                text += cars[i] + "<br>";
+                    //                            }
+                    //
+                    //
+                    //
+                    //
+                    //                            var reader = new FileReader();
+                    //                            reader.onload = function (e) {
+                    //                                $('#test').attr('src', e.target.result);
+                    //                            }
+                    //                            reader.readAsDataURL(input.files[0]);
+                    //                        }
+                    //                    }
 
 
 
@@ -133,14 +112,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                             if (input.files) {
                                 var filesAmount = input.files.length;
-
+                                document.getElementById(placeToInsertImagePreview).innerHTML = ''
+                                document.getElementById('addImageBtn').className = 'plus circle icon big'
                                 for (i = 0; i < filesAmount; i++) {
                                     var reader = new FileReader();
 
                                     reader.onload = function(event) {
-                                        $($.parseHTML('<img>')).attr('src', event.target.result)
-                                            .attr('id', "test")
-                                            .appendTo(placeToInsertImagePreview);
+
+
+                                        const imgdiv = document.createElement('div');
+
+                                        imgdiv.className = 'image';
+
+                                        imgdiv.innerHTML = `
+<div class="overlay">
+
+                    </div>
+<img src="${event.target.result}" id="test" key="${i}">
+`;
+                                        
+//If overlay botton needed then copy below code into inner html
+//                                        <button type="button" class="btn btn-default edit-image-btn pull-right mt-2">
+//<i class="minus circle icon colorRed"></i>
+//                    </button>
+
+                                        document.getElementById(placeToInsertImagePreview).appendChild(imgdiv);
+                                        document.getElementById('addImageBtn').className = 'edit icon large'
+
+
+
+
+
+                                        //                                        $($.parseHTML('<img>')).attr('src', event.target.result)
+                                        //                                            .attr('id', "test")
+                                        //                                            .appendTo(placeToInsertImagePreview);
                                     }
 
                                     reader.readAsDataURL(input.files[i]);
@@ -150,9 +155,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                         };
 
                         $('#gallery-photo-add').on('change', function() {
-                            imagesPreview(this, 'div.gallery');
+                            imagesPreview(this, 'gallery');
                         });
                     });
+
+                    
+
                 </script>
 
 
@@ -298,16 +306,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                                             $unitName = isset($unit['unit_name']) ? $unit['unit_name'] : "";
                                             $unitId = isset($unit['unit_id']) ? $unit['unit_id'] : 0;
                                             $unitAbbr = isset($unit['unit_abbr']) ? $unit['unit_abbr'] : "";
-
                                 ?>
-
                                 <option value="<?php echo $unitId?>"><?php echo "$unitName ($unitAbbr)" ?></option>
-
                                 <?php 
                                         }
                                     }
                                 }else{
-
                                 }
                                 ?>
                             </select>
@@ -332,15 +336,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                     <div class="form-group">
                         <label>Add product images</label>
-                        <div class="mx-4 justify-content-center align-middle row">
-                            <div class="gallery row"></div>
-                            <label class="btn btn-default rounded-circle" id="addBtn">
-                                <!--                                <i class="fa fa-plus"></i> <input onchange="readURL(this);" type="file" hidden id="gallery-photo-add" name="files[]" multiple>-->
-                                <input type="file" name="file[]" id="file" multiple>
-                            </label>
+                        <div class="mx-4 justify-content-center row">
+                            <div id="gallery" class="gallery row">
 
+                            </div>
+                            <div class="my-auto">
+                                <label class="btn btn-default rounded-circle" id="addBtn">
+                                    <!--<i class="fa fa-plus"></i> <input onchange="readURL(this);" type="file" hidden id="gallery-photo-add" name="files[]" multiple>-->
+                                    <i id="addImageBtn" class="plus circle icon big"></i>
+                                    <input id="gallery-photo-add" hidden type="file" name="file[]" id="file" multiple>
+                                </label>
+                            </div>
+
+
+                            <!--
+<button id="addBtn" class="circular ui icon button">
+<i class="icon settings"></i>
+<input id="gallery-photo-add" hidden type="file" name="file[]" id="file" multiple>
+</button>
+-->
                         </div>
                     </div>
+
+
 
                     <div class="modal-footer justify-content-between">
 
@@ -385,5 +403,18 @@ e.preventDefault();
         width: 50px;
         height: 50px;
         background-color: aqua;
+    }
+    .image {
+        position: relative;
+        display: inline-block;
+    }
+
+    .overlay {
+        position: absolute;
+        right: 0;
+        z-index: 5;
+    }
+    .colorRed {
+        color: red;
     }
 </style>

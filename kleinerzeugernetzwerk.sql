@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2020 at 06:24 PM
+-- Generation Time: Dec 18, 2020 at 06:14 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -60,7 +60,8 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (18, 16, 'AW03330105fd775bdd26231.39235455', '2020-12-14 14:25:01'),
 (19, 16, 'AW03330105fd9bc93d843a8.43535785', '2020-12-16 07:51:47'),
 (21, 16, 'AW03330105fda1d03792459.65584962', '2020-12-16 14:43:15'),
-(22, 16, 'AW03330105fdb56a3c31c20.24636917', '2020-12-17 13:01:23');
+(22, 16, 'AW03330105fdb56a3c31c20.24636917', '2020-12-17 13:01:23'),
+(23, 16, 'AW03330105fdcad8240a0a0.54598902', '2020-12-18 13:24:18');
 
 -- --------------------------------------------------------
 
@@ -129,15 +130,34 @@ CREATE TABLE `images` (
   `image_id` int(11) NOT NULL,
   `image_type` int(11) NOT NULL,
   `image_name` text NOT NULL,
-  `entity_id` int(11) NOT NULL
+  `entity_id` int(11) NOT NULL,
+  `createdDate` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `images`
 --
 
-INSERT INTO `images` (`image_id`, `image_type`, `image_name`, `entity_id`) VALUES
-(1, 1, '74c2578b-b260-4255-8802-0233b32e98b9.jpg', 48);
+INSERT INTO `images` (`image_id`, `image_type`, `image_name`, `entity_id`, `createdDate`) VALUES
+(1, 1, '74c2578b-b260-4255-8802-0233b32e98b9.jpg', 48, '2020-12-18 13:30:20'),
+(2, 1, 'deb9dec0-f9f8-4b67-989b-0fca88ee3686.jpg', 51, '2020-12-18 13:30:20'),
+(3, 1, '9ec1b169-88cd-4f72-9978-4474321c4bab.jpg', 51, '2020-12-18 13:30:20'),
+(4, 1, 'c2c94e80-a9bf-4dd9-899b-57548d4105c4.png', 51, '2020-12-18 13:30:20'),
+(5, 1, '80bde851-861a-46c5-aef8-308dfe6132ae.png', 52, '2020-12-18 13:30:20'),
+(6, 1, '62c9cee8-3962-4505-9b75-eae382944325.jpg', 52, '2020-12-18 13:30:20'),
+(7, 1, '8f609f40-586b-4e06-a1c6-a093e08166d2.jpg', 52, '2020-12-18 13:30:20'),
+(8, 1, '49d2c7a0-3747-4a93-bafe-f640295736cf.png', 52, '2020-12-18 13:30:20'),
+(9, 1, 'ee61f568-3c31-487c-83de-5f0e1ed84838.jpeg', 53, '2020-12-18 16:35:31'),
+(10, 1, 'ad3f9450-b78a-4590-801d-2dd6975e34cc.jpg', 53, '2020-12-18 16:35:31'),
+(11, 1, '039905d4-0540-40e8-ae04-7c2715e6d0be.jpg', 54, '2020-12-18 16:36:03'),
+(12, 1, '09da3fb0-ceeb-4877-9f71-bbe4bebf2e35.jpg', 54, '2020-12-18 16:36:03'),
+(13, 1, '2871f1f4-562f-4d22-8e3c-3d2a01d2541a.jpg', 55, '2020-12-18 16:37:19'),
+(14, 1, '565c2415-d608-4dc8-9a75-2944f6497e85.jpg', 55, '2020-12-18 16:37:19'),
+(15, 1, '97bd3c16-c751-4905-9596-7947a2613fb9.jpg', 55, '2020-12-18 16:37:19'),
+(16, 1, '16d13cfe-2372-4937-ba70-d6633ed6f26c.jpg', 55, '2020-12-18 16:37:19'),
+(17, 1, 'a9a7add0-4cd1-4687-97e7-65742cad324f.jpeg', 55, '2020-12-18 16:37:19'),
+(18, 1, '33a90f5d-4c4c-4440-bb3b-2100f2c3769a.jpg', 55, '2020-12-18 16:37:19'),
+(19, 1, 'c344dbcc-889a-4c91-9d02-1bc642cd21fd.jpg', 56, '2020-12-18 16:37:57');
 
 -- --------------------------------------------------------
 
@@ -189,7 +209,13 @@ INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_de
 (38, 16, 'test', '', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:52:20'),
 (39, 16, 'Fruit spread forest fruit123', '123', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 16:07:43'),
 (40, 16, 'Fruit spread forest fruit123', '123', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 16:07:43'),
-(48, 16, 'Fruit spread forest fruit1234', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 17:14:53');
+(48, 16, 'Fruit spread forest fruit1234', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 17:14:53'),
+(51, 16, 'test', '12434', 1, 3, 0, 1, 11, 1, 2, 0, '2020-12-18 13:28:19'),
+(52, 16, 'test', 'testeretrtrth', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-18 13:28:40'),
+(53, 16, 'test', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-18 16:35:31'),
+(54, 16, 'test', 'test', 2, 2, 0, 1, 11, 1, 2, 0, '2020-12-18 16:36:03'),
+(55, 16, 'test', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-18 16:37:19'),
+(56, 16, 'TEST', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-18 16:37:57');
 
 -- --------------------------------------------------------
 
@@ -436,7 +462,7 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `farm_land`
@@ -454,13 +480,13 @@ ALTER TABLE `feature_type`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `product_category`

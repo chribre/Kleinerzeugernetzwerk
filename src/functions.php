@@ -236,11 +236,16 @@ function addProduct($productName, $productDescription, $productCategory, $produc
             //            confirmQuery($productInsertQuery);
             $productId = $dbConnection->insert_id;
             $fileCount = count($fileNameArray);
-            $productImageQuery = "";
+            $productImageQuery = "INSERT INTO images (image_type, image_name, entity_id) VALUES ";
             if ($fileCount > 0){
                 for ($i = 0; $i<$fileCount; $i++){
                     $imageName = $fileNameArray[$i];
-                    $productImageQuery .= "INSERT INTO images (image_type, image_name, entity_id) VALUES (1, '$imageName', $productId);";
+                    $productImageQuery .= "(1, '$imageName', $productId)";
+                    if ($i===$fileCount-1){
+                         $productImageQuery .= ";";
+                    }else{
+                        $productImageQuery .= ", ";
+                    }
                 }
                 echo $productImageQuery;
                 if (mysqli_query($dbConnection, $productImageQuery)){
