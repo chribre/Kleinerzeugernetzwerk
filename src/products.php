@@ -20,7 +20,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
     });
         
         
-        
+        //Ajax call to get all the farms of a producer to list in add product screen
         $('#addNewProduct').on('shown.bs.modal', function (e) {
             $.ajax({
                 url:"/kleinerzeugernetzwerk/src/getFarmData.php",    //the page containing php script
@@ -56,12 +56,21 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
 
 </div>
 <div class="row d-flex justify-content-center">
+   
+<!--   Fetch all the products by the producer and dispplay it as cards-->
     <?php 
     $carrotImg ="$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/images/carrot_1.jpg";
     global $dbConnection;
     if (isset($_SESSION['userId'])){
         $userId = $_SESSION['userId'];
-        $getProductsQuery = mysqli_query($dbConnection, "SELECT * FROM `products` WHERE `producer_id` = '$userId'");
+        
+                    $fetchProductQuery = "SELECT * from products p
+LEFT JOIN images i on (i.entity_id = p.product_id and i.image_type = 1)
+WHERE p.producer_id = '$userId'
+GROUP BY p.product_id ORDER BY p.created_date DESC";
+                        
+                        
+        $getProductsQuery = mysqli_query($dbConnection, $fetchProductQuery  );
         confirmQuery($getProductsQuery);
         $productCount = mysqli_num_rows($getProductsQuery);
         if ($productCount == 0){
@@ -74,16 +83,23 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
                 $productPrice = $row['price_per_unit'];
                 //                $productQuantity = $row['product_quantity'];
                 $productUnit = $row['unit'];
+                $imageName = $row['image_name'];
+                $imagePath = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/product_img/";
+                if ($imageName === null){
+                    $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
+                }else{
+                    $imagePath .= $imageName;
+                }
 
     ?>
 
-    <div class="w3-card-4 test m-4 shadow bg-white rounded productCard" id:"productCard">
+    <div class="w3-card-4 test m-4 shadow bg-white rounded productCard" id="productCard">
         <div class="overflow-hidden" width="280" height="180">
-            <img src="/kleinerzeugernetzwerk/images/carrot_1.jpg" alt="Avatar" width="280">
+            <img src="<?php echo $imagePath ?>" alt="Avatar" width="280">
         </div>
-        <div class="w3-container p-2">
+        <div class="p-2">
             <h4><b><?php echo $productName ?></b></h4>   
-            <p><?php echo $productDesc ?></p> 
+            <p id="productDesc" class="overflow-hidden"><?php echo $productDesc ?></p> 
             <div class="row mx-0 mb-2">
                 <div class="rounded-pill border border-secondary align-items-center">
                     <img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
@@ -124,4 +140,9 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
     ?>
 
 </div>  
-
+<style>
+/*    to make the product description only two lines*/
+    #productDesc{
+        max-height: 38px;
+    }
+</style>

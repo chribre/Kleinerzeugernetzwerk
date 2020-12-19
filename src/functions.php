@@ -136,8 +136,6 @@ function getNameFormatted($firstName, $middleName, $lastName){
 }
 
 
-
-
 function logout(){
     removeAuthToken();
 }
@@ -242,7 +240,7 @@ function addProduct($productName, $productDescription, $productCategory, $produc
                     $imageName = $fileNameArray[$i];
                     $productImageQuery .= "(1, '$imageName', $productId)";
                     if ($i===$fileCount-1){
-                         $productImageQuery .= ";";
+                        $productImageQuery .= ";";
                     }else{
                         $productImageQuery .= ", ";
                     }
@@ -274,7 +272,7 @@ function addProduct($productName, $productDescription, $productCategory, $produc
 }
 
 
-function addProductionPoint($pointName, $pointDescription, $pointAddress, $latitude, $longitude, $area){
+function addProductionPoint($pointName, $pointDescription, $pointAddress, $latitude, $longitude, $area, $fileNameArray){
     global $dbConnection;
     /* Start transaction */
     mysqli_begin_transaction($dbConnection);
@@ -291,10 +289,32 @@ function addProductionPoint($pointName, $pointDescription, $pointAddress, $latit
                 echo "   inserted succesfully   ";
             //            confirmQuery($productInsertQuery);
             $productionPointId = $dbConnection->insert_id;
-            mysqli_commit($dbConnection);
+            $fileCount = count($fileNameArray);
+            $productionPointImageQuery = "INSERT INTO images (image_type, image_name, entity_id) VALUES ";
+            if ($fileCount > 0){
+                for ($i = 0; $i<$fileCount; $i++){
+                    $imageName = $fileNameArray[$i];
+                    $productionPointImageQuery .= "(2, '$imageName', $productionPointId)";
+                    if ($i===$fileCount-1){
+                        $productionPointImageQuery .= ";";
+                    }else{
+                        $productionPointImageQuery .= ", ";
+                    }
+                }
+                echo $productionPointImageQuery;
+                if (mysqli_query($dbConnection, $productionPointImageQuery)){
+                    echo "  Files inserted succesfully   ";
+                    mysqli_commit($dbConnection);
+                }else{
+                    echo "product creation failed at inserting images,";
+                    mysqli_rollback($dbConnection);
+                }
+            }else{
+                mysqli_commit($dbConnection);
 
-            echo "inserted";
-            echo "production Point id is $productionPointId, ";
+                echo "inserted";
+                echo "production Point id is $productionPointId, ";
+            }
         }catch(mysqli_sql_exception $exception){
             echo "faild to add a new production point,";
             mysqli_rollback($dbConnection);
@@ -305,6 +325,12 @@ function addProductionPoint($pointName, $pointDescription, $pointAddress, $latit
 
     }
 
+}
+function generateFileName(){
+    $data = random_bytes(16);
+    $data[6] = chr(ord($data[6]) & 0x0f | 0x40); 
+    $data[8] = chr(ord($data[8]) & 0x3f | 0x80); 
+    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 }
 
 

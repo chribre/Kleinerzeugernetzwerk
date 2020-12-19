@@ -39,6 +39,7 @@ html, body {
 
 #productCard{
     background-color: #fafafa;
+
 }
 #addNewProduct .modal-dialog-scrollable {
     -webkit-transform: translate(0,-50%);

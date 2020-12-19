@@ -8,6 +8,42 @@ global $dbConnection;
 //PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
     echo('add production point post method hit,');
+    $fileNameArray = [];
+    if (isset($_FILES['file'])){
+        $fileCount = count($_FILES['file']['name']);
+        for ($idx = 0; $idx < $fileCount; $idx++){
+            $fileNameNew = null;
+            $fileName = $_FILES['file']['name'][$idx];
+            $fileTmpName = $_FILES['file']['tmp_name'][$idx];
+            $fileSize = $_FILES['file']['size'][$idx];
+            $fileError = $_FILES['file']['error'][$idx];
+            $fileType = $_FILES['file']['type'][$idx];
+
+
+            $fileExt = explode('.', $fileName);
+            $fileActualExt = strtolower(end($fileExt));
+
+            $allowed = array('jpeg', 'jpg', 'png');
+            echo $fileActualExt;
+            if (in_array($fileActualExt, $allowed)){
+                if ($fileError === 0){
+                    if ($fileSize < 10000000 ){
+                        $fileNameNew = generateFileName().".".$fileActualExt;//uniqid('', true).".".$fileActualExt;
+                        $fileDestination = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/production_point_img/".$fileNameNew;
+                        move_uploaded_file($fileTmpName, $fileDestination);  
+                        array_push($fileNameArray,$fileNameNew);
+                        echo "filed upload success";
+                    }else{
+                        echo "your file size is too high";
+                    }
+                }else{
+                    echo "There was an error uploading your profile image";
+                }
+            }else{
+                echo "Cannot upload file of this type";
+            }
+        }
+    }
     if (isset($_POST['addProductionPointMethod'])){
         $pointName = escapeSQLString($_POST['productionPointName']);
         $pointDesc = escapeSQLString($_POST['productionPointDesc']);
@@ -22,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $pointArea = 0;//escapeSQLString($_POST['pointArea']);
 
 
-        addProductionPoint($pointName, $pointDesc, $pointAddress, $latitude, $longitude, $pointArea);
+        addProductionPoint($pointName, $pointDesc, $pointAddress, $latitude, $longitude, $pointArea,$fileNameArray);
     }
 }
 
@@ -40,50 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
                 <script type="text/javascript">
-                    function readURL(input) {
-                        if (input.files && input.files.length > 0) {
-
-
-                            var i;
-                            for (i = 0; i < input.files.length; i++) {
-                                text += cars[i] + "<br>";
-                            }
-
-
-
-
-                            var reader = new FileReader();
-                            reader.onload = function (e) {
-                                $('#test').attr('src', e.target.result);
-                            }
-                            reader.readAsDataURL(input.files[0]);
-                        }
-                    }
-
-                    function addImage() {
-                        const div = document.createElement('div');
-
-                        div.className = 'row';
-
-                        div.innerHTML = `
-<input type="text" name="name" value="" />
-<input type="text" name="value" value="" />
-<label> 
-<input type="checkbox" name="check" value="1" /> Checked? 
-                    </label>
-<input type="button" value="-" onclick="removeRow(this)" />
-`;
-
-                        document.getElementById('content').appendChild(div);
-                    }
-
-                    function removeRow(input) {
-                        document.getElementById('content').removeChild(input.parentNode);
-                    }
-
-
-
-
 
 
                     $(function() {
@@ -92,14 +84,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                             if (input.files) {
                                 var filesAmount = input.files.length;
-
+                                document.getElementById(placeToInsertImagePreview).innerHTML = ''
+                                document.getElementById('addImageBtn').className = 'plus circle icon big'
                                 for (i = 0; i < filesAmount; i++) {
                                     var reader = new FileReader();
 
                                     reader.onload = function(event) {
-                                        $($.parseHTML('<img>')).attr('src', event.target.result)
-                                            .attr('id', "test")
-                                            .appendTo(placeToInsertImagePreview);
+
+
+                                        const imgdiv = document.createElement('div');
+
+                                        imgdiv.className = 'image';
+
+                                        imgdiv.innerHTML = `
+<div class="overlay">
+
+                    </div>
+<img src="${event.target.result}" id="test" key="${i}">
+`;
+                                        
+//If overlay botton needed then copy below code into inner html
+//                                        <button type="button" class="btn btn-default edit-image-btn pull-right mt-2">
+//<i class="minus circle icon colorRed"></i>
+//                    </button>
+
+                                        document.getElementById(placeToInsertImagePreview).appendChild(imgdiv);
+                                        document.getElementById('addImageBtn').className = 'edit icon large'
+
+
+
+
+
+                                        //                                        $($.parseHTML('<img>')).attr('src', event.target.result)
+                                        //                                            .attr('id', "test")
+                                        //                                            .appendTo(placeToInsertImagePreview);
                                     }
 
                                     reader.readAsDataURL(input.files[i]);
@@ -109,10 +127,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                         };
 
                         $('#gallery-photo-add').on('change', function() {
-                            imagesPreview(this, 'div.gallery');
+                            imagesPreview(this, 'gallery');
                         });
                     });
 
+                    
 
                 </script>
 
@@ -130,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             </div>
             <div class="modal-body m-3">
                 <p>Modal body text goes here.</p>
-                <form method="post" id="newProductionPointForm">
+                <form method="post" id="newProductionPointForm" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="productionPointName">Production Point Name</label>
                         <input type="text" class="form-control" id="productionPointName" aria-describedby="productionPointName" placeholder="Production Point Name" name="productionPointName">
@@ -190,10 +209,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                     <div class="form-group">
                         <label>Add product images</label>
                         <div class="mx-4 justify-content-center align-middle row">
-                            <div class="gallery row"></div>
-                            <label class="btn btn-default rounded-circle" id="addBtn">
-                                <i class="fa fa-plus"></i> <input onchange="readURL(this);" type="file" hidden id="gallery-photo-add" name="files" multiple>
-                            </label>
+                            <div id="gallery" class="gallery row">
+
+                            </div>
+                            <div class="my-auto">
+                                <label class="btn btn-default rounded-circle" id="addBtn">
+                                    <i id="addImageBtn" class="plus circle icon big"></i>
+                                    <input id="gallery-photo-add" hidden type="file" name="file[]" id="file" multiple accept="image/*">
+                                </label>
+                            </div>
 
                         </div>
                     </div>

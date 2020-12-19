@@ -11,7 +11,11 @@
         if (isTokenValid()){
             if (isset($_SESSION['userId'])){
                 $userId = $_SESSION['userId'];
-                $getProductionPointQuery = mysqli_query($dbConnection, "SELECT * FROM `farm_land` WHERE `producer_id` = '$userId'");
+                $fetchProductionPointQuery = "SELECT * FROM farm_land f
+LEFT JOIN images i on (i.entity_id = f.farm_id and i.image_type = 2)
+WHERE f.producer_id = '$userId'
+GROUP BY f.farm_id ORDER BY f.created_date DESC";
+                $getProductionPointQuery = mysqli_query($dbConnection, $fetchProductionPointQuery);
                 confirmQuery($getProductionPointQuery);
                 $productCount = mysqli_num_rows($getProductionPointQuery);
                 if ($productCount == 0){
@@ -21,6 +25,13 @@
                         $pointName = $row['farm_name'];
                         $pointDesc = $row['farm_desc'];
                         $pointAddress = $row['farm_address'];
+                        $imageName = $row['image_name'];
+                        $imagePath = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/production_point_img/";
+                        if ($imageName === null){
+                            $imagePath = "/kleinerzeugernetzwerk/images/defaul_agricultural-land.jpg";
+                        }else{
+                            $imagePath .= $imageName;
+                        }
 
         ?>
 
@@ -34,7 +45,7 @@
 
         <li class="row p-2 farmLandLI">
             <div class=" d-md-flex align-items-center w-100 justify-content-between">
-                <img class="rounded" id="farmImg" src="/kleinerzeugernetzwerk/images/carrot_1.jpg" width="240" alt="">
+                <img class="rounded" id="farmImg" src="<?php echo $imagePath ?>" width="240" alt="">
                 <div id="farmDetails" class="flex-grow-1 mx-4">
                     <h3><?php echo $pointName ?></h3>
                     <p><?php echo $pointDesc ?></p>

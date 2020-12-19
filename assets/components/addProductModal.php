@@ -1,14 +1,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/10.31.0/js/jquery.fileupload.min.js" integrity="sha512-qPkNWpUqYz8bhO5bGNPBvlCB9hPZBil2ez5Mo8yVmpCKI315UDDPQeg/TE7KwZ+U/wdSO8JguwVxYY/Ha7U+vQ==" crossorigin="anonymous"></script>
 
 <?php
-
-function generateFileName(){
-    $data = random_bytes(16);
-    $data[6] = chr(ord($data[6]) & 0x0f | 0x40); 
-    $data[8] = chr(ord($data[8]) & 0x3f | 0x80); 
-    return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
-}
-
 global $dbConnection;
 //PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
@@ -82,28 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
                 <script type="text/javascript">
-                    //                    function readURL(input) {
-                    //                        if (input.files && input.files.length > 0) {
-                    //
-                    //
-                    //                            var i;
-                    //                            for (i = 0; i < input.files.length; i++) {
-                    //                                text += cars[i] + "<br>";
-                    //                            }
-                    //
-                    //
-                    //
-                    //
-                    //                            var reader = new FileReader();
-                    //                            reader.onload = function (e) {
-                    //                                $('#test').attr('src', e.target.result);
-                    //                            }
-                    //                            reader.readAsDataURL(input.files[0]);
-                    //                        }
-                    //                    }
-
-
-
 
 
                     $(function() {
@@ -342,9 +312,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
                             </div>
                             <div class="my-auto">
                                 <label class="btn btn-default rounded-circle" id="addBtn">
-                                    <!--<i class="fa fa-plus"></i> <input onchange="readURL(this);" type="file" hidden id="gallery-photo-add" name="files[]" multiple>-->
                                     <i id="addImageBtn" class="plus circle icon big"></i>
-                                    <input id="gallery-photo-add" hidden type="file" name="file[]" id="file" multiple>
+                                    <input id="gallery-photo-add" hidden type="file" name="file[]" id="file" multiple accept="image/*">
                                 </label>
                             </div>
 
