@@ -20,7 +20,6 @@ include "assets/components/map.php";
 ?>
 
 
-
 <?php
 //Footer Html containig jquery scripts and other dependent bootstrap cdns
 include "assets/components/footer.php";

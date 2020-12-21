@@ -372,7 +372,7 @@ function getProductUnits(){
 function getAllProducts(){
     ob_start();
     global $dbConnection;
-    $productsQuery = mysqli_query($dbConnection, "SELECT p.product_id, p.product_name, p.product_description, p.product_category, X(f.farm_location) as Lat, Y(f.farm_location) as Lon FROM `products` p JOIN farm_land f ON p.production_location=f.farm_id");
+    $productsQuery = mysqli_query($dbConnection, "SELECT p.product_id, p.product_name, p.product_description, p.product_category, X(f.farm_location) as Lat, Y(f.farm_location) as Lon, f.farm_address FROM `products` p JOIN farm_land f ON p.production_location=f.farm_id");
     confirmQuery($productsQuery);
     if ($productsQuery->num_rows > 0){
         $result = mysqli_fetch_all($productsQuery, MYSQLI_ASSOC);

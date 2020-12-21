@@ -1,4 +1,23 @@
+<?php
+$leaflet_sidebar_css = "/kleinerzeugernetzwerk/assets/leaflet_sidebar/L.Control.Sidebar.css";
+$leaflet_sidebar_js = "/kleinerzeugernetzwerk/assets/leaflet_sidebar/L.Control.Sidebar.js";
+$imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
+
+?>
+
+
+<link rel="stylesheet" type="text/css" href="<?php echo $leaflet_sidebar_css ?>" />
+<script src="<?php echo $leaflet_sidebar_js ?>"></script>
+
+
 <div id="mapid" class="full-height"></div>
+
+
+
+
+<div id="sidebar">
+        <h1>leaflet-sidebar</h1>
+    </div>
 
 <script>
 
@@ -14,29 +33,83 @@
             dataType: 'json',
             success:function(result){
                 console.log(result)
-
-
+                products = {
+                    "type": "FeatureCollection",
+                    "features": []
+                }
                 $.each(result,function(i,obj){
                     console.log(obj)
                     const productName = obj.product_name;
                     const productDesc = obj.product_description;
+                    const productAddr = obj.farm_address;
                     const latitude = parseFloat(obj.Lat);
                     const longitude = parseFloat(obj.Lon);
                     const productId = parseInt(obj.product_id);
-                    const tempProductPoints = {
-                        "geometry": {
-                            "type": "Point",
-                            "coordinates": [
-                                longitude, latitude
-                            ]
-                        },
-                        "type": "Feature",
-                        "properties": {
-                            "popupContent": productName
-                        },
-                        "id": productId
-                    };
-                    products.features = [...products.features, tempProductPoints];
+
+                    const geom = {
+                        "type": "Point",
+                        "coordinates": [
+                            longitude, latitude
+                        ]
+                    }
+
+                    if (products.features.some((e) => {
+                        console.log(e.geometry)
+                        return JSON.stringify(e.geometry) === JSON.stringify(geom)
+                    })) {
+                        console.log('Exists');
+                        products.features.some((feats) => {
+                            feats.properties.popupContent +=  `<div class="d-inline-flex m-1 p-1"> <img src="<?php echo $imagePath ?>" alt="" width="90" height="60" class="m-auto"> <div class="pl-2"> <div id="productTitle">${productName}</div> <div>${productAddr}</div> </div> </div>`
+                        })
+                    }else{
+                        const tempProductPoints = {
+                            "geometry": {
+                                "type": "Point",
+                                "coordinates": [
+                                    longitude, latitude
+                                ]
+                            },
+                            "type": "Feature",
+                            "properties": {
+                                "popupContent": `<div class="d-inline-flex m-1 p-1"> <img src="<?php echo $imagePath ?>" alt="" width="90" height="60" class="m-auto"> <div class="pl-2"> <div id="productTitle">${productName}</div> <div>${productAddr}</div> </div> </div>`
+
+
+
+                                //                            "popupContent": '<div class="container bg-secondary"> <div class="row bg-success"> <div class="col-xs bg-warning"> 1 of 2 </div> <div class="col-xs">University of Neubrandenburg, Brodaer Straße 2, 17033 Neubrandenburg</div> </div> <div class="row"> <div class="col"> 1 of 3 </div> <div class="col"> 2 of 3 </div> <div class="col"> 3 of 3 </div> </div></div>'
+
+
+
+                                //                            "popupContent": '<div id="block_container" class=""> <img id="bloc1" src="<?php echo $imagePath ?>" alt="" width="80" height="50" class=""> <div id="bloc2" class=""> <div>Farm Land</div> <div>University of Neubrandenburg, Brodaer Straße 2, 17033 Neubrandenburg</div> </div> </div>'
+                            },
+                            "id": productId
+                        };
+                        products.features = [...products.features, tempProductPoints];
+                    }
+
+
+
+                    //                    const tempProductPoints = {
+                    //                        "geometry": {
+                    //                            "type": "Point",
+                    //                            "coordinates": [
+                    //                                longitude, latitude
+                    //                            ]
+                    //                        },
+                    //                        "type": "Feature",
+                    //                        "properties": {
+                    //                            "popupContent": `<div class="d-inline-flex"> <img src="<?php echo $imagePath ?>" alt="" width="90" height="60" class="m-auto"> <div class="pl-2"> <div id="productTitle">${productName}</div> <div>${productAddr}</div> </div> </div>`
+                    //
+                    //
+                    //
+                    //                            //                            "popupContent": '<div class="container bg-secondary"> <div class="row bg-success"> <div class="col-xs bg-warning"> 1 of 2 </div> <div class="col-xs">University of Neubrandenburg, Brodaer Straße 2, 17033 Neubrandenburg</div> </div> <div class="row"> <div class="col"> 1 of 3 </div> <div class="col"> 2 of 3 </div> <div class="col"> 3 of 3 </div> </div></div>'
+                    //
+                    //
+                    //
+                    //                            //                            "popupContent": '<div id="block_container" class=""> <img id="bloc1" src="<?php echo $imagePath ?>" alt="" width="80" height="50" class=""> <div id="bloc2" class=""> <div>Farm Land</div> <div>University of Neubrandenburg, Brodaer Straße 2, 17033 Neubrandenburg</div> </div> </div>'
+                    //                        },
+                    //                        "id": productId
+                    //                    };
+                    //                    products.features = [...products.features, tempProductPoints];
                 })
                 console.log(products)
                 L.geoJSON([products], {
@@ -83,18 +156,114 @@
         accessToken: 'your.mapbox.access.token'
     }).addTo(mymap);
 
-
-
-    console.log(bicycleRental)
+    L.popup({maxHeight: 350});
 
     function onEachFeature(feature, layer) {
         var popupContent = "<p>I started out as a GeoJSON " +
             feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
 
         if (feature.properties && feature.properties.popupContent) {
-            popupContent += feature.properties.popupContent;
+            popupContent = feature.properties.popupContent;
         }
+
+
+
 
         layer.bindPopup(popupContent);
     }
+
+
+
+
+    var sidebar = L.control.sidebar('sidebar', {
+        closeButton: true,
+        position: 'left'
+    });
+    mymap.addControl(sidebar);
+
+    setTimeout(function () {
+        sidebar.show();
+    }, 500);
+
+    var marker = L.marker([51.2, 7]).addTo(mymap).on('click', function () {
+        sidebar.toggle();
+    });
+
+    mymap.on('click', function () {
+        sidebar.hide();
+    })
+
+    sidebar.on('show', function () {
+        console.log('Sidebar will be visible.');
+    });
+
+    sidebar.on('shown', function () {
+        console.log('Sidebar is visible.');
+    });
+
+    sidebar.on('hide', function () {
+        console.log('Sidebar will be hidden.');
+    });
+
+    sidebar.on('hidden', function () {
+        console.log('Sidebar is hidden.');
+    });
+
+    L.DomEvent.on(sidebar.getCloseButton(), 'click', function () {
+        console.log('Close button clicked.');
+    });
 </script>
+
+
+<style>
+
+    body > #sidebar {
+        display: none;
+    }
+    
+    
+    #productTitle{
+        font-size: 15px;
+        font-weight: bold;
+    }
+
+
+
+
+
+    .custom-popup {
+        border-radius: 2px;
+        color: #504e4e;
+        font-family: 'Molengo', sans-serif;
+        font-size: 12px;
+        line-height: 10px;
+        height: 10 px ;
+        max-height: 300px;
+    }
+
+    .custom-popup, .leaflet-popup-tip {
+        background: #e7e7e7;
+        border: none;
+        box-shadow: none;
+    }
+
+    .leaflet-popup-content-wrapper {
+        background: #e7e7e7;
+        border-radius: 2px;
+    }
+
+    .leaflet-popup {
+        position: absolute;
+        text-align: center;
+    }
+
+    .leaflet-popup-content {
+        margin-top: 20px;
+        margin-right: 2px;
+        padding-right: 12px;
+        min-width: 100 px !important;
+        max-height: 300px;
+        overflow: auto;
+    }
+
+</style>
