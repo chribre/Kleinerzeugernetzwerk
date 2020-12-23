@@ -15,7 +15,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 
 
-<div id="sidebar">
+<div id="mapSidebar">
         <h1>leaflet-sidebar</h1>
     </div>
 
@@ -175,15 +175,15 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 
 
-    var sidebar = L.control.sidebar('sidebar', {
+    var sidebar = L.control.sidebar('mapSidebar', {
         closeButton: true,
         position: 'left'
     });
     mymap.addControl(sidebar);
 
-    setTimeout(function () {
-        sidebar.show();
-    }, 500);
+    //    setTimeout(function () {
+    //        sidebar.show();
+    //    }, 500);
 
     var marker = L.marker([51.2, 7]).addTo(mymap).on('click', function () {
         sidebar.toggle();
@@ -220,7 +220,10 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     body > #sidebar {
         display: none;
     }
-    
+    body {
+            padding: 0;
+            margin: 0;
+        }
     
     #productTitle{
         font-size: 15px;

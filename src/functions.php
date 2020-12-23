@@ -275,7 +275,6 @@ function addProduct($productName, $productDescription, $productCategory, $produc
 function addProductionPoint($pointName, $pointDescription, $pointAddress, $latitude, $longitude, $area, $fileNameArray){
     global $dbConnection;
     /* Start transaction */
-    mysqli_begin_transaction($dbConnection);
     if (isTokenValid()){
         $producerId = $_SESSION["userId"];
         mysqli_begin_transaction($dbConnection);
@@ -382,6 +381,54 @@ function getAllProducts(){
         echo "No products found. Try Adding some products";
     }
 }
+
+
+function getAllProducersAndSellers(){
+    ob_start();
+    global $dbConnection;
+    $producersQuery = mysqli_query($dbConnection, "SELECT f.farm_id, f.farm_name, f.farm_address, X(f.farm_location) as Lat, Y(f.farm_location) as Lon, u.user_id, u.first_name, u.last_name, u.middle_name, u.street, u.house_number, u.zip, u.city, u.mobile, u.phone, u.email, u.user_type from farm_land f JOIN user u on(f.producer_id = u.user_id)");
+    confirmQuery($producersQuery);
+    if ($producersQuery->num_rows > 0){
+        $result = mysqli_fetch_all($producersQuery, MYSQLI_ASSOC);
+        ob_end_clean();
+        return json_encode($result);
+    }else{
+        echo "No products found. Try Adding some products";
+    }
+}
+//function updateProducts($productId, $producerId, $productName, $productDesc, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $pricePerUnit, $quantityOfPrice, $unit, $productRating){
+//    
+//    ob_start();
+//    global $dbConnection;
+//    
+//    $updateProductQuery = "UPDATE products";
+//    $updateProductQuery .= "SET product_name = '$productName', product_description = '$productDesc', product_category = $productCategory, production_location = $productionLocation, is_processed_product = $isProcessedProduct, is_available = $isAvailable, price_per_unit = $pricePerUnit, quantity_of_price = $quantityOfPrice, unit = $unit, product_rating = $productRating";
+//    $updateProductQuery .= "WHERE product_id = $productId AND producer_id = $producerId;";
+//    
+//    if (isTokenValid()){
+//        mysqli_begin_transaction($dbConnection);
+//
+//        try{
+//            echo "<script>console.log('PHP: " . $updateProductQuery . "');</script>";
+//            if (mysqli_query($dbConnection, $updateProductQuery)){
+//                echo "<script>console.log('PHP: Successfully updated prodcut details');</script>";
+//            }else{
+//                echo "<script>console.log('PHP: faield to update prodcut details');</script>";
+//                mysqli_rollback($dbConnection);
+//            }
+//        }catch(mysqli_sql_exception $exception){
+//            echo "<script>console.log('PHP: faield to update prodcut details exception');</script>";
+//            mysqli_rollback($dbConnection);
+//            var_dump($exception);
+//            throw $exception;
+//
+//        }
+//    }else{
+//        echo "<script>console.log('PHP: Authentication Failed');</script>";
+//    }
+//}
+
+
 
 
 ?>

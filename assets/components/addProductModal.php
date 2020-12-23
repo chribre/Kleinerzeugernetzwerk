@@ -56,7 +56,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
         $isProcessedFood = (isset($_POST['isProcessed']) && $_POST['isProcessed'] === true) ? 1 : 0;
         $isAvailable = true;
         $productRating = 0;
-        $isprocessed = true;
 
         addProduct($productName, $productDesc, $productCategory, $productionPoint, $isProcessedFood, $isAvailable, $productPrice, $productQuantity, $productUnit, $productRating, $fileNameArray);
     }
