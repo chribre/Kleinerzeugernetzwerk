@@ -66,7 +66,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 
-
 <div class="modal fade" id="addProductionPoint">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="form">
         <div class="modal-content">

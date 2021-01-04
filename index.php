@@ -7,9 +7,11 @@ if (session_status() == PHP_SESSION_NONE) {
 
 //Header of the HTML page
 include "assets/components/header.php";
+include "src/getfarmData.php";
 getProductCategories();
 getProductFeatures();
 getProductUnits();
+fetchFarmLandData();
 ?>
 
 

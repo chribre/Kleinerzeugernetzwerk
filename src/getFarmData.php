@@ -1,6 +1,6 @@
 <?php 
-session_start();
-include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
+//session_start();
+include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
 
 
 echo fetchFarmLandData();
@@ -24,7 +24,8 @@ function fetchFarmLandData(){
                     $farmLandArray[] = $row;
                 }
                 ob_end_clean();
-                return json_encode($farmLandArray);
+                $_SESSION["productionPoints"] = $farmLandArray;
+//                return json_encode($farmLandArray);
             }
         }
     }
