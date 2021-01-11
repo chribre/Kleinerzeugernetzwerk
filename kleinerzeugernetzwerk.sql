@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2020 at 06:14 PM
+-- Generation Time: Jan 11, 2021 at 05:40 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -61,7 +61,25 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (19, 16, 'AW03330105fd9bc93d843a8.43535785', '2020-12-16 07:51:47'),
 (21, 16, 'AW03330105fda1d03792459.65584962', '2020-12-16 14:43:15'),
 (22, 16, 'AW03330105fdb56a3c31c20.24636917', '2020-12-17 13:01:23'),
-(23, 16, 'AW03330105fdcad8240a0a0.54598902', '2020-12-18 13:24:18');
+(23, 16, 'AW03330105fdcad8240a0a0.54598902', '2020-12-18 13:24:18'),
+(24, 16, 'AW03330105fddd5b2ec9d49.93435085', '2020-12-19 10:28:02'),
+(25, 16, 'AW03330105fe056c527ed85.47332443', '2020-12-21 08:03:17'),
+(26, 16, 'AW03330105fe0a5b6216ce1.60350281', '2020-12-21 13:40:06'),
+(27, 16, 'AW03330105fe1b77d8f3892.65600463', '2020-12-22 09:08:13'),
+(28, 16, 'AW03330105fe34ed43b1181.04079260', '2020-12-23 14:06:12'),
+(29, 16, 'AW03330105fe35c5988b675.29594547', '2020-12-23 15:03:53'),
+(30, 16, 'AW03330105fe9b948379179.73281716', '2020-12-28 10:54:00'),
+(32, 16, 'AW03330105feb59b43634f1.03097853', '2020-12-29 16:30:44'),
+(33, 16, 'AW03330105fed9ca80e4ef4.33584048', '2020-12-31 09:40:56'),
+(36, 16, 'AW03330105ff06c4b3a7e72.76117348', '2021-01-02 12:51:23'),
+(37, 16, 'AW03330105ff2d0d2012499.26691127', '2021-01-04 08:24:50'),
+(38, 16, 'AW03330105ff42838c5de27.34204032', '2021-01-05 08:50:00'),
+(39, 16, 'AW03330105ff483262684c7.75321198', '2021-01-05 15:17:58'),
+(41, 16, 'AW03330105ff5bd0cc5b504.22825734', '2021-01-06 13:37:16'),
+(42, 16, 'AW03330105ff714b1a74ae7.30617096', '2021-01-07 14:03:29'),
+(43, 16, 'AW03330105ff83c0557e5d0.41936380', '2021-01-08 11:03:33'),
+(44, 16, 'AW03330105ff98471103c55.06674635', '2021-01-09 10:24:49'),
+(45, 16, 'AW03330105ffc0f1246e390.08545740', '2021-01-11 08:40:50');
 
 -- --------------------------------------------------------
 
@@ -88,7 +106,18 @@ INSERT INTO `farm_land` (`farm_id`, `producer_id`, `farm_name`, `farm_desc`, `fa
 (2, 16, 'Test Point', 'test farm land', 'Brodaer Straße 2, Neubrandenburg, 17033', 0x000000000101000000456458c51bc74a40bfdd488f957e2a40, 0, '2020-12-11 17:23:45'),
 (3, 16, 'New Farm', 'Test Description of famr land', 'Dükerweg undefined, Neubrandenburg, 17033', 0x00000000010100000000000000000000000000000000000000, 0, '2020-12-12 13:47:09'),
 (4, 16, 'Test Point 3', 'new test location', 'Brodaer Straße 4, Neubrandenburg, 17033', 0x000000000101000000ced60b4ff9c64a401aea6635137e2a40, 0, '2020-12-16 09:22:04'),
-(5, 16, 'Marketplatz', 'A market, or marketplace, is a location where people regularly gather for the purchase and sale of provisions, livestock, and other goods.[1] In different parts of the world, a market place may be described as a souk (from the Arabic), bazaar (from the Persian), a fixed mercado (Spanish), or itinerant tianguis (Mexico), or palengke (Philippines). Some markets operate daily and are said to be permanent markets while others are held once a week or on less frequent specified days such as festival days and are said to be periodic markets. The form that a market adopts depends on its locality\'s population, culture, ambient and geographic conditions. The term market covers many types of trading, as market squares, market halls and food halls, and their different varieties. Due to this, marketplaces can be situated both outdoors and indoors.', 'Dorfstraße Ost 13, undefined, 16307', 0x0000000001010000002c69ad0130a44a406affff7fa0d12c40, 0, '2020-12-17 13:13:16');
+(5, 16, 'Marketplatz', 'A market, or marketplace, is a location where people regularly gather for the purchase and sale of provisions, livestock, and other goods.[1] In different parts of the world, a market place may be described as a souk (from the Arabic), bazaar (from the Persian), a fixed mercado (Spanish), or itinerant tianguis (Mexico), or palengke (Philippines). Some markets operate daily and are said to be permanent markets while others are held once a week or on less frequent specified days such as festival days and are said to be periodic markets. The form that a market adopts depends on its locality\'s population, culture, ambient and geographic conditions. The term market covers many types of trading, as market squares, market halls and food halls, and their different varieties. Due to this, marketplaces can be situated both outdoors and indoors.', 'Dorfstraße Ost 13, undefined, 16307', 0x0000000001010000002c69ad0130a44a406affff7fa0d12c40, 0, '2020-12-17 13:13:16'),
+(6, 16, 'Test Point', 'this is my new production point', 'Gartenstraße 5a, Neubrandenburg, 17033', 0x000000000101000000ae4ee359d8c64a40a900006038892a40, 0, '2020-12-19 11:08:34'),
+(7, 16, 'Test Point', 'hello', 'Binsenwerder 4-6, Neubrandenburg, 17033', 0x0000000001010000003e4e4560e2c64a4096ffffff657f2a40, 0, '2020-12-19 11:09:59'),
+(8, 16, 'Test Point', 'hello', 'Binsenwerder 4-6, Neubrandenburg, 17033', 0x00000000010100000083970584d7c64a402bffff1f827f2a40, 0, '2020-12-19 11:11:21'),
+(9, 16, 'Test Point 3', 'test', 'Binsenwerder 4-6, Neubrandenburg, 17033', 0x00000000010100000056ace8baeac64a40f6feff1f557f2a40, 0, '2020-12-19 11:18:41'),
+(10, 16, '', '', 'Binsenwerder 3, Neubrandenburg, 17033', 0x000000000101000000cc19d264fac64a400e0100a03e7f2a40, 0, '2020-12-19 11:19:41'),
+(11, 16, 'Test Point', '', '3.Ringstraße 321, Neubrandenburg, 17033', 0x000000000101000000b5fdbeca03c74a400900008087832a40, 0, '2020-12-19 11:20:47'),
+(12, 16, '', '', 'Binsenwerder 1, Neubrandenburg, 17033', 0x000000000101000000338da266ecc64a406e0000c02d7f2a40, 0, '2020-12-19 11:28:54'),
+(13, 16, '', '', 'Binsenwerder 4-6, Neubrandenburg, 17033', 0x000000000101000000c3b79e88efc64a40e6ffff7fa97f2a40, 0, '2020-12-19 11:29:30'),
+(14, 16, 'Test Point', 'test', 'Binsenwerder 2, Neubrandenburg, 17033', 0x000000000101000000e2d7ff0be4c64a40cdffffdf1c7f2a40, 0, '2020-12-19 11:29:54'),
+(15, 16, 'Marketplatz', 'test', 'Binsenwerder 2, Neubrandenburg, 17033', 0x00000000010100000097d559b1dbc64a40e8ffff5f337f2a40, 0, '2020-12-19 11:33:22'),
+(16, 16, 'Test Point 3', 'test', 'Binsenwerder 1, Neubrandenburg, 17033', 0x000000000101000000c5e915beefc64a40f8feffffde7e2a40, 0, '2020-12-19 11:35:49');
 
 -- --------------------------------------------------------
 
@@ -157,7 +186,14 @@ INSERT INTO `images` (`image_id`, `image_type`, `image_name`, `entity_id`, `crea
 (16, 1, '16d13cfe-2372-4937-ba70-d6633ed6f26c.jpg', 55, '2020-12-18 16:37:19'),
 (17, 1, 'a9a7add0-4cd1-4687-97e7-65742cad324f.jpeg', 55, '2020-12-18 16:37:19'),
 (18, 1, '33a90f5d-4c4c-4440-bb3b-2100f2c3769a.jpg', 55, '2020-12-18 16:37:19'),
-(19, 1, 'c344dbcc-889a-4c91-9d02-1bc642cd21fd.jpg', 56, '2020-12-18 16:37:57');
+(19, 1, 'c344dbcc-889a-4c91-9d02-1bc642cd21fd.jpg', 56, '2020-12-18 16:37:57'),
+(20, 2, '9bfdb0a1-9165-4ecf-af0b-7e9e1b0d3d8c.jpg', 16, '2020-12-19 11:35:49'),
+(21, 2, '85214677-95d0-4ae8-a8b1-2efb9695d7ea.jpg', 16, '2020-12-19 11:35:49'),
+(22, 1, 'f5e92244-67ea-452c-ba6d-25fb06df98fe.jpg', 57, '2020-12-19 13:11:16'),
+(23, 1, '9cbd6a72-c208-43d8-ad70-b3fefc3ff3fa.jpg', 57, '2020-12-19 13:11:16'),
+(24, 1, 'edb178d1-9600-447b-961b-85af4f6adb7c.jpg', 57, '2020-12-19 13:11:16'),
+(25, 1, '6de80b31-9b6b-4330-b4d1-597fe8c1adeb.jpg', 58, '2020-12-28 14:07:14'),
+(26, 1, '7ac3c92c-6a4c-42b2-b105-a490ed31e50e.jpg', 58, '2020-12-28 14:07:14');
 
 -- --------------------------------------------------------
 
@@ -187,7 +223,6 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_description`, `product_category`, `production_location`, `is_processed_product`, `is_available`, `price_per_unit`, `quantity_of_price`, `unit`, `product_rating`, `created_date`) VALUES
 (7, 16, 'test', 'test data', 1, 2, 1, 1, 11, 0, 1, 0, '2020-12-07 14:04:40'),
-(8, 16, 'new product', 'test product description', 1, 2, 1, 1, 125.23, 0, 1, 0, '2020-12-07 14:05:48'),
 (20, 16, 'test', 'test435', 1, 3, 1, 1, 151, 1, 3, 0, '2020-12-16 10:49:34'),
 (21, 16, 'Wild cranberries', 'fruity & slightly dry in taste\r\nWild cranberries from certified wild collection', 8, 3, 1, 1, 1.65, 220, 2, 0, '2020-12-17 13:10:54'),
 (22, 16, 'Fruit spread forest fruit', 'There are many varieties of fruit preserves globally, distinguished by method of preparation, type of fruit used, and place in a meal. Sweet fruit preserves such as jams, jellies and marmalades are often eaten at breakfast on bread or as an ingredient of a pastry or dessert, whereas more savory and acidic preserves made from vegetable fruits such as tomato, squash or zucchini, are eaten alongside savoury foods such as cheese, cold meats, and curries.', 2, 5, 1, 1, 11, 500, 2, 0, '2020-12-17 13:14:49'),
@@ -197,7 +232,6 @@ INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_de
 (26, 16, 'test', 'test54545', 1, 3, 1, 1, 151, 1, 5, 0, '2020-12-17 13:40:36'),
 (27, 16, 'Wild cranberries23423', 'teste1231', 1, 2, 1, 1, 11, 1, 2, 0, '2020-12-17 13:51:04'),
 (28, 16, 'test', 'test new 23', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 13:52:45'),
-(29, 16, 'test', 'test123', 1, 2, 0, 1, 11, 1, 1, 0, '2020-12-17 14:28:39'),
 (30, 16, 'uuuu', 'uuu', 1, 2, 0, 1, 11, 1, 3, 0, '2020-12-17 14:30:09'),
 (31, 16, 'Wild cranberries', 'dfsdfs', 1, 2, 0, 1, 11, 1, 3, 0, '2020-12-17 14:31:25'),
 (32, 16, 'Wild cranberries', 'ascasc', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:32:40'),
@@ -207,15 +241,12 @@ INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_de
 (36, 16, 'test', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:41:54'),
 (37, 16, 'test', '', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:51:05'),
 (38, 16, 'test', '', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:52:20'),
-(39, 16, 'Fruit spread forest fruit123', '123', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 16:07:43'),
 (40, 16, 'Fruit spread forest fruit123', '123', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 16:07:43'),
-(48, 16, 'Fruit spread forest fruit1234', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 17:14:53'),
-(51, 16, 'test', '12434', 1, 3, 0, 1, 11, 1, 2, 0, '2020-12-18 13:28:19'),
-(52, 16, 'test', 'testeretrtrth', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-18 13:28:40'),
-(53, 16, 'test', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-18 16:35:31'),
 (54, 16, 'test', 'test', 2, 2, 0, 1, 11, 1, 2, 0, '2020-12-18 16:36:03'),
 (55, 16, 'test', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-18 16:37:19'),
-(56, 16, 'TEST', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-18 16:37:57');
+(57, 16, 'Minced Beef', 'Ground meat is used in a wide variety of dishes, by itself, or mixed with other ingredients. It may be formed into meatballs which are then fried, baked, steamed, or braised. They may be cooked on a skewer to produce dishes such as kabab koobideh, adana kebabı and ćevapi. It may be formed into patties which are then grilled or fried (hamburger), breaded and fried (menchi-katsu, Pozharsky cutlet), or braised (Salisbury steak). It may be formed into meatloaves or pâtés and baked. It may also be used as a filling or stuffing for meat pies and böreks, and also as stuffing. It may be made into meat sauce such as ragù, which in turn is used in dishes like pastitsio and moussaka, or mixed with sauce and served on a bun as a sloppy joe sandwich. It may also be cooked with beans, tomatoes, and/or spices to make chili con carne.', 2, 2, 0, 1, 2.58, 500, 2, 0, '2020-12-19 13:11:16'),
+(58, 16, 'test', 'test', 2, 4, 1, 1, 151, 1, 2, 0, '2020-12-28 14:07:14'),
+(87, 16, 'Coffee', 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffea species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. Dried coffee seeds are roasted to varying degrees, depending on the desired flavor.', 10, 15, 1, 1, 8, 1, 2, 0, '2021-01-05 16:21:49');
 
 -- --------------------------------------------------------
 
@@ -258,6 +289,27 @@ CREATE TABLE `product_feature` (
   `product_id` int(11) NOT NULL,
   `feature_type` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product_feature`
+--
+
+INSERT INTO `product_feature` (`id`, `product_id`, `feature_type`) VALUES
+(32, 87, 1),
+(71, 87, 2),
+(72, 87, 3),
+(73, 87, 4),
+(74, 87, 8),
+(75, 87, 9),
+(76, 87, 10),
+(77, 87, 11),
+(78, 87, 12),
+(79, 87, 13),
+(80, 87, 14),
+(81, 87, 15),
+(82, 58, 4),
+(83, 58, 10),
+(84, 58, 12);
 
 -- --------------------------------------------------------
 
@@ -344,7 +396,8 @@ INSERT INTO `user` (`user_id`, `salutations`, `first_name`, `middle_name`, `last
 (29, 'Mr.', 'sxasx', 'asxas', 'xasxasx', '0000-00-00', 'asxax', 'asxasx', 'asxasx', 'asxas', 'xasxasx', 'asxasx', 'axaxaxax', 'asxasx', 1, 1, 0, '2020-12-01 09:57:55', NULL),
 (30, 'Mr.', 'saxax', 'asxaxa', 'sxasx', '0000-00-00', 'asxasx', 'asxasx', 'asxasx', 'asxasx', 'asxasx', 'asxax', 'asxasx', 'asxasx', 1, 1, 0, '2020-12-01 10:04:35', NULL),
 (31, 'Mr.', 'asdf', 'asdd', 'asdasd', '0000-00-00', 'asdas', 'asdasd', 'asdasd', 'asdasd', 'asda', 'asdasd', 'asdasdasd', 'asdas', 1, 1, 0, '2020-12-01 10:06:06', NULL),
-(32, 'Mr.', 'bbbgbf', 'gbfgbfgb', 'fgbfbg', '0000-00-00', 'fgbfb', 'fgbfgb', 'fgbfgb', 'fgbfbg', 'fgbf', 'bfgbfgb', 'ffffffffffff', 'fgbfbgfgbfg', 1, 1, 0, '2020-12-01 10:29:20', '5fc61b0078c5d3.94614348.jpg');
+(32, 'Mr.', 'bbbgbf', 'gbfgbfgb', 'fgbfbg', '0000-00-00', 'fgbfb', 'fgbfgb', 'fgbfgb', 'fgbfbg', 'fgbf', 'bfgbfgb', 'ffffffffffff', 'fgbfbgfgbfg', 1, 1, 0, '2020-12-01 10:29:20', '5fc61b0078c5d3.94614348.jpg'),
+(33, 'Mr.', 'Tom', 'Vian', 'Fernando', '0000-00-00', 'Dorfstraße Ost', '4', '16307', '13', 'DE', '8965236589', 'tom@vian.com', '7845125858', 1, 1, 0, '2021-01-02 10:27:37', '');
 
 -- --------------------------------------------------------
 
@@ -382,7 +435,8 @@ INSERT INTO `user_credential` (`id`, `user_id`, `user_name`, `password`) VALUES
 (16, 29, 'axaxaxax', 'axa'),
 (17, 30, 'asxasx', 'asd'),
 (18, 31, 'asdasdasd', 'asdasd'),
-(19, 32, 'ffffffffffff', 'fff');
+(19, 32, 'ffffffffffff', 'fff'),
+(20, 33, 'tom@vian.com', 'tom');
 
 --
 -- Indexes for dumped tables
@@ -432,8 +486,8 @@ ALTER TABLE `product_category`
 --
 ALTER TABLE `product_feature`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `product_feature_type_fk` (`feature_type`),
-  ADD KEY `product_fk` (`product_id`);
+  ADD KEY `product_fk` (`product_id`),
+  ADD KEY `product_feature_type_fk` (`feature_type`);
 
 --
 -- Indexes for table `units`
@@ -462,13 +516,13 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `farm_land`
 --
 ALTER TABLE `farm_land`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `feature_type`
@@ -480,13 +534,13 @@ ALTER TABLE `feature_type`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `product_category`
@@ -498,7 +552,7 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `product_feature`
 --
 ALTER TABLE `product_feature`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
 
 --
 -- AUTO_INCREMENT for table `units`
@@ -510,13 +564,13 @@ ALTER TABLE `units`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `user_credential`
 --
 ALTER TABLE `user_credential`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Constraints for dumped tables
@@ -539,8 +593,8 @@ ALTER TABLE `products`
 -- Constraints for table `product_feature`
 --
 ALTER TABLE `product_feature`
-  ADD CONSTRAINT `product_feature_type_fk` FOREIGN KEY (`feature_type`) REFERENCES `feature_type` (`feature_type_id`),
-  ADD CONSTRAINT `product_fk` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+  ADD CONSTRAINT `product_feature_type_fk` FOREIGN KEY (`feature_type`) REFERENCES `feature_type` (`feature_type_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `product_fk` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_credential`

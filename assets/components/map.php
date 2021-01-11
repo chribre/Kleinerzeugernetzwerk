@@ -16,8 +16,8 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 
 <div id="mapSidebar">
-        <h1>leaflet-sidebar</h1>
-    </div>
+    <h1>leaflet-sidebar</h1>
+</div>
 
 <script>
 
@@ -45,6 +45,12 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
                     const latitude = parseFloat(obj.Lat);
                     const longitude = parseFloat(obj.Lon);
                     const productId = parseInt(obj.product_id);
+                    
+                    
+                    
+                    const farmId = obj.farm_id;
+                    const farmName = obj.farm_name;
+                    const farmAddress = obj.farm_address;
 
                     const geom = {
                         "type": "Point",
@@ -52,6 +58,8 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
                             longitude, latitude
                         ]
                     }
+                    
+                    const farmPopupContent = `<a data-id="${farmId}" style="text-decoration: none" id="productionPointLoc" onclick='return showProductsInProductionPoint()'><div class="d-inline-flex m-1 p-1"> <img src="<?php echo $imagePath ?>" alt="" width="90" height="60" class="m-auto"> <div class="pl-2"> <div id="productTitle">${farmName}</div> <div>${farmAddress}</div> </div> </div></a>`
 
                     if (products.features.some((e) => {
                         console.log(e.geometry)
@@ -59,7 +67,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
                     })) {
                         console.log('Exists');
                         products.features.some((feats) => {
-                            feats.properties.popupContent +=  `<div class="d-inline-flex m-1 p-1"> <img src="<?php echo $imagePath ?>" alt="" width="90" height="60" class="m-auto"> <div class="pl-2"> <div id="productTitle">${productName}</div> <div>${productAddr}</div> </div> </div>`
+                            feats.properties.popupContent += farmPopupContent   
                         })
                     }else{
                         const tempProductPoints = {
@@ -71,7 +79,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
                             },
                             "type": "Feature",
                             "properties": {
-                                "popupContent": `<div class="d-inline-flex m-1 p-1"> <img src="<?php echo $imagePath ?>" alt="" width="90" height="60" class="m-auto"> <div class="pl-2"> <div id="productTitle">${productName}</div> <div>${productAddr}</div> </div> </div>`
+                                "popupContent": farmPopupContent
 
 
 
@@ -159,19 +167,16 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     L.popup({maxHeight: 350});
 
     function onEachFeature(feature, layer) {
-        var popupContent = "<p>I started out as a GeoJSON " +
-            feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
+        var popupContent = "";
 
         if (feature.properties && feature.properties.popupContent) {
             popupContent = feature.properties.popupContent;
         }
 
-
-
-
         layer.bindPopup(popupContent);
+        layer.on('mouseover', function() { layer.openPopup(); });
+        //        layer.on('mouseout', function() { layer.closePopup(); });
     }
-
 
 
 
@@ -212,6 +217,40 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     L.DomEvent.on(sidebar.getCloseButton(), 'click', function () {
         console.log('Close button clicked.');
     });
+
+
+
+    function showProductsInProductionPoint(){
+        console.log('farming location clicked')
+        const farmId = $("#productionPointLoc").data("id")
+        console.log(farmId)
+        getProductsFromFarmLand(farmId);
+    }
+    
+    function getProductsFromFarmLand(farmId){
+        $.ajax({
+                type: "GET",
+                url: "/kleinerzeugernetzwerk/controller/productController.php",
+                data: { productionLocationId: farmId },
+                dataType: "json",
+                contentType: "application/json",
+                cache: false,
+                success: function( data ) {
+                    if (data != null && data.length !== 0){
+                        sidebar.toggle();
+                    }
+
+
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                    console.log(error)
+                    $('#addNewProduct').modal('toggle');
+                }
+            });
+    }
+
+
 </script>
 
 
@@ -221,10 +260,10 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         display: none;
     }
     body {
-            padding: 0;
-            margin: 0;
-        }
-    
+        padding: 0;
+        margin: 0;
+    }
+
     #productTitle{
         font-size: 15px;
         font-weight: bold;

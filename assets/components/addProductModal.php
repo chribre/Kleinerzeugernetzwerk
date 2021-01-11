@@ -94,21 +94,21 @@
 <img src="${event.target.result}" id="test" key="${i}">
 `;
 
- 
+
 
                         document.getElementById(placeToInsertImagePreview).appendChild(imgdiv);
 
 
-                    reader.readAsDataURL(input.files[i]);
+                        reader.readAsDataURL(input.files[i]);
+                    }
                 }
-            }
 
-        };
+            };
 
-        $('#gallery-photo-add').on('change', function() {
-            imagesPreview(this, 'gallery');
+            $('#gallery-photo-add').on('change', function() {
+                imagesPreview(this, 'gallery');
+            });
         });
-    });
 
 
 
@@ -175,7 +175,7 @@
                     <div class="form-group">
                         <label>Product Features</label>
 
-
+                        <div id="featureIdArray" hidden></div>
                         <div>
                             <select class="selectpicker form-control" multiple data-actions-box="true" name="productFeatures[]" id="productFeatures">
 
@@ -190,7 +190,7 @@
                                             $FeatureName = isset($feature['feature_name']) ? $feature['feature_name'] : "";
                                             $FeatureId = isset($feature['feature_type_id']) ? $feature['feature_type_id'] : 0;
                                             $EditFeatureArray = explode(',', $editProductFeatures);
-                        
+
                                 ?>
 
 
@@ -308,8 +308,8 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
                                         <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
                                     </svg>
-                                    
-                                    
+
+
                                     <input id="gallery-photo-add" hidden type="file" name="file[]" id="file" multiple accept="image/*">
                                     <span class="visually-hidden"></span>
                                 </label>
@@ -351,6 +351,15 @@
         var productDesc = document.getElementById("productDesc").value;
         var productCategory = document.getElementById("productCategory").value;
         var productFeatures = $('#productFeatures').val(); //document.getElementById("productFeatures").value;
+        var productFeatureId = $('#featureIdArray').data('id');
+        var productFeatureIdArray = [];
+        if (typeof productFeatureId == "string"){
+            productFeatureIdArray = productFeatureId.split(',')
+        }else{
+            productFeatureIdArray = [productFeatureId];
+        }
+        
+//        var productFeatureIdArray = productFeatureId.split(',') != null ? productFeatureId.split(',') : [productFeatureId];
         var productPrice = document.getElementById("productPrice").value;
         var productQuantity = document.getElementById("quantity").value;
         var productUnit = document.getElementById("unit").value;
@@ -369,20 +378,25 @@
                 $("#overlay").fadeOut (300);
             },
             data: {
-                productId: productId,
-                producerId: 16, 
-                productName: productName,
-                productDesc: productDesc,
-                productCategory: productCategory,
-                productFeatures: productFeatures,
-                productionPoint: productLocation,
-                isProcessed: isProcessedProduct,
-                productPrice: productPrice,
-                quantity: productQuantity,
+
+
+
+                product_id: productId,
+                producer_id: 16, 
+                product_name: productName,
+                product_description: productDesc,
+                product_category: productCategory,
+                product_features: productFeatures,
+                product_features_id: productFeatureIdArray,
+                production_location: productLocation,
+                is_processed_product: isProcessedProduct,
+                price_per_unit: productPrice,
+                quantity_of_price: productQuantity,
                 unit: productUnit
             },
             success:function(result){
                 console.log(result)
+                window.location.reload();
             },
             error: function (request, status, error) {
                 alert(request.responseText);

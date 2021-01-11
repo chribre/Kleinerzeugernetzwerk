@@ -13,9 +13,10 @@ class product{
     public $unit;
     public $productRating;
     public $productFeatures = [];
+    public $productFeaturesId = [];
     public $isDelete = false;
-    
-    
+
+
     function formatProductFeatures($productFeatureInputString){
         $tempFeatureArray = []; 
         $productFeaturesArray = explode (",", $productFeatures);
@@ -30,44 +31,66 @@ class product{
         return $tempFeatureArray;
     }
 
-    
-    
+
+
     function __construct($productDataDict){
-        $this->productId = isset($productDataDict['productId']) ? escapeSQLString($productDataDict['productId']) : 0;
-        $this->producerId = isset($productDataDict['producerId']) ? escapeSQLString($productDataDict['producerId']) : "";
-        $this->productName = isset($productDataDict['productName']) ? escapeSQLString($productDataDict['productName']) : "";
-        $this->productDesc = isset($productDataDict['productDesc']) ? escapeSQLString($productDataDict['productDesc']) : "";
-        $this->productCategory = isset($productDataDict['productCategory']) ? escapeSQLString($productDataDict['productCategory']) : 0;
-        $this->productionLocation = isset($productDataDict['productionPoint']) ? escapeSQLString($productDataDict['productionPoint']): 0;
-        $this->isProcessedProduct = (isset($productDataDict['isProcessed']) && $productDataDict['isProcessed'] == true) ? 1 : 0;
-        $this->pricePerUnit = isset($productDataDict['productPrice']) ? floatval(escapeSQLString($productDataDict['productPrice'])) : 0;
-        $this->quantityOfPrice = isset($productDataDict['quantity']) ? floatval(escapeSQLString($productDataDict['quantity'])) : 0;
+
+        $this->productId = isset($productDataDict['product_id']) ? escapeSQLString($productDataDict['product_id']) : 0;
+        $this->producerId = isset($productDataDict['producer_id']) ? escapeSQLString($productDataDict['producer_id']) : "";
+        $this->productName = isset($productDataDict['product_name']) ? escapeSQLString($productDataDict['product_name']) : "";
+        $this->productDesc = isset($productDataDict['product_description']) ? escapeSQLString($productDataDict['product_description']) : "";
+        $this->productCategory = isset($productDataDict['product_category']) ? escapeSQLString($productDataDict['product_category']) : 0;
+        $this->productionLocation = isset($productDataDict['production_location']) ? escapeSQLString($productDataDict['production_location']): 0;
+        $this->isProcessedProduct = (isset($productDataDict['is_processed_product']) && $productDataDict['is_processed_product'] == true) ? 1 : 0;
+        $this->pricePerUnit = isset($productDataDict['price_per_unit']) ? floatval(escapeSQLString($productDataDict['price_per_unit'])) : 0;
+        $this->quantityOfPrice = isset($productDataDict['quantity_of_price']) ? floatval(escapeSQLString($productDataDict['quantity_of_price'])) : 0;
         $this->unit = isset($productDataDict['unit']) ? escapeSQLString($productDataDict['unit']): 0;
-        
-//        $productFeaturesString = isset($_POST['productFeatures']) ? escapeSQLString($_POST['productFeatures']) : "";
-        $this->productFeatures = isset($_POST['productFeatures']) ? $_POST['productFeatures'] : [];
-        
+
+        //        $productFeaturesString = isset($_POST['productFeatures']) ? escapeSQLString($_POST['productFeatures']) : "";
+        $productFeatures = isset($productDataDict['product_features']) ? $productDataDict['product_features'] : [];
+        $productFeaturesId = isset($productDataDict['product_features_id']) ? $productDataDict['product_features_id'] : [];
+
+        $featureCount = count($productFeatures);
+        $featureIdCount = count($productFeaturesId);
+
+        $deleteFeatureCount = $featureIdCount - $featureCount;
+        $addNewFeatureCount = $featureCount - $featureIdCount;
+
+        if ($deleteFeatureCount > 0){
+            $productFeatures = array_pad($productFeatures, $featureIdCount, 0);
+        }
+        if ($addNewFeatureCount > 0){
+            $productFeaturesId = array_pad($productFeaturesId, $featureCount, 0);
+        }
+
+        if (count($productFeatures) > 0){
+            $this->productFeatures = $productFeatures;
+            $this->productFeaturesId = $productFeaturesId;
+        }
+
 
         $this->productRating = 0;
         $this->isAvailable = true;
-        
-        $this->isDelete = isset($_POST['isDelete']) ? $_POST['isDelete'] : false;
-        
+
+        $this->isDelete = isset($_POST['is_delete']) ? $_POST['is_delete'] : false;
+
     }
-    
-    
+
+
 }
 
 class productFeatures{
     public $productFeatureId;
     public $productId;
     public $featureType;
-    
-    
-    function __construct($featureId, $productId, $featureType){
+    public $action;
+
+
+    function __construct($featureId, $productId, $featureType, $action){
         $this->$productFeatureId = $featureId;//isset($productFeatures['productFeatureId']) ? escapeSQLString($productFeatures['productFeatureId']) : 0;
         $this->$productId = $productId;//isset($productFeatures['producerId']) ? escapeSQLString($productFeatures['producerId']) : "";
         $this->$featureType = $featureType;//isset($productFeatures['productName']) ? escapeSQLString($productFeatures['productName']) : "";
+        $this->action = $action;
     }
 }
 ?>
