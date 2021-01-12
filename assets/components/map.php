@@ -16,8 +16,29 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 
 <div id="mapSidebar">
-    <h1>leaflet-sidebar</h1>
+    <ul style="list-style-type: none; padding: 0" class="mx-auto" id="productList">
+        <li class="">
+            <div>
+                <div class="overflow-hidden" width="100%">
+                    <img src="/kleinerzeugernetzwerk/images/default_products.jpg" alt="" width="240" class="img-rounded">
+                </div>
+                <div>
+                    <h3>Product Name</h3>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                    <p>Category Name</p>
+                    <div class="row p-3">
+                        <p>Feature 1</p>
+                        <p>Feature 2</p>
+                        <p>Feature 3</p>
+                        <p>Feature 4</p>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
 </div>
+
+
 
 <script>
 
@@ -45,9 +66,9 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
                     const latitude = parseFloat(obj.Lat);
                     const longitude = parseFloat(obj.Lon);
                     const productId = parseInt(obj.product_id);
-                    
-                    
-                    
+
+
+
                     const farmId = obj.farm_id;
                     const farmName = obj.farm_name;
                     const farmAddress = obj.farm_address;
@@ -58,7 +79,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
                             longitude, latitude
                         ]
                     }
-                    
+
                     const farmPopupContent = `<a data-id="${farmId}" style="text-decoration: none" id="productionPointLoc" onclick='return showProductsInProductionPoint()'><div class="d-inline-flex m-1 p-1"> <img src="<?php echo $imagePath ?>" alt="" width="90" height="60" class="m-auto"> <div class="pl-2"> <div id="productTitle">${farmName}</div> <div>${farmAddress}</div> </div> </div></a>`
 
                     if (products.features.some((e) => {
@@ -226,28 +247,58 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         console.log(farmId)
         getProductsFromFarmLand(farmId);
     }
-    
+
     function getProductsFromFarmLand(farmId){
+        document.getElementById("productList").innerHTML = "";
         $.ajax({
-                type: "GET",
-                url: "/kleinerzeugernetzwerk/controller/productController.php",
-                data: { productionLocationId: farmId },
-                dataType: "json",
-                contentType: "application/json",
-                cache: false,
-                success: function( data ) {
-                    if (data != null && data.length !== 0){
-                        sidebar.toggle();
-                    }
+            type: "GET",
+            url: "/kleinerzeugernetzwerk/controller/productController.php",
+            data: { productionLocationId: farmId },
+            dataType: "json",
+            contentType: "application/json",
+            cache: false,
+            success: function( data ) {
+                if (data != null && data.length !== 0){
+                    
+                    data.forEach(product => {
+                        const productName = product.product_name;
+                        const productDesc = product.product_description;
+                        const productCategory = product.product_category;
+                        
+                        const productListDiv = `<li class="">
+            <div>
+                <div class="overflow-hidden" width="100%">
+                    <img src="/kleinerzeugernetzwerk/images/default_products.jpg" alt="" width="240" class="img-rounded">
+                </div>
+                <div>
+                    <h3>${productName}</h3>
+                    <p>${productDesc}</p>
+                    <p>${productCategory}</p>
+                    <div class="row p-3">
+                        <p>Feature 1</p>
+                        <p>Feature 2</p>
+                        <p>Feature 3</p>
+                        <p>Feature 4</p>
+                    </div>
+                </div>
+            </div>
+        </li>`;
+                        
+                        document.getElementById("productList").innerHTML += productListDiv;
+                    })
 
+                    sidebar.toggle();
+                }else{
 
-                },
-                error: function (request, status, error) {
-                    alert(request.responseText);
-                    console.log(error)
-                    $('#addNewProduct').modal('toggle');
                 }
-            });
+
+
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+                console.log(error)
+            }
+        });
     }
 
 

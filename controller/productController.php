@@ -304,7 +304,8 @@ function fetchAllProductsFromLocation($locationId){
     $productData = [];
     if ($result = mysqli_query($dbConnection, $productsQuery)) {
         while ($row = $result->fetch_all(MYSQLI_ASSOC)) {
-            array_push ($productData, $row);
+            $productData = $row;
+//            array_push ($productData, $row);
         }
     }
 

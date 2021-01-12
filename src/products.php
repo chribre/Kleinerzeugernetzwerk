@@ -49,7 +49,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
                             const isProcessedProduct = productData.is_processed_product != null ? productData.is_processed_product : false;
                             const productLocation = productData.production_location != null ? productData.production_location : 0;
 
-                            const imageName = productData.image_name != null ? productData.image_name : 'default_products.jpg';
+                            var imageName = productData.image_name != null ? productData.image_name : '/images/default_products.jpg';
                             
                             const featureData = productData.product_feature != null ? productData.product_feature : [];
                             var featureArray = [];
@@ -61,7 +61,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
                             
                             
                             
-                            
+                            imageName = '/kleinerzeugernetzwerk/images/default_products.jpg'
                             var productCard = `<div class="w3-card-4 m-4 shadow bg-white rounded productCard" id="productCard">
         <div class="overflow-hidden" width="280" height="180">
             <img src="${imageName}" alt="Avatar" width="280">
