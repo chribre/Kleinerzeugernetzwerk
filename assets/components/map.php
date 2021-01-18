@@ -203,7 +203,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
     var sidebar = L.control.sidebar('mapSidebar', {
         closeButton: true,
-        position: 'left'
+        position: 'right'
     });
     mymap.addControl(sidebar);
 

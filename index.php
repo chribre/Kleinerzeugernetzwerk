@@ -6,8 +6,8 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 //Header of the HTML page
-include "assets/components/header.php";
-include "src/getfarmData.php";
+include "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.php";
+include "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/getFarmData.php";
 getProductCategories();
 getProductFeatures();
 getProductUnits();
@@ -17,12 +17,13 @@ fetchFarmLandData();
 
 <?php
 //MAP to show products and point features which is implemented using leafletJs and mapBox. A tocken should generate from mapbox and use inorder to display the map here.
+include "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/map.php";
 getAllProducts();
-include "assets/components/map.php";
+
 ?>
 
 
 <?php
 //Footer Html containig jquery scripts and other dependent bootstrap cdns
-include "assets/components/footer.php";
+include "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/footer.php";
 ?>

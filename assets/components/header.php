@@ -3,7 +3,7 @@
 <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/constants.php");
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
 $HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
-$SIDE_BAR_CSS = '/kleinerzeugernetzwerk/css/custom/sidebar.css';
+$SIDE_BAR_CSS = '/kleinerzeugernetzwerk/css/custom/sideBar.css';
 $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min.js';
 ?>
 
