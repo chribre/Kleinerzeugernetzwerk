@@ -50,7 +50,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
                             const productLocation = productData.production_location != null ? productData.production_location : 0;
 
                             var imageName = productData.image_name != null ? productData.image_name : '/images/default_products.jpg';
-                            
+
                             const featureData = productData.product_feature != null ? productData.product_feature : [];
                             var featureArray = [];
                             if (featureData.length !=0){
@@ -58,39 +58,39 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
                                 featureArray = featureDataArray.featureTypeArray;
                                 //                                editProductFeatureId = featureDataArray.featureIdArray;
                             }
-                            
-                            
-                            
+
+
+
                             imageName = '/kleinerzeugernetzwerk/images/default_products.jpg'
                             var productCard = `<div class="w3-card-4 m-4 shadow bg-white rounded productCard" id="productCard">
-        <div class="overflow-hidden" width="280" height="180">
-            <img src="${imageName}" alt="Avatar" width="280">
+<div class="overflow-hidden" width="280" height="180">
+<img src="${imageName}" alt="Avatar" width="280">
         </div>
-        <div class="p-2">
-            <h4><b>${productName}</b></h4>   
-            <p id="productDesc" class="overflow-hidden" style="line-height: 1.4">${productDesc}</p> 
-            <div class="row mx-0 mb-2 d-flex justify-content-between">`;
+<div class="p-2">
+<h4><b>${productName}</b></h4>   
+<p id="productDesc" class="overflow-hidden" style="line-height: 1.4">${productDesc}</p> 
+<div class="row mx-0 mb-2 d-flex justify-content-between">`;
 
-                var featureUI = ``;
-                featureArray.forEach(feature =>{
-                    featureUI += `<div class="rounded-pill border border-secondary align-items-center mb-1">
-                    <img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
-                    <h class="text-gray mx-1">Bio</h>
-                </div>`
-                })
+                            var featureUI = ``;
+                            featureArray.forEach(feature =>{
+                                featureUI += `<div class="rounded-pill border border-secondary align-items-center mb-1">
+<img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
+<h class="text-gray mx-1">Bio</h>
+        </div>`
+                            })
 
-                productCard += featureUI;
-                    
-                            
-            productCard += `</div>
-            <div class="row justify-content-between align-items-center px-3">
-                <button type="button" class="btn btn-primary btn-sm col-3" onclick="openAddProductModal(${productId})" value="${productId}">Edit</button>
-                <button type="button" class="btn btn-danger btn-sm col-3" onclick="showDeleteProductModal(${productId})" value="${productId}">Delete</button>
+                            productCard += featureUI;
 
-            </div>
+
+                            productCard += `</div>
+<div class="row justify-content-between align-items-center px-3">
+<button type="button" class="btn btn-primary btn-sm col-3" onclick="openAddProductModal(${productId})" value="${productId}">Edit</button>
+<button type="button" class="btn btn-danger btn-sm col-3" onclick="showDeleteProductModal(${productId})" value="${productId}">Delete</button>
 
         </div>
-    </div>`;
+
+        </div>
+        </div>`;
                             document.getElementById("productContainer").innerHTML += productCard;
                         })
                     }
@@ -141,8 +141,61 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
         //        })
 
 
-        function openAddProductModal(productId){
+        function setCategories(){
+            const categoriesJsonString = localStorage['productCategories'] || "";
+            const categories = JSON.parse(categoriesJsonString) || [];
+            var categoryOptions = ``;
+            if (categories.length != 0){
+                categories.forEach(element =>{
+                    const categoryId = element['category_id'] != null ? element['category_id'] : 0;
+                    const categoryName = element['category_name'] != null ? element['category_name'] : "";
+                    const categoryDesc = element['category_description'] != null ? element['category_description'] : "";
 
+                    categoryOptions += `<option value="${categoryId}" >${categoryName}</option>`
+
+                })
+            }
+            document.getElementById("productCategory").innerHTML = categoryOptions;
+            $('#productCategory').selectpicker('refresh');
+        }
+        function setFeatureList(){
+            const featuresJsonString = localStorage['productFeatures'] || "";
+            const features = JSON.parse(featuresJsonString) || [];
+            var featureOptions = ``;
+            if (features.length != 0){
+                features.forEach(element =>{
+                    const featureId = element['feature_type_id'] != null ? element['feature_type_id'] : 0;
+                    const featureName = element['feature_name'] != null ? element['feature_name'] : "";
+                    const featureDesc = element['feature_description'] != null ? element['feature_description'] : "";
+
+                    featureOptions += `<option value="${featureId}" >${featureName}</option>`
+                })
+            }
+            document.getElementById("productFeatures").innerHTML = featureOptions;
+            $('#productFeatures').selectpicker('refresh');
+        }
+        function setUnits(){
+            const unitJsonString = localStorage['productUnits'] || "";
+            const units = JSON.parse(unitJsonString) || [];
+            var unitOptions = ``;
+            if (units.length != 0){
+                units.forEach(element =>{
+                    const unitId = element['unit_id'] != null ? element['unit_id'] : 0;
+                    const unitName = element['unit_name'] != null ? element['unit_name'] : "";
+                    const unitDesc = element['unit_description'] != null ? element['unit_description'] : "";
+
+                    unitOptions += `<option value="${unitId}" >${unitName}</option>`
+                })
+            }
+            document.getElementById("unit").innerHTML = unitOptions;
+            $('#unit').selectpicker('refresh');
+        }
+
+
+        function openAddProductModal(productId){
+            setCategories();
+            setFeatureList();
+            setUnits();
             var editProductId = 0;
             var editProductName = "";
             var editProductDesc = "";
@@ -156,7 +209,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
             var editProductLocation = 0;            
 
             if (productId == 0){
-                $('#addNewProduct').modal('toggle');
+                $('#addNewProduct').modal('show');
 
                 document.getElementById("productId").value = editProductId;
                 document.getElementById("productName").value = editProductName;
@@ -207,7 +260,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
                         editIsProcessedProduct = productData.is_processed_product != null ? productData.is_processed_product : false;
                         editProductLocation = productData.production_location != null ? productData.production_location : 0;
 
-                        $('#addNewProduct').modal('toggle');
+                        $('#addNewProduct').modal('show');
 
                         document.getElementById("productId").value = editProductId;
                         document.getElementById("productName").value = editProductName;
@@ -228,7 +281,6 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
                 error: function (request, status, error) {
                     alert(request.responseText);
                     console.log(error)
-                    $('#addNewProduct').modal('toggle');
                 }
             });
 
@@ -281,7 +333,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
 <div class="row d-flex justify-content-center" id="productContainer">
 
     <!--   Fetch all the products by the producer and dispplay it as cards-->
-    
+
     <div class="w3-card-4 test m-4 shadow bg-white rounded productCard" id="productCard">
         <div class="overflow-hidden" width="280" height="180">
             <img src="" alt="Avatar" width="280">

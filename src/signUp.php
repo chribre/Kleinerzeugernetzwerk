@@ -5,21 +5,6 @@ if (session_status() == PHP_SESSION_NONE) {
 
 //$HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.php");
-//include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/config.php");
-//include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
-/* Tell mysqli to throw an exception if an error occurs */
-//mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
-//$mysql_conn = mysqli_connect('localhost', 'root', '', 'kleinerzeugernetzwerk');
-//if ($mysql_conn->connect_error) {
-//    die("Connection failed: " . $mysql_conn->connect_error);
-//}
-//echo "Connected successfully, ";
-///* The table engine has to support transactions */
-//mysqli_query($mysqli, "CREATE TABLE IF NOT EXISTS language (
-//    Code text NOT NULL,
-//    Speakers int(11) NOT NULL
-//    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
 
 global $dbConnection;
 //PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
@@ -52,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['signUp'] == "true"){
             $isActive = 1;
             $isBlocked = 0;
 
-
+//file upload for user image
             $fileNameNew = null;
             if (isset($_FILES['file'])){
                 $file = $_FILES['file'];
@@ -325,6 +310,56 @@ function uploadprofileImage(){
                     });
                 }, false);
             })();
+
+
+//            Work in progress to implement sign up sign in as  ajax call
+            function signUp(){
+                const firstName = document.getElementsByName("first_name") != null ? document.getElementsByName("first_name"): "";
+                const lastName = document.getElementsByName("last_name") != null ? document.getElementsByName("last_name"): "";
+                const dob = document.getElementsByName("dob") != null ? document.getElementsByName("dob"): "";
+                const street = document.getElementsByName("street") != null ? document.getElementsByName("street"): "";
+                const houseNumber = document.getElementsByName("house_number") != null ? document.getElementsByName("house_number"): "";
+                const zip = document.getElementsByName("zip") != null ? document.getElementsByName("zip"): "";
+                const city = document.getElementsByName("city") != null ? document.getElementsByName("city"): "";
+                const country = document.getElementsByName("country") != null ? document.getElementsByName("country"): "";
+                const mobile = document.getElementsByName("mobile") != null ? document.getElementsByName("mobile"): "";
+                const phone = document.getElementsByName("phone") != null ? document.getElementsByName("phone"): "";
+                const email = document.getElementsByName("email") != null ? document.getElementsByName("email"): "";
+                const password = document.getElementsByName("password") != null ? document.getElementsByName("password"): "";
+                const repeatPassword = document.getElementsByName("psw-repeat") != null ? document.getElementsByName("psw-repeat"): "";
+
+                $.ajax({
+                    type: "POST",
+                    url: "/kleinerzeugernetzwerk/controller/userController.php",
+                    data: { 
+                        user_id: 0,
+                        first_name: firstName,
+                        last_name: lastName,
+                        dob: dob,
+                        street: street,
+                        house_number: houseNumber,
+                        zip: zip,
+                        city: city,
+                        country: country,
+                        mobile: mobile,
+                        phone: phone,
+                        email:email,
+                        password: password
+                    },
+                    dataType: "json",
+                    contentType: "application/json",
+                    cache: false,
+                    success: function( data ) {
+
+                    },
+                    error: function (request, status, error) {
+                        alert(request.responseText);
+                        console.log(error)
+                    }
+                });
+
+            }
+
         </script>
     </div>
 

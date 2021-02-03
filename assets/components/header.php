@@ -41,9 +41,6 @@ $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min
         <script src="<?php echo $DATE_PICKER_JS ?>"></script>
 
 
-        <link href="/your-path-to-fontawesome/css/fontawesome.css" rel="stylesheet">
-        <link href="/your-path-to-fontawesome/css/brands.css" rel="stylesheet">
-        <link href="/your-path-to-fontawesome/css/solid.css" rel="stylesheet">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 

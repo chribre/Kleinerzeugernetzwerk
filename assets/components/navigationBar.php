@@ -130,6 +130,27 @@ function logOutUser(){
 </div>
 
 
+<script>
+    function userLogin(userName, password){
+
+        $.ajax({
+            type: "POST",
+            url: "/kleinerzeugernetzwerk/controller/userController.php",
+            data: { userName: userName, password: password },
+            dataType: "json",
+            contentType: "application/json",
+            cache: false,
+            success: function( data ) {
+
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+                console.log(error)
+            }
+        });
+
+    }
+</script>
 
 
 

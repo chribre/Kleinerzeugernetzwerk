@@ -69,8 +69,7 @@
 
 <script type="text/javascript">
 
-
-    $(function() {
+$(function() {
         // Multiple images preview in browser
         var imagesPreview = function(input, placeToInsertImagePreview) {
 
@@ -88,29 +87,30 @@
                         imgdiv.className = 'image';
 
                         imgdiv.innerHTML = `
-<div class="overlay">
-
-    </div>
-<img src="${event.target.result}" id="test" key="${i}">
-`;
-
-
+                                            <div class="overlay">
+                                            </div>
+                                            <img src="${event.target.result}" id="test" key="${i}">`;
 
                         document.getElementById(placeToInsertImagePreview).appendChild(imgdiv);
 
-
-                        reader.readAsDataURL(input.files[i]);
                     }
+
+                    reader.readAsDataURL(input.files[i]);
                 }
+            }
 
-            };
+        };
 
-            $('#gallery-photo-add').on('change', function() {
-                imagesPreview(this, 'gallery');
-            });
+        $('#gallery-photo-add').on('change', function() {
+            imagesPreview(this, 'gallery');
         });
+    });
 
 
+
+//    $('#addNewProduct').on('show.bs.modal', function () {
+//        setCategories()
+//    });
 
 </script>
 
@@ -145,27 +145,6 @@
                         <div>
                             <select class="selectpicker form-control" name="productCategory" id="productCategory">
 
-                                <?php 
-                                if (isset($_SESSION['productCategories'])){
-                                    $categories = $_SESSION['productCategories'];
-                                    if (count($categories) > 0){
-                                        for ($i = 0; $i < count($categories); $i++) {
-                                            $category = $categories[$i];
-                                            $categoryName = isset($category['category_name']) ? $category['category_name'] : "";
-                                            $categoryId = isset($category['category_id']) ? $category['category_id'] : 0;
-                                ?>
-
-
-
-
-                                <option value="<?php echo $categoryId ?>" ><?php echo $categoryName ?></option>
-                                <?php 
-                                        }
-                                    }
-                                }else{
-
-                                }
-                                ?>
                             </select>
                         </div>
 
@@ -179,33 +158,6 @@
                         <div>
                             <select class="selectpicker form-control" multiple data-actions-box="true" name="productFeatures[]" id="productFeatures">
 
-
-
-                                <?php 
-                                if (isset($_SESSION['productFeatures'])){
-                                    $features = $_SESSION['productFeatures'];
-                                    if (count($features) > 0){
-                                        for ($i = 0; $i < count($features); $i++) {
-                                            $feature = $features[$i];
-                                            $FeatureName = isset($feature['feature_name']) ? $feature['feature_name'] : "";
-                                            $FeatureId = isset($feature['feature_type_id']) ? $feature['feature_type_id'] : 0;
-                                            $EditFeatureArray = explode(',', $editProductFeatures);
-
-                                ?>
-
-
-                                <option value="<?php echo $FeatureId ?>" ><?php echo $FeatureName ?></option>
-
-
-
-
-                                <?php 
-                                        }
-                                    }
-                                }else{
-
-                                }
-                                ?>
                             </select>
                         </div>
 
@@ -238,26 +190,7 @@
                             <label for="unit">Unit</label>
                             <select class="form-control" id="unit" name="unit">
 
-                                <?php 
-                                if (isset($_SESSION['productUnits'])){
-                                    $units = $_SESSION['productUnits'];
-                                    if (count($units) > 0){
-                                        for ($i = 0; $i < count($units); $i++) {
-                                            $unit = $units[$i];
-                                            $unitName = isset($unit['unit_name']) ? $unit['unit_name'] : "";
-                                            $unitId = isset($unit['unit_id']) ? $unit['unit_id'] : 0;
-                                            $unitAbbr = isset($unit['unit_abbr']) ? $unit['unit_abbr'] : "";
-                                            //                $selected = $unitId == $editUnit ? "selected = 'selected'" : "";
-                                ?>
-                                <option value="<?php echo $unitId?>">
-                                    <?php echo "$unitName ($unitAbbr)" ?> 
-                                </option>
-                                <?php 
-                                        }
-                                    }
-                                }else{
-                                }
-                                ?>
+                                
                             </select>
                         </div>
                     </div>
@@ -358,8 +291,8 @@
         }else{
             productFeatureIdArray = [productFeatureId];
         }
-        
-//        var productFeatureIdArray = productFeatureId.split(',') != null ? productFeatureId.split(',') : [productFeatureId];
+
+        //        var productFeatureIdArray = productFeatureId.split(',') != null ? productFeatureId.split(',') : [productFeatureId];
         var productPrice = document.getElementById("productPrice").value;
         var productQuantity = document.getElementById("quantity").value;
         var productUnit = document.getElementById("unit").value;
@@ -404,6 +337,9 @@
             }
         })
     };
+
+
+    
 </script>
 
 
