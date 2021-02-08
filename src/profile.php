@@ -5,10 +5,12 @@
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProductionPoint.php");
 ?>
 <div class="">   
-    <div class="text-center m-3">
-        <div class="three ui buttons col-md-7">
-            <a href='dashboard.php?menu=profile&data=personal' class="ui button <?php if (isset($_GET['data']) && $_GET['data'] == 'personal'){echo "active";}?>" id="segmentButtonPersonal">Personal Details</a>
-            <a href='dashboard.php?menu=profile&data=productionPoint' class="ui button <?php if (isset($_GET['data']) && $_GET['data'] == 'productionPoint'){echo "active";}?>" id="segmentButtonFarmLand">Farm Land</a>
+    <div class="text-center m-3 ">
+        <div class="btn-group">
+            <!--        <div class="three ui buttons col-md-7">-->
+            <a href='dashboard.php?menu=profile&data=personal' class="btn btn-secondary <?php if (isset($_GET['data']) && $_GET['data'] == 'personal'){echo "active";}?>" id="segmentButtonPersonal">Personal Details</a>
+            <a href='dashboard.php?menu=profile&data=productionPoint' class="btn btn-secondary <?php if (isset($_GET['data']) && $_GET['data'] == 'productionPoint'){echo "active";}?>" id="segmentButtonFarmLand">Farm Land</a>
+            <!--        </div>-->
         </div>
     </div>
 

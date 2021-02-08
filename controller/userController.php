@@ -1,7 +1,7 @@
 <?php 
 session_start();
-include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
-include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/userModel.php");
+require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
+require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/userModel.php");
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':

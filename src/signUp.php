@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['signUp'] == "true"){
             $isActive = 1;
             $isBlocked = 0;
 
-//file upload for user image
+            //file upload for user image
             $fileNameNew = null;
             if (isset($_FILES['file'])){
                 $file = $_FILES['file'];
@@ -119,7 +119,7 @@ function uploadprofileImage(){
 ?>
 
 
-<div class="mx-xl-5">
+<div class="container mb-5">
 
 
     <div class="justify-content-center text-center">
@@ -127,24 +127,18 @@ function uploadprofileImage(){
         <p>Please fill in this form to create an account.</p>
     </div>
 
-    <!--
-<div class="small-4 columns">
-<img src="http://placehold.it/350x150">
-<a class="button" href="/jane/">View Jane's Profile</a>
-</div>
--->
-
 
 
     <!--Form to capure data from user for registration-->
     <div class="registration_form">
-        <form action="signUp.php" enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
+        <form enctype="multipart/form-data" class="" novalidate>
             <div  class="rounded-circle pb-4" width="152px" height="152px">
                 <img src="../images/profile_placeholder.png" class="mx-auto d-block rounded-circle" width="150px" height="150px">
                 <label class="btn btn-default">
                     Edit <input type="file" hidden name="file">
                 </label>
             </div>
+
             <div class="form-row">
                 <div class="col-md-1 mb-3">
                     <label for="exampleFormControlSelect1">Salutation</label>
@@ -288,31 +282,40 @@ function uploadprofileImage(){
                 </div>
             </div>
             <input type="hidden" name="signUp" value="true">
-            <button class="btn btn-primary btn-lg" type="submit">Submit</button>
+            <div class="col text-center">
+                <button class="btn btn-primary btn-lg col-4 rounded-pill shadow-lg" id="signUpBtn">Sign Up</button>
+            </div>
+            
         </form>
 
         <script>
             // Example starter JavaScript for disabling form submissions if there are invalid fields
-            (function() {
-                'use strict';
-                window.addEventListener('load', function() {
-                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                    var forms = document.getElementsByClassName('needs-validation');
-                    // Loop over them and prevent submission
-                    var validation = Array.prototype.filter.call(forms, function(form) {
-                        form.addEventListener('submit', function(event) {
-                            if (form.checkValidity() === false) {
-                                event.preventDefault();
-                                event.stopPropagation();
-                            }
-                            form.classList.add('was-validated');
-                        }, false);
-                    });
-                }, false);
-            })();
+//            (function() {
+//                'use strict';
+//                window.addEventListener('load', function() {
+//                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//                    var forms = document.getElementsByClassName('needs-validation');
+//                    // Loop over them and prevent submission
+//                    var validation = Array.prototype.filter.call(forms, function(form) {
+//                        form.addEventListener('submit', function(event) {
+//                            event.preventDefault();
+//                            if (form.checkValidity() === false) {
+//                                event.stopPropagation();
+//                            }else{
+//                                signUp();
+//                            }
+//                            form.classList.add('was-validated');
+//                        }, false);
+//                    });
+//                }, false);
+//            })();
 
 
-//            Work in progress to implement sign up sign in as  ajax call
+            //            Work in progress to implement sign up sign in as ajax call
+            
+            document.getElementById("signUpBtn").onclick = function () { 
+                signUp();
+            }
             function signUp(){
                 const firstName = document.getElementsByName("first_name") != null ? document.getElementsByName("first_name"): "";
                 const lastName = document.getElementsByName("last_name") != null ? document.getElementsByName("last_name"): "";
@@ -350,7 +353,7 @@ function uploadprofileImage(){
                     contentType: "application/json",
                     cache: false,
                     success: function( data ) {
-
+                        console.log(data)
                     },
                     error: function (request, status, error) {
                         alert(request.responseText);
