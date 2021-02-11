@@ -1,4 +1,13 @@
 <?php
+/****************************************************************
+   FILE:      signUp.php
+   AUTHOR:    Fredy Davis
+   LAST EDIT DATE:  08.02.2021
+
+   PURPOSE:   Page to enter user details to register to the system.
+              Contains a form to enter user details
+****************************************************************/
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
@@ -7,7 +16,9 @@ if (session_status() == PHP_SESSION_NONE) {
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.php");
 
 global $dbConnection;
-//PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
+/*
+    PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
+*/
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['signUp'] == "true"){
     echo('Post method hit,');
     $password = escapeSQLString($_POST['password']);
@@ -316,6 +327,12 @@ function uploadprofileImage(){
             document.getElementById("signUpBtn").onclick = function () { 
                 signUp();
             }
+            
+            /*
+                javaScript function to fetch data from form and submit it to the backend using an ajax call
+                POST request to pass data to backend
+                On successful sign up show a modal with success message and a button to go to login screen.*
+            */
             function signUp(){
                 const firstName = document.getElementsByName("first_name") != null ? document.getElementsByName("first_name"): "";
                 const lastName = document.getElementsByName("last_name") != null ? document.getElementsByName("last_name"): "";

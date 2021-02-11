@@ -1,5 +1,15 @@
-
 <?php
+/****************************************************************
+   FILE             :   config.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   Configuration file which having dtabase access information
+****************************************************************/
+
+
+
+
 //$config=array(
 //    'DB_HOST'=>'localhost',
 //    'DB_USERNAME'=>'root',

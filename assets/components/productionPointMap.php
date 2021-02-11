@@ -1,3 +1,12 @@
+<?php
+/****************************************************************
+   FILE             :   productionPointMap.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   leaflet map using mapbox for geocoding and reverse to add/edit production location
+****************************************************************/
+?>
 <div id="productionPointMap"></div>
 <script>
 

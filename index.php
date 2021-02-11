@@ -1,3 +1,5 @@
+<?php 
+
 /****************************************************************
    FILE:      index.php
    AUTHOR:    Fredy Davis
@@ -6,7 +8,7 @@
    PURPOSE:   Home page of Kleinerzeugernetzwerk project. 
 ****************************************************************/
 
-<?php 
+
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 
@@ -16,20 +18,27 @@ if (session_status() == PHP_SESSION_NONE) {
 //Header of the HTML page
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.php";
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/getFarmData.php";
+/*
+    fetch production points of the user, product categories, product features, 
+    product unit types from database. which can be used in add 
+    a new product modal as options in curresponding fields. the result is stored locally in the session
+*/
 getProductCategories();
 getProductFeatures();
 getProductUnits();
-fetchFarmLandData();
+fetchFarmLandData(); //Optional call, this function call has to be deleted becuase the same function is called when loading getFarmData.php file
 ?>
 
 
 <script>
     window.onload = function() {
-//        pass user_id instead of 0 to get user defined cache daat
+        //        pass user_id instead of 0 to get user defined cache daat
         getCache(0);
     };
-    //cache service to get product category, product features and unit to show in the add product page.
-    //This service also want to be updated in the respose of successfull user login
+    /*
+        cache service to get product category, product features and unit to show in the add product page.
+        This service also want to be updated in the respose of successfull user login to get user prefered cache data
+    */
     function getCache(userID){
         $.ajax({
             type: "GET",
@@ -43,13 +52,13 @@ fetchFarmLandData();
                 const productCategories = data['product_category'] != null ? data['product_category'] : []
                 const productFeatures = data['product_feature'] != null ? data['product_feature'] : []
                 const productUnits = data['product_unit'] != null ? data['product_unit'] : []
-                
-                
+
+
                 localStorage['productCategories'] = JSON.stringify(productCategories);
                 localStorage['productFeatures'] = JSON.stringify(productFeatures);
                 localStorage['productUnits'] = JSON.stringify(productUnits);
-                
-//                var myVar = localStorage['myKey'] || 'defaultValue';
+
+                //                var myVar = localStorage['myKey'] || 'defaultValue';
             },
             error: function (request, status, error) {
                 alert(request.responseText);

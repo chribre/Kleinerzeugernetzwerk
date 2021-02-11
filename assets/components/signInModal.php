@@ -1,4 +1,12 @@
+<?php
+/****************************************************************
+   FILE             :   signInModal.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
 
+   PURPOSE          :   Sign in form with user name and password
+****************************************************************/
+?>
 <!-- Modal -->
 <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">

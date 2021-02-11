@@ -1,5 +1,11 @@
 <?php
+/****************************************************************
+   FILE             :   userModel.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   10.02.2021
 
+   PURPOSE          :   Data model of the user table and initialisation function
+****************************************************************/
 class user{
     public userId;
     public firstName;
@@ -16,7 +22,8 @@ class user{
     public userType;
     public isActive;
     public isBlocked;
-    
+   
+    //init function to set user class variables
     function __construct($userData){
         $this->userId = isset($userData['user_id']) ? escapeSQLString($userData['user_id']) : 0;
         $this->firstName = isset($userData['first_name']) ? escapeSQLString($userData['first_name']) : "";

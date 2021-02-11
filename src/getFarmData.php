@@ -1,11 +1,26 @@
 <?php 
+/****************************************************************
+   FILE:      getFarmData.php
+   AUTHOR:    Fredy Davis
+   LAST EDIT DATE:  09.02.2021
+
+   PURPOSE:   To fetch production points and store it in cache.
+****************************************************************/
+
+
 //session_start();
-include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
+require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
 
 
 echo fetchFarmLandData();
 
 
+
+/*
+    FUNCTION    :   Fetch production points of a user.
+    INPUT       :   user id which is taken from session.
+    OUTPUT      :   production points are fetched and cahced in session
+*/
 function fetchFarmLandData(){
     ob_start();
     global $dbConnection;
@@ -25,7 +40,7 @@ function fetchFarmLandData(){
                 }
                 ob_end_clean();
                 $_SESSION["productionPoints"] = $farmLandArray;
-//                return json_encode($farmLandArray);
+                //                return json_encode($farmLandArray);
             }
         }
     }

@@ -1,8 +1,20 @@
+<?php
+/****************************************************************
+   FILE:      products.php
+   AUTHOR:    Fredy Davis
+   LAST EDIT DATE:  09.02.2021
+
+   PURPOSE:   Page to view/edit/delete products by the user.
+              products are displayed as cards.
+****************************************************************/
+?>
+
+
 <style>
-    <?php include "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/css/custom/productCard.css"; ?>
+    <?php require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/css/custom/productCard.css"; ?>
 </style>
 <?php
-include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProductModal.php");
+require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProductModal.php");
 ?>
 
 <div class="d-flex justify-content-center">
@@ -26,6 +38,11 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
             loadAllProducts(<?php echo $_SESSION['userId']?>)
         };
 
+        /*
+            PURPOSE     :   Fetch products from backend and load data as a card
+            INPUT       :   userId (products are fetched based on user id)
+            OUTPUT      :   HTML card element for each product is created and added to product list.
+        */
         function loadAllProducts(userId){
             $.ajax({
                 type: "GET",
@@ -141,6 +158,10 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
         //        })
 
 
+        /*
+            function to set product categories on to the product category drop down list 
+            in the new product modal form from cached values
+        */
         function setCategories(){
             const categoriesJsonString = localStorage['productCategories'] || "";
             const categories = JSON.parse(categoriesJsonString) || [];
@@ -158,6 +179,12 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
             document.getElementById("productCategory").innerHTML = categoryOptions;
             $('#productCategory').selectpicker('refresh');
         }
+        
+        
+        /*
+            function to set product features on to the product feature drop down list 
+            in the new product modal form from cached values
+        */
         function setFeatureList(){
             const featuresJsonString = localStorage['productFeatures'] || "";
             const features = JSON.parse(featuresJsonString) || [];
@@ -174,6 +201,11 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
             document.getElementById("productFeatures").innerHTML = featureOptions;
             $('#productFeatures').selectpicker('refresh');
         }
+        
+        /*
+            function to set product units on to the unit drop down list 
+            in the new product modal form from cached values
+        */
         function setUnits(){
             const unitJsonString = localStorage['productUnits'] || "";
             const units = JSON.parse(unitJsonString) || [];
@@ -192,6 +224,13 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
         }
 
 
+        /*        
+            FUNCTION    :   To open add product modal to add new product or edit existing product. 
+            
+            INPUT       :   id of the product in the database
+            OUTPUT      :     
+            NOTES       :   First initialize modal form with default data, product id to fetch details from backend if it is not 0
+        */
         function openAddProductModal(productId){
             setCategories();
             setFeatureList();
@@ -298,6 +337,14 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
             return {featureTypeArray, featureIdArray};
         }
 
+        
+        /*        
+            FUNCTION:   Deletes a product from the list.
+            
+            INPUT:     id of the product in the database
+            OUTPUT:    show message as a modal, success or failure 
+            NOTES:     Ask confirmation before get deleted.
+        */
         function deleteProduct(productId){
             $.ajax({
                 type: "POST",
@@ -306,13 +353,17 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProd
                 dataType: "json",
                 success: function( data ) {
                     window.location.reload();
+                    //Success Message Modal
                 },
                 error: function (request, status, error) {
                     alert(request.responseText);
                     console.log(error)
+                    //Failure Message Modal
                 }
             });
         }
+        
+        
 
         function showDeleteProductModal(productId){
 

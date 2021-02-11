@@ -1,4 +1,12 @@
 <?php
+/****************************************************************
+   FILE             :   userModel.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   10.02.2021
+
+   PURPOSE          :   Data model of the product categories and 
+                        product feature types and initialisation function
+****************************************************************/
 class productCategory{
     public categoryId;
     public categoryName;

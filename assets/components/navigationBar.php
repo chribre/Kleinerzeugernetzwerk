@@ -1,5 +1,12 @@
-
 <?php
+/****************************************************************
+   FILE             :   navigationBar.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   navigation bar containing project logo, menu and search bar. 
+                        it is incorporated into header.php to get it in all pages
+****************************************************************/
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

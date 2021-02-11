@@ -1,5 +1,13 @@
-
 <?php
+/****************************************************************
+   FILE             :   addProductionPoint.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   To add a new production point or edit existing product details into the database.
+                        a form having space to enter the details of the production point
+****************************************************************/
+
 //MAP to caputure production point locations.
 
 

@@ -1,4 +1,11 @@
 <?php 
+/****************************************************************
+   FILE             :   footer.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   file containg all footer files
+****************************************************************/
 $MAIN_JS = '/kleinerzeugernetzwerk/js/main.js';
 $POPPER_JS = '/kleinerzeugernetzwerk/js/popper.js';
 ?>

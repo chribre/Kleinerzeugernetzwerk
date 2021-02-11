@@ -1,4 +1,14 @@
-<div id="overlay">
+<?php
+/****************************************************************
+   FILE             :   loadingSpinner.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   animating spinner to show when something loading from backend 
+                        or to temporarly restrict interactions
+****************************************************************/
+?>
+   <div id="overlay">
     <div class="cv-spinner">
         <span class="spinner"></span>
     </div>

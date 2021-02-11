@@ -1,7 +1,23 @@
 <?php 
+/****************************************************************
+   FILE             :   personalProfile.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   Page to show details of the user. 
+                        informations like name, image, address and other info.
+                        also to edit user profile details
+****************************************************************/
+
 
 getUserProfile();
 
+
+/*
+    FUNCTION    :   to fetch user details from the database to show in the profile screen.
+    INPUT       :   user id
+    OUTPUT      :   return user detaisl from the user table
+*/
 function getUserProfile(){
     global $dbConnection;
     global $PROFILE_IMAGE_DEFAULT;

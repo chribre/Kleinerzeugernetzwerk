@@ -1,4 +1,14 @@
-<div class="container">
+<?php
+/****************************************************************
+   FILE             :   farmLand.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   fetch and list all farmland and their details in the dashboard page
+                        productions poitns can be added/edited or deleted
+****************************************************************/
+?>
+   <div class="container">
     <ul class="my-5">
 
 

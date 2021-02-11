@@ -1,3 +1,12 @@
+<?php
+/****************************************************************
+   FILE             :   sideBar.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   Side bar drwaing menu for dashboard
+****************************************************************/
+?>
 <body>
     <div class="wrapper d-flex align-items-stretch">
         <nav id="sidebar" class="active bg-secondary min-vh-100">
@@ -43,13 +52,13 @@
                         switch ($_GET['menu']){
                             case 'profile':
                                 $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PROFILE</text></div>';
-                                    if (isset($_GET['data'])){
-                                        if ($_GET['data'] == 'personal'){
-                                            $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false"><i class="edit icon"></i>Edit profile</button>';
-                                        }elseif ($_GET['data'] == 'productionPoint'){
-                                            $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Farm Land</button>';
-                                        }
+                                if (isset($_GET['data'])){
+                                    if ($_GET['data'] == 'personal'){
+                                        $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false"><i class="edit icon"></i>Edit profile</button>';
+                                    }elseif ($_GET['data'] == 'productionPoint'){
+                                        $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Farm Land</button>';
                                     }
+                                }
                                 echo $profileHead;
                                 break;
                             case 'products':

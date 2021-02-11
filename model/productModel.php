@@ -1,4 +1,13 @@
 <?php
+/****************************************************************
+   FILE             :   userModel.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   10.02.2021
+
+   PURPOSE          :   Data model of the product table and initialisation function
+****************************************************************/
+
+
 class product{
     public $productId;
     public $producerId;

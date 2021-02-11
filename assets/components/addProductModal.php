@@ -1,3 +1,13 @@
+<?php
+/****************************************************************
+   FILE             :   addProductModal.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   To add a new product or edit existing product details into the database.
+                        a form having space to enter the details of the product
+****************************************************************/
+?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/10.31.0/js/jquery.fileupload.min.js" integrity="sha512-qPkNWpUqYz8bhO5bGNPBvlCB9hPZBil2ez5Mo8yVmpCKI315UDDPQeg/TE7KwZ+U/wdSO8JguwVxYY/Ha7U+vQ==" crossorigin="anonymous"></script>
 
 <?php

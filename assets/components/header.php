@@ -1,4 +1,13 @@
-<?php session_start(); ?>
+<?php 
+/****************************************************************
+   FILE             :   header.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   file containg all dependencies and header files
+****************************************************************/
+session_start(); 
+?>
 
 <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/constants.php");
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");

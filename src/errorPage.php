@@ -1,5 +1,13 @@
-
 <?php
+/****************************************************************
+   FILE             :   errorPage.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   10.02.2021
+
+   PURPOSE          :   redirected to this page if there is any error occures.
+****************************************************************/
+
+
 $ERROR_CSS_LOC = '/kleinerzeugernetzwerk/css/style.css';
 
 ?>

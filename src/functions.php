@@ -1,15 +1,30 @@
 <?php 
+/****************************************************************
+   FILE:      functions.php
+   AUTHOR:    Fredy Davis
+   LAST EDIT DATE:  09.02.2021
+
+   PURPOSE:   All commonly used functions are written here
+****************************************************************/
+
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/config.php");
 
+/*
+    FUNCTION    :   To redirect to different location.
+    INPUT       :   location as path of the page.
+    OUTPUT      :   content from the specified location is loaded.
+*/
 function redirect($location){
-
-
     header("Location:" . $location);
     exit;
-
 }
 
 
+/*
+    FUNCTION    :   to store user data when a new user is registering.
+    INPUT       :   user details -> sign up form data.
+    OUTPUT      :   return true if the user is successfully registered otherwise false
+*/
 function createUser($salutation, $fName, $mName, $lName, $dob, $street, $houseNum, $zip, $city, $country, $phone, $mobile, $email, $password, $userType, $isActive, $isBlocked, $profileImageName){
 
     global $dbConnection;
@@ -40,6 +55,11 @@ function createUser($salutation, $fName, $mName, $lName, $dob, $street, $houseNu
     return false;
 }
 
+/*
+    FUNCTION    :   to store user name and password during new user registration.
+    INPUT       :   user id, email and password.
+    OUTPUT      :   return true if the user crediantials stored successfully otherwise false
+*/
 function saveUserCredentials($userId, $email, $password){
     global $dbConnection;
     $user_credential_query = "INSERT INTO user_credential(user_id, user_name, password)"
@@ -60,6 +80,12 @@ function saveUserCredentials($userId, $email, $password){
     return false;
 }
 
+
+/*
+    FUNCTION    :   to check whether the user's email address already registererd in the system
+    INPUT       :   email address
+    OUTPUT      :   return true if the user already exist otherwise false
+*/
 function isUserAlreadyExist($email){
     global $dbConnection;
     $selectEmail = mysqli_query($dbConnection, "SELECT `email` FROM `user` WHERE `email` = '$email'");
@@ -72,6 +98,11 @@ function isUserAlreadyExist($email){
 }
 
 
+/*
+    FUNCTION    :   to check the sql query returns any valid results
+    INPUT       :   result from the sql query
+    OUTPUT      :   exit and print failure message
+*/
 function confirmQuery($result) {
 
     global $dbConnection;
@@ -84,6 +115,12 @@ function confirmQuery($result) {
     }
 }
 
+
+/*
+    FUNCTION    :   Escapes special characters in a string for use in an SQL statement to avoid SQL injections
+    INPUT       :   connection string and query string
+    OUTPUT      :   Returns the escaped string, or false on error.
+*/
 function escapeSQLString($string) {
 
     global $dbConnection;
@@ -94,6 +131,11 @@ function escapeSQLString($string) {
 }
 
 
+/*
+    FUNCTION    :   handle user login by supplying username amd password
+    INPUT       :   email & password
+    OUTPUT      :   success: if it is a valid username and pasword, failure: display error message
+*/
 function loginUser($email, $password){
     global $dbConnection;
     $select_user = mysqli_query($dbConnection, "SELECT `user_id` FROM `user_credential` WHERE `user_name` = '$email' && password = '$password'");
@@ -115,6 +157,11 @@ function loginUser($email, $password){
     return false;
 }
 
+/*
+    FUNCTION    :   to fetch details of the user and store in session for further use
+    INPUT       :   user id
+    OUTPUT      :   store name, email into the session variable
+*/
 function getUserDetails($userId){
     global $dbConnection;
     $userSelectQuery = mysqli_query($dbConnection, "SELECT * FROM `user` WHERE `user_id` = '$userId'");
@@ -135,11 +182,20 @@ function getUserDetails($userId){
 function getNameFormatted($firstName, $middleName, $lastName){
 }
 
-
+/*
+    FUNCTION    :   Function to call logout service  
+*/
 function logout(){
     removeAuthToken();
 }
 
+
+/*
+    FUNCTION    :   Function to remove user login details when logged out
+    INPUT       :   
+    OUTPUT      :   deletes authentication token, user id and token id from user session as well as backend
+                    resirect user to the index page after successful logout
+*/
 function removeAuthToken(){
     global $dbConnection;
     $token = $_SESSION["token"];
@@ -173,7 +229,13 @@ if (isset($_GET['user'])) {
 
 }
 
-
+/*
+    FUNCTION    :   Create an entry in access_token table to validate whether 
+                    any web service called by a valid user.
+                    A random token is generated using PHP function.
+    INPUT       :   ----------------
+    OUTPUT      :   authentication token and currespoding id is stored into user session for further access
+*/
 function insertSignInToken(){
     global $dbConnection;
     $uid = uniqid(php_uname('n'), true);
@@ -195,6 +257,12 @@ function insertSignInToken(){
 
 }
 
+/*
+    FUNCTION    :   To valide user authenticity on each web service call
+                    A random token is generated using PHP function.
+    INPUT       :   user id and authentication token string
+    OUTPUT      :   return true if it is by a valid user otherwise return false
+*/
 function isTokenValid(){
     global $dbConnection;
 
@@ -296,6 +364,13 @@ function isTokenValid(){
 //}
 
 
+
+/*
+    FUNCTION    :   Function to add new production point details into the table.
+                    Also images of the production point.
+    INPUT       :   details of the product which is passed from the web service
+    OUTPUT      :   success/failure message on completion
+*/
 function addProductionPoint($pointName, $pointDescription, $pointAddress, $latitude, $longitude, $area, $fileNameArray){
     global $dbConnection;
     /* Start transaction */
@@ -349,6 +424,13 @@ function addProductionPoint($pointName, $pointDescription, $pointAddress, $latit
     }
 
 }
+
+/*
+    FUNCTION    :   generate a random unique file name to store images into database. 
+                    
+    INPUT       :   ----------------
+    OUTPUT      :   a unique random string is returned
+*/
 function generateFileName(){
     $data = random_bytes(16);
     $data[6] = chr(ord($data[6]) & 0x0f | 0x40); 
@@ -356,7 +438,12 @@ function generateFileName(){
     return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
 }
 
-
+/*
+    FUNCTION    :   generate a random unique file name to store images into database. 
+                    
+    INPUT       :   ----------------
+    OUTPUT      :   a unique random string is returned as file name
+*/
 function getProductCategories(){
     global $dbConnection;
     $productCategoryQuery = mysqli_query($dbConnection, "SELECT * FROM `product_category`");
@@ -368,6 +455,13 @@ function getProductCategories(){
         echo "No categories found. Try Adding some categories";
     }
 }
+/*
+    FUNCTION    :   fetch all product features from the backend to show 
+                    it when addign a new product in the add product modal 
+                    
+    INPUT       :   ----------------
+    OUTPUT      :   list of features and their ids stored into the session variable
+*/
 function getProductFeatures(){
     global $dbConnection;
     $productFeatureQuery = mysqli_query($dbConnection, "SELECT * FROM `feature_type`");
@@ -380,6 +474,13 @@ function getProductFeatures(){
     }
 }
 
+/*
+    FUNCTION    :   fetch all product units from the backend to show 
+                    it when addign a new product in the add product modal 
+                    
+    INPUT       :   ----------------
+    OUTPUT      :   list of units and their ids stored into the session variable
+*/
 function getProductUnits(){
     global $dbConnection;
     $unitQuery = mysqli_query($dbConnection, "SELECT * FROM `units`");
@@ -392,6 +493,12 @@ function getProductUnits(){
     }
 }
 
+/*
+    FUNCTION    :   fetch all products from the backend to show it in the map
+                    
+    INPUT       :   ----------------
+    OUTPUT      :   list of products with name, desc, category, address, and location
+*/
 function getAllProducts(){
     ob_start();
     global $dbConnection;
@@ -406,7 +513,12 @@ function getAllProducts(){
     }
 }
 
-
+/*
+    FUNCTION    :   fetch all production points of all users from the backend to show it in the map
+                    
+    INPUT       :   ----------------
+    OUTPUT      :   list of production points with name, desc, owner details, address, and location
+*/
 function getAllProducersAndSellers(){
     ob_start();
     global $dbConnection;

@@ -1,4 +1,12 @@
 <?php
+/****************************************************************
+   FILE             :   map.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   map using leafletJS to show production points as dots.
+****************************************************************/
+
 $leaflet_sidebar_css = "/kleinerzeugernetzwerk/assets/leaflet_sidebar/L.Control.Sidebar.css";
 $leaflet_sidebar_js = "/kleinerzeugernetzwerk/assets/leaflet_sidebar/L.Control.Sidebar.js";
 $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";

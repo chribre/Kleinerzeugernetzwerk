@@ -1,4 +1,15 @@
 <?php 
+
+/****************************************************************
+   FILE             :   getCache.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   CRUD operations on product model. 
+                        add new products, edit product details, delete a product.
+****************************************************************/
+
+
 session_start();
 include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
 //include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/productCategoryModel.php");
@@ -14,7 +25,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
         }
 }
 
-
+/*
+    FUNCTION    :   to fetch product categories, feature types, units from the database.
+    INPUT       :   user id
+    OUTPUT      :   return a json dictionary with product categories, feature types, units
+*/
 function getCache($userId){
     $cacheData = [];
     global $dbConnection;

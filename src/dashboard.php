@@ -1,4 +1,12 @@
 <?php 
+/****************************************************************
+   FILE             :   dashboard.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   10.02.2021
+
+   PURPOSE          :   side bar of the dashbord is incorporated here
+                        controls are defined in assets/components/sideBar.php
+****************************************************************/
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }

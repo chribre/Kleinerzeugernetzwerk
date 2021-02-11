@@ -1,4 +1,13 @@
 <?php 
+/****************************************************************
+   FILE             :   productController.php
+   AUTHOR           :   Fredy Davis
+   LAST EDIT DATE   :   11.02.2021
+
+   PURPOSE          :   CRUD operations on product model. 
+                        add new products, edit product details, delete a product.
+****************************************************************/
+
 session_start();
 include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
 include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/productModel.php");
@@ -50,7 +59,12 @@ switch ($_SERVER['REQUEST_METHOD']) {
 }
 
 
-
+/*
+    FUNCTION    :   to fetch all products by a user.
+    INPUT       :   user id
+    OUTPUT      :   return list of products with product details, production point details, images etc
+                    otherwise return emply array
+*/
 function fetchAllProducts($userId){
     $products = [];
     global $dbConnection;
@@ -93,7 +107,11 @@ function fetchAllProducts($userId){
 
 
 
-//Add product details to product table
+/*
+    FUNCTION    :   to Add product details to product table
+    INPUT       :   product details fetched from add product modal
+    OUTPUT      :   return true if product details, features and images are inserted into the database successully
+*/
 function addProduct($productName, $productDescription, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating, $fileNameArray, $productFeaturesArray, $productFeatureIdArray){
     global $dbConnection;
     /* Start transaction */
@@ -176,7 +194,11 @@ function addProduct($productName, $productDescription, $productCategory, $produc
 
 
 
-
+/*
+    FUNCTION    :   to edit product details of an existing product in the database
+    INPUT       :   product details fetched from add product modal
+    OUTPUT      :   return true if product details, features and images are upadated successully
+*/
 function updateProducts($productId, $productName, $productDesc, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $pricePerUnit, $quantityOfPrice, $unit, $productRating, $productFeatures, $featureIdArray){
 
     ob_start();
@@ -221,6 +243,12 @@ function updateProducts($productId, $productName, $productDesc, $productCategory
     }
 }
 
+
+/*
+    FUNCTION    :   to get details of a product
+    INPUT       :   product details fetched from add product modal
+    OUTPUT      :   return true if product details, features and images are upadated successully
+*/
 function getProduct($productId){
     ob_start();
     global $dbConnection;
@@ -254,7 +282,12 @@ function getProduct($productId){
         echo "<script>console.log('PHP: Authentication Failed');</script>";
     }
 }
-
+/*
+    FUNCTION    :   features for each product is handled in this function.
+                    by comapring the feature id and feature type it decide whether it to update, delete or insert new feature.
+    INPUT       :   feature array from add product modal, existing feature ids of the product, prod
+    OUTPUT      :   return true if product details, features and images are upadated successully
+*/
 function PrepareFeatureQuery($featureArray, $featureIdArray, $productId){
     $featureQuery = "";
 
@@ -273,7 +306,11 @@ function PrepareFeatureQuery($featureArray, $featureIdArray, $productId){
     return $featureQuery;
 }
 
-
+/*
+    FUNCTION    :   function deletes an entry of product by a user from the database
+    INPUT       :   id of the product to be deleted
+    OUTPUT      :   return true if product deleted successully otherwise false
+*/
 function deleteProduct($productId){
     ob_start();
     global $dbConnection;
@@ -295,7 +332,11 @@ function deleteProduct($productId){
     return false;
 }
 
-
+/*
+    FUNCTION    :   to fetch all products from a production point and show on side bar of the map
+    INPUT       :   id of the production point
+    OUTPUT      :   return array of products as json
+*/
 function fetchAllProductsFromLocation($locationId){
     ob_start();
     global $dbConnection;
