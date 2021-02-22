@@ -11,7 +11,6 @@
 //MAP to caputure production point locations.
 
 
-
 global $dbConnection;
 //PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){

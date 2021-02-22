@@ -22,19 +22,19 @@ $loginFailAlert = '<div class="alert alert-success" id="success-alert">
   <button type="button" class="close" data-dismiss="alert">x</button>
   <strong>Success! </strong> Product have added to your wishlist.
 </div>';
-if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-    if (isset($_POST['signIn'])){
-        echo('Post method hit,');
-        $email = escapeSQLString($_POST['email']);
-        $password = escapeSQLString($_POST['password']);
-        if(loginUser($email, $password)){
-            echo "login success";
-        }else{
-            echo "login faield. retry!";
-        }
-    }
-
-}
+//if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+//    if (isset($_POST['signIn'])){
+//        echo('Post method hit,');
+//        $email = escapeSQLString($_POST['email']);
+//        $password = escapeSQLString($_POST['password']);
+//        if(loginUser($email, $password)){
+//            echo "login success";
+//        }else{
+//            echo "login faield. retry!";
+//        }
+//    }
+//
+//}
 
 $SIGN_UP_LOC = '/kleinerzeugernetzwerk/src/signUp.php';
 $LOGO_LOC = '/kleinerzeugernetzwerk/images/logo.svg';
@@ -44,13 +44,13 @@ $LOG_OUT_IMG = '/kleinerzeugernetzwerk/images/logout.png';
 $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=personal';
 
 
-if(isset($_GET['logOut'])){
-    logOut();
-
-}
-function logOutUser(){
-    $_SESSION["isLoggedIn"] = false;
-}
+//if(isset($_GET['logOut'])){
+//    logOut();
+//
+//}
+//function logOutUser(){
+//    $_SESSION["isLoggedIn"] = false;
+//}
 
 ?>
 
@@ -99,7 +99,7 @@ function logOutUser(){
                 </div>
 
             </ul>
-            <div class="row mr-3">
+            <div class="row mr-3" id="navEndSpace">
                 <div class="bg-white rounded rounded-pill shadow-sm mx-sm-4 align-items-center align-self-center">
                     <div class="input-group">
                         <div class="input-group-prepend">
@@ -109,27 +109,7 @@ function logOutUser(){
                     </div>
                 </div>
 
-                <?php 
-                $signInButton = '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right">Sign In</button>';
-                if (isset($_SESSION['isLoggedIn'])) {
-                    if ($_SESSION["isLoggedIn"] == false){
-                        echo $signInButton;
-                    }else{
-                        echo '<div class="dropdown rounded-circle bg-info p-1 ml-3">
-                    <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="rounded-circle bg-info">
-                        <img src="'.$PROFILE_IMAGE_DEFAULT.'" class="d-block rounded-circle" width="36px" height="36px">
-                    </div>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel">
-                        <a class="dropdown-item font-weight-bold text-uppercase" href="'.$VIEW_PROFILE.'">'.$_SESSION["userName"].'</br><span class=" text font-weight-light text-lowercase">'.$_SESSION["email"].'</span> </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="?logOut=true"><img class="mr-2" src="'.$LOG_OUT_IMG.'" width=20px, height=20px/>Log Out</a>
-                    </div>
-                </div>';
-                    }
-                }else{
-                    echo $signInButton;
-                }
-                ?>
+               <div id="signInOrProfileBtn"></div>
 
             </div>           
         </div>
@@ -138,6 +118,51 @@ function logOutUser(){
 
 
 <script>
+    //        window.onload = function() {
+    //            setLoginOrProfileButton();
+    //        };
+
+    function setLoginOrProfileButton(){
+        const signInButton = '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right id="signInOrProfileBtn">Sign In</button>';       
+
+
+//        if (!$('#signInOrProfileBtn').length > 0) {
+//            // Not Exists.
+//            document.getElementById('navEndSpace').innerHTML += signInButton;
+//        }
+
+        if (localStorage.getItem('isLoggedIn')){
+            const userName = localStorage.getItem('userName');
+            const email = localStorage.getItem('email');
+            const profileImage = '/kleinerzeugernetzwerk/images/profile_placeholder.png';
+            const viewProfilePath = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=personal';
+            const logOutImage = '/kleinerzeugernetzwerk/images/logout.png';
+
+            const profileBtn = `<div class="dropdown rounded-circle bg-info p-1 ml-3" id="signInOrProfileBtn"> <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="rounded-circle bg-info"> <img src="${profileImage}" class="d-block rounded-circle" width="36px" height="36px"> </div> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel"> <a class="dropdown-item font-weight-bold text-uppercase" href="${viewProfilePath}">${userName}</br><span class=" text font-weight-light text-lowercase">${email}</span> </a> <div class="dropdown-divider"></div>  <a class="dropdown-item" href="javascript:logOut()"><img class="mr-2" src="${logOutImage}" width=20px, height=20px/>Log Out</a> </div> </div>`
+
+
+            $("#signInOrProfileBtn").replaceWith(profileBtn);
+            if (window.location.pathname.includes('signUp')){
+                window.location.href = "/kleinerzeugernetzwerk/index.php";
+            }
+        }else{
+            $("#signInOrProfileBtn").replaceWith(signInButton);
+        }
+    }
+    function logOut(){
+        console.log('log out');
+        removeLoginCache();
+        window.location.href = "/kleinerzeugernetzwerk/index.php";
+    }
+    function removeLoginCache(){
+        localStorage.removeItem('userId');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('email');
+        localStorage.removeItem('token');
+        localStorage.removeItem('tokenId');
+        localStorage.removeItem('isLoggedIn');
+    }
+    
     function userLogin(userName, password){
 
         $.ajax({

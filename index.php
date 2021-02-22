@@ -34,6 +34,7 @@ fetchFarmLandData(); //Optional call, this function call has to be deleted becua
     window.onload = function() {
         //        pass user_id instead of 0 to get user defined cache daat
         getCache(0);
+        setLoginOrProfileButton();
     };
     /*
         cache service to get product category, product features and unit to show in the add product page.

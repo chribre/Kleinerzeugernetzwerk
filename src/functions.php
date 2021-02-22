@@ -25,60 +25,60 @@ function redirect($location){
     INPUT       :   user details -> sign up form data.
     OUTPUT      :   return true if the user is successfully registered otherwise false
 */
-function createUser($salutation, $fName, $mName, $lName, $dob, $street, $houseNum, $zip, $city, $country, $phone, $mobile, $email, $password, $userType, $isActive, $isBlocked, $profileImageName){
-
-    global $dbConnection;
-    /* Start transaction */
-    mysqli_begin_transaction($dbConnection);
-
-    $sql = "INSERT INTO user (salutations, first_name, middle_name, last_name, dob, street, house_number, zip, city, country, phone, mobile, email, profile_image_name, user_type, is_active, is_blocked)"
-        . "VALUES ('$salutation', '$fName', '$mName', '$lName', '$dob', '$street', '$houseNum', '$zip', '$city', '$country', '$phone', '$mobile', '$email', '$profileImageName', $userType, $isActive, $isBlocked)";
-
-    try{
-        echo "trying to insert";
-        echo "\n ".$sql."\n";
-        mysqli_query($dbConnection, $sql);
-        $user_id = $dbConnection->insert_id;
-        echo "inserted";
-        echo "user id is $user_id, ";
-        if (saveUserCredentials($user_id, $email, $password)){
-            return true;
-        }else{
-            return false;
-        }
-    }catch(mysqli_sql_exception $exception){
-        echo "user creation failed,";
-        mysqli_rollback($dbConnection);
-        var_dump($exception);
-        throw $exception;
-    }
-    return false;
-}
+//function createUser($salutation, $fName, $mName, $lName, $dob, $street, $houseNum, $zip, $city, $country, $phone, $mobile, $email, $password, $userType, $isActive, $isBlocked, $profileImageName){
+//
+//    global $dbConnection;
+//    /* Start transaction */
+//    mysqli_begin_transaction($dbConnection);
+//
+//    $sql = "INSERT INTO user (salutations, first_name, middle_name, last_name, dob, street, house_number, zip, city, country, phone, mobile, email, profile_image_name, user_type, is_active, is_blocked)"
+//        . "VALUES ('$salutation', '$fName', '$mName', '$lName', '$dob', '$street', '$houseNum', '$zip', '$city', '$country', '$phone', '$mobile', '$email', '$profileImageName', $userType, $isActive, $isBlocked)";
+//
+//    try{
+//        echo "trying to insert";
+//        echo "\n ".$sql."\n";
+//        mysqli_query($dbConnection, $sql);
+//        $user_id = $dbConnection->insert_id;
+//        echo "inserted";
+//        echo "user id is $user_id, ";
+//        if (saveUserCredentials($user_id, $email, $password)){
+//            return true;
+//        }else{
+//            return false;
+//        }
+//    }catch(mysqli_sql_exception $exception){
+//        echo "user creation failed,";
+//        mysqli_rollback($dbConnection);
+//        var_dump($exception);
+//        throw $exception;
+//    }
+//    return false;
+//}
 
 /*
     FUNCTION    :   to store user name and password during new user registration.
     INPUT       :   user id, email and password.
     OUTPUT      :   return true if the user crediantials stored successfully otherwise false
 */
-function saveUserCredentials($userId, $email, $password){
-    global $dbConnection;
-    $user_credential_query = "INSERT INTO user_credential(user_id, user_name, password)"
-        ."VALUES($userId, '$email', '$password')";
-
-    try{
-        mysqli_query($dbConnection, $user_credential_query);
-        confirmQuery($user_credential_query);
-        mysqli_commit($dbConnection);
-        echo "account created, ";
-        return true;
-    }catch(mysqli_sql_exception $exception){
-        echo "user creation failed,";
-        mysqli_rollback($dbConnection);
-        var_dump($exception);
-        throw $exception;
-    }        
-    return false;
-}
+//function saveUserCredentials($userId, $email, $password){
+//    global $dbConnection;
+//    $user_credential_query = "INSERT INTO user_credential(user_id, user_name, password)"
+//        ."VALUES($userId, '$email', '$password')";
+//
+//    try{
+//        mysqli_query($dbConnection, $user_credential_query);
+//        confirmQuery($user_credential_query);
+//        mysqli_commit($dbConnection);
+//        echo "account created, ";
+//        return true;
+//    }catch(mysqli_sql_exception $exception){
+//        echo "user creation failed,";
+//        mysqli_rollback($dbConnection);
+//        var_dump($exception);
+//        throw $exception;
+//    }        
+//    return false;
+//}
 
 
 /*
@@ -86,16 +86,16 @@ function saveUserCredentials($userId, $email, $password){
     INPUT       :   email address
     OUTPUT      :   return true if the user already exist otherwise false
 */
-function isUserAlreadyExist($email){
-    global $dbConnection;
-    $selectEmail = mysqli_query($dbConnection, "SELECT `email` FROM `user` WHERE `email` = '$email'");
-    confirmQuery($selectEmail);
-    if(mysqli_num_rows($selectEmail)) {
-        //        exit(mysqli_error($dbConnection));
-        return true;
-    }
-    return false;
-}
+//function isUserAlreadyExist($email){
+//    global $dbConnection;
+//    $selectEmail = mysqli_query($dbConnection, "SELECT `email` FROM `user` WHERE `email` = '$email'");
+//    confirmQuery($selectEmail);
+//    if(mysqli_num_rows($selectEmail)) {
+//        //        exit(mysqli_error($dbConnection));
+//        return true;
+//    }
+//    return false;
+//}
 
 
 /*
@@ -136,26 +136,26 @@ function escapeSQLString($string) {
     INPUT       :   email & password
     OUTPUT      :   success: if it is a valid username and pasword, failure: display error message
 */
-function loginUser($email, $password){
-    global $dbConnection;
-    $select_user = mysqli_query($dbConnection, "SELECT `user_id` FROM `user_credential` WHERE `user_name` = '$email' && password = '$password'");
-    confirmQuery($select_user);
-    if(mysqli_num_rows($select_user)) {
-        $row = mysqli_fetch_array($select_user);
-        $userId = $row['user_id'];
-        $_SESSION["isLoggedIn"] = true;
-        $_SESSION["userId"] = $userId;
-        echo "User_Found $userId";
-        insertSignInToken();
-        getUserDetails($userId);
-        return true;
-    }else{
-        $_SESSION["isLoggedIn"] = false;
-        redirect("/kleinerzeugernetzwerk/src/errorPage.php");
-        echo $loginFailAlert;
-    }
-    return false;
-}
+//function loginUser($email, $password){
+//    global $dbConnection;
+//    $select_user = mysqli_query($dbConnection, "SELECT `user_id` FROM `user_credential` WHERE `user_name` = '$email' && password = '$password'");
+//    confirmQuery($select_user);
+//    if(mysqli_num_rows($select_user)) {
+//        $row = mysqli_fetch_array($select_user);
+//        $userId = $row['user_id'];
+//        $_SESSION["isLoggedIn"] = true;
+//        $_SESSION["userId"] = $userId;
+//        echo "User_Found $userId";
+//        insertSignInToken();
+//        getUserDetails($userId);
+//        return true;
+//    }else{
+//        $_SESSION["isLoggedIn"] = false;
+//        redirect("/kleinerzeugernetzwerk/src/errorPage.php");
+//        echo $loginFailAlert;
+//    }
+//    return false;
+//}
 
 /*
     FUNCTION    :   to fetch details of the user and store in session for further use
@@ -163,6 +163,7 @@ function loginUser($email, $password){
     OUTPUT      :   store name, email into the session variable
 */
 function getUserDetails($userId){
+    $userData = [];
     global $dbConnection;
     $userSelectQuery = mysqli_query($dbConnection, "SELECT * FROM `user` WHERE `user_id` = '$userId'");
     confirmQuery($userSelectQuery);
@@ -174,10 +175,14 @@ function getUserDetails($userId){
         $_SESSION["userName"] = $fName." ".$mName." ".$lName;
         $email = $row['email'];
         $_SESSION["email"] = $email;
-        redirect("/kleinerzeugernetzwerk/index.php");
+        $userData["userName"] = $fName." ".$mName." ".$lName;
+        $userData["email"] = $email;
+        return $userData;
+        //        redirect("/kleinerzeugernetzwerk/index.php");
     }else{
 
     }
+    return $userData;
 }
 function getNameFormatted($firstName, $middleName, $lastName){
 }
@@ -236,26 +241,26 @@ if (isset($_GET['user'])) {
     INPUT       :   ----------------
     OUTPUT      :   authentication token and currespoding id is stored into user session for further access
 */
-function insertSignInToken(){
-    global $dbConnection;
-    $uid = uniqid(php_uname('n'), true);
-    $userId = $_SESSION["userId"];
-    $accessTokenSql = "INSERT INTO access_token (user_id, token)"
-        . "VALUES ($userId,'$uid')";
-    try{
-        mysqli_query($dbConnection, $accessTokenSql);
-        confirmQuery($accessTokenSql);
-        $accessTokenId = $dbConnection->insert_id;
-        mysqli_commit($dbConnection);
-        $_SESSION["token"] = $uid;
-        $_SESSION["tokenId"] = $accessTokenId;
-    }catch(mysqli_sql_exception $exception){
-        mysqli_rollback($dbConnection);
-        var_dump($exception);
-        throw $exception;
-    }   
-
-}
+//function insertSignInToken(){
+//    global $dbConnection;
+//    $uid = uniqid(php_uname('n'), true);
+//    $userId = $_SESSION["userId"];
+//    $accessTokenSql = "INSERT INTO access_token (user_id, token)"
+//        . "VALUES ($userId,'$uid')";
+//    try{
+//        mysqli_query($dbConnection, $accessTokenSql);
+//        confirmQuery($accessTokenSql);
+//        $accessTokenId = $dbConnection->insert_id;
+//        mysqli_commit($dbConnection);
+//        $_SESSION["token"] = $uid;
+//        $_SESSION["tokenId"] = $accessTokenId;
+//    }catch(mysqli_sql_exception $exception){
+//        mysqli_rollback($dbConnection);
+//        var_dump($exception);
+//        throw $exception;
+//    }   
+//
+//}
 
 /*
     FUNCTION    :   To valide user authenticity on each web service call
@@ -281,6 +286,18 @@ function isTokenValid(){
     }
 }
 
+function isAccessTokenValid(){
+    global $dbConnection;
+    $header = apache_request_headers();
+    $token = $header['access-token'];
+    $userId = $header['user_id'];
+    $validAccessTokenQuery = mysqli_query($dbConnection, "SELECT * FROM `access_token` WHERE `token` = '$token' AND `user_id` = '$userId'");
+    confirmQuery($validAccessTokenQuery);
+    if (mysqli_num_rows($validAccessTokenQuery)){
+        return true;
+    }
+    return false;
+}
 
 //Add product details to product table
 //function addProduct($productName, $productDescription, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating, $fileNameArray, $productFeaturesArray){
@@ -427,7 +444,7 @@ function addProductionPoint($pointName, $pointDescription, $pointAddress, $latit
 
 /*
     FUNCTION    :   generate a random unique file name to store images into database. 
-                    
+
     INPUT       :   ----------------
     OUTPUT      :   a unique random string is returned
 */
@@ -440,7 +457,7 @@ function generateFileName(){
 
 /*
     FUNCTION    :   generate a random unique file name to store images into database. 
-                    
+
     INPUT       :   ----------------
     OUTPUT      :   a unique random string is returned as file name
 */
@@ -458,7 +475,7 @@ function getProductCategories(){
 /*
     FUNCTION    :   fetch all product features from the backend to show 
                     it when addign a new product in the add product modal 
-                    
+
     INPUT       :   ----------------
     OUTPUT      :   list of features and their ids stored into the session variable
 */
@@ -477,7 +494,7 @@ function getProductFeatures(){
 /*
     FUNCTION    :   fetch all product units from the backend to show 
                     it when addign a new product in the add product modal 
-                    
+
     INPUT       :   ----------------
     OUTPUT      :   list of units and their ids stored into the session variable
 */
@@ -495,7 +512,7 @@ function getProductUnits(){
 
 /*
     FUNCTION    :   fetch all products from the backend to show it in the map
-                    
+
     INPUT       :   ----------------
     OUTPUT      :   list of products with name, desc, category, address, and location
 */
@@ -515,7 +532,7 @@ function getAllProducts(){
 
 /*
     FUNCTION    :   fetch all production points of all users from the backend to show it in the map
-                    
+
     INPUT       :   ----------------
     OUTPUT      :   list of production points with name, desc, owner details, address, and location
 */

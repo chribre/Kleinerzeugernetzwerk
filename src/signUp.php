@@ -15,118 +15,118 @@ if (session_status() == PHP_SESSION_NONE) {
 //$HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.php");
 
-global $dbConnection;
-/*
-    PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
-*/
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['signUp'] == "true"){
-    echo('Post method hit,');
-    $password = escapeSQLString($_POST['password']);
-    $repeat_password = escapeSQLString($_POST['psw-repeat']);
-    if ($password === $repeat_password){
-        $email = escapeSQLString($_POST['email']);
-
-        if (isUserAlreadyExist($email)){
-            echo "This email is already being used";
-            exit('This email is already being used');
-        }else{
-            $salutation = escapeSQLString($_POST['salutation']);
-            $first_name = escapeSQLString($_POST['first_name']);
-            $middle_name = escapeSQLString($_POST['middle_name']);
-            $last_name = escapeSQLString($_POST['last_name']);
-            $dob = escapeSQLString($_POST['dob']);
-            $street = escapeSQLString($_POST['street']);
-            $house_number = escapeSQLString($_POST['house_number']);
-            $zip = escapeSQLString($_POST['zip']);
-            $city = escapeSQLString($_POST['city']);
-            $country = escapeSQLString($_POST['country']);
-            $phone = escapeSQLString($_POST['phone']);
-            $mobile = escapeSQLString($_POST['mobile']);
-
-
-            $userType = 1;
-            $isActive = 1;
-            $isBlocked = 0;
-
-            //file upload for user image
-            $fileNameNew = null;
-            if (isset($_FILES['file'])){
-                $file = $_FILES['file'];
-                echo $file;
-                $fileName = $_FILES['file']['name'];
-                $fileTmpName = $_FILES['file']['tmp_name'];
-                $fileSize = $_FILES['file']['size'];
-                $fileError = $_FILES['file']['error'];
-                $fileType = $_FILES['file']['type'];
-
-
-                $fileExt = explode('.', $fileName);
-                $fileActualExt = strtolower(end($fileExt));
-
-                $allowed = array('jpeg', 'jpg', 'png');
-                echo $fileActualExt;
-                if (in_array($fileActualExt, $allowed)){
-                    if ($fileError === 0){
-                        if ($fileSize < 100000 ){
-                            $fileNameNew = uniqid('', true).".".$fileActualExt;
-                            $fileDestination = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/".$fileNameNew;
-                            move_uploaded_file($fileTmpName, $fileDestination);  
-                            echo "filed upload success";
-                        }else{
-                            echo "your file size is too high";
-                        }
-                    }else{
-                        echo "There was an error uploading your profile image";
-                    }
-                }else{
-                    echo "Cannot upload file of this type";
-                }
-            }
-
-
-
-
-            //create user function which is written in functions.php to generate query and insert values to the user table
-            createUser($salutation, $first_name, $middle_name, $last_name, $dob, $street, $house_number, $zip, $city, $country, $phone, $mobile, $email, $password, $userType, $isActive, $isBlocked, $fileNameNew);
-        }
-    }else{
-        echo "Passwords doesn't match.";
-    }
-}else{
-    echo "post method not found!,";
-}
-
-
-function uploadprofileImage(){
-    $file = $_FILES['profileImage'];
-    $fileName = $_FILES['profileImage']['name'];
-    $fileTmpName = $_FILES['profileImage']['tmp_name'];
-    $fileSize = $_FILES['profileImage']['size'];
-    $fileError = $_FILES['profileImage']['error'];
-    $fileType = $_FILES['profileImage']['type'];
-
-
-    $fileExt = explode('.', $fileName);
-    $fileActualExt = strtolower(end($fileExt));
-
-    $allowed = array('jpeg', 'jpg', 'png');
-
-    if (in_array($fileActualExt, $allowed)){
-        if ($fileError === 0){
-            if ($fileSize < 100000 ){
-                $fileNameNew = uniqid('', true).".".$fileActualExt;
-                $fileDestination = '/uploads/'.$fileNameNew;
-                move_uploaded_file($fileTmpName, $fileDestination);                
-            }else{
-                echo "your file size is too high";
-            }
-        }else{
-            echo "There was an error uploading your profile image";
-        }
-    }else{
-        echo "Cannot upload file of this type";
-    }
-}
+//global $dbConnection;
+///*
+//    PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
+//*/
+//if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['signUp'] == "true"){
+//    echo('Post method hit,');
+//    $password = escapeSQLString($_POST['password']);
+//    $repeat_password = escapeSQLString($_POST['psw-repeat']);
+//    if ($password === $repeat_password){
+//        $email = escapeSQLString($_POST['email']);
+//
+//        if (isUserAlreadyExist($email)){
+//            echo "This email is already being used";
+//            exit('This email is already being used');
+//        }else{
+//            $salutation = escapeSQLString($_POST['salutation']);
+//            $first_name = escapeSQLString($_POST['first_name']);
+//            $middle_name = escapeSQLString($_POST['middle_name']);
+//            $last_name = escapeSQLString($_POST['last_name']);
+//            $dob = escapeSQLString($_POST['dob']);
+//            $street = escapeSQLString($_POST['street']);
+//            $house_number = escapeSQLString($_POST['house_number']);
+//            $zip = escapeSQLString($_POST['zip']);
+//            $city = escapeSQLString($_POST['city']);
+//            $country = escapeSQLString($_POST['country']);
+//            $phone = escapeSQLString($_POST['phone']);
+//            $mobile = escapeSQLString($_POST['mobile']);
+//
+//
+//            $userType = 1;
+//            $isActive = 1;
+//            $isBlocked = 0;
+//
+//            //file upload for user image
+//            $fileNameNew = null;
+//            if (isset($_FILES['file'])){
+//                $file = $_FILES['file'];
+//                echo $file;
+//                $fileName = $_FILES['file']['name'];
+//                $fileTmpName = $_FILES['file']['tmp_name'];
+//                $fileSize = $_FILES['file']['size'];
+//                $fileError = $_FILES['file']['error'];
+//                $fileType = $_FILES['file']['type'];
+//
+//
+//                $fileExt = explode('.', $fileName);
+//                $fileActualExt = strtolower(end($fileExt));
+//
+//                $allowed = array('jpeg', 'jpg', 'png');
+//                echo $fileActualExt;
+//                if (in_array($fileActualExt, $allowed)){
+//                    if ($fileError === 0){
+//                        if ($fileSize < 100000 ){
+//                            $fileNameNew = uniqid('', true).".".$fileActualExt;
+//                            $fileDestination = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/".$fileNameNew;
+//                            move_uploaded_file($fileTmpName, $fileDestination);  
+//                            echo "filed upload success";
+//                        }else{
+//                            echo "your file size is too high";
+//                        }
+//                    }else{
+//                        echo "There was an error uploading your profile image";
+//                    }
+//                }else{
+//                    echo "Cannot upload file of this type";
+//                }
+//            }
+//
+//
+//
+//
+//            //create user function which is written in functions.php to generate query and insert values to the user table
+//            createUser($salutation, $first_name, $middle_name, $last_name, $dob, $street, $house_number, $zip, $city, $country, $phone, $mobile, $email, $password, $userType, $isActive, $isBlocked, $fileNameNew);
+//        }
+//    }else{
+//        echo "Passwords doesn't match.";
+//    }
+//}else{
+//    echo "post method not found!,";
+//}
+//
+//
+//function uploadprofileImage(){
+//    $file = $_FILES['profileImage'];
+//    $fileName = $_FILES['profileImage']['name'];
+//    $fileTmpName = $_FILES['profileImage']['tmp_name'];
+//    $fileSize = $_FILES['profileImage']['size'];
+//    $fileError = $_FILES['profileImage']['error'];
+//    $fileType = $_FILES['profileImage']['type'];
+//
+//
+//    $fileExt = explode('.', $fileName);
+//    $fileActualExt = strtolower(end($fileExt));
+//
+//    $allowed = array('jpeg', 'jpg', 'png');
+//
+//    if (in_array($fileActualExt, $allowed)){
+//        if ($fileError === 0){
+//            if ($fileSize < 100000 ){
+//                $fileNameNew = uniqid('', true).".".$fileActualExt;
+//                $fileDestination = '/uploads/'.$fileNameNew;
+//                move_uploaded_file($fileTmpName, $fileDestination);                
+//            }else{
+//                echo "your file size is too high";
+//            }
+//        }else{
+//            echo "There was an error uploading your profile image";
+//        }
+//    }else{
+//        echo "Cannot upload file of this type";
+//    }
+//}
 ?>
 
 
@@ -134,8 +134,8 @@ function uploadprofileImage(){
 
 
     <div class="justify-content-center text-center">
-        <h3 class="pt-4">Sign Up</h3>
-        <p>Please fill in this form to create an account.</p>
+        <h3 class="pt-4" id="editTitle">Sign Up</h3>
+        <p id="editDesc">Please fill in this form to create an account.</p>
     </div>
 
 
@@ -151,31 +151,33 @@ function uploadprofileImage(){
             </div>
 
             <div class="form-row">
-                <div class="col-md-1 mb-3">
-                    <label for="exampleFormControlSelect1">Salutation</label>
-                    <select class="form-control" id="exampleFormControlSelect1" name="salutation">
+                <div class="col-md-2 mb-3">
+                    <label for="salutation">Salutation</label>
+                    <select class="form-control" id="salutation" name="salutation">
                         <option>Mr.</option>
-                        <option>Mrs.</option>
                         <option>Ms.</option>
+                        <option>Mrs.</option>
                     </select>
                 </div>
-                <div class="col-md-4 mb-3">
-                    <label for="validationCustom01">First name</label>
-                    <input type="text" class="form-control" id="validationCustom01" placeholder="First name" required name="first_name">
+                <div class="col-md-5 mb-3">
+                    <label for="first_name">First name</label>
+                    <input type="text" class="form-control" id="first_name" placeholder="First name" required name="first_name">
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
-                <div class="col-md-3 mb-3">
-                    <label for="validationCustom02">Middle name</label>
-                    <input type="text" class="form-control" id="validationCustom02" placeholder="Middle name" required name="middle_name">
-                    <div class="valid-feedback">
-                        Looks good!
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                    <label for="validationCustom03">Last name</label>
-                    <input type="text" class="form-control" id="validationCustom03" placeholder="Last name" required name="last_name">
+                <!--
+<div class="col-md-3 mb-3">
+<label for="middle_name">Middle name</label>
+<input type="text" class="form-control" id="middle_name" placeholder="Middle name" required name="middle_name">
+<div class="valid-feedback">
+Looks good!
+</div>
+</div>
+-->
+                <div class="col-md-5 mb-3">
+                    <label for="last_name">Last name</label>
+                    <input type="text" class="form-control" id="last_name" placeholder="Last name" required name="last_name">
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -185,10 +187,21 @@ function uploadprofileImage(){
 
             <div class="form-row">
                 <div class="col-md-12 mb-3">
-                    <label for="validationCustom03">Date of Birth</label>
-                    <input type="text" class="form-control" id="date-picker" placeholder="DD/MM/YYYY" required name="dob">
+                    <label for="bio">Share Your Farm Story</label>
+                    <!--                    <input type="text" class="form-control" id="bio" placeholder="E-mail" required name="bio">-->
+                    <textarea class="form-control" id="bio" rows="5" placeholder="Write something about you, your farm, products etc." required name="bio"></textarea>
+                    <div class="invalid-feedback">
+                        Please provide a description.
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-12 mb-3">
+                    <label for="dob_date_picker">Date of Birth</label>
+                    <input type="text" class="form-control" id="dob_date_picker" placeholder="DD/MM/YYYY" required name="dob">
                     <script>
-                        $('#date-picker').dateDropper({
+                        $('#dob_date_picker').dateDropper({
                             large: true,
                             largeOnly: true
                         })
@@ -200,15 +213,15 @@ function uploadprofileImage(){
             </div>                
             <div class="form-row">
                 <div class="col-md-7 mb-3">
-                    <label for="validationCustom03">Street</label>
-                    <input type="text" class="form-control" id="validationCustom03" placeholder="Street" required name="street">
+                    <label for="street">Street</label>
+                    <input type="text" class="form-control" id="street" placeholder="Street" required name="street">
                     <div class="invalid-feedback">
                         Please provide a valid Street Name.
                     </div>
                 </div>
                 <div class="col-md-5 mb-3">
-                    <label for="validationCustom04">House Number</label>
-                    <input type="text" class="form-control" id="validationCustom04" placeholder="House Number" required name="house_number">
+                    <label for="house_number">House Number</label>
+                    <input type="text" class="form-control" id="house_number" placeholder="House Number" required name="house_number">
                     <div class="invalid-feedback">
                         Please provide a valid hosue number.
                     </div>
@@ -217,22 +230,22 @@ function uploadprofileImage(){
 
             <div class="form-row">
                 <div class="col-md-6 mb-3">
-                    <label for="validationCustom03">Zip</label>
-                    <input type="text" class="form-control" id="validationCustom03" placeholder="Zip" required name="zip">
+                    <label for="zip">Zip</label>
+                    <input type="text" class="form-control" id="zip" placeholder="Zip" required name="zip">
                     <div class="invalid-feedback">
                         Please provide a valid Zip.
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label for="validationCustom04">City</label>
-                    <input type="text" class="form-control" id="validationCustom04" placeholder="City" required name="city">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" id="city" placeholder="City" required name="city">
                     <div class="invalid-feedback">
                         Please provide a valid City.
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label for="validationCustom05">Country</label>
-                    <input type="text" class="form-control" id="validationCustom05" placeholder="Country" required name="country">
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control" id="country" placeholder="Country" required name="country">
                     <div class="invalid-feedback">
                         Please provide a valid Country.
                     </div>
@@ -240,48 +253,48 @@ function uploadprofileImage(){
             </div>
             <div class="form-row">
                 <div class="col-md-6 mb-3">
-                    <label for="validationCustom03">Mobile</label>
-                    <input type="text" class="form-control" id="validationCustom03" placeholder="Mobile" required name="mobile">
+                    <label for="mobile">Mobile</label>
+                    <input type="text" class="form-control" id="mobile" placeholder="Mobile" required name="mobile">
                     <div class="invalid-feedback">
                         Please provide a valid mobile number.
                     </div>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="validationCustom04">Phone</label>
-                    <input type="text" class="form-control" id="validationCustom04" placeholder="Phone" required name="phone">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" placeholder="Phone" required name="phone">
                     <div class="invalid-feedback">
                         Please provide a valid phone number.
                     </div>
                 </div>
             </div>
-            <div class="form-row">
+            <div class="form-row" id="emailSection">
                 <div class="col-md-12 mb-3">
-                    <label for="validationCustom04">E-mail</label>
-                    <input type="text" class="form-control" id="validationCustom04" placeholder="E-mail" required name="email">
+                    <label for="r_email">E-mail</label>
+                    <input type="text" class="form-control" id="r_email" placeholder="E-mail" required name="r_email">
                     <div class="invalid-feedback">
                         Please provide a valid e-mail address.
                     </div>
                 </div>
             </div>
-            <div class="form-row">
+            <div class="form-row" id="passwordSection">
                 <div class="col-md-12 mb-3">
-                    <label for="validationCustom04">Password</label>
-                    <input type="password" class="form-control" id="validationCustom04" placeholder="Password" required name="password">
+                    <label for="r_password">Password</label>
+                    <input type="password" class="form-control" id="r_password" placeholder="Password" required name="r_password">
                     <div class="invalid-feedback">
                         Please provide a valid password.
                     </div>
                 </div>
             </div>
-            <div class="form-row">
+            <div class="form-row" id="passwordrptSection">
                 <div class="col-md-12 mb-3">
-                    <label for="validationCustom04">Repeat Password</label>
-                    <input type="password" class="form-control" id="validationCustom04" placeholder="RepeatPassword" required name="psw-repeat">
+                    <label for="psw_repeat">Repeat Password</label>
+                    <input type="password" class="form-control" id="psw_repeat" placeholder="RepeatPassword" required name="psw-repeat">
                     <div class="invalid-feedback">
                         Please provide a valid repeat password.
                     </div>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="agreeSection">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required name="agree">
                     <label class="form-check-label" for="invalidCheck">
@@ -292,65 +305,100 @@ function uploadprofileImage(){
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="signUp" value="true">
+            <!--            <input type="hidden" name="signUp" value="true">-->
+            <input type="hidden" name="userId" value=0 id="userId">
             <div class="col text-center">
                 <button class="btn btn-primary btn-lg col-4 rounded-pill shadow-lg" id="signUpBtn">Sign Up</button>
             </div>
-            
+
         </form>
 
         <script>
             // Example starter JavaScript for disabling form submissions if there are invalid fields
-//            (function() {
-//                'use strict';
-//                window.addEventListener('load', function() {
-//                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-//                    var forms = document.getElementsByClassName('needs-validation');
-//                    // Loop over them and prevent submission
-//                    var validation = Array.prototype.filter.call(forms, function(form) {
-//                        form.addEventListener('submit', function(event) {
-//                            event.preventDefault();
-//                            if (form.checkValidity() === false) {
-//                                event.stopPropagation();
-//                            }else{
-//                                signUp();
-//                            }
-//                            form.classList.add('was-validated');
-//                        }, false);
-//                    });
-//                }, false);
-//            })();
+            //            (function() {
+            //                'use strict';
+            //                window.addEventListener('load', function() {
+            //                    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            //                    var forms = document.getElementsByClassName('needs-validation');
+            //                    // Loop over them and prevent submission
+            //                    var validation = Array.prototype.filter.call(forms, function(form) {
+            //                        form.addEventListener('submit', function(event) {
+            //                            event.preventDefault();
+            //                            if (form.checkValidity() === false) {
+            //                                event.stopPropagation();
+            //                            }else{
+            //                                signUp();
+            //                            }
+            //                            form.classList.add('was-validated');
+            //                        }, false);
+            //                    });
+            //                }, false);
+            //            })();
 
 
             //            Work in progress to implement sign up sign in as ajax call
-            
+
+
+            window.onload = function() {
+                setLoginOrProfileButton();
+                setProfileForEditing();
+            };
+
+
             document.getElementById("signUpBtn").onclick = function () { 
-                signUp();
+                if (document.getElementById('userId') == 0){
+                    signUp();
+                }else{
+                    saveUserProfile();
+                    
+                }
+
             }
-            
+
+            function fetchValueFromForm(){
+                const ids = ['first_name', 'last_name', 'bio', 'dob_date_picker', 'street', 'house_number', 'zip', 'city', 'country', 'mobile', 'phone', 'r_email', 'r_password', 'psw_repeat', 'userId'];
+                var formData = [];
+
+                ids.forEach(function(element) {
+                    const value = document.getElementById(element).value != null ? document.getElementById(element).value: "";
+                    formData[element] = value;
+                }); 
+                return formData
+            }
             /*
                 javaScript function to fetch data from form and submit it to the backend using an ajax call
                 POST request to pass data to backend
                 On successful sign up show a modal with success message and a button to go to login screen.*
             */
             function signUp(){
-                const firstName = document.getElementsByName("first_name") != null ? document.getElementsByName("first_name"): "";
-                const lastName = document.getElementsByName("last_name") != null ? document.getElementsByName("last_name"): "";
-                const dob = document.getElementsByName("dob") != null ? document.getElementsByName("dob"): "";
-                const street = document.getElementsByName("street") != null ? document.getElementsByName("street"): "";
-                const houseNumber = document.getElementsByName("house_number") != null ? document.getElementsByName("house_number"): "";
-                const zip = document.getElementsByName("zip") != null ? document.getElementsByName("zip"): "";
-                const city = document.getElementsByName("city") != null ? document.getElementsByName("city"): "";
-                const country = document.getElementsByName("country") != null ? document.getElementsByName("country"): "";
-                const mobile = document.getElementsByName("mobile") != null ? document.getElementsByName("mobile"): "";
-                const phone = document.getElementsByName("phone") != null ? document.getElementsByName("phone"): "";
-                const email = document.getElementsByName("email") != null ? document.getElementsByName("email"): "";
-                const password = document.getElementsByName("password") != null ? document.getElementsByName("password"): "";
-                const repeatPassword = document.getElementsByName("psw-repeat") != null ? document.getElementsByName("psw-repeat"): "";
+                const formData = fetchValueFromForm();
+                const firstName = document.getElementById("first_name").value != null ? document.getElementById("first_name").value: "";
+                const lastName = document.getElementById("last_name").value != null ? document.getElementById("last_name").value: "";
+                const description = document.getElementById("bio").value != null ? document.getElementById("bio").value: "";
+                const dob = document.getElementById("dob_date_picker").value != null ? document.getElementById("dob_date_picker").value: "";
+                const street = document.getElementById("street").value != null ? document.getElementById("street").value: "";
+                const houseNumber = document.getElementById("house_number").value != null ? document.getElementById("house_number").value: "";
+                const zip = document.getElementById("zip").value != null ? document.getElementById("zip").value: "";
+                const city = document.getElementById("city").value != null ? document.getElementById("city").value: "";
+                const country = document.getElementById("country").value != null ? document.getElementById("country").value: "";
+                const mobile = document.getElementById("mobile").value != null ? document.getElementById("mobile").value: "";
+                const phone = document.getElementById("phone").value != null ? document.getElementById("phone").value: "";
+                const email = document.getElementById("r_email").value != null ? document.getElementById("r_email").value: "";
+                const password = document.getElementById("r_password").value != null ? document.getElementById("r_password").value: "";
+                const repeatPassword = document.getElementById("psw_repeat").value != null ? document.getElementById("psw_repeat").value: "";
 
                 $.ajax({
                     type: "POST",
                     url: "/kleinerzeugernetzwerk/controller/userController.php",
+                    beforeSend: function(){
+                        $("#overlay").fadeIn(300);　
+                    },
+                    complete: function(){
+                        $("#overlay").fadeOut(300);
+                    },
+                    headers: {
+                        'action': "CREATE"
+                    },
                     data: { 
                         user_id: 0,
                         first_name: firstName,
@@ -364,11 +412,12 @@ function uploadprofileImage(){
                         mobile: mobile,
                         phone: phone,
                         email:email,
-                        password: password
+                        password: password,
+                        description: description
                     },
-                    dataType: "json",
-                    contentType: "application/json",
-                    cache: false,
+                    //                    dataType: "json",
+                    //                    contentType: "application/json",
+                    //                    cache: false,
                     success: function( data ) {
                         console.log(data)
                     },
@@ -380,6 +429,110 @@ function uploadprofileImage(){
 
             }
 
+            function setProfileForEditing(){
+                if (window.location.href.includes('editProfile.php')){
+
+                    document.getElementById("editTitle").innerHTML = "Edit Your Profile";
+                    document.getElementById("editDesc").innerHTML = "Make changes in the fields provided and save";
+                    document.getElementById("signUpBtn").innerHTML = "Save";
+                    document.getElementById("emailSection").hidden = true;
+                    document.getElementById("passwordSection").hidden = true;
+                    document.getElementById("passwordrptSection").hidden = true;
+                    document.getElementById("agreeSection").hidden = true;
+                    getUserDetails()
+                }
+
+            }
+
+            function setProfileValues(userData){
+                document.getElementById("salutation").value = userData.salutations ? userData.salutations : "Mr."; 
+                document.getElementById("first_name").value = userData.firstName ? userData.firstName : "";
+                document.getElementById("last_name").value = userData.lastName ? userData.lastName : ""; 
+                document.getElementById("bio").value = userData.description ? userData.description : "";
+                document.getElementById("dob_date_picker").value = userData.dob ? userData.dob : ""; 
+                document.getElementById("street").value = userData.street ? userData.street : "";
+                document.getElementById("house_number").value = userData.houseNumber ? userData.houseNumber : ""; 
+                document.getElementById("zip").value = userData.zip ? userData.zip : "";
+                document.getElementById("city").value = userData.city ? userData.city : ""; 
+                document.getElementById("country").value = userData.country ? userData.country : "";
+                document.getElementById("mobile").value = userData.mobile ? userData.mobile : ""; 
+                document.getElementById("phone").value = userData.phone ? userData.phone : "";
+                document.getElementById("userId").value = userData.userId ? userData.userId : "";
+            }
+            function getUserDetails(){
+                const userId = localStorage.getItem('userId')
+
+                $.ajax({
+                    type: "POST",
+                    url: "/kleinerzeugernetzwerk/controller/userController.php",
+
+                    headers: {
+                        'access-token': localStorage.getItem('token'),
+                        'user_id': userId,
+                        'action': "READ"
+                    },
+                    beforeSend: function(){
+                        $("#overlay").fadeIn(300);　
+                    },
+                    complete: function(){
+                        $("#overlay").fadeOut(300);
+                    },
+                    data: { 
+                        user_id: userId,
+                    },
+                    success: function( data ) {
+                        console.log(data)
+                        const userDetails = JSON.parse(data);
+                        setProfileValues(userDetails);
+                    },
+                    error: function (request, status, error) {               
+                        console.log(error)
+                    }
+                });
+            }
+
+            function saveUserProfile(){
+                const formData = fetchValueFromForm();
+                $.ajax({
+                    type: "POST",
+                    url: "/kleinerzeugernetzwerk/controller/userController.php",
+                    beforeSend: function(){
+                        $("#overlay").fadeIn(300);　
+                    },
+                    complete: function(){
+                        $("#overlay").fadeOut(300);
+                    },
+                    headers: {
+                        'action': "UPDATE",
+                        'access-token': localStorage.getItem('token'),
+                        'user_id': formData.userId,
+                    },
+                    data: { 
+                        user_id: formData.userId,
+                        first_name: formData.first_name,
+                        last_name: formData.last_name,
+                        dob: formData.dob_date_picker,
+                        street: formData.street,
+                        house_number: formData.house_number,
+                        zip: formData.zip,
+                        city: formData.city,
+                        country: formData.country,
+                        mobile: formData.mobile,
+                        phone: formData.phone,
+                        description: formData.bio
+                    },
+                    //                    dataType: "json",
+                    //                    contentType: "application/json",
+                    //                    cache: false,
+                    success: function( data ) {
+                        console.log(data)
+                    },
+                    error: function (request, status, error) {
+                        alert(request.responseText);
+                        console.log(error)
+                    }
+                });
+            }
         </script>
     </div>
 

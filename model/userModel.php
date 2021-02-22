@@ -7,21 +7,22 @@
    PURPOSE          :   Data model of the user table and initialisation function
 ****************************************************************/
 class user{
-    public userId;
-    public firstName;
-    public lastName;
-    public dob;
-    public street;
-    public houseNumber;
-    public zip;
-    public city;
-    public country;
-    public phone;
-    public email;
-    public mobile;
-    public userType;
-    public isActive;
-    public isBlocked;
+    public $userId;
+    public $firstName;
+    public $lastName;
+    public $dob;
+    public $street;
+    public $houseNumber;
+    public $zip;
+    public $city;
+    public $country;
+    public $phone;
+    public $email;
+    public $mobile;
+    public $userType;
+    public $isActive;
+    public $isBlocked;
+    public $description;
    
     //init function to set user class variables
     function __construct($userData){
@@ -40,6 +41,7 @@ class user{
         $this->userType = isset($userData['user_type']) ? escapeSQLString($userData['user_type']) : 0;
         $this->isActive = isset($userData['is_active']) ? escapeSQLString($userData['is_active']) : 0;
         $this->isBlocked = isset($userData['is_blocked']) ? escapeSQLString($userData['is_blocked']) : 0;
+        $this->description = isset($userData['description']) ? escapeSQLString($userData['description']) : "";
     }
 }
 ?>

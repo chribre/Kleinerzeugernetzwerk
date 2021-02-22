@@ -7,6 +7,7 @@
    PURPOSE          :   Sign in form with user name and password
 ****************************************************************/
 ?>
+<script src="/kleinerzeugernetzwerk/js/animate.js" type="text/javascript"></script>
 <!-- Modal -->
 <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
@@ -22,20 +23,23 @@
             </div>
 
 
+            <div class="alert alert-danger mx-4" hidden role="alert" id="loginError">
+                Please check the email and password and try again!
+            </div>
 
             <div class="registration_form">
-                <form enctype="multipart/form-data" method="post" class="needs-validation" novalidate>
+                <form enctype="multipart/form-data" class="needs-validation" novalidate onsubmit="event.preventDefault()">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
-                            <label for="validationCustom01">E-mail</label>
-                            <input type="text" class="form-control" id="validationCustom01" placeholder="Enter your email address" required name="email">
+                            <label for="email">E-mail</label>
+                            <input type="text" class="form-control" id="email" placeholder="Enter your email address" required name="email">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label for="validationCustom02">Password</label>
-                            <input type="password" class="form-control" id="validationCustom02" placeholder="Enter your password" required name="password">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" placeholder="Enter your password" required name="password">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -45,8 +49,8 @@
                     <div class="text-right">
                         <p>Forgot password?</p>
                     </div>
-                    <input type="hidden" name="signIn" value="true">
-                    <button class="btn btn-primary btn-block" type="submit">Sign In</button>
+                    <!--                    <input type="hidden" name="signIn" value="true">-->
+                    <button class="btn btn-primary btn-block" id="signInBtn">Sign In</button>
                 </form>
                 <div class="text-center pt-3">
                     <p>Not a memeber yet?</p>
@@ -88,3 +92,59 @@
     </div>
 </div>
 <!-- Modal -->
+
+
+
+
+<script>
+    document.getElementById("signInBtn").onclick = function () { 
+        login();
+    }
+
+    function login(){
+        const email = document.getElementById("email").value != null ? document.getElementById("email").value: "";
+        const password = document.getElementById("password").value != null ? document.getElementById("password").value: "";
+
+        $.ajax({
+            type: "POST",
+            url: "/kleinerzeugernetzwerk/controller/userAuthController.php",
+            beforeSend: function(){
+                $("#overlay").fadeIn(300);　
+            },
+            complete: function(){
+                $("#overlay").fadeOut(300);
+            },
+            data: { 
+                email:email,
+                password: password
+            },
+            success: function( data ) {
+                console.log(data)
+                document.getElementById("loginError").setAttribute("hidden","");
+                cacheLoginDetails(JSON.parse(data));
+                window.location.href = "/kleinerzeugernetzwerk/index.php";
+            },
+            error: function (request, status, error) {
+                $('loginError')
+                document.getElementById("loginError").removeAttribute("hidden");                
+                animateCSS('#elegantModalForm', 'shakeX');
+                //                alert(request.responseText);
+                console.log(error)
+            }
+        });
+    }
+
+    function cacheLoginDetails(data){
+        if (data){
+            localStorage['userId'] = data.userId;
+            localStorage['userName'] = data.userName;
+            localStorage['email'] = data.email;
+            localStorage['token'] = data.token;
+            localStorage['tokenId'] = data.tokenId;
+            localStorage['isLoggedIn'] = true;
+            for (var i = 0; i < localStorage.length; i++){
+                console.log(localStorage.getItem(localStorage.key(i)));
+            }
+        }
+    }
+</script>
