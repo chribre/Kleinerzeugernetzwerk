@@ -388,59 +388,59 @@ function isAccessTokenValid(){
     INPUT       :   details of the product which is passed from the web service
     OUTPUT      :   success/failure message on completion
 */
-function addProductionPoint($pointName, $pointDescription, $pointAddress, $latitude, $longitude, $area, $fileNameArray){
-    global $dbConnection;
-    /* Start transaction */
-    if (isTokenValid()){
-        $producerId = $_SESSION["userId"];
-        mysqli_begin_transaction($dbConnection);
-        $productionPointInsertQuery = "INSERT INTO farm_land (producer_id, farm_name, farm_desc, farm_address, farm_location, farm_area	)"
-            . "VALUES ($producerId, '$pointName', '$pointDescription', '$pointAddress', POINT($latitude, $longitude), $area)";
-
-        try{
-            echo "trying to insert";
-            echo "\n ".$productionPointInsertQuery."\n";
-            if (mysqli_query($dbConnection, $productionPointInsertQuery))
-                echo "   inserted succesfully   ";
-            //            confirmQuery($productInsertQuery);
-            $productionPointId = $dbConnection->insert_id;
-            $fileCount = count($fileNameArray);
-            $productionPointImageQuery = "INSERT INTO images (image_type, image_name, entity_id) VALUES ";
-            if ($fileCount > 0){
-                for ($i = 0; $i<$fileCount; $i++){
-                    $imageName = $fileNameArray[$i];
-                    $productionPointImageQuery .= "(2, '$imageName', $productionPointId)";
-                    if ($i===$fileCount-1){
-                        $productionPointImageQuery .= ";";
-                    }else{
-                        $productionPointImageQuery .= ", ";
-                    }
-                }
-                echo $productionPointImageQuery;
-                if (mysqli_query($dbConnection, $productionPointImageQuery)){
-                    echo "  Files inserted succesfully   ";
-                    mysqli_commit($dbConnection);
-                }else{
-                    echo "product creation failed at inserting images,";
-                    mysqli_rollback($dbConnection);
-                }
-            }else{
-                mysqli_commit($dbConnection);
-
-                echo "inserted";
-                echo "production Point id is $productionPointId, ";
-            }
-        }catch(mysqli_sql_exception $exception){
-            echo "faild to add a new production point,";
-            mysqli_rollback($dbConnection);
-            var_dump($exception);
-            throw $exception;
-
-        }
-
-    }
-
-}
+//function addProductionPoint($pointName, $pointDescription, $pointAddress, $latitude, $longitude, $area, $fileNameArray){
+//    global $dbConnection;
+//    /* Start transaction */
+//    if (isTokenValid()){
+//        $producerId = $_SESSION["userId"];
+//        mysqli_begin_transaction($dbConnection);
+//        $productionPointInsertQuery = "INSERT INTO farm_land (producer_id, farm_name, farm_desc, farm_address, farm_location, farm_area	)"
+//            . "VALUES ($producerId, '$pointName', '$pointDescription', '$pointAddress', POINT($latitude, $longitude), $area)";
+//
+//        try{
+//            echo "trying to insert";
+//            echo "\n ".$productionPointInsertQuery."\n";
+//            if (mysqli_query($dbConnection, $productionPointInsertQuery))
+//                echo "   inserted succesfully   ";
+//            //            confirmQuery($productInsertQuery);
+//            $productionPointId = $dbConnection->insert_id;
+//            $fileCount = count($fileNameArray);
+//            $productionPointImageQuery = "INSERT INTO images (image_type, image_name, entity_id) VALUES ";
+//            if ($fileCount > 0){
+//                for ($i = 0; $i<$fileCount; $i++){
+//                    $imageName = $fileNameArray[$i];
+//                    $productionPointImageQuery .= "(2, '$imageName', $productionPointId)";
+//                    if ($i===$fileCount-1){
+//                        $productionPointImageQuery .= ";";
+//                    }else{
+//                        $productionPointImageQuery .= ", ";
+//                    }
+//                }
+//                echo $productionPointImageQuery;
+//                if (mysqli_query($dbConnection, $productionPointImageQuery)){
+//                    echo "  Files inserted succesfully   ";
+//                    mysqli_commit($dbConnection);
+//                }else{
+//                    echo "product creation failed at inserting images,";
+//                    mysqli_rollback($dbConnection);
+//                }
+//            }else{
+//                mysqli_commit($dbConnection);
+//
+//                echo "inserted";
+//                echo "production Point id is $productionPointId, ";
+//            }
+//        }catch(mysqli_sql_exception $exception){
+//            echo "faild to add a new production point,";
+//            mysqli_rollback($dbConnection);
+//            var_dump($exception);
+//            throw $exception;
+//
+//        }
+//
+//    }
+//
+//}
 
 /*
     FUNCTION    :   generate a random unique file name to store images into database. 

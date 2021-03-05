@@ -1,0 +1,53 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2021-03-02 17:49+0100\n"
+"PO-Revision-Date: 2021-03-02 17:50+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ../../..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: assets/components/languagePreference.php:45 index.php:18
+msgid "Good Morning"
+msgstr "Guten Morgen"
+
+#: assets/components/navigationBar.php:81
+msgid "Map"
+msgstr "Karte"
+
+#: assets/components/navigationBar.php:84
+msgid "About Us"
+msgstr "Über uns"
+
+#: assets/components/navigationBar.php:87
+msgid "Events"
+msgstr "Ereignisse"
+
+#: assets/components/navigationBar.php:90
+msgid "Contact Us"
+msgstr "Kontakt"
+
+#~ msgid "your file size is too high"
+#~ msgstr "die Datei ist zu groß"
+
+#~ msgid "There was an error uploading your profile image"
+#~ msgstr "Problem beim Hochladen des Profilbilds"
+
+#~ msgid "Small Scale Producer"
+#~ msgstr "Kleinerzeugernetzwerk"
+
+#~ msgid "Connected successfully, "
+#~ msgstr "Erfolgreich verbunden "
+
+#~ msgid "login success"
+#~ msgstr "Login erfolgreich"
+
+#~ msgid "login faield. retry!"
+#~ msgstr "das hat nicht geklappt, bitte noch einmal versuchen!"

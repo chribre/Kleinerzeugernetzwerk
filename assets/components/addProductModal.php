@@ -213,22 +213,22 @@ $(function() {
                             <select class="selectpicker form-control" id="productionPointOptions" name="productionPoint">
 
                                 <?php 
-                                if (isset($_SESSION['productionPoints'])){
-                                    $farmLands = $_SESSION['productionPoints'];
-                                    if (count($farmLands) > 0){
-                                        for ($i = 0; $i < count($farmLands); $i++) {
-                                            $farmLand = $farmLands[$i];
-
-                                            $FarmName = isset($farmLand['farm_name']) ? $farmLand['farm_name'] : "";
-                                            $farmId = isset($farmLand['farm_id']) ? $farmLand['farm_id'] : 0;
-                                            $farmAddr = isset($farmLand['farm_address']) ? $farmLand['farm_address'] : "";
-                                ?>
-                                <option value="<?php echo $farmId ?>" data-subtext="<?php echo $farmAddr ?>"><?php echo $FarmName ?></option>
-                                <?php 
-                                        }
-                                    }
-                                }else{
-                                }
+//                                if (isset($_SESSION['productionPoints'])){
+//                                    $farmLands = $_SESSION['productionPoints'];
+//                                    if (count($farmLands) > 0){
+//                                        for ($i = 0; $i < count($farmLands); $i++) {
+//                                            $farmLand = $farmLands[$i];
+//
+//                                            $FarmName = isset($farmLand['farm_name']) ? $farmLand['farm_name'] : "";
+//                                            $farmId = isset($farmLand['farm_id']) ? $farmLand['farm_id'] : 0;
+//                                            $farmAddr = isset($farmLand['farm_address']) ? $farmLand['farm_address'] : "";
+//                                ?>
+<!--//                                <option value="<?php echo $farmId ?>" data-subtext="<?php echo $farmAddr ?>"><?php echo $FarmName ?></option>-->
+//                                <?php 
+//                                        }
+//                                    }
+//                                }else{
+//                                }
                                 ?>
 
 

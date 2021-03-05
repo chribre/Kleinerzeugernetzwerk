@@ -15,7 +15,7 @@ if (session_status() == PHP_SESSION_NONE) {
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.php");
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sideBar.php");
 ?>
-
+ 
 <script>
     window.onload = function() {
         setLoginOrProfileButton();
@@ -26,6 +26,8 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sideBar
 
         if (menu == 'profile' && data == 'personal'){
             getUserDetails();
+        }else if (menu == 'profile' && data == 'productionPoint'){
+            getAllProductionPoint();
         }
     };
 
@@ -107,6 +109,42 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sideBar
         }
         return parms;
     }
+    
+    
+    function getAllProductionPoint(){
+        const formData = fetchProductionPointFormData();
+        const userId = localStorage.getItem('userId');
+
+        $.ajax({
+            type: "POST",
+            url: "/kleinerzeugernetzwerk/controller/productionPointController.php",
+
+            headers: {
+                'access-token': localStorage.getItem('token'),
+                'user_id': userId,
+                'action': "READ_ALL"
+            },
+            beforeSend: function(){
+                $("#overlay").fadeIn(300);　
+            },
+            complete: function(){
+                $("#overlay").fadeOut(300);
+            },
+            data: { 
+                producer_id: userId
+            },
+            success: function( data ) {
+                console.log(data)
+                const productionPoints = JSON.parse(data);
+                listAllProductionPoints(productionPoints);
+            },
+            error: function (request, status, error) {               
+                console.log(error)
+            }
+        });
+    }
+    
+    
 </script>
 
 

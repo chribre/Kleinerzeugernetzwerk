@@ -78,16 +78,16 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
             <ul class="navbar-nav font-weight-bold">
                 <div class="navbar-nav mr-auto">
                     <li class="nav-item active ml-3">
-                        <a href="#" class="nav-link" data-toggle="modal" data-target="#">Map<span class="sr-only">(current)</span></a>
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#"><?php echo _('Map') ?><span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active ml-3">
-                        <a href="#" class="nav-link" data-toggle="modal" data-target="#">About Us<span class="sr-only">(current)</span></a>
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#"><?php echo _('About Us') ?><span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active ml-3">
-                        <a href="#" class="nav-link" data-toggle="modal" data-target="#">Events<span class="sr-only">(current)</span></a>
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#"><?php echo _('Events') ?><span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active ml-3">
-                        <a href="#" class="nav-link" data-toggle="modal" data-target="#">Contact Us<span class="sr-only">(current)</span></a>
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#"><?php echo _('Contact Us') ?><span class="sr-only">(current)</span></a>
                     </li>
 
                     <!--
@@ -109,80 +109,145 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                     </div>
                 </div>
 
-               <div id="signInOrProfileBtn"></div>
+                <div id="signInOrProfileBtn"></div>
 
-            </div>           
+
+
+
+                <div class="dropdown p-1 ml-3" id="languageSwitch"> 
+                    <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > 
+                        <img id="preferedLanguageImg" src="">
+                    </div> 
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel"> 
+                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('de_DE')"><img class="mr-3" src="https://www.countryflags.io/DE/shiny/32.png">Deutsch</a>  
+                        <div class="dropdown-divider">
+
+                        </div>  
+                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('en_EN')"><img class="mr-3" src="https://www.countryflags.io/GB/shiny/32.png">English</a> 
+                    </div> 
+                </div>
+
+
+
+            </div>
+            </nav>
         </div>
-    </nav>
-</div>
 
 
-<script>
-    //        window.onload = function() {
-    //            setLoginOrProfileButton();
-    //        };
+    <script>
+        //        window.onload = function() {
+        //            setLoginOrProfileButton();
+        //        };
 
-    function setLoginOrProfileButton(){
-        const signInButton = '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right id="signInOrProfileBtn">Sign In</button>';       
-
-
-//        if (!$('#signInOrProfileBtn').length > 0) {
-//            // Not Exists.
-//            document.getElementById('navEndSpace').innerHTML += signInButton;
-//        }
-
-        if (localStorage.getItem('isLoggedIn')){
-            const userName = localStorage.getItem('userName');
-            const email = localStorage.getItem('email');
-            const profileImage = '/kleinerzeugernetzwerk/images/profile_placeholder.png';
-            const viewProfilePath = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=personal';
-            const logOutImage = '/kleinerzeugernetzwerk/images/logout.png';
-
-            const profileBtn = `<div class="dropdown rounded-circle bg-info p-1 ml-3" id="signInOrProfileBtn"> <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="rounded-circle bg-info"> <img src="${profileImage}" class="d-block rounded-circle" width="36px" height="36px"> </div> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel"> <a class="dropdown-item font-weight-bold text-uppercase" href="${viewProfilePath}">${userName}</br><span class=" text font-weight-light text-lowercase">${email}</span> </a> <div class="dropdown-divider"></div>  <a class="dropdown-item" href="javascript:logOut()"><img class="mr-2" src="${logOutImage}" width=20px, height=20px/>Log Out</a> </div> </div>`
-
-
-            $("#signInOrProfileBtn").replaceWith(profileBtn);
-            if (window.location.pathname.includes('signUp')){
-                window.location.href = "/kleinerzeugernetzwerk/index.php";
+        function setLanguage(language){
+            if (language){
+                localStorage.setItem("language", language); 
             }
-        }else{
-            $("#signInOrProfileBtn").replaceWith(signInButton);
         }
-    }
-    function logOut(){
-        console.log('log out');
-        removeLoginCache();
-        window.location.href = "/kleinerzeugernetzwerk/index.php";
-    }
-    function removeLoginCache(){
-        localStorage.removeItem('userId');
-        localStorage.removeItem('userName');
-        localStorage.removeItem('email');
-        localStorage.removeItem('token');
-        localStorage.removeItem('tokenId');
-        localStorage.removeItem('isLoggedIn');
-    }
-    
-    function userLogin(userName, password){
 
-        $.ajax({
-            type: "POST",
-            url: "/kleinerzeugernetzwerk/controller/userController.php",
-            data: { userName: userName, password: password },
-            dataType: "json",
-            contentType: "application/json",
-            cache: false,
-            success: function( data ) {
+        function setLanguagePreferenceOnNav(){
+            var languagePreference = localStorage.getItem("language");
+            switch (languagePreference){
+                case 'de_DE':
+                    document.getElementById("preferedLanguageImg").src = "https://www.countryflags.io/DE/shiny/24.png";
+                    break;
+                case 'en_EN':
+                    document.getElementById("preferedLanguageImg").src = "https://www.countryflags.io/GB/shiny/24.png";
+                    break;
+                default:
+                    document.getElementById("preferedLanguageImg").src = "https://www.countryflags.io/DE/shiny/24.png";
+                    break;
+            }        
+        }
 
-            },
-            error: function (request, status, error) {
-                alert(request.responseText);
-                console.log(error)
+        function setLanguagePreferenceServer(language){
+            $.ajax({
+                type: "POST",
+                url: "/kleinerzeugernetzwerk/assets/components/languagePreference.php",
+                data: { language: language },
+//                dataType: "json",
+//                contentType: "application/json",
+//                cache: false,
+                success: function( data ) {
+                    const language = JSON.parse(data);
+                    const languagePref = language.language;
+                    setLanguage(languagePref);
+                    setLanguagePreferenceOnNav();
+                    location.reload();
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                    console.log(error)
+                }
+            });
+
+        }
+
+
+
+        function setLoginOrProfileButton(){
+            const signInButton = '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right id="signInOrProfileBtn">Sign In</button>';       
+
+
+            //        if (!$('#signInOrProfileBtn').length > 0) {
+            //            // Not Exists.
+            //            document.getElementById('navEndSpace').innerHTML += signInButton;
+            //        }
+
+            if (localStorage.getItem('isLoggedIn')){
+                const userName = localStorage.getItem('userName');
+                const email = localStorage.getItem('email');
+                const profileImage = '/kleinerzeugernetzwerk/images/profile_placeholder.png';
+                const viewProfilePath = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=personal';
+                const logOutImage = '/kleinerzeugernetzwerk/images/logout.png';
+
+                const profileBtn = `<div class="dropdown rounded-circle bg-info p-1 ml-3" id="signInOrProfileBtn"> <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="rounded-circle bg-info"> <img src="${profileImage}" class="d-block rounded-circle" width="36px" height="36px"> </div> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel"> <a class="dropdown-item font-weight-bold text-uppercase" href="${viewProfilePath}">${userName}</br><span class=" text font-weight-light text-lowercase">${email}</span> </a> <div class="dropdown-divider"></div>  <a class="dropdown-item" href="javascript:logOut()"><img class="mr-2" src="${logOutImage}" width=20px, height=20px/>Log Out</a> </div> </div>`
+
+
+                $("#signInOrProfileBtn").replaceWith(profileBtn);
+                if (window.location.pathname.includes('signUp')){
+                    window.location.href = "/kleinerzeugernetzwerk/index.php";
+                }
+            }else{
+                $("#signInOrProfileBtn").replaceWith(signInButton);
             }
-        });
 
-    }
-</script>
+            setLanguagePreferenceOnNav();
+        }
+        function logOut(){
+            console.log('log out');
+            removeLoginCache();
+            window.location.href = "/kleinerzeugernetzwerk/index.php";
+        }
+        function removeLoginCache(){
+            localStorage.removeItem('userId');
+            localStorage.removeItem('userName');
+            localStorage.removeItem('email');
+            localStorage.removeItem('token');
+            localStorage.removeItem('tokenId');
+            localStorage.removeItem('isLoggedIn');
+        }
+
+        function userLogin(userName, password){
+
+            $.ajax({
+                type: "POST",
+                url: "/kleinerzeugernetzwerk/controller/userController.php",
+                data: { userName: userName, password: password },
+                dataType: "json",
+                contentType: "application/json",
+                cache: false,
+                success: function( data ) {
+
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                    console.log(error)
+                }
+            });
+
+        }
+    </script>
 
 
 

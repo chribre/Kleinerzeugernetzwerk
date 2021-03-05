@@ -32,11 +32,13 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 
         $(document).ready(function(){
             $('#productionPointDropdown').dropdown();
+            const userId = localStorage.getItem("userId");
+            loadAllProducts(userId);
         });
 
-        window.onload = function() {
-            loadAllProducts(<?php echo $_SESSION['userId']?>)
-        };
+//        window.onload = function() {
+//            loadAllProducts(<?php echo $_SESSION['userId']?>)
+//        };
 
         /*
             PURPOSE     :   Fetch products from backend and load data as a card
@@ -223,6 +225,33 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
             $('#unit').selectpicker('refresh');
         }
 
+        
+        /*
+            function to set product features on to the product feature drop down list 
+            in the new product modal form from cached values
+        */
+        function setProductionPointList(){
+            const productionPointJsonString = localStorage['productionPoints'] || "";
+            const productionPoints = JSON.parse(productionPointJsonString) || [];
+            var productionPointOptions = ``;
+            if (productionPoints.length != 0){
+                productionPoints.forEach(element =>{
+                    const productionPointId = element['farm_id'] != null ? element['farm_id'] : 0;
+                    const productionPointName = element['farm_name'] != null ? element['farm_name'] : "";
+                    
+                    const street = element['street'] != null ? element['street'] : "";
+                    const houseNum = element['house_number'] != null ? element['house_number'] : "";
+                    const city = element['city'] != null ? element['city'] : "";
+                    const zip = element['zip'] != null ? element['zip'] : "";
+                    
+                    const productionPointAddress = `${street} ${houseNum}, ${city} - ${zip}`;
+
+                    productionPointOptions += `<option value="${productionPointId}" data-subtext="${productionPointAddress}">${productionPointName}</option>`
+                })
+            }
+            document.getElementById("productionPointOptions").innerHTML = productionPointOptions;
+            $('#productionPointOptions').selectpicker('refresh');
+        }
 
         /*        
             FUNCTION    :   To open add product modal to add new product or edit existing product. 
@@ -235,6 +264,7 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
             setCategories();
             setFeatureList();
             setUnits();
+            setProductionPointList();
             var editProductId = 0;
             var editProductName = "";
             var editProductDesc = "";

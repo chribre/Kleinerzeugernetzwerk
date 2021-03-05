@@ -14,7 +14,8 @@ if (session_status() == PHP_SESSION_NONE) {
 
 }else{
 }
-
+require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/languagePreference.php";
+echo _("Good Morning");
 //Header of the HTML page
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.php";
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/getFarmData.php";
@@ -33,7 +34,8 @@ fetchFarmLandData(); //Optional call, this function call has to be deleted becua
 <script>
     window.onload = function() {
         //        pass user_id instead of 0 to get user defined cache daat
-        getCache(0);
+        const userId = localStorage.getItem('userId') ? localStorage.getItem('userId') : 0;
+        getCache(userId);
         setLoginOrProfileButton();
     };
     /*
@@ -41,23 +43,33 @@ fetchFarmLandData(); //Optional call, this function call has to be deleted becua
         This service also want to be updated in the respose of successfull user login to get user prefered cache data
     */
     function getCache(userID){
+        const headerValue = {
+            'access-token': localStorage.getItem('token'),
+            'user_id': userID,
+            'action': "READ"
+        };
         $.ajax({
-            type: "GET",
+            type: "POST",
             url: "/kleinerzeugernetzwerk/controller/getCache.php",
+            headers: headerValue,
             data: { userId: userID },
-            dataType: "json",
-            contentType: "application/json",
-            cache: false,
+            //            dataType: "json",
+            //            contentType: "application/json",
+            //            cache: false,
             success: function( data ) {
                 console.log(data)
-                const productCategories = data['product_category'] != null ? data['product_category'] : []
-                const productFeatures = data['product_feature'] != null ? data['product_feature'] : []
-                const productUnits = data['product_unit'] != null ? data['product_unit'] : []
-
+                const cacheJSON = JSON.parse(data);
+                const productCategories = cacheJSON['product_category'] != null ? cacheJSON['product_category'] : []
+                const productFeatures = cacheJSON['product_feature'] != null ? cacheJSON['product_feature'] : []
+                const productUnits = cacheJSON['product_unit'] != null ? cacheJSON['product_unit'] : []
+                const productionPoint = cacheJSON['production_point'] != null ? cacheJSON['production_point'] : []
 
                 localStorage['productCategories'] = JSON.stringify(productCategories);
                 localStorage['productFeatures'] = JSON.stringify(productFeatures);
                 localStorage['productUnits'] = JSON.stringify(productUnits);
+                localStorage['productionPoints'] = JSON.stringify(productionPoint);
+
+
 
                 //                var myVar = localStorage['myKey'] || 'defaultValue';
             },

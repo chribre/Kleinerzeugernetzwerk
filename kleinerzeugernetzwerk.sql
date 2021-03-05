@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2021 at 01:41 PM
+-- Generation Time: Mar 01, 2021 at 11:46 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -120,7 +120,9 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (97, 47, 'AW0333010602e78ee2ec195.00007040', '2021-02-18 14:25:50'),
 (98, 16, 'AW0333010602e951fd5d650.98720877', '2021-02-18 16:26:07'),
 (99, 16, 'AW0333010602e954d0dec32.89125822', '2021-02-18 16:26:53'),
-(100, 16, 'AW03330106033a619c29143.76416258', '2021-02-22 12:39:53');
+(100, 16, 'AW03330106033a619c29143.76416258', '2021-02-22 12:39:53'),
+(101, 16, 'AW0333010603ca7b20cb440.99492883', '2021-03-01 08:37:06'),
+(102, 16, 'AW0333010603cb6b9351a35.63444566', '2021-03-01 09:41:13');
 
 -- --------------------------------------------------------
 
@@ -134,6 +136,10 @@ CREATE TABLE `farm_land` (
   `farm_name` varchar(50) NOT NULL,
   `farm_desc` text DEFAULT NULL,
   `farm_address` text NOT NULL,
+  `street` varchar(100) DEFAULT NULL,
+  `house_number` varchar(25) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
+  `zip` varchar(15) DEFAULT NULL,
   `farm_location` point NOT NULL,
   `farm_area` double DEFAULT NULL,
   `created_date` timestamp NOT NULL DEFAULT current_timestamp()
@@ -143,22 +149,18 @@ CREATE TABLE `farm_land` (
 -- Dumping data for table `farm_land`
 --
 
-INSERT INTO `farm_land` (`farm_id`, `producer_id`, `farm_name`, `farm_desc`, `farm_address`, `farm_location`, `farm_area`, `created_date`) VALUES
-(2, 16, 'Test Point', 'test farm land', 'Brodaer Straße 2, Neubrandenburg, 17033', 0x000000000101000000456458c51bc74a40bfdd488f957e2a40, 0, '2020-12-11 17:23:45'),
-(3, 16, 'New Farm', 'Test Description of famr land', 'Dükerweg undefined, Neubrandenburg, 17033', 0x00000000010100000000000000000000000000000000000000, 0, '2020-12-12 13:47:09'),
-(4, 16, 'Test Point 3', 'new test location', 'Brodaer Straße 4, Neubrandenburg, 17033', 0x000000000101000000ced60b4ff9c64a401aea6635137e2a40, 0, '2020-12-16 09:22:04'),
-(5, 16, 'Marketplatz', 'A market, or marketplace, is a location where people regularly gather for the purchase and sale of provisions, livestock, and other goods.[1] In different parts of the world, a market place may be described as a souk (from the Arabic), bazaar (from the Persian), a fixed mercado (Spanish), or itinerant tianguis (Mexico), or palengke (Philippines). Some markets operate daily and are said to be permanent markets while others are held once a week or on less frequent specified days such as festival days and are said to be periodic markets. The form that a market adopts depends on its locality\'s population, culture, ambient and geographic conditions. The term market covers many types of trading, as market squares, market halls and food halls, and their different varieties. Due to this, marketplaces can be situated both outdoors and indoors.', 'Dorfstraße Ost 13, undefined, 16307', 0x0000000001010000002c69ad0130a44a406affff7fa0d12c40, 0, '2020-12-17 13:13:16'),
-(6, 16, 'Test Point', 'this is my new production point', 'Gartenstraße 5a, Neubrandenburg, 17033', 0x000000000101000000ae4ee359d8c64a40a900006038892a40, 0, '2020-12-19 11:08:34'),
-(7, 16, 'Test Point', 'hello', 'Binsenwerder 4-6, Neubrandenburg, 17033', 0x0000000001010000003e4e4560e2c64a4096ffffff657f2a40, 0, '2020-12-19 11:09:59'),
-(8, 16, 'Test Point', 'hello', 'Binsenwerder 4-6, Neubrandenburg, 17033', 0x00000000010100000083970584d7c64a402bffff1f827f2a40, 0, '2020-12-19 11:11:21'),
-(9, 16, 'Test Point 3', 'test', 'Binsenwerder 4-6, Neubrandenburg, 17033', 0x00000000010100000056ace8baeac64a40f6feff1f557f2a40, 0, '2020-12-19 11:18:41'),
-(10, 16, '', '', 'Binsenwerder 3, Neubrandenburg, 17033', 0x000000000101000000cc19d264fac64a400e0100a03e7f2a40, 0, '2020-12-19 11:19:41'),
-(11, 16, 'Test Point', '', '3.Ringstraße 321, Neubrandenburg, 17033', 0x000000000101000000b5fdbeca03c74a400900008087832a40, 0, '2020-12-19 11:20:47'),
-(12, 16, '', '', 'Binsenwerder 1, Neubrandenburg, 17033', 0x000000000101000000338da266ecc64a406e0000c02d7f2a40, 0, '2020-12-19 11:28:54'),
-(13, 16, '', '', 'Binsenwerder 4-6, Neubrandenburg, 17033', 0x000000000101000000c3b79e88efc64a40e6ffff7fa97f2a40, 0, '2020-12-19 11:29:30'),
-(14, 16, 'Test Point', 'test', 'Binsenwerder 2, Neubrandenburg, 17033', 0x000000000101000000e2d7ff0be4c64a40cdffffdf1c7f2a40, 0, '2020-12-19 11:29:54'),
-(15, 16, 'Marketplatz', 'test', 'Binsenwerder 2, Neubrandenburg, 17033', 0x00000000010100000097d559b1dbc64a40e8ffff5f337f2a40, 0, '2020-12-19 11:33:22'),
-(16, 16, 'Test Point 3', 'test', 'Binsenwerder 1, Neubrandenburg, 17033', 0x000000000101000000c5e915beefc64a40f8feffffde7e2a40, 0, '2020-12-19 11:35:49');
+INSERT INTO `farm_land` (`farm_id`, `producer_id`, `farm_name`, `farm_desc`, `farm_address`, `street`, `house_number`, `city`, `zip`, `farm_location`, `farm_area`, `created_date`) VALUES
+(2, 16, 'Test Point', 'test farm land', 'Brodaer Straße 2, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000456458c51bc74a40bfdd488f957e2a40, 0, '2020-12-11 17:23:45'),
+(3, 16, 'New Farm', 'Test Description of famr land', 'Dükerweg undefined, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x00000000010100000000000000000000000000000000000000, 0, '2020-12-12 13:47:09'),
+(4, 16, 'Test Point 3', 'new test location', 'Brodaer Straße 4, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000ced60b4ff9c64a401aea6635137e2a40, 0, '2020-12-16 09:22:04'),
+(5, 16, 'Marketplatz', 'A market, or marketplace, is a location where people regularly gather for the purchase and sale of provisions, livestock, and other goods.[1] In different parts of the world, a market place may be described as a souk (from the Arabic), bazaar (from the Persian), a fixed mercado (Spanish), or itinerant tianguis (Mexico), or palengke (Philippines). Some markets operate daily and are said to be permanent markets while others are held once a week or on less frequent specified days such as festival days and are said to be periodic markets. The form that a market adopts depends on its locality\'s population, culture, ambient and geographic conditions. The term market covers many types of trading, as market squares, market halls and food halls, and their different varieties. Due to this, marketplaces can be situated both outdoors and indoors.', 'Dorfstraße Ost 13, undefined, 16307', NULL, NULL, NULL, NULL, 0x0000000001010000002c69ad0130a44a406affff7fa0d12c40, 0, '2020-12-17 13:13:16'),
+(6, 16, 'Test Point', 'this is my new production point', 'Gartenstraße 5a, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000ae4ee359d8c64a40a900006038892a40, 0, '2020-12-19 11:08:34'),
+(10, 16, '', '', 'Binsenwerder 3, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000cc19d264fac64a400e0100a03e7f2a40, 0, '2020-12-19 11:19:41'),
+(11, 16, 'Test Point', '', '3.Ringstraße 321, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000b5fdbeca03c74a400900008087832a40, 0, '2020-12-19 11:20:47'),
+(12, 16, '', '', 'Binsenwerder 1, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000338da266ecc64a406e0000c02d7f2a40, 0, '2020-12-19 11:28:54'),
+(14, 16, 'Monmouthshire', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Binsenwerder 2, Neubrandenburg, 17033', 'Sonnenkamp', '4A', 'Neubrandenburg', '17036', 0x000000000101000000e2d7ff0be4c64a40cdffffdf1c7f2a40, 0, '2020-12-19 11:29:54'),
+(15, 16, 'Salisbury', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Binsenwerder 2, Neubrandenburg, 17033', 'Dr. Brückner Weg', '5', 'Neubrandenburg', '17033', 0x00000000010100000097d559b1dbc64a40e8ffff5f337f2a40, 0, '2020-12-19 11:33:22'),
+(18, 16, 'Virginia Water', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Binsenwerder, 4-6, Neubrandenburg - 17033', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x0000000001010000004a0091d1ecc64a40010000a03e7f2a40, 0, '2021-02-26 14:07:04');
 
 -- --------------------------------------------------------
 
@@ -422,7 +424,7 @@ INSERT INTO `user` (`user_id`, `salutations`, `first_name`, `middle_name`, `last
 (11, 'Mr.', '123', '32443', '453', '0000-00-00', 'hgh', 'hv', '17033', 'Kochi', 'India', '9846194609', 'fredy123@gmail.com', '17063142345', 1, 1, 0, '2020-11-18 10:56:10', NULL, NULL),
 (14, 'Mr.', 'Fredy', 'Davis', 'Thekkekkara', '0000-00-00', 'Brodaer Strasse', 'Helo', '17033', 'Neubrandenburg', 'Germany', '9846194609', 'FREDZ@GMAIL.COM', '17063142345', 1, 1, 0, '2020-11-18 11:17:58', NULL, NULL),
 (15, 'Mr.', 'qq', 'q', 'qq', '0000-00-00', 'q', 'q', 'q', 'q', 'q', 'q', 'q', 'q', 1, 1, 0, '2020-11-18 11:18:36', NULL, NULL),
-(16, '', 'Fredz', 'abc', 'thekkekkara', '0000-00-00', 'Brodaer Straße', 'abc', '17033', '2', 'abc', 'abc', 'abc@abc.com', 'v', 1, 1, 0, '2020-11-18 11:20:18', NULL, ''),
+(16, '', 'John', 'abc', 'Doe', '0000-00-00', 'Brodaer Straße', '4', '17033', 'Neubrandenburg', 'Germany', '1425698375', 'abc@abc.com', '1763025489', 1, 1, 0, '2020-11-18 11:20:18', NULL, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
 (17, 'Mr.', 'test', 'test', 'test', '0000-00-00', 'Brodaer StraÃŸe', '4', '17033', 'Neubrandenburg', 'DE', '453453453', 'test', '123454678', 1, 1, 0, '2020-11-27 14:23:58', NULL, NULL),
 (18, 'Mr.', 'zz', 'zz', 'zzz', '0000-00-00', 'zzzz', '98645', '5661', 'Neubrandenburg', 'a', '1234567890', 'zzz', '12345896556', 1, 1, 0, '2020-11-27 18:16:32', NULL, NULL),
 (19, 'Mr.', 'test', 'fdfg', 'dfgdfg', '0000-00-00', 'a', '4', '17033', 'Neubrandenburg', 'DE', '1234567890', 'abc@abc.com1', '12345896556', 1, 1, 0, '2020-12-01 09:24:27', NULL, NULL),
@@ -586,13 +588,13 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `farm_land`
 --
 ALTER TABLE `farm_land`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `feature_type`

@@ -17,10 +17,10 @@ include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
 
 
 switch ($_SERVER['REQUEST_METHOD']) {
-    case 'GET':
-        if ((isset($_GET['userId'])) && $_GET['userId'] !== 0){
-            $userId = $_GET['userId'];
-            echo getCache(0);
+    case 'POST':
+        if ((isset($_POST['userId'])) && $_POST['userId'] !== 0){
+            $userId = $_POST['userId'];
+            echo getCache($userId);
             break;
         }
 }
@@ -36,12 +36,12 @@ function getCache($userId){
     $productCategoryQuery = "SELECT * FROM product_category;";
     $productFeatureQuery = "SELECT * FROM feature_type;";
     $productUnits = "SELECT * FROM units;";
-    
+
     if ($result = mysqli_query($dbConnection, $productCategoryQuery)) {
         $data = $result->fetch_all(MYSQLI_ASSOC);
         $cacheData['product_category'] = $data;
     }
-    
+
     if ($result = mysqli_query($dbConnection, $productFeatureQuery)) {
         $data = $result->fetch_all(MYSQLI_ASSOC);
         $cacheData['product_feature'] = $data;
@@ -51,7 +51,17 @@ function getCache($userId){
         $data = $result->fetch_all(MYSQLI_ASSOC);
         $cacheData['product_unit'] = $data;
     }
-    
+
+    if ($userId > 0){
+        if (isAccessTokenValid()){
+            $productionPointQuery = "SELECT f.farm_id, f.producer_id, f.farm_name, f.farm_desc, f.street, f.house_number, f.city, f.zip FROM farm_land f where f.producer_id = $userId;";
+            if ($result = mysqli_query($dbConnection, $productionPointQuery)) {
+                $data = $result->fetch_all(MYSQLI_ASSOC);
+                $cacheData['production_point'] = $data;
+            }
+        }
+    }
+
     mysqli_close($dbConnection);
     return json_encode($cacheData);
 }

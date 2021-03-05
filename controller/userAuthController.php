@@ -39,11 +39,18 @@ function loginUser($email, $password){
             $userData = getUserDetails($userId);
             $loginData = $token + $userData;
             $loginData["userId"] = $userId;
+
+            $_SESSION["isLoggedIn"] = true;
+            $_SESSION["userId"] = $userId;
+
+            $_SESSION["token"] = $token;
+
+
             http_response_code(200); //OK
             return json_encode($loginData);
         }
     }else{
-        
+
     }
     http_response_code(400); //400 Bad Request
     return json_encode($loginData);

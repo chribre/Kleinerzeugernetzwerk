@@ -21,13 +21,29 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 ?>
 <div class="">   
     <div class="text-center m-3 ">
-        <div class="btn-group">
+        
+<div class="btn-group">
 
-            <a href='dashboard.php?menu=profile&data=personal' class="btn btn-secondary <?php if (isset($_GET['data']) && $_GET['data'] == 'personal'){echo "active";}?>" id="segmentButtonPersonal">Personal Details</a>
+<a href='dashboard.php?menu=profile&data=personal' class="btn btn-secondary <?php if (isset($_GET['data']) && $_GET['data'] == 'personal'){echo "active";}?>" id="segmentButtonPersonal">Personal Details</a>
 
-            <a href='dashboard.php?menu=profile&data=productionPoint' class="btn btn-secondary <?php if (isset($_GET['data']) && $_GET['data'] == 'productionPoint'){echo "active";}?>" id="segmentButtonFarmLand">Farm Land</a>
+<a href='dashboard.php?menu=profile&data=productionPoint' class="btn btn-secondary <?php if (isset($_GET['data']) && $_GET['data'] == 'productionPoint'){echo "active";}?>" id="segmentButtonFarmLand">Production Point</a>
 
+<a href='dashboard.php?menu=profile&data=productionPoint' class="btn btn-secondary <?php if (isset($_GET['data']) && $_GET['data'] == 'productionPoint'){echo "active";}?>" id="segmentButtonFarmLand">Selling Point</a>
+
+</div>
+
+<!--
+        <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>
+            <label class="btn btn-outline-primary" for="btnradio1">Personal Details</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio2">Production Points</label>
+
+            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">
+            <label class="btn btn-outline-primary" for="btnradio3">Selling Points</label>
         </div>
+-->
     </div>
 
 

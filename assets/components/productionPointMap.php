@@ -23,7 +23,7 @@
         zoomOffset: -1,
         accessToken: 'your.mapbox.access.token'
     }).addTo(mymap);
-    
+
     var popup = L.popup();
 
     //    function returns address of latitude and logitude from osm using nominatim : geocoding
@@ -40,18 +40,19 @@
                 let houseNum = data.address.house_number
                 let city = data.address.town
                 let zip = data.address.postcode
-                
+
                 console.log(street)
                 console.log(houseNum)
                 console.log(city)
                 console.log(zip)
-                
-                
-                document.getElementById("validationCustom03").value = street;
-                document.getElementById("validationCustom04").value = houseNum;
-                document.getElementById("validationCustom05").value = zip;
-                document.getElementById("validationCustom06").value = city;
-                
+
+
+
+                document.getElementById("street").value = street;
+                document.getElementById("houseNumber").value = houseNum;
+                document.getElementById("zipCode").value = zip;
+                document.getElementById("city").value = city;
+
                 document.getElementById('latitude').value = lat;
                 document.getElementById('longitude').value = lon;
             }else{
@@ -74,10 +75,10 @@
 
     function findLocation() {
 
-        const houseNumber = document.getElementById("validationCustom04").value
-        const street = houseNumber + " " + document.getElementById("validationCustom03").value;
-        const city = document.getElementById("validationCustom06").value;
-        const zip = document.getElementById("validationCustom05").value;
+        const houseNumber = document.getElementById("houseNumber").value
+        const street = houseNumber + " " + document.getElementById("street").value;
+        const city = document.getElementById("city").value;
+        const zip = document.getElementById("zipCode").value;
 
         let url = `https://nominatim.openstreetmap.org/search?format=json&street=${street}&city=${city}&postalcode=${zip}&zoom=27&addressdetails=1`
         fetch(url)
@@ -92,12 +93,12 @@
                 let address = data[0].address
                 console.log(latitude)
                 console.log(longitude)
-                
+
                 let latlong = {lat: latitude, lng: longitude}
                 popup
-            .setLatLng(latlong)
-            .setContent("You clicked the map at " + latlong.toString())
-            .openOn(mymap);
+                    .setLatLng(latlong)
+                    .setContent("You clicked the map at " + latlong.toString())
+                    .openOn(mymap);
                 document.getElementById('latitude').value = latitude;
                 document.getElementById('longitude').value = longitude;
             }else{
@@ -110,6 +111,18 @@
     }
 
 
+
+    function setproductionPointLocationOnMap(){
+        const point_latitude = document.getElementById('latitude').value;
+        const point_longitude = document.getElementById('longitude').value;
+        if (point_latitude && point_longitude){
+            const point_latlong = {lat: point_latitude, lng: point_longitude}
+            popup
+                .setLatLng(point_latlong)
+                .setContent("You clicked the map at " + point_latlong.toString())
+                .openOn(mymap);
+        }
+    }
 
 </script>
 
