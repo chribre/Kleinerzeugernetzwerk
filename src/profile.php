@@ -28,7 +28,7 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 
 <a href='dashboard.php?menu=profile&data=productionPoint' class="btn btn-secondary <?php if (isset($_GET['data']) && $_GET['data'] == 'productionPoint'){echo "active";}?>" id="segmentButtonFarmLand">Production Point</a>
 
-<a href='dashboard.php?menu=profile&data=productionPoint' class="btn btn-secondary <?php if (isset($_GET['data']) && $_GET['data'] == 'productionPoint'){echo "active";}?>" id="segmentButtonFarmLand">Selling Point</a>
+<a href='dashboard.php?menu=profile&data=seller' class="btn btn-secondary <?php if (isset($_GET['data']) && $_GET['data'] == 'seller'){echo "active";}?>" id="segmentButtonSeller">Selling Point</a>
 
 </div>
 
@@ -53,7 +53,9 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
             require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/personalProfile.php");
         }elseif ($_GET['data'] == 'productionPoint') {
             require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/farmLand.php");
-        }
+        }elseif ($_GET['data'] == 'seller') {
+            require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sellingPoint.php");
+         }
     }
     ?>
 

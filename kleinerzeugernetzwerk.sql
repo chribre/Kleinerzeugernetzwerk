@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2021 at 11:46 AM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.2.22
+-- Generation Time: Mar 08, 2021 at 10:05 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -122,7 +121,8 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (99, 16, 'AW0333010602e954d0dec32.89125822', '2021-02-18 16:26:53'),
 (100, 16, 'AW03330106033a619c29143.76416258', '2021-02-22 12:39:53'),
 (101, 16, 'AW0333010603ca7b20cb440.99492883', '2021-03-01 08:37:06'),
-(102, 16, 'AW0333010603cb6b9351a35.63444566', '2021-03-01 09:41:13');
+(102, 16, 'AW0333010603cb6b9351a35.63444566', '2021-03-01 09:41:13'),
+(103, 16, 'DESKTOP-K1GQ9RH60437964eefcc0.82977263', '2021-03-06 12:45:24');
 
 -- --------------------------------------------------------
 
@@ -357,6 +357,51 @@ INSERT INTO `product_feature` (`id`, `product_id`, `feature_type`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `sellers`
+--
+
+CREATE TABLE `sellers` (
+  `seller_id` int(11) NOT NULL,
+  `producer_id` int(11) NOT NULL,
+  `seller_name` varchar(120) NOT NULL,
+  `seller_description` text NOT NULL,
+  `street` varchar(50) NOT NULL,
+  `building_number` varchar(20) NOT NULL,
+  `city` varchar(50) NOT NULL,
+  `zip` varchar(20) NOT NULL,
+  `seller_location` point NOT NULL,
+  `seller_email` varchar(50) NOT NULL,
+  `seller_website` text NOT NULL,
+  `mobile` varchar(15) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `is_blocked` tinyint(1) NOT NULL,
+  `is_mon_available` tinyint(1) NOT NULL,
+  `mon_open_time` time NOT NULL,
+  `mon_close_time` time NOT NULL,
+  `is_tue_available` tinyint(1) NOT NULL,
+  `tue_open_time` time NOT NULL,
+  `tue_close_time` time NOT NULL,
+  `is_wed_available` tinyint(1) NOT NULL,
+  `wed_open_time` time NOT NULL,
+  `wed_close_time` time NOT NULL,
+  `is_thu_available` tinyint(1) NOT NULL,
+  `thu_open_time` time NOT NULL,
+  `thu_close_time` time NOT NULL,
+  `is_fri_available` tinyint(1) NOT NULL,
+  `fri_open_time` time NOT NULL,
+  `fri_close_time` time NOT NULL,
+  `is_sat_available` tinyint(1) NOT NULL,
+  `sat_open_time` time NOT NULL,
+  `sat_close_time` time NOT NULL,
+  `is_sun_available` tinyint(1) NOT NULL,
+  `sun_open_time` time NOT NULL,
+  `sun_close_time` year(4) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `units`
 --
 
@@ -562,6 +607,13 @@ ALTER TABLE `product_feature`
   ADD KEY `product_feature_type_fk` (`feature_type`);
 
 --
+-- Indexes for table `sellers`
+--
+ALTER TABLE `sellers`
+  ADD PRIMARY KEY (`seller_id`),
+  ADD KEY `user_to_seller` (`producer_id`);
+
+--
 -- Indexes for table `units`
 --
 ALTER TABLE `units`
@@ -588,7 +640,7 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `farm_land`
@@ -625,6 +677,12 @@ ALTER TABLE `product_category`
 --
 ALTER TABLE `product_feature`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+
+--
+-- AUTO_INCREMENT for table `sellers`
+--
+ALTER TABLE `sellers`
+  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `units`
@@ -667,6 +725,12 @@ ALTER TABLE `products`
 ALTER TABLE `product_feature`
   ADD CONSTRAINT `product_feature_type_fk` FOREIGN KEY (`feature_type`) REFERENCES `feature_type` (`feature_type_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `product_fk` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `sellers`
+--
+ALTER TABLE `sellers`
+  ADD CONSTRAINT `user_to_seller` FOREIGN KEY (`producer_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `user_credential`
