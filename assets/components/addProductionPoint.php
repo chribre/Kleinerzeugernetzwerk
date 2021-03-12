@@ -8,67 +8,6 @@
                         a form having space to enter the details of the production point
 ****************************************************************/
 
-//MAP to caputure production point locations.
-
-
-//global $dbConnection;
-//PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
-//if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-//    echo('add production point post method hit,');
-//    $fileNameArray = [];
-//    if (isset($_FILES['file'])){
-//        $fileCount = count($_FILES['file']['name']);
-//        for ($idx = 0; $idx < $fileCount; $idx++){
-//            $fileNameNew = null;
-//            $fileName = $_FILES['file']['name'][$idx];
-//            $fileTmpName = $_FILES['file']['tmp_name'][$idx];
-//            $fileSize = $_FILES['file']['size'][$idx];
-//            $fileError = $_FILES['file']['error'][$idx];
-//            $fileType = $_FILES['file']['type'][$idx];
-//
-//
-//            $fileExt = explode('.', $fileName);
-//            $fileActualExt = strtolower(end($fileExt));
-//
-//            $allowed = array('jpeg', 'jpg', 'png');
-//            echo $fileActualExt;
-//            if (in_array($fileActualExt, $allowed)){
-//                if ($fileError === 0){
-//                    if ($fileSize < 10000000 ){
-//                        $fileNameNew = generateFileName().".".$fileActualExt;//uniqid('', true).".".$fileActualExt;
-//                        $fileDestination = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/production_point_img/".$fileNameNew;
-//                        move_uploaded_file($fileTmpName, $fileDestination);  
-//                        array_push($fileNameArray,$fileNameNew);
-//                        echo "filed upload success";
-//                    }else{
-//                        echo "your file size is too high";
-//                    }
-//                }else{
-//                    echo "There was an error uploading your profile image";
-//                }
-//            }else{
-//                echo "Cannot upload file of this type";
-//            }
-//        }
-//    }
-//    if (isset($_POST['addProductionPointMethod'])){
-//        $pointName = escapeSQLString($_POST['productionPointName']);
-//        $pointDesc = escapeSQLString($_POST['productionPointDesc']);
-//        $pStreet = escapeSQLString($_POST['street']);
-//        $pHouseNum = escapeSQLString($_POST['house_number']);
-//        $pCity = escapeSQLString($_POST['city']);
-//        $pZip = escapeSQLString($_POST['zip']);
-//        $pointAddress = $pStreet . " " . $pHouseNum . ", " . $pCity . ", " . $pZip;
-//
-//        $latitude = floatval(escapeSQLString($_POST['latitude']));
-//        $longitude = floatval(escapeSQLString($_POST['longitude']));
-//        $pointArea = 0;//escapeSQLString($_POST['pointArea']);
-//
-//
-//        addProductionPoint($pointName, $pointDesc, $pointAddress, $latitude, $longitude, $pointArea,$fileNameArray);
-//    }
-//}
-
 ?>
 
 

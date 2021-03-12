@@ -18,6 +18,11 @@
     Modal with form to add production point details
 */
 require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProductionPoint.php");
+
+/*
+    Modal with form to add selling point details
+*/
+require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addSellerModal.php");
 ?>
 <div class="">   
     <div class="text-center m-3 ">

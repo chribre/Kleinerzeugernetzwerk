@@ -24,35 +24,35 @@ switch ($_SERVER['REQUEST_METHOD']) {
         switch ($action){
             case 'CREATE':
                 if (isAccessTokenValid()){
-                    echo addProductionPoint($productionPoint);
+                    echo addSeller($sellingPoint);
                 }else{
                     http_response_code(401);
                 }
                 break;
             case 'READ':
                 if (isAccessTokenValid()){
-                    echo getProductionPointDetails($productionPoint);
+                    echo getSellerDetails($sellingPoint);
                 }else{
                     http_response_code(401);
                 }
                 break;
             case 'READ_ALL':
                 if (isAccessTokenValid()){
-                    echo getAllProductionPoints($productionPoint);
+                    echo getAllSellingPoints($sellingPoint);
                 }else{
                     http_response_code(401);
                 }
                 break;
             case 'UPDATE':
                 if (isAccessTokenValid()){
-                    echo editProductionPoint($productionPoint);
+                    echo editSellingPoint($sellingPoint);
                 }else{
                     http_response_code(401);
                 }
                 break;
             case 'DELETE':
                 if (isAccessTokenValid()){
-                    echo deleteProduct($productionPoint);
+                    echo deleteSeller($sellingPoint);
                 }else{
                     http_response_code(401);
                 }
@@ -109,19 +109,21 @@ function addSeller($sellerDetails){
     }
 }
 
+
+
 /*
     FUNCTION    :   Function to edit details of a seller.
                     Also images of the selling point.
     INPUT       :   details of the selling point which is passed from the web service
     OUTPUT      :   success/failure message on completion
 */
-function editProductionPoint($sellerDetails){
+function editSellingPoint($sellerDetails){
     global $dbConnection;
     /* Start transaction */
     mysqli_begin_transaction($dbConnection);
 
 
-    $sellerUpdateQuery = "UPDATE farm_land SET producer_id = $sellerDetails->producerId, seller_name = '$sellerDetails->sellerName', seller_description = '$sellerDetails->sellerDescription', street = '$sellerDetails->street', building_number = '$sellerDetails->buildingNumber', city = '$sellerDetails->city', zip = '$sellerDetails->zip', seller_location = POINT($sellerDetails->latitude, $sellerDetails->longitude), seller_email = '$sellerDetails->email', seller_website = '$sellerDetails->website', mobile = '$sellerDetails->mobile', phone = '$sellerDetails->phone', is_blocked = '$sellerDetails->isBlocked', is_mon_available = '$sellerDetails->isMonAvailable', mon_open_time = '$sellerDetails->monOpenTime', mon_close_time = '$sellerDetails->monCloseTime', is_tue_available = '$sellerDetails->isTueAvailable', tue_open_time = '$sellerDetails->tueOpenTime', tue_close_time = '$sellerDetails->tueCloseTime', is_wed_available = '$sellerDetails->isWedAvailable', wed_open_time = '$sellerDetails->wedOpenTime', wed_close_time = '$sellerDetails->wedCloseTime', is_thu_available = '$sellerDetails->isThuAvailable', thu_open_time = '$sellerDetails->thuOpenTime', thu_close_time = '$sellerDetails->thuCloseTime', is_fri_available = '$sellerDetails->isFriAvailable', fri_open_time = '$sellerDetails->friOpenTime', fri_close_time = '$sellerDetails->friCloseTime', is_sat_available = '$sellerDetails->isSatAvailable', sat_open_time = '$sellerDetails->satOpenTime', sat_close_time = '$sellerDetails->satCloseTime', is_sun_available = '$sellerDetails->isSunAvailable', sun_open_time = '$sellerDetails->sunOpenTime', sun_close_time = '$sellerDetails->sunCloseTime'";
+    $sellerUpdateQuery = "UPDATE sellers SET producer_id = $sellerDetails->producerId, seller_name = '$sellerDetails->sellerName', seller_description = '$sellerDetails->sellerDescription', street = '$sellerDetails->street', building_number = '$sellerDetails->buildingNumber', city = '$sellerDetails->city', zip = '$sellerDetails->zip', seller_location = POINT($sellerDetails->latitude, $sellerDetails->longitude), seller_email = '$sellerDetails->email', seller_website = '$sellerDetails->website', mobile = '$sellerDetails->mobile', phone = '$sellerDetails->phone', is_blocked = '$sellerDetails->isBlocked', is_mon_available = '$sellerDetails->isMonAvailable', mon_open_time = '$sellerDetails->monOpenTime', mon_close_time = '$sellerDetails->monCloseTime', is_tue_available = '$sellerDetails->isTueAvailable', tue_open_time = '$sellerDetails->tueOpenTime', tue_close_time = '$sellerDetails->tueCloseTime', is_wed_available = '$sellerDetails->isWedAvailable', wed_open_time = '$sellerDetails->wedOpenTime', wed_close_time = '$sellerDetails->wedCloseTime', is_thu_available = '$sellerDetails->isThuAvailable', thu_open_time = '$sellerDetails->thuOpenTime', thu_close_time = '$sellerDetails->thuCloseTime', is_fri_available = '$sellerDetails->isFriAvailable', fri_open_time = '$sellerDetails->friOpenTime', fri_close_time = '$sellerDetails->friCloseTime', is_sat_available = '$sellerDetails->isSatAvailable', sat_open_time = '$sellerDetails->satOpenTime', sat_close_time = '$sellerDetails->satCloseTime', is_sun_available = '$sellerDetails->isSunAvailable', sun_open_time = '$sellerDetails->sunOpenTime', sun_close_time = '$sellerDetails->sunCloseTime' where seller_id = $sellerDetails->sellerId and producer_id = $sellerDetails->producerId";
 
 
     try{
@@ -176,7 +178,7 @@ function editProductionPoint($sellerDetails){
     INPUT       :   id of the seller to be deleted
     OUTPUT      :   return true if product deleted successully otherwise false
 */
-function deleteProduct($seller){
+function deleteSeller($seller){
     ob_start();
     global $dbConnection;
     $deleteSellerQuery = "DELETE FROM sellers ";
@@ -200,7 +202,7 @@ function deleteProduct($seller){
     INPUT       :   id of the user is passed from the web service
     OUTPUT      :   returns json comprising details of seller 
 */
-function getAllProductionPoints($seller){
+function getAllSellingPoints($seller){
 
     $sellerDataArray = [];
 
@@ -247,7 +249,7 @@ function getAllProductionPoints($seller){
     INPUT       :   id of the seller and producer id is passed in the web service
     OUTPUT      :   array containign details of the seller will be returned
 */
-function getProductionPointDetails($seller){
+function getSellerDetails($seller){
 
     $productionPoitArray = [];
 
@@ -255,7 +257,7 @@ function getProductionPointDetails($seller){
     /* Start transaction */
     
     $fetchSellerDetailsQuery = "SELECT s.seller_id, s.producer_id, s.seller_name, s.seller_description, s.street, s.building_number, s.city, s.zip, s.seller_location, s.seller_email, s.seller_website, s.mobile, s.phone, s.is_blocked, s.is_mon_available, s.mon_open_time, s.mon_close_time, s.is_tue_available, s.tue_open_time, s.tue_close_time, s.is_wed_available, s.wed_open_time, s.wed_close_time, s.is_thu_available, s.thu_open_time, s.thu_close_time, s.is_fri_available, s.fri_open_time, s.fri_close_time, s.is_sat_available, s.sat_open_time, s.sat_close_time, s.is_sun_available, s.sun_open_time, s.sun_close_time FROM sellers s
-    WHERE s.producer_id = $seller->producerId AND s.seller_id = $seller->seller_id";
+    WHERE s.producer_id = $seller->producerId AND s.seller_id = $seller->sellerId";
     
     
 
@@ -265,8 +267,8 @@ function getProductionPointDetails($seller){
 
     $getSellerQuery = mysqli_query($dbConnection, $fetchSellerDetailsQuery);
     confirmQuery($getSellerQuery);
-    $productCount = mysqli_num_rows($getSellerQuery);
-    if ($productCount == 0){
+    $sellerCount = mysqli_num_rows($getSellerQuery);
+    if ($sellerCount == 0){
         //        $productionPoitArray = [];
         http_response_code(400);
         return false;

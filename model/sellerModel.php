@@ -15,13 +15,11 @@ class seller{
     public $mobile;
     public $phone;
     public $isBlocked;
-    public $isMonAvailable;
-    public $monOpenTime;
-    public $monCloseTime;
     
     public $isMonAvailable;
     public $monOpenTime;
     public $monCloseTime;
+    
     
     public $isTueAvailable;
     public $tueOpenTime;
