@@ -5,7 +5,7 @@ class seller{
     public $sellerName;
     public $sellerDesc;
     public $street;
-    public $buildNumber;
+    public $buildingNumber;
     public $city;
     public $zip;
     public $latitude;

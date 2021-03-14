@@ -86,7 +86,7 @@
 
 
 
-                <div class="text-center"><h5 class="modal-title"><i class="material-icons">&#xE147;</i>Add new production point</h5></div>
+                <div class="text-center"><h5 class="modal-title"><i class="material-icons">&#xE147;</i>Add a new seller</h5></div>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
@@ -206,12 +206,12 @@
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour">
+                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour">
+                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
@@ -224,12 +224,12 @@
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour">
+                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour">
+                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
@@ -242,12 +242,12 @@
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour">
+                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour">
+                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
@@ -260,12 +260,12 @@
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour">
+                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour">
+                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
@@ -278,12 +278,12 @@
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour">
+                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour">
+                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
@@ -296,12 +296,12 @@
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour">
+                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour">
+                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
@@ -314,12 +314,12 @@
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour">
+                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour">
+                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
@@ -473,9 +473,14 @@
 
 
 
-    $('.clockpicker').clockpicker();    
+//    $('.clockpicker').clockpicker();    
 
 
+    $('.clockpicker').clockpicker({
+        placement: 'top',
+        align: 'left',
+        donetext: 'Done'
+    });
 
 
 

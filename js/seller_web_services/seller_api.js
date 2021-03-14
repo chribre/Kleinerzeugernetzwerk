@@ -110,7 +110,7 @@ function editSellerDetails(){
     });
 }
 
-function deleteSeller(){
+function deleteSeller(sellerId){
     const userId = localStorage.getItem('userId');
     $.ajax({
         type: "POST",
@@ -128,7 +128,7 @@ function deleteSeller(){
             $("#overlay").fadeOut(300);
         },
         data: { 
-            seller_id: 2,
+            seller_id: sellerId,
             producer_id: userId, 
         },
         success: function( data ) {
@@ -159,12 +159,12 @@ function getAllSellers(){
             $("#overlay").fadeOut(300);
         },
         data: { 
-            seller_id: 2,
             producer_id: userId, 
         },
         success: function( data ) {
             console.log(data)
-            const userDetails = JSON.parse(data);
+            const sellers = JSON.parse(data);
+            listAllSellers(sellers);
         },
         error: function (request, status, error) {               
             console.log(error)
@@ -200,4 +200,61 @@ function getSellerDetails(){
             console.log(error)
         }
     });
+}
+
+
+function listAllSellers(sellerArray){
+    document.getElementById("sellerList").innerHTML = "";
+    if (sellerArray.length > 0){
+        sellerArray.forEach(function(seller) {
+            console.log(seller);
+
+            const pointId = seller.sellerId ? seller.sellerId : 0;
+            const pointName = seller.sellerName ? seller.sellerName : "";
+            const pointDesc = seller.sellerDescription ? seller.sellerDescription : "";
+
+            const street = seller.street ? seller.street : "";
+            const houseNumber = seller.buildingNumber ? seller.buildingNumber : "";
+            const city = seller.city ? seller.city : "";
+            const zip = seller.zip ? seller.zip : "";
+
+            const address = street + ', ' + houseNumber + ', ' + city + ' - ' + zip;
+            const pointLatitude = seller.latitude ? seller.latitude : 0;
+            const pointLongitude = seller.longitude ? seller.longitude : 0;
+
+
+
+            const card = `<div class="blog-card">
+<div class="meta">
+<div class="photo" style="background-image: url(https://images.westend61.de/0000910140pw/people-buying-groceries-while-standing-in-supermarket-MASF02959.jpg)"></div>
+</div>
+<div class="description">
+<h1>${pointName}</h1>
+<h2>${address}</h2>
+<p> ${pointDesc}</p>
+
+<div id="manipulationBtnSeller" class="btn-group btn-group-sm mt-3 mr-auto float-right" role="group" aria-label="" value=${pointId}>
+<button type="button" class="btn btn-danger" id="deleteSellerBtn" onclick="sellerDeleteConfirmation('${pointId}', '${pointName}','${address}')">Delete</button>
+<button type="button" class="btn btn-primary" id="editSellerBtn" onclick="getProductionPointDetails('${pointId}', 'EDIT')">Edit</button>
+<button type="button" class="btn btn-success" id="viewSellerBtn">View</button></div>
+
+</div>
+</div>`;
+
+            //                                var productionPointHTMLObject = $(card);
+            var prodcutionPointListObj = document.getElementById("sellerListContainer");
+            prodcutionPointListObj.innerHTML = prodcutionPointListObj.innerHTML + card;
+
+        });
+    }
+}
+
+function sellerDeleteConfirmation(id, pointName, address){
+    const deleteMessage = `Are you sure want to delete ${pointName} at ${address}.`
+    document.getElementById('sellerDeleteMessageText').innerHTML = deleteMessage;
+    document.getElementById("confirmSellerDelete").addEventListener("click", function() {
+        deleteSeller(id);
+    });
+
+    $('#sellerDeleteModal').modal('toggle');
 }

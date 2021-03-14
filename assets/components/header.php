@@ -78,6 +78,8 @@ $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min
 
         <script type="text/javascript" src="/kleinerzeugernetzwerk/js/seller_web_services/seller_api.js"></script>
 
+        
+        <link rel="stylesheet" href="/kleinerzeugernetzwerk/css/custom/card.css">
 
         <title>Kleinerzeuger Netzwerk</title>
 

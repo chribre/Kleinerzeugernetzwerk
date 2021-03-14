@@ -28,6 +28,8 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sideBar
             getUserDetails();
         }else if (menu == 'profile' && data == 'productionPoint'){
             getAllProductionPoint();
+        }else if (menu == 'profile' && data == 'seller'){
+            getAllSellers();
         }
     };
 
