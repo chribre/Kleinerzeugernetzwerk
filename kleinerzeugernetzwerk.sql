@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2021 at 10:05 AM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- Generation Time: Mar 14, 2021 at 01:26 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.2.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -122,7 +123,9 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (100, 16, 'AW03330106033a619c29143.76416258', '2021-02-22 12:39:53'),
 (101, 16, 'AW0333010603ca7b20cb440.99492883', '2021-03-01 08:37:06'),
 (102, 16, 'AW0333010603cb6b9351a35.63444566', '2021-03-01 09:41:13'),
-(103, 16, 'DESKTOP-K1GQ9RH60437964eefcc0.82977263', '2021-03-06 12:45:24');
+(103, 16, 'DESKTOP-K1GQ9RH60437964eefcc0.82977263', '2021-03-06 12:45:24'),
+(104, 16, 'AW033301060460a0b840aa7.22438129', '2021-03-08 11:27:07'),
+(105, 16, 'AW033301060461a2fa3aa49.55906955', '2021-03-08 12:35:59');
 
 -- --------------------------------------------------------
 
@@ -156,7 +159,6 @@ INSERT INTO `farm_land` (`farm_id`, `producer_id`, `farm_name`, `farm_desc`, `fa
 (5, 16, 'Marketplatz', 'A market, or marketplace, is a location where people regularly gather for the purchase and sale of provisions, livestock, and other goods.[1] In different parts of the world, a market place may be described as a souk (from the Arabic), bazaar (from the Persian), a fixed mercado (Spanish), or itinerant tianguis (Mexico), or palengke (Philippines). Some markets operate daily and are said to be permanent markets while others are held once a week or on less frequent specified days such as festival days and are said to be periodic markets. The form that a market adopts depends on its locality\'s population, culture, ambient and geographic conditions. The term market covers many types of trading, as market squares, market halls and food halls, and their different varieties. Due to this, marketplaces can be situated both outdoors and indoors.', 'Dorfstraße Ost 13, undefined, 16307', NULL, NULL, NULL, NULL, 0x0000000001010000002c69ad0130a44a406affff7fa0d12c40, 0, '2020-12-17 13:13:16'),
 (6, 16, 'Test Point', 'this is my new production point', 'Gartenstraße 5a, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000ae4ee359d8c64a40a900006038892a40, 0, '2020-12-19 11:08:34'),
 (10, 16, '', '', 'Binsenwerder 3, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000cc19d264fac64a400e0100a03e7f2a40, 0, '2020-12-19 11:19:41'),
-(11, 16, 'Test Point', '', '3.Ringstraße 321, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000b5fdbeca03c74a400900008087832a40, 0, '2020-12-19 11:20:47'),
 (12, 16, '', '', 'Binsenwerder 1, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000338da266ecc64a406e0000c02d7f2a40, 0, '2020-12-19 11:28:54'),
 (14, 16, 'Monmouthshire', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Binsenwerder 2, Neubrandenburg, 17033', 'Sonnenkamp', '4A', 'Neubrandenburg', '17036', 0x000000000101000000e2d7ff0be4c64a40cdffffdf1c7f2a40, 0, '2020-12-19 11:29:54'),
 (15, 16, 'Salisbury', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Binsenwerder 2, Neubrandenburg, 17033', 'Dr. Brückner Weg', '5', 'Neubrandenburg', '17033', 0x00000000010100000097d559b1dbc64a40e8ffff5f337f2a40, 0, '2020-12-19 11:33:22'),
@@ -399,6 +401,13 @@ CREATE TABLE `sellers` (
   `created_date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `sellers`
+--
+
+INSERT INTO `sellers` (`seller_id`, `producer_id`, `seller_name`, `seller_description`, `street`, `building_number`, `city`, `zip`, `seller_location`, `seller_email`, `seller_website`, `mobile`, `phone`, `is_blocked`, `is_mon_available`, `mon_open_time`, `mon_close_time`, `is_tue_available`, `tue_open_time`, `tue_close_time`, `is_wed_available`, `wed_open_time`, `wed_close_time`, `is_thu_available`, `thu_open_time`, `thu_close_time`, `is_fri_available`, `fri_open_time`, `fri_close_time`, `is_sat_available`, `sat_open_time`, `sat_close_time`, `is_sun_available`, `sun_open_time`, `sun_close_time`, `created_date`) VALUES
+(1, 16, 'Bio Store NB', 'Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes.', 'Buttelstraße', '13', 'Belin', '18001', 0x00000000010100000068976f7d58c74a40a6d1e4620c8c2a40, 'Bio Store NB', 'www.biostore.co.in', '017630123456', '01255123456', 0, 0, '08:30:00', '10:30:00', 0, '10:00:00', '11:30:00', 0, '12:30:00', '12:30:00', 0, '08:00:00', '09:30:00', 0, '08:30:00', '08:30:00', 0, '08:33:00', '08:30:00', 0, '08:30:00', 2008, '2021-03-11 15:34:26');
+
 -- --------------------------------------------------------
 
 --
@@ -640,7 +649,7 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT for table `farm_land`
@@ -682,7 +691,7 @@ ALTER TABLE `product_feature`
 -- AUTO_INCREMENT for table `sellers`
 --
 ALTER TABLE `sellers`
-  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `units`
