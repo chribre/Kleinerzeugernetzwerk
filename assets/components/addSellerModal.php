@@ -94,20 +94,21 @@
             </div>
             <div class="modal-body m-3">
                 <p>Modal body text goes here.</p>
-                <form id="newSellingPointForm" enctype="multipart/form-data">
+                <form id="newSellingPointForm" enctype="multipart/form-data" onsubmit="event.preventDefault()">
                     <!--                    <form method="post" id="newProductionPointForm" enctype="multipart/form-data">-->
                     <div class="form-group">
-                        <label for="sellingPointName">Production Point Name</label>
+                        <label for="sellingPointName">Seller Name</label>
                         <input type="text" class="form-control" id="sellingPointName" aria-describedby="sellingPointName" placeholder="Selling Point Name" name="sellingPointName">
                     </div>
                     <div class="form-group">
-                        <label for="sellingPointDesc">Production Point Description</label>
+                        <label for="sellingPointDesc">Seller Description</label>
                         <textarea class="form-control" id="sellingPointDesc" name="productionPointDesc" rows="4" placeholder="Write a description about your selling point."></textarea>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/productionPointMap.php");?>
+                            <?php require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sellingPointMap.php");
+                            ?>
                         </div>
 
 
@@ -121,10 +122,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-5 mb-3">
-                                    <label for="sp_houseNumber">House Number</label>
+                                    <label for="sp_houseNumber">Building Number</label>
                                     <input type="text" class="form-control" id="sp_houseNumber" placeholder="House Number" required name="sp_house_number">
                                     <div class="invalid-feedback">
-                                        Please provide a valid hosue number.
+                                        Please provide a valid building number.
                                     </div>
                                 </div>
                             </div>
@@ -145,9 +146,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="m-4"><button type="button" class="btn btn-link col-md-12" id="locateOnMapBtn" onclick="findLocation()">Locate on map</button>
-                                <input type="hidden" id="latitude" name="latitude" value="" />
-                                <input type="hidden" id="longitude" name="longitude" value="" />
+                            <div class="m-4"><button type="button" class="btn btn-link col-md-12" id="sp_locateOnMapBtn" onclick="findSllerLocation()">Locate on map</button>
+                                <input type="hidden" id="sp_latitude" name="sp_latitude" value="" />
+                                <input type="hidden" id="sp_longitude" name="sp_longitude" value="" />
                             </div>
                         </div>
                         <input type="hidden" id="sellingPointId" name="sellingPointId" value="0" />
@@ -200,126 +201,126 @@
                             <tr>
                                 <th scope="row">Monday</th>
                                 <td><label class="switch">
-                                    <input type="checkbox">
+                                    <input id="mon_switch" type="checkbox">
                                     <span class="slider round"></span>
                                     </label>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
+                                        <input id="mon_openHourTxt" type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
+                                        <input id="mon_closeHourTxt" type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">Tuesday</th>
                                 <td><label class="switch">
-                                    <input type="checkbox">
+                                    <input id="tue_switch" type="checkbox">
                                     <span class="slider round"></span>
                                     </label>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
+                                        <input id="tue_openHourTxt" id="tue_openHourTxt" type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
+                                        <input id="tue_closeHourTxt" type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">Wednesday</th>
                                 <td><label class="switch">
-                                    <input type="checkbox">
+                                    <input id="wed_switch" type="checkbox">
                                     <span class="slider round"></span>
                                     </label>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
+                                        <input id="wed_openHourTxt" type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
+                                        <input id="wed_closeHourTxt" type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">Thursday</th>
                                 <td><label class="switch">
-                                    <input type="checkbox">
+                                    <input id="thu_switch" type="checkbox">
                                     <span class="slider round"></span>
                                     </label>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
+                                        <input id="thu_openHourTxt" type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
+                                        <input id="thu_closeHourTxt" type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">Friday</th>
                                 <td><label class="switch">
-                                    <input type="checkbox">
+                                    <input id="fri_switch" type="checkbox">
                                     <span class="slider round"></span>
                                     </label>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
+                                        <input id="fri_openHourTxt" type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
+                                        <input id="fri_closeHourTxt" type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">Saturday</th>
                                 <td><label class="switch">
-                                    <input type="checkbox">
+                                    <input id="sat_switch" type="checkbox">
                                     <span class="slider round"></span>
                                     </label>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
+                                        <input id="sat_openHourTxt" type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
+                                        <input id="sat_closeHourTxt" type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row">Sunday</th>
                                 <td><label class="switch">
-                                    <input type="checkbox">
+                                    <input id="sun_switch" type="checkbox">
                                     <span class="slider round"></span>
                                     </label>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
+                                        <input id="sun_openHourTxt" type="text" class="form-control" placeholder="Opening hour" onkeypress="return false;">
                                     </div>
                                 </td>
                                 <td>
                                     <div class="input-group clockpicker">
-                                        <input type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
+                                        <input id="sun_closeHourTxt" type="text" class="form-control" placeholder="Closing hour" onkeypress="return false;">
                                     </div>
                                 </td>
                             </tr>
@@ -361,119 +362,19 @@
 
 <script>
     document.getElementById("saveSellingPointBtn").onclick = function () { 
-        if (document.getElementById('productionPointId').value == 0){
 
+        $('#addSellingPoint').on('submit', 'newSellingPointForm', function (event) {
+            event.preventDefaults()
+            event.stopPropagation()
+        })
+
+        if (document.getElementById('sellingPointId').value == 0){
+            createSeller();
         }else{
-
+            editSellerDetails();
         }
 
-    }
-
-    function fetchProductionPointFormData(){
-        const ids = ['productionPointName', 'productionPointDesc', 'street', 'houseNumber', 'zipCode', 'city', 'latitude', 'longitude', 'productionPointId'];
-        var formData = [];
-
-        ids.forEach(function(element) {
-            const value = document.getElementById(element).value != null ? document.getElementById(element).value: "";
-            formData[element] = value;
-        }); 
-        const address = formData.street + ', ' + formData.houseNumber + ', ' + formData.city + ' - ' + formData.zipCode;
-        formData['address'] = address;
-        return formData
-    }
-    function addNewProductionPoint(){
-        const formData = fetchProductionPointFormData();
-        const userId = localStorage.getItem('userId');
-
-        $.ajax({
-            type: "POST",
-            url: "/kleinerzeugernetzwerk/controller/productionPointController.php",
-
-            headers: {
-                'access-token': localStorage.getItem('token'),
-                'user_id': userId,
-                'action': "CREATE"
-            },
-            beforeSend: function(){
-                $("#overlay").fadeIn(300);　
-            },
-            complete: function(){
-                $("#overlay").fadeOut(300);
-            },
-            data: { 
-                farm_id: 0,
-                producer_id: userId,
-                farm_name: formData.productionPointName,
-                farm_desc:formData.productionPointDesc,
-                farm_address:formData.address,
-                street:formData.street,
-                house_number:formData.houseNumber,
-                city:formData.city,
-                zip:formData.zipCode,
-                latitude:formData.latitude,
-                longitude:formData.longitude,
-
-            },
-            success: function( data ) {
-                console.log(data)
-                const userDetails = JSON.parse(data);
-            },
-            error: function (request, status, error) {               
-                console.log(error)
-            }
-        });
-    }
-
-
-    function updateProductionPoint(){
-        const formData = fetchProductionPointFormData();
-        const userId = localStorage.getItem('userId');
-
-        $.ajax({
-            type: "POST",
-            url: "/kleinerzeugernetzwerk/controller/productionPointController.php",
-
-            headers: {
-                'access-token': localStorage.getItem('token'),
-                'user_id': userId,
-                'action': "UPDATE"
-            },
-            beforeSend: function(){
-                $("#overlay").fadeIn(300);　
-            },
-            complete: function(){
-                $("#overlay").fadeOut(300);
-            },
-            data: { 
-                farm_id: 17,
-                producer_id: userId,
-                farm_name: 'Rooster Orchard',
-                farm_desc:'This name generator will give you 10 names fit for farms, ranches, and pastures. All the names are heavily based on real life farm names, which are often either named after whichever lifestock or crops they farm, or after the surrounding nature,. Theres a wide variety to pick from though, so, no matter the type of farm, theres bound to be a name that fits. To start, simply click on the button to generate 10 random names. Dont like the names? Simply click again to get 10 new random names.',
-                farm_address:'Zur Schwedenschanze 15, 18435 Stralsund',
-                street:formData.street,
-                house_number:formData.houseNumber,
-                city:formData.city,
-                zip:formData.zipCode,
-                latitude:'53.56435',
-                longitude:'13.213578'
-
-            },
-            success: function( data ) {
-                console.log(data)
-                const userDetails = JSON.parse(data);
-            },
-            error: function (request, status, error) {               
-                console.log(error)
-            }
-        });
-    }
-
-
-
-
-
-
-//    $('.clockpicker').clockpicker();    
+    }  
 
 
     $('.clockpicker').clockpicker({

@@ -83,24 +83,21 @@ function addSeller($sellerDetails){
         . "VALUES ($sellerDetails->producerId, '$sellerDetails->sellerName', '$sellerDetails->sellerDescription', '$sellerDetails->street', '$sellerDetails->buildingNumber', '$sellerDetails->city', '$sellerDetails->zip', POINT($sellerDetails->latitude, $sellerDetails->longitude), '$sellerDetails->email', '$sellerDetails->website', '$sellerDetails->mobile', '$sellerDetails->phone', $sellerDetails->isBlocked, $sellerDetails->isMonAvailable, '$sellerDetails->monOpenTime', '$sellerDetails->monCloseTime', $sellerDetails->isTueAvailable, '$sellerDetails->tueOpenTime', '$sellerDetails->tueCloseTime', $sellerDetails->isWedAvailable, '$sellerDetails->wedOpenTime', '$sellerDetails->wedCloseTime', $sellerDetails->isThuAvailable, '$sellerDetails->thuOpenTime', '$sellerDetails->thuCloseTime', $sellerDetails->isFriAvailable, '$sellerDetails->friOpenTime', '$sellerDetails->friCloseTime', $sellerDetails->isSatAvailable, '$sellerDetails->satOpenTime', '$sellerDetails->satCloseTime', $sellerDetails->isSunAvailable, '$sellerDetails->sunOpenTime', '$sellerDetails->sunCloseTime')";
 
     try{
-        echo "trying to insert";
-        echo "\n ".$sellerInsertQuery."\n";
+//        echo "trying to insert";
+//        echo "\n ".$sellerInsertQuery."\n";
         if (mysqli_query($dbConnection, $sellerInsertQuery))
-            echo "   inserted succesfully   ";
+//            echo "   inserted succesfully   ";
         //            confirmQuery($productInsertQuery);
         $sellerId = $dbConnection->insert_id;
-        $fileCount = count($fileNameArray);
-        $productionPointImageQuery = "INSERT INTO images (image_type, image_name, entity_id) VALUES ";
-
         mysqli_commit($dbConnection);
 
-        echo "inserted";
-        echo "production Point id is $sellerId, ";
+//        echo "inserted";
+//        echo "production Point id is $sellerId, ";
         http_response_code(200);
         return true;
 
     }catch(mysqli_sql_exception $exception){
-        echo "faild to add a new production point,";
+//        echo "faild to add a new production point,";
         mysqli_rollback($dbConnection);
         var_dump($exception);
         throw $exception;
@@ -123,14 +120,14 @@ function editSellingPoint($sellerDetails){
     mysqli_begin_transaction($dbConnection);
 
 
-    $sellerUpdateQuery = "UPDATE sellers SET producer_id = $sellerDetails->producerId, seller_name = '$sellerDetails->sellerName', seller_description = '$sellerDetails->sellerDescription', street = '$sellerDetails->street', building_number = '$sellerDetails->buildingNumber', city = '$sellerDetails->city', zip = '$sellerDetails->zip', seller_location = POINT($sellerDetails->latitude, $sellerDetails->longitude), seller_email = '$sellerDetails->email', seller_website = '$sellerDetails->website', mobile = '$sellerDetails->mobile', phone = '$sellerDetails->phone', is_blocked = '$sellerDetails->isBlocked', is_mon_available = '$sellerDetails->isMonAvailable', mon_open_time = '$sellerDetails->monOpenTime', mon_close_time = '$sellerDetails->monCloseTime', is_tue_available = '$sellerDetails->isTueAvailable', tue_open_time = '$sellerDetails->tueOpenTime', tue_close_time = '$sellerDetails->tueCloseTime', is_wed_available = '$sellerDetails->isWedAvailable', wed_open_time = '$sellerDetails->wedOpenTime', wed_close_time = '$sellerDetails->wedCloseTime', is_thu_available = '$sellerDetails->isThuAvailable', thu_open_time = '$sellerDetails->thuOpenTime', thu_close_time = '$sellerDetails->thuCloseTime', is_fri_available = '$sellerDetails->isFriAvailable', fri_open_time = '$sellerDetails->friOpenTime', fri_close_time = '$sellerDetails->friCloseTime', is_sat_available = '$sellerDetails->isSatAvailable', sat_open_time = '$sellerDetails->satOpenTime', sat_close_time = '$sellerDetails->satCloseTime', is_sun_available = '$sellerDetails->isSunAvailable', sun_open_time = '$sellerDetails->sunOpenTime', sun_close_time = '$sellerDetails->sunCloseTime' where seller_id = $sellerDetails->sellerId and producer_id = $sellerDetails->producerId";
+    $sellerUpdateQuery = "UPDATE sellers SET producer_id = $sellerDetails->producerId, seller_name = '$sellerDetails->sellerName', seller_description = '$sellerDetails->sellerDescription', street = '$sellerDetails->street', building_number = '$sellerDetails->buildingNumber', city = '$sellerDetails->city', zip = '$sellerDetails->zip', seller_location = POINT($sellerDetails->latitude, $sellerDetails->longitude), seller_email = '$sellerDetails->email', seller_website = '$sellerDetails->website', mobile = '$sellerDetails->mobile', phone = '$sellerDetails->phone', is_blocked = '$sellerDetails->isBlocked', is_mon_available = $sellerDetails->isMonAvailable, mon_open_time = '$sellerDetails->monOpenTime', mon_close_time = '$sellerDetails->monCloseTime', is_tue_available = $sellerDetails->isTueAvailable, tue_open_time = '$sellerDetails->tueOpenTime', tue_close_time = '$sellerDetails->tueCloseTime', is_wed_available = $sellerDetails->isWedAvailable, wed_open_time = '$sellerDetails->wedOpenTime', wed_close_time = '$sellerDetails->wedCloseTime', is_thu_available = $sellerDetails->isThuAvailable, thu_open_time = '$sellerDetails->thuOpenTime', thu_close_time = '$sellerDetails->thuCloseTime', is_fri_available = $sellerDetails->isFriAvailable, fri_open_time = '$sellerDetails->friOpenTime', fri_close_time = '$sellerDetails->friCloseTime', is_sat_available = $sellerDetails->isSatAvailable, sat_open_time = '$sellerDetails->satOpenTime', sat_close_time = '$sellerDetails->satCloseTime', is_sun_available = $sellerDetails->isSunAvailable, sun_open_time = '$sellerDetails->sunOpenTime', sun_close_time = '$sellerDetails->sunCloseTime' where seller_id = $sellerDetails->sellerId and producer_id = $sellerDetails->producerId";
 
 
     try{
-        echo "trying to insert";
-        echo "\n ".$sellerUpdateQuery."\n";
+//        echo "trying to insert";
+//        echo "\n ".$sellerUpdateQuery."\n";
         if (mysqli_query($dbConnection, $sellerUpdateQuery))
-            echo "   updated succesfully   ";
+//            echo "   updated succesfully   ";
         //            confirmQuery($productInsertQuery);
         //        $productionPointId = $dbConnection->insert_id;
         //        $fileCount = count($fileNameArray);
@@ -156,13 +153,13 @@ function editSellingPoint($sellerDetails){
         //        }else{
         mysqli_commit($dbConnection);
 
-        echo "updated";
+//        echo "updated";
         //        echo "production Point id is $productionPointId, ";
         //        }
         http_response_code(200);
         return true;
     }catch(mysqli_sql_exception $exception){
-        echo "faild to update seller,";
+//        echo "faild to update seller,";
         mysqli_rollback($dbConnection);
         var_dump($exception);
         throw $exception;
@@ -256,7 +253,7 @@ function getSellerDetails($seller){
     global $dbConnection;
     /* Start transaction */
     
-    $fetchSellerDetailsQuery = "SELECT s.seller_id, s.producer_id, s.seller_name, s.seller_description, s.street, s.building_number, s.city, s.zip, s.seller_location, s.seller_email, s.seller_website, s.mobile, s.phone, s.is_blocked, s.is_mon_available, s.mon_open_time, s.mon_close_time, s.is_tue_available, s.tue_open_time, s.tue_close_time, s.is_wed_available, s.wed_open_time, s.wed_close_time, s.is_thu_available, s.thu_open_time, s.thu_close_time, s.is_fri_available, s.fri_open_time, s.fri_close_time, s.is_sat_available, s.sat_open_time, s.sat_close_time, s.is_sun_available, s.sun_open_time, s.sun_close_time FROM sellers s
+    $fetchSellerDetailsQuery = "SELECT s.seller_id, s.producer_id, s.seller_name, s.seller_description, s.street, s.building_number, s.city, s.zip, ST_X(s.seller_location) as latitude, ST_Y(s.seller_location) as longitude, s.seller_email, s.seller_website, s.mobile, s.phone, s.is_blocked, s.is_mon_available, s.mon_open_time, s.mon_close_time, s.is_tue_available, s.tue_open_time, s.tue_close_time, s.is_wed_available, s.wed_open_time, s.wed_close_time, s.is_thu_available, s.thu_open_time, s.thu_close_time, s.is_fri_available, s.fri_open_time, s.fri_close_time, s.is_sat_available, s.sat_open_time, s.sat_close_time, s.is_sun_available, s.sun_open_time, s.sun_close_time FROM sellers s
     WHERE s.producer_id = $seller->producerId AND s.seller_id = $seller->sellerId";
     
     

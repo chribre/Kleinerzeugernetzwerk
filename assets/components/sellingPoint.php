@@ -9,7 +9,6 @@
                         selling points can be added/edited or deleted
 ****************************************************************/
 
-echo 'Selling Point'
 ?>
 
 

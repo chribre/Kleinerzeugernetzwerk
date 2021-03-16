@@ -94,7 +94,7 @@
             </div>
             <div class="modal-body m-3">
                 <p>Modal body text goes here.</p>
-                <form id="newProductionPointForm" enctype="multipart/form-data">
+                <form id="newProductionPointForm" enctype="multipart/form-data" onsubmit="event.preventDefault()">
                     <!--                    <form method="post" id="newProductionPointForm" enctype="multipart/form-data">-->
                     <div class="form-group">
                         <label for="productionPointName">Production Point Name</label>
@@ -107,7 +107,7 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/productionPointMap.php");?>
+                            <?php require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/productionPointMap.php");?>
                         </div>
 
 
@@ -190,12 +190,12 @@
     document.getElementById("saveProductionPointBtn").onclick = function () { 
         if (document.getElementById('productionPointId').value == 0){
             addNewProductionPoint();
-//            updateProductionPoint();
-//            getAllProductionPoint();
-//            getProductionPointDetails();
-//            deleteProductionPoint()
+            //            updateProductionPoint();
+            //            getAllProductionPoint();
+            //            getProductionPointDetails();
+            //            deleteProductionPoint()
         }else{
-
+            updateProductionPoint();
         }
 
     }
@@ -243,7 +243,7 @@
                 zip:formData.zipCode,
                 latitude:formData.latitude,
                 longitude:formData.longitude,
-                
+
             },
             success: function( data ) {
                 console.log(data)
@@ -254,8 +254,8 @@
             }
         });
     }
-    
-    
+
+
     function updateProductionPoint(){
         const formData = fetchProductionPointFormData();
         const userId = localStorage.getItem('userId');
@@ -287,7 +287,7 @@
                 zip:formData.zipCode,
                 latitude:'53.56435',
                 longitude:'13.213578'
-                
+
             },
             success: function( data ) {
                 console.log(data)
@@ -298,8 +298,8 @@
             }
         });
     }
-    
-    
+
+
 </script>
 
 

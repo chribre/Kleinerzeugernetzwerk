@@ -58,7 +58,7 @@
                                     }elseif ($_GET['data'] == 'productionPoint'){
                                         $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Farm Land</button>';
                                     }elseif ($_GET['data'] == 'seller'){
-                                        $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" data-target="#addSellingPoint" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Selling Point</button>';
+                                        $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddSellarModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Selling Point</button>';
                                        
                                         
 //                                        $profileHead = $profileHead . '<button onclick="getSellerDetails()">Click me</button>';
