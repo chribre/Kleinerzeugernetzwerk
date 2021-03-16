@@ -16,7 +16,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         if ((isset($_GET['productId'])) && $_GET['productId'] !== 0){
             $productId = $_GET['productId'];
-            echo getProduct($productId);
+            $producerId = $_GET['producerId'];
+            echo getProduct($productId, $producerId);
             break;
         }
 
@@ -43,14 +44,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
         $product = new product($_POST);
 
         if ($product->isDelete == true){
-            echo deleteProduct($product->productId);
+            echo deleteProduct($product->productId, $product->producerId);
             break;
         } else{
             if ($product->productId == 0){
-                addProduct($product->productName, $product->productDesc, $product->productCategory, $product->productionLocation, $product->isProcessedProduct, $product->isAvailable, $product->pricePerUnit, $product->quantityOfPrice, $product->unit, $product->productRating, $files, $product->productFeatures, $product->productFeaturesId);
+                echo addProduct($product->producerId, $product->productName, $product->productDesc, $product->productCategory, $product->productionLocation, $product->isProcessedProduct, $product->isAvailable, $product->pricePerUnit, $product->quantityOfPrice, $product->unit, $product->productRating, $files, $product->productFeatures, $product->productFeaturesId);
                 break;
             }else{
-                updateProducts($product->productId,$product->productName, $product->productDesc, $product->productCategory, $product->productionLocation, $product->isProcessedProduct, $product->isAvailable, $product->pricePerUnit, $product->quantityOfPrice, $product->unit, $product->productRating, $product->productFeatures, $product->productFeaturesId);
+                echo updateProducts($product->producerId, $product->productId,$product->productName, $product->productDesc, $product->productCategory, $product->productionLocation, $product->isProcessedProduct, $product->isAvailable, $product->pricePerUnit, $product->quantityOfPrice, $product->unit, $product->productRating, $product->productFeatures, $product->productFeaturesId);
                 break;
             }
         }
@@ -112,20 +113,19 @@ function fetchAllProducts($userId){
     INPUT       :   product details fetched from add product modal
     OUTPUT      :   return true if product details, features and images are inserted into the database successully
 */
-function addProduct($productName, $productDescription, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating, $fileNameArray, $productFeaturesArray, $productFeatureIdArray){
+function addProduct($producerId, $productName, $productDescription, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating, $fileNameArray, $productFeaturesArray, $productFeatureIdArray){
     global $dbConnection;
     /* Start transaction */
     mysqli_begin_transaction($dbConnection);
-    if (isTokenValid()){
-        $producerId = $_SESSION["userId"];
+    if (isAccessTokenValid()){
         mysqli_begin_transaction($dbConnection);
         $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, production_location, is_processed_product, is_available, price_per_unit, quantity_of_price, unit, product_rating)"
             . "VALUES ($producerId, '$productName', '$productDescription', $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating)";
 
 
         try{
-            echo "trying to insert";
-            echo "\n ".$productInsertQuery."\n";
+//            echo "trying to insert";
+//            echo "\n ".$productInsertQuery."\n";
             if (mysqli_query($dbConnection, $productInsertQuery))
                 echo "   inserted succesfully   ";
             //            confirmQuery($productInsertQuery);
@@ -146,10 +146,10 @@ function addProduct($productName, $productDescription, $productCategory, $produc
                 //                }
                 //                echo $productfeatureQuery;
                 if (mysqli_multi_query($dbConnection, $productfeatureQuery)){
-                    echo "  features inserted succesfully   ";
+//                    echo "  features inserted succesfully   ";
                     //                    mysqli_commit($dbConnection);
                 }else{
-                    echo "product creation failed at inserting images,";
+//                    echo "product creation failed at inserting images,";
                     mysqli_rollback($dbConnection);
                 }
             }
@@ -168,16 +168,16 @@ function addProduct($productName, $productDescription, $productCategory, $produc
                 }
                 echo $productImageQuery;
                 if (mysqli_query($dbConnection, $productImageQuery)){
-                    echo "  Files inserted succesfully   ";
+//                    echo "  Files inserted succesfully   ";
                     mysqli_commit($dbConnection);
                 }else{
-                    echo "product creation failed at inserting images,";
+//                    echo "product creation failed at inserting images,";
                     mysqli_rollback($dbConnection);
                 }
             }else{
                 mysqli_commit($dbConnection);
-                echo "inserted";
-                echo "product id is $productId, ";
+//                echo "inserted";
+//                echo "product id is $productId, ";
             }
 
         }catch(mysqli_sql_exception $exception){
@@ -189,7 +189,7 @@ function addProduct($productName, $productDescription, $productCategory, $produc
         }
 
     }
-
+    return true;
 }
 
 
@@ -199,16 +199,14 @@ function addProduct($productName, $productDescription, $productCategory, $produc
     INPUT       :   product details fetched from add product modal
     OUTPUT      :   return true if product details, features and images are upadated successully
 */
-function updateProducts($productId, $productName, $productDesc, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $pricePerUnit, $quantityOfPrice, $unit, $productRating, $productFeatures, $featureIdArray){
+function updateProducts($producerId, $productId, $productName, $productDesc, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $pricePerUnit, $quantityOfPrice, $unit, $productRating, $productFeatures, $featureIdArray){
 
     ob_start();
     global $dbConnection;
 
 
 
-    if (isTokenValid()){
-
-        $producerId = $_SESSION["userId"];
+    if (isAccessTokenValid()){
 
         $updateProductQuery = "UPDATE products ";
         $updateProductQuery .= "SET product_name = '$productName', product_description = '$productDesc', product_category = $productCategory, production_location = $productionLocation, is_processed_product = $isProcessedProduct, is_available = $isAvailable, price_per_unit = $pricePerUnit, quantity_of_price = $quantityOfPrice, unit = $unit, product_rating = $productRating ";
@@ -249,11 +247,10 @@ function updateProducts($productId, $productName, $productDesc, $productCategory
     INPUT       :   product details fetched from add product modal
     OUTPUT      :   return true if product details, features and images are upadated successully
 */
-function getProduct($productId){
+function getProduct($productId, $producerId){
     ob_start();
     global $dbConnection;
-    if (isTokenValid()){
-        $producerId = $_SESSION["userId"];
+    if (isAccessTokenValid()){
         $getProductQuery = "SELECT * FROM products p ";
         //        $getProductQuery .= "JOIN product_feature pf on pf.product_id = p.product_id ";
         $getProductQuery .= "WHERE p.product_id = $productId AND p.producer_id = $producerId;";
@@ -311,11 +308,10 @@ function PrepareFeatureQuery($featureArray, $featureIdArray, $productId){
     INPUT       :   id of the product to be deleted
     OUTPUT      :   return true if product deleted successully otherwise false
 */
-function deleteProduct($productId){
+function deleteProduct($productId, $producerId){
     ob_start();
     global $dbConnection;
-    if (isTokenValid()){
-        $producerId = $_SESSION["userId"];
+    if (isAccessTokenValid()){
         $deleteProductQuery = "DELETE FROM products ";
         $deleteProductQuery .= "WHERE product_id = $productId AND producer_id = $producerId;";
         $deleteProductResult = mysqli_query($dbConnection, $deleteProductQuery);

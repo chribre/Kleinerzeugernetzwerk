@@ -36,9 +36,9 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
             loadAllProducts(userId);
         });
 
-//        window.onload = function() {
-//            loadAllProducts(<?php echo $_SESSION['userId']?>)
-//        };
+        //        window.onload = function() {
+        //            loadAllProducts(<?php echo $_SESSION['userId']?>)
+        //        };
 
         /*
             PURPOSE     :   Fetch products from backend and load data as a card
@@ -49,6 +49,10 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
             $.ajax({
                 type: "GET",
                 url: "/kleinerzeugernetzwerk/controller/productController.php",
+                headers: {
+                    'access-token': localStorage.getItem('token'),
+                    'user_id': userId,
+                },
                 data: { userId: userId, fetchAllProducts: true },
                 dataType: "json",
                 success: function( data ) {
@@ -181,8 +185,8 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
             document.getElementById("productCategory").innerHTML = categoryOptions;
             $('#productCategory').selectpicker('refresh');
         }
-        
-        
+
+
         /*
             function to set product features on to the product feature drop down list 
             in the new product modal form from cached values
@@ -203,7 +207,7 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
             document.getElementById("productFeatures").innerHTML = featureOptions;
             $('#productFeatures').selectpicker('refresh');
         }
-        
+
         /*
             function to set product units on to the unit drop down list 
             in the new product modal form from cached values
@@ -225,7 +229,7 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
             $('#unit').selectpicker('refresh');
         }
 
-        
+
         /*
             function to set product features on to the product feature drop down list 
             in the new product modal form from cached values
@@ -238,12 +242,12 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
                 productionPoints.forEach(element =>{
                     const productionPointId = element['farm_id'] != null ? element['farm_id'] : 0;
                     const productionPointName = element['farm_name'] != null ? element['farm_name'] : "";
-                    
+
                     const street = element['street'] != null ? element['street'] : "";
                     const houseNum = element['house_number'] != null ? element['house_number'] : "";
                     const city = element['city'] != null ? element['city'] : "";
                     const zip = element['zip'] != null ? element['zip'] : "";
-                    
+
                     const productionPointAddress = `${street} ${houseNum}, ${city} - ${zip}`;
 
                     productionPointOptions += `<option value="${productionPointId}" data-subtext="${productionPointAddress}">${productionPointName}</option>`
@@ -255,12 +259,13 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 
         /*        
             FUNCTION    :   To open add product modal to add new product or edit existing product. 
-            
+
             INPUT       :   id of the product in the database
             OUTPUT      :     
             NOTES       :   First initialize modal form with default data, product id to fetch details from backend if it is not 0
         */
         function openAddProductModal(productId){
+            const userId = localStorage.getItem('userId');
             setCategories();
             setFeatureList();
             setUnits();
@@ -293,7 +298,9 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
                 document.getElementById("unit").value = editProductUnit;
                 document.getElementById("isProcessed").checked = editIsProcessedProduct;
                 document.getElementById("productionPointOptions").value = editProductLocation;
-
+                
+                getSellingPoints();
+                
                 return 0;
             }
 
@@ -302,7 +309,11 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
             $.ajax({
                 type: "GET",
                 url: "/kleinerzeugernetzwerk/controller/productController.php",
-                data: { productId: productId },
+                headers: {
+                    'access-token': localStorage.getItem('token'),
+                    'user_id': userId,
+                },
+                data: { productId: productId, producerId: userId},
                 dataType: "json",
                 contentType: "application/json",
                 cache: false,
@@ -355,6 +366,66 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 
         }
 
+
+        /*
+            function to set product seller on to the selling point drop down list 
+            in the new product modal form from cached values
+        */
+        function setSellingPointList(sellingPoints){
+            //            const sellingPointJsonString = localStorage['sellingPoints'] || "";
+            //            const sellingPoints = JSON.parse(sellingPointJsonString) || [];
+            var sellingPointOptions = ``;
+            if (sellingPoints.length != 0){
+                sellingPoints.forEach(element =>{
+                    const sellingPointId = element['sellerId'] != null ? element['sellerId'] : 0;
+                    const sellingPointName = element['sellerName'] != null ? element['sellerName'] : "";
+
+                    const street = element['street'] != null ? element['street'] : "";
+                    const buildingNumber = element['buildingNumber'] != null ? element['buildingNumber'] : "";
+                    const city = element['city'] != null ? element['city'] : "";
+                    const zip = element['zip'] != null ? element['zip'] : "";
+
+                    const sellingPointAddress = `${street} ${buildingNumber}, ${city} - ${zip}`;
+
+                    sellingPointOptions += `<option value="${sellingPointId}" data-subtext="${sellingPointAddress}">${sellingPointName}</option>`
+                })
+            }
+            document.getElementById("productSellers").innerHTML = sellingPointOptions;
+            $('#productSellers').selectpicker('refresh');
+        }
+
+
+
+        function getSellingPoints(){
+            const userId = localStorage.getItem('userId');
+            $.ajax({
+                type: "POST",
+                url: "/kleinerzeugernetzwerk/controller/sellerController.php",
+
+                headers: {
+                    'access-token': localStorage.getItem('token'),
+                    'user_id': userId,
+                    'action': "READ_ALL"
+                },
+                beforeSend: function(){
+                    $("#overlay").fadeIn(300);　
+                },
+                complete: function(){
+                    $("#overlay").fadeOut(300);
+                },
+                data: { 
+                    producer_id: userId, 
+                },
+                success: function( data ) {
+                    console.log(data)
+                    const sellers = JSON.parse(data);
+                    setSellingPointList(sellers);
+                },
+                error: function (request, status, error) {               
+                    console.log(error)
+                }
+            });
+        }
         function parseProductFeature(features){
             var featureTypeArray = [];
             var featureIdArray = [];
@@ -367,19 +438,24 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
             return {featureTypeArray, featureIdArray};
         }
 
-        
+
         /*        
             FUNCTION:   Deletes a product from the list.
-            
+
             INPUT:     id of the product in the database
             OUTPUT:    show message as a modal, success or failure 
             NOTES:     Ask confirmation before get deleted.
         */
         function deleteProduct(productId){
+            const userId = localStorage.getItem('userId');
             $.ajax({
                 type: "POST",
                 url: "/kleinerzeugernetzwerk/controller/productController.php",
-                data: { product_id: productId, is_delete: true },
+                headers: {
+                    'access-token': localStorage.getItem('token'),
+                    'user_id': userId,
+                },
+                data: { product_id: productId, is_delete: true, producer_id: userId },
                 dataType: "json",
                 success: function( data ) {
                     window.location.reload();
@@ -392,8 +468,8 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
                 }
             });
         }
-        
-        
+
+
 
         function showDeleteProductModal(productId){
 

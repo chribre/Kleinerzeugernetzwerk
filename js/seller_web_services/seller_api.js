@@ -139,7 +139,7 @@ function deleteSeller(sellerId){
         success: function( data ) {
             console.log(data)
             location.reload();
-//            const userDetails = JSON.parse(data);
+            //            const userDetails = JSON.parse(data);
         },
         error: function (request, status, error) {               
             console.log(error)
@@ -177,6 +177,7 @@ function getAllSellers(){
         }
     });
 }
+
 function getSellerDetails(sellerId, action){
     const userId = localStorage.getItem('userId');
     $.ajax({
@@ -235,7 +236,17 @@ function listAllSellers(sellerArray){
             const address = street + ', ' + houseNumber + ', ' + city + ' - ' + zip;
             const pointLatitude = seller.latitude ? seller.latitude : 0;
             const pointLongitude = seller.longitude ? seller.longitude : 0;
+            
+            const isFavourite = seller.isFavourite ? seller.isFavourite == 1 ? true : false : false;
 
+
+            const favouriteBtn = `<button type="button" class="btn btn-outline-danger" onclick="markSellerAsFavourite('${pointId}')"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
+  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+</svg></button>`;
+
+            const unfavouriteButton = `<button type="button" class="btn btn-outline-danger" onclick="markSellerAsUnfavourite('${pointId}')"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
+  <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
+</svg></button>`;
 
 
             const card = `<div class="blog-card">
@@ -250,9 +261,20 @@ function listAllSellers(sellerArray){
 <div id="manipulationBtnSeller" class="btn-group btn-group-sm mt-3 mr-auto float-right" role="group" aria-label="" value=${pointId}>
 <button type="button" class="btn btn-danger" id="deleteSellerBtn" onclick="sellerDeleteConfirmation('${pointId}', '${pointName}','${address}')">Delete</button>
 <button type="button" class="btn btn-primary" id="editSellerBtn" onclick="getSellerDetails('${pointId}', 'EDIT')">Edit</button>
-<button type="button" class="btn btn-success" id="viewSellerBtn">View</button></div>
+<button type="button" class="btn btn-success" id="viewSellerBtn">View</button>
+
+${isFavourite ? unfavouriteButton : favouriteBtn}
+
 
 </div>
+
+
+
+
+
+</div>
+
+
 </div>`;
 
             //                                var productionPointHTMLObject = $(card);
@@ -344,7 +366,7 @@ function openAddSellarModal(){
 }
 
 $('#addSellingPoint').on('hide.bs.modal', function (e) {
-  // do something...
+    // do something...
     getAllSellers();
 })
 
@@ -352,3 +374,70 @@ $("#addSellingPoint").on("hidden.bs.modal", function () {
     // put your default event here
     getAllSellers();
 });
+
+
+function markSellerAsFavourite(sellerId){
+    const userId = localStorage.getItem('userId');
+    $.ajax({
+        type: "POST",
+        url: "/kleinerzeugernetzwerk/controller/sellerController.php",
+
+        headers: {
+            'access-token': localStorage.getItem('token'),
+            'user_id': userId,
+            'action': "FAVOURITE"
+        },
+        beforeSend: function(){
+            $("#overlay").fadeIn(300);　
+        },
+        complete: function(){
+            $("#overlay").fadeOut(300);
+        },
+        data: { 
+            seller_id: sellerId,
+            producer_id: userId,
+            is_favourite: true,
+        },
+        success: function( data ) {
+            console.log(data)
+            location.reload();
+            //            const userDetails = JSON.parse(data);
+        },
+        error: function (request, status, error) {               
+            console.log(error)
+        }
+    });
+}
+
+function markSellerAsUnfavourite(sellerId){
+    const userId = localStorage.getItem('userId');
+    $.ajax({
+        type: "POST",
+        url: "/kleinerzeugernetzwerk/controller/sellerController.php",
+
+        headers: {
+            'access-token': localStorage.getItem('token'),
+            'user_id': userId,
+            'action': "FAVOURITE"
+        },
+        beforeSend: function(){
+            $("#overlay").fadeIn(300);　
+        },
+        complete: function(){
+            $("#overlay").fadeOut(300);
+        },
+        data: { 
+            seller_id: sellerId,
+            producer_id: userId, 
+            is_favourite: false,
+        },
+        success: function( data ) {
+            console.log(data)
+            location.reload();
+            //            const userDetails = JSON.parse(data);
+        },
+        error: function (request, status, error) {               
+            console.log(error)
+        }
+    });
+}

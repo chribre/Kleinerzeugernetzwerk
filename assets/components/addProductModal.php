@@ -79,7 +79,7 @@
 
 <script type="text/javascript">
 
-$(function() {
+    $(function() {
         // Multiple images preview in browser
         var imagesPreview = function(input, placeToInsertImagePreview) {
 
@@ -97,9 +97,9 @@ $(function() {
                         imgdiv.className = 'image';
 
                         imgdiv.innerHTML = `
-                                            <div class="overlay">
-                                            </div>
-                                            <img src="${event.target.result}" id="test" key="${i}">`;
+<div class="overlay">
+    </div>
+<img src="${event.target.result}" id="test" key="${i}">`;
 
                         document.getElementById(placeToInsertImagePreview).appendChild(imgdiv);
 
@@ -118,9 +118,9 @@ $(function() {
 
 
 
-//    $('#addNewProduct').on('show.bs.modal', function () {
-//        setCategories()
-//    });
+    //    $('#addNewProduct').on('show.bs.modal', function () {
+    //        setCategories()
+    //    });
 
 </script>
 
@@ -200,7 +200,7 @@ $(function() {
                             <label for="unit">Unit</label>
                             <select class="form-control" id="unit" name="unit">
 
-                                
+
                             </select>
                         </div>
                     </div>
@@ -212,30 +212,21 @@ $(function() {
                         <div>
                             <select class="selectpicker form-control" id="productionPointOptions" name="productionPoint">
 
-                                <?php 
-//                                if (isset($_SESSION['productionPoints'])){
-//                                    $farmLands = $_SESSION['productionPoints'];
-//                                    if (count($farmLands) > 0){
-//                                        for ($i = 0; $i < count($farmLands); $i++) {
-//                                            $farmLand = $farmLands[$i];
-//
-//                                            $FarmName = isset($farmLand['farm_name']) ? $farmLand['farm_name'] : "";
-//                                            $farmId = isset($farmLand['farm_id']) ? $farmLand['farm_id'] : 0;
-//                                            $farmAddr = isset($farmLand['farm_address']) ? $farmLand['farm_address'] : "";
-//                                ?>
-<!--//                                <option value="<?php echo $farmId ?>" data-subtext="<?php echo $farmAddr ?>"><?php echo $FarmName ?></option>-->
-//                                <?php 
-//                                        }
-//                                    }
-//                                }else{
-//                                }
-                                ?>
+                            </select>
+                        </div>
 
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Selling Points</label>
 
-
+                        <div id="sellerIdArray" hidden></div>
+                        <div>
+                            <select class="selectpicker form-control" multiple data-actions-box="true" name="productSeller[]" id="productSellers">
 
                             </select>
                         </div>
+
 
                     </div>
 
@@ -309,11 +300,17 @@ $(function() {
         var isProcessedProduct = document.getElementById("isProcessed").value;
         var productLocation = document.getElementById("productionPointOptions").value;
 
+        const userId = localStorage.getItem('userId');
+        
         $.ajax({
             url:"/kleinerzeugernetzwerk/controller/productController.php",    //the page containing php script
             type: "POST",    //request type,
             //                contentType: "application/json",
             //                dataType: 'json',
+            headers: {
+                'access-token': localStorage.getItem('token'),
+                'user_id': userId,
+            },
             beforeSend: function(){
                 $("#overlay").fadeIn(300);　
             },
@@ -325,7 +322,7 @@ $(function() {
 
 
                 product_id: productId,
-                producer_id: 16, 
+                producer_id: userId, 
                 product_name: productName,
                 product_description: productDesc,
                 product_category: productCategory,
@@ -349,7 +346,7 @@ $(function() {
     };
 
 
-    
+
 </script>
 
 

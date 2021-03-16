@@ -57,6 +57,20 @@ switch ($_SERVER['REQUEST_METHOD']) {
                     http_response_code(401);
                 }
                 break;
+            case 'FAVOURITE':
+                if (isAccessTokenValid()){
+                    echo sellerMarkAsFavourite($sellingPoint);
+                }else{
+                    http_response_code(401);
+                }
+                break;
+            case 'UNFAVOURITE':
+                if (isAccessTokenValid()){
+                    echo sellerMarkAsFavourite($sellingPoint);
+                }else{
+                    http_response_code(401);
+                }
+                break;
             default:
                 http_response_code(400);
                 break;
@@ -83,21 +97,21 @@ function addSeller($sellerDetails){
         . "VALUES ($sellerDetails->producerId, '$sellerDetails->sellerName', '$sellerDetails->sellerDescription', '$sellerDetails->street', '$sellerDetails->buildingNumber', '$sellerDetails->city', '$sellerDetails->zip', POINT($sellerDetails->latitude, $sellerDetails->longitude), '$sellerDetails->email', '$sellerDetails->website', '$sellerDetails->mobile', '$sellerDetails->phone', $sellerDetails->isBlocked, $sellerDetails->isMonAvailable, '$sellerDetails->monOpenTime', '$sellerDetails->monCloseTime', $sellerDetails->isTueAvailable, '$sellerDetails->tueOpenTime', '$sellerDetails->tueCloseTime', $sellerDetails->isWedAvailable, '$sellerDetails->wedOpenTime', '$sellerDetails->wedCloseTime', $sellerDetails->isThuAvailable, '$sellerDetails->thuOpenTime', '$sellerDetails->thuCloseTime', $sellerDetails->isFriAvailable, '$sellerDetails->friOpenTime', '$sellerDetails->friCloseTime', $sellerDetails->isSatAvailable, '$sellerDetails->satOpenTime', '$sellerDetails->satCloseTime', $sellerDetails->isSunAvailable, '$sellerDetails->sunOpenTime', '$sellerDetails->sunCloseTime')";
 
     try{
-//        echo "trying to insert";
-//        echo "\n ".$sellerInsertQuery."\n";
+        //        echo "trying to insert";
+        //        echo "\n ".$sellerInsertQuery."\n";
         if (mysqli_query($dbConnection, $sellerInsertQuery))
-//            echo "   inserted succesfully   ";
-        //            confirmQuery($productInsertQuery);
-        $sellerId = $dbConnection->insert_id;
+            //            echo "   inserted succesfully   ";
+            //            confirmQuery($productInsertQuery);
+            $sellerId = $dbConnection->insert_id;
         mysqli_commit($dbConnection);
 
-//        echo "inserted";
-//        echo "production Point id is $sellerId, ";
+        //        echo "inserted";
+        //        echo "production Point id is $sellerId, ";
         http_response_code(200);
         return true;
 
     }catch(mysqli_sql_exception $exception){
-//        echo "faild to add a new production point,";
+        //        echo "faild to add a new production point,";
         mysqli_rollback($dbConnection);
         var_dump($exception);
         throw $exception;
@@ -124,42 +138,42 @@ function editSellingPoint($sellerDetails){
 
 
     try{
-//        echo "trying to insert";
-//        echo "\n ".$sellerUpdateQuery."\n";
+        //        echo "trying to insert";
+        //        echo "\n ".$sellerUpdateQuery."\n";
         if (mysqli_query($dbConnection, $sellerUpdateQuery))
-//            echo "   updated succesfully   ";
-        //            confirmQuery($productInsertQuery);
-        //        $productionPointId = $dbConnection->insert_id;
-        //        $fileCount = count($fileNameArray);
-        //        $productionPointImageQuery = "INSERT INTO images (image_type, image_name, entity_id) VALUES ";
-        //        if ($fileCount > 0){
-        //            for ($i = 0; $i<$fileCount; $i++){
-        //                $imageName = $fileNameArray[$i];
-        //                $productionPointImageQuery .= "(2, '$imageName', $productionPointId)";
-        //                if ($i===$fileCount-1){
-        //                    $productionPointImageQuery .= ";";
-        //                }else{
-        //                    $productionPointImageQuery .= ", ";
-        //                }
-        //            }
-        //            echo $productionPointImageQuery;
-        //            if (mysqli_query($dbConnection, $productionPointImageQuery)){
-        //                echo "  Files inserted succesfully   ";
-        //                mysqli_commit($dbConnection);
-        //            }else{
-        //                echo "product creation failed at inserting images,";
-        //                mysqli_rollback($dbConnection);
-        //            }
-        //        }else{
-        mysqli_commit($dbConnection);
+            //            echo "   updated succesfully   ";
+            //            confirmQuery($productInsertQuery);
+            //        $productionPointId = $dbConnection->insert_id;
+            //        $fileCount = count($fileNameArray);
+            //        $productionPointImageQuery = "INSERT INTO images (image_type, image_name, entity_id) VALUES ";
+            //        if ($fileCount > 0){
+            //            for ($i = 0; $i<$fileCount; $i++){
+            //                $imageName = $fileNameArray[$i];
+            //                $productionPointImageQuery .= "(2, '$imageName', $productionPointId)";
+            //                if ($i===$fileCount-1){
+            //                    $productionPointImageQuery .= ";";
+            //                }else{
+            //                    $productionPointImageQuery .= ", ";
+            //                }
+            //            }
+            //            echo $productionPointImageQuery;
+            //            if (mysqli_query($dbConnection, $productionPointImageQuery)){
+            //                echo "  Files inserted succesfully   ";
+            //                mysqli_commit($dbConnection);
+            //            }else{
+            //                echo "product creation failed at inserting images,";
+            //                mysqli_rollback($dbConnection);
+            //            }
+            //        }else{
+            mysqli_commit($dbConnection);
 
-//        echo "updated";
+        //        echo "updated";
         //        echo "production Point id is $productionPointId, ";
         //        }
         http_response_code(200);
         return true;
     }catch(mysqli_sql_exception $exception){
-//        echo "faild to update seller,";
+        //        echo "faild to update seller,";
         mysqli_rollback($dbConnection);
         var_dump($exception);
         throw $exception;
@@ -194,6 +208,60 @@ function deleteSeller($seller){
     return false;
 }
 
+
+/*
+    FUNCTION    :   function to add selling point as favourite
+    INPUT       :   id of the seller to mark as favourite
+    OUTPUT      :   return true if marked as favourite
+*/
+function sellerMarkAsFavourite($seller){
+    ob_start();
+    global $dbConnection;
+
+
+
+    $favouriteQuery = "SELECT is_favourite from favourite_sellers WHERE seller_id = $seller->sellerId AND user_id = $seller->producerId;";
+
+    $favouriteSellerResult = mysqli_query($dbConnection, $favouriteQuery);
+    confirmQuery($favouriteSellerResult);
+
+    $favouriteCount = mysqli_num_rows($favouriteSellerResult);
+    if ($favouriteCount == 0){
+        $addFavouriteQuery = "INSERT INTO favourite_sellers (seller_id, user_id, is_favourite) VALUES ($seller->sellerId, $seller->producerId, true);";
+
+        $addFavouriteSellerResult = mysqli_query($dbConnection, $addFavouriteQuery);
+        confirmQuery($addFavouriteSellerResult);
+        if ($addFavouriteSellerResult == true){
+            ob_end_clean();
+            http_response_code(200);
+            return true;
+        }else{
+            http_response_code(400);
+            return "<script>console.log('PHP: No sellers found with the given seller id');</script>";
+        }
+
+    }else{
+        $makeFavouriteQuery = "UPDATE favourite_sellers fs SET fs.is_favourite = $seller->isFavourite WHERE fs.seller_id = $seller->sellerId AND fs.user_id = $seller->producerId;";
+        
+        $makeFavouriteSellerResult = mysqli_query($dbConnection, $makeFavouriteQuery);
+        confirmQuery($makeFavouriteSellerResult);
+        
+        if ($makeFavouriteSellerResult == true){
+            ob_end_clean();
+            http_response_code(200);
+            return true;
+        }else{
+            http_response_code(400);
+            return "<script>console.log('PHP: No sellers found with the given seller id');</script>";
+        }
+    }
+
+
+    http_response_code(400);
+    return false;
+}
+
+
 /*
     FUNCTION    :   Function to read all sellers by a user.
     INPUT       :   id of the user is passed from the web service
@@ -206,8 +274,9 @@ function getAllSellingPoints($seller){
     global $dbConnection;
     /* Start transaction */
 
-    $fetchAllSellerQuery = "SELECT s.seller_id, s.producer_id, s.seller_name, s.seller_description, s.street, s.building_number, s.city, s.zip, s.seller_location, s.seller_email, s.seller_website, s.mobile, s.phone, s.is_blocked, s.is_mon_available, s.mon_open_time, s.mon_close_time, s.is_tue_available, s.tue_open_time, s.tue_close_time, s.is_wed_available, s.wed_open_time, s.wed_close_time, s.is_thu_available, s.thu_open_time, s.thu_close_time, s.is_fri_available, s.fri_open_time, s.fri_close_time, s.is_sat_available, s.sat_open_time, s.sat_close_time, s.is_sun_available, s.sun_open_time, s.sun_close_time FROM sellers s
+    $fetchAllSellerQuery = "SELECT s.seller_id, s.producer_id, s.seller_name, s.seller_description, s.street, s.building_number, s.city, s.zip, s.seller_location, s.seller_email, s.seller_website, s.mobile, s.phone, s.is_blocked, s.is_mon_available, s.mon_open_time, s.mon_close_time, s.is_tue_available, s.tue_open_time, s.tue_close_time, s.is_wed_available, s.wed_open_time, s.wed_close_time, s.is_thu_available, s.thu_open_time, s.thu_close_time, s.is_fri_available, s.fri_open_time, s.fri_close_time, s.is_sat_available, s.sat_open_time, s.sat_close_time, s.is_sun_available, s.sun_open_time, s.sun_close_time, fs.is_favourite FROM sellers s
     LEFT JOIN images i on (i.entity_id = s.seller_id and i.image_type = 4)
+    LEFT JOIN favourite_sellers fs ON (fs.seller_id = s.seller_id AND fs.user_id = s.producer_id)
     WHERE s.producer_id = $seller->producerId
     GROUP BY s.seller_id ORDER BY s.created_date DESC";
 
@@ -252,15 +321,15 @@ function getSellerDetails($seller){
 
     global $dbConnection;
     /* Start transaction */
-    
+
     $fetchSellerDetailsQuery = "SELECT s.seller_id, s.producer_id, s.seller_name, s.seller_description, s.street, s.building_number, s.city, s.zip, ST_X(s.seller_location) as latitude, ST_Y(s.seller_location) as longitude, s.seller_email, s.seller_website, s.mobile, s.phone, s.is_blocked, s.is_mon_available, s.mon_open_time, s.mon_close_time, s.is_tue_available, s.tue_open_time, s.tue_close_time, s.is_wed_available, s.wed_open_time, s.wed_close_time, s.is_thu_available, s.thu_open_time, s.thu_close_time, s.is_fri_available, s.fri_open_time, s.fri_close_time, s.is_sat_available, s.sat_open_time, s.sat_close_time, s.is_sun_available, s.sun_open_time, s.sun_close_time FROM sellers s
     WHERE s.producer_id = $seller->producerId AND s.seller_id = $seller->sellerId";
-    
-    
 
-//    $fetchProductionPointQuery = "SELECT f.farm_id, f.producer_id, f.farm_name, f.farm_desc, f.farm_address, f.street, f.house_number, f.city, f.zip, ST_X(f.farm_location) as latitude, ST_Y(f.farm_location) as longitude, f.farm_area FROM farm_land f
-//    LEFT JOIN images i on (i.entity_id = f.farm_id and i.image_type = 2)
-//    WHERE f.producer_id = '$productionPoint->producerId' AND f.farm_id = $productionPoint->farmId";
+
+
+    //    $fetchProductionPointQuery = "SELECT f.farm_id, f.producer_id, f.farm_name, f.farm_desc, f.farm_address, f.street, f.house_number, f.city, f.zip, ST_X(f.farm_location) as latitude, ST_Y(f.farm_location) as longitude, f.farm_area FROM farm_land f
+    //    LEFT JOIN images i on (i.entity_id = f.farm_id and i.image_type = 2)
+    //    WHERE f.producer_id = '$productionPoint->producerId' AND f.farm_id = $productionPoint->farmId";
 
     $getSellerQuery = mysqli_query($dbConnection, $fetchSellerDetailsQuery);
     confirmQuery($getSellerQuery);

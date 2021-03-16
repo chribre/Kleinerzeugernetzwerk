@@ -257,41 +257,46 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     }
 
     function getProductsFromFarmLand(farmId){
+        const userId = localStorage.getItem('userId');
         document.getElementById("productList").innerHTML = "";
         $.ajax({
             type: "GET",
             url: "/kleinerzeugernetzwerk/controller/productController.php",
+            headers: {
+                'access-token': localStorage.getItem('token'),
+                'user_id': userId,
+            },
             data: { productionLocationId: farmId },
             dataType: "json",
             contentType: "application/json",
             cache: false,
             success: function( data ) {
                 if (data != null && data.length !== 0){
-                    
+
                     data.forEach(product => {
                         const productName = product.product_name;
                         const productDesc = product.product_description;
                         const productCategory = product.product_category;
-                        
+
                         const productListDiv = `<li class="">
-            <div>
-                <div class="overflow-hidden" width="100%">
-                    <img src="/kleinerzeugernetzwerk/images/default_products.jpg" alt="" width="240" class="img-rounded">
-                </div>
-                <div>
-                    <h3>${productName}</h3>
-                    <p>${productDesc}</p>
-                    <p>${productCategory}</p>
-                    <div class="row p-3">
-                        <p>Feature 1</p>
-                        <p>Feature 2</p>
-                        <p>Feature 3</p>
-                        <p>Feature 4</p>
-                    </div>
-                </div>
-            </div>
-        </li>`;
-                        
+<div>
+<div class="overflow-hidden" width="100%">
+<img src="/kleinerzeugernetzwerk/images/default_products.jpg" alt="" width="240" class="img-rounded">
+    </div>
+<div>
+<h3>${productName}</h3>
+<p>${productDesc}</p>
+<p>${productCategory}</p>
+<div class="row p-3">
+<p>Feature 1</p>
+<p>Feature 2</p>
+<p>Feature 3</p>
+<p>Feature 4</p>
+    </div>
+    </div>
+    </div>
+    </li>`;
+
                         document.getElementById("productList").innerHTML += productListDiv;
                     })
 
