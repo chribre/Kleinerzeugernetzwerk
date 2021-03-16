@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 14, 2021 at 01:26 PM
+-- Generation Time: Mar 16, 2021 at 07:01 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -125,7 +125,8 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (102, 16, 'AW0333010603cb6b9351a35.63444566', '2021-03-01 09:41:13'),
 (103, 16, 'DESKTOP-K1GQ9RH60437964eefcc0.82977263', '2021-03-06 12:45:24'),
 (104, 16, 'AW033301060460a0b840aa7.22438129', '2021-03-08 11:27:07'),
-(105, 16, 'AW033301060461a2fa3aa49.55906955', '2021-03-08 12:35:59');
+(105, 16, 'AW033301060461a2fa3aa49.55906955', '2021-03-08 12:35:59'),
+(106, 16, 'AW0333010604f2ca7528010.40973882', '2021-03-15 09:45:11');
 
 -- --------------------------------------------------------
 
@@ -162,7 +163,36 @@ INSERT INTO `farm_land` (`farm_id`, `producer_id`, `farm_name`, `farm_desc`, `fa
 (12, 16, '', '', 'Binsenwerder 1, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000338da266ecc64a406e0000c02d7f2a40, 0, '2020-12-19 11:28:54'),
 (14, 16, 'Monmouthshire', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Binsenwerder 2, Neubrandenburg, 17033', 'Sonnenkamp', '4A', 'Neubrandenburg', '17036', 0x000000000101000000e2d7ff0be4c64a40cdffffdf1c7f2a40, 0, '2020-12-19 11:29:54'),
 (15, 16, 'Salisbury', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Binsenwerder 2, Neubrandenburg, 17033', 'Dr. Brückner Weg', '5', 'Neubrandenburg', '17033', 0x00000000010100000097d559b1dbc64a40e8ffff5f337f2a40, 0, '2020-12-19 11:33:22'),
-(18, 16, 'Virginia Water', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Binsenwerder, 4-6, Neubrandenburg - 17033', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x0000000001010000004a0091d1ecc64a40010000a03e7f2a40, 0, '2021-02-26 14:07:04');
+(18, 16, 'Virginia Water', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Binsenwerder, 4-6, Neubrandenburg - 17033', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x0000000001010000004a0091d1ecc64a40010000a03e7f2a40, 0, '2021-02-26 14:07:04'),
+(20, 16, 'Test Point 568', 'test point', 'Am Oberbach, 14, Neubrandenburg - 17033', 'Am Oberbach', '14', 'Neubrandenburg', '17033', 0x000000000101000000ac0cfb6cf6c64a40af15106e32802a40, 0, '2021-03-15 14:16:52'),
+(21, 16, 'Test Point 321', 'test', 'Schwedenstraße, 9, Neubrandenburg - 17033', 'Schwedenstraße', '9', 'Neubrandenburg', '17033', 0x000000000101000000df4216c87ac64a40876c5f0077852a40, 0, '2021-03-15 14:55:29'),
+(22, 16, 'test 0000002', 'test', 'John-Schehr-Straße, 36, Neubrandenburg - 17033', 'John-Schehr-Straße', '36', 'Neubrandenburg', '17033', 0x000000000101000000e10edd97f2c54a40e01adcb7c58a2a40, 0, '2021-03-15 16:13:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favourite_sellers`
+--
+
+CREATE TABLE `favourite_sellers` (
+  `fav_seller_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `seller_id` int(11) NOT NULL,
+  `is_favourite` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `favourite_sellers`
+--
+
+INSERT INTO `favourite_sellers` (`fav_seller_id`, `user_id`, `seller_id`, `is_favourite`) VALUES
+(1, 16, 27, 1),
+(2, 16, 26, 0),
+(3, 16, 25, 1),
+(4, 16, 23, 0),
+(5, 16, 24, 0),
+(6, 16, 14, 1),
+(7, 16, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -280,8 +310,6 @@ INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_de
 (30, 16, 'uuuu', 'uuu', 1, 2, 0, 1, 11, 1, 3, 0, '2020-12-17 14:30:09'),
 (31, 16, 'Wild cranberries', 'dfsdfs', 1, 2, 0, 1, 11, 1, 3, 0, '2020-12-17 14:31:25'),
 (32, 16, 'Wild cranberries', 'ascasc', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:32:40'),
-(33, 16, 'TEST', 'test', 2, 2, 0, 1, 11, 51, 2, 0, '2020-12-17 14:33:36'),
-(34, 16, 'TEST', 'test', 2, 2, 0, 1, 11, 51, 2, 0, '2020-12-17 14:35:05'),
 (35, 16, 'Fruit spread forest fruit', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:39:16'),
 (36, 16, 'test', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:41:54'),
 (37, 16, 'test', '', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:51:05'),
@@ -291,7 +319,7 @@ INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_de
 (55, 16, 'test', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-18 16:37:19'),
 (57, 16, 'Minced Beef', 'Ground meat is used in a wide variety of dishes, by itself, or mixed with other ingredients. It may be formed into meatballs which are then fried, baked, steamed, or braised. They may be cooked on a skewer to produce dishes such as kabab koobideh, adana kebabı and ćevapi. It may be formed into patties which are then grilled or fried (hamburger), breaded and fried (menchi-katsu, Pozharsky cutlet), or braised (Salisbury steak). It may be formed into meatloaves or pâtés and baked. It may also be used as a filling or stuffing for meat pies and böreks, and also as stuffing. It may be made into meat sauce such as ragù, which in turn is used in dishes like pastitsio and moussaka, or mixed with sauce and served on a bun as a sloppy joe sandwich. It may also be cooked with beans, tomatoes, and/or spices to make chili con carne.', 2, 2, 0, 1, 2.58, 500, 2, 0, '2020-12-19 13:11:16'),
 (58, 16, 'test', 'test', 2, 4, 1, 1, 151, 1, 2, 0, '2020-12-28 14:07:14'),
-(87, 16, 'Coffee', 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffea species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. Dried coffee seeds are roasted to varying degrees, depending on the desired flavor.', 10, 15, 1, 1, 8, 1, 2, 0, '2021-01-05 16:21:49');
+(87, 16, 'Coffee test', 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffea species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. Dried coffee seeds are roasted to varying degrees, depending on the desired flavor.', 10, 15, 1, 1, 8, 1, 2, 0, '2021-01-05 16:21:49');
 
 -- --------------------------------------------------------
 
@@ -406,7 +434,31 @@ CREATE TABLE `sellers` (
 --
 
 INSERT INTO `sellers` (`seller_id`, `producer_id`, `seller_name`, `seller_description`, `street`, `building_number`, `city`, `zip`, `seller_location`, `seller_email`, `seller_website`, `mobile`, `phone`, `is_blocked`, `is_mon_available`, `mon_open_time`, `mon_close_time`, `is_tue_available`, `tue_open_time`, `tue_close_time`, `is_wed_available`, `wed_open_time`, `wed_close_time`, `is_thu_available`, `thu_open_time`, `thu_close_time`, `is_fri_available`, `fri_open_time`, `fri_close_time`, `is_sat_available`, `sat_open_time`, `sat_close_time`, `is_sun_available`, `sun_open_time`, `sun_close_time`, `created_date`) VALUES
-(1, 16, 'Bio Store NB', 'Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes.', 'Buttelstraße', '13', 'Belin', '18001', 0x00000000010100000068976f7d58c74a40a6d1e4620c8c2a40, 'Bio Store NB', 'www.biostore.co.in', '017630123456', '01255123456', 0, 0, '08:30:00', '10:30:00', 0, '10:00:00', '11:30:00', 0, '12:30:00', '12:30:00', 0, '08:00:00', '09:30:00', 0, '08:30:00', '08:30:00', 0, '08:33:00', '08:30:00', 0, '08:30:00', 2008, '2021-03-11 15:34:26');
+(1, 16, 'Bio Store NB', 'Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes.', 'Josef-Alterdinger-Straße', 'undefined', 'Neubrandenburg', '17033', 0x0000000001010000003cb85adacbc74a4041205244a76d2a40, 'Bio Store NB', 'www.biostore.co.in', '017630123456', '01255123456', 0, 0, '08:30:00', '10:30:00', 0, '10:00:00', '11:30:00', 0, '12:30:00', '12:30:00', 0, '08:00:00', '09:30:00', 0, '08:30:00', '08:30:00', 0, '08:33:00', '08:30:00', 0, '08:30:00', 2008, '2021-03-11 15:34:26'),
+(3, 16, 'New Point', 'test', 'Goethestraße', '2', 'Neubrandenburg', '17033', 0x00000000010100000049d4a822e6c64a40467b95492c822a40, 'New Point', 'www.test.com', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 1, '10:00:00', '11:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 14:13:50'),
+(5, 16, 'point 3', 'test', 'Große Wollweberstraße', '34', 'Neubrandenburg', '17033', 0x000000000101000000c077676c17c74a40d548eb51c4822a40, 'point 3', 'www.test.com', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 14:21:00'),
+(6, 16, 'New Point 254', 'test', '2.Werderstraße', '5', 'Neubrandenburg', '17033', 0x000000000101000000ae931c8d07c74a4061fdba25a5812a40, 'New Point 254', 'www.test.com', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 1, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 1, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 14:23:34'),
+(7, 16, 'New Point 023', 'test', 'Weidenweg', '8', 'Neubrandenburg', '17033', 0x00000000010100000053e6a1a4a6c64a40615c0de63a892a40, 'New Point 023', 'www.test.com', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 14:52:09'),
+(8, 16, 'fr', 'tes', 'Mühlenstraße', '9a', 'undefined', '17039', 0x0000000001010000008c7cf98c41c64a40e609fe1f4d562a40, 'fr', '', '', '', 0, 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 14:58:07'),
+(9, 16, 'New Point 789', 'test', 'Am Oberbach', '14', 'Neubrandenburg', '17033', 0x0000000001010000004a0091d1ecc64a401d54b392f37f2a40, 'New Point 789', 'www.test.com', '1234567890', '0000012345', 0, 1, '08:30:00', '08:30:00', 1, '10:00:00', '11:30:00', 1, '15:00:00', '17:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 14:59:02'),
+(10, 16, 'New Point 3', '', 'Binsenwerder', '2', 'Neubrandenburg', '17033', 0x0000000001010000003da503c8ddc64a4060941bfeb37e2a40, 'New Point 3', '', '', '', 0, 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 14:59:38'),
+(11, 16, 'Bio Store NB r', 'test', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x0000000001010000006bf29b49e0c64a400cb6d5b1777f2a40, 'Bio Store NB r', '', '', '', 0, 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:00:29'),
+(12, 16, 'bestf', 'test', 'Brodaer Straße', 'WH 2', 'Neubrandenburg', '17033', 0x000000000101000000df26d2c4d8c64a4012706bf77a7e2a40, 'bestf', '', '1234567890', '', 0, 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:02:06'),
+(13, 16, 'bestf', 'test', 'Brodaer Straße', 'WH 2', 'Neubrandenburg', '17033', 0x000000000101000000df26d2c4d8c64a4012706bf77a7e2a40, 'bestf', '', '1234567890', '0000012345', 0, 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:02:20'),
+(14, 16, 'bestf', 'test', 'Brodaer Straße', 'WH 2', 'Neubrandenburg', '17033', 0x000000000101000000df26d2c4d8c64a4012706bf77a7e2a40, 'bestf', '', '1234567890', '0000012345', 0, 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:02:28'),
+(15, 16, 'bestf', 'test', 'Brodaer Straße', 'WH 2', 'Neubrandenburg', '17033', 0x000000000101000000df26d2c4d8c64a4012706bf77a7e2a40, 'bestf', 'www.test.com', '1234567890', '0000012345', 0, 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:02:38'),
+(16, 16, 'New Point', 'test', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x00000000010100000049d4a822e6c64a4076c54a1c9f7f2a40, 'New Point', '', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:03:13'),
+(17, 16, 'New Point', 'test', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x00000000010100000049d4a822e6c64a4076c54a1c9f7f2a40, 'New Point', '', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 1, '00:00:00', '00:00:00', 1, '00:00:00', '00:00:00', 1, '00:00:00', '00:00:00', 1, '00:00:00', '00:00:00', 1, '00:00:00', '00:00:00', 1, '00:00:00', 0000, '2021-03-15 15:03:33'),
+(18, 16, 'New Point', 'test', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x00000000010100000049d4a822e6c64a4076c54a1c9f7f2a40, 'New Point', 'test', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 1, '00:00:00', '00:00:00', 1, '00:00:00', '00:00:00', 1, '00:00:00', '00:00:00', 1, '00:00:00', '00:00:00', 1, '00:00:00', '00:00:00', 1, '00:00:00', 0000, '2021-03-15 15:04:48'),
+(19, 16, 'New Point 7', 'test', 'Große Wollweberstraße', '47', 'Neubrandenburg', '17033', 0x00000000010100000017a68be40ac74a406ea9f468e0822a40, 'New Point 7', '', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 1, '10:00:00', '11:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:05:27'),
+(20, 16, 'New Point 7', 'test', 'Große Wollweberstraße', '47', 'Neubrandenburg', '17033', 0x00000000010100000017a68be40ac74a406ea9f468e0822a40, 'New Point 7', '', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 1, '10:00:00', '11:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:05:49'),
+(21, 16, 'New Point 7', 'test', 'Große Wollweberstraße', '47', 'Neubrandenburg', '17033', 0x000000000101000000531b41cf0bc74a4003b00111e2822a40, 'New Point 7', 'test', '1234567890', '0000012345', 0, 0, '06:30:00', '08:30:00', 0, '10:00:00', '11:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:06:14'),
+(22, 16, 'New Point 98', 'test', 'Otto-Vitense-Weg', 'undefined', 'Neubrandenburg', '17033', 0x0000000001010000005c731babb0c64a40ab28e8d49c842a40, 'New Point 98', 'www.test.com', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:23:53'),
+(23, 16, 'New Point 100', 'test', 'Schulstraße', '3 a', 'Neubrandenburg', '17033', 0x00000000010100000029faac3504c74a40ebdf4baa02852a40, 'New Point 100', 'www.biostore.co.in', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:31:42'),
+(24, 16, 'New Point', 'test', 'Zanderstraße', '10', 'Neubrandenburg', '17033', 0x0000000001010000005c731babb0c64a4010e7662167792a40, 'New Point', 'www.test.com', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:43:27'),
+(25, 16, 'New Point 7890', 'test', 'Am Blumenborn', '11', 'Neubrandenburg', '17033', 0x000000000101000000b011652a73c54a401ba965576c892a40, 'New Point 7890', 'www.test.com test', '1234567890', '0000012345', 0, 0, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:57:04'),
+(26, 16, 'test 8', 'test', 'Dümperstraße', '1', 'Neubrandenburg', '17033', 0x0000000001010000005c16b8e11cc74a40b238526cbb832a40, 'test 8', 'www.test.com', '1234567890', '0000012345', 0, 0, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:57:44'),
+(27, 16, 'test 5tr', 'test test', 'Otto-Vitense-Weg', 'undefined', 'Neubrandenburg', '17033', 0x00000000010100000068fe224da3c64a4043e16492a8842a40, 'test 5tr', 'www.biostore.co.in', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 1, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 16:08:01');
 
 -- --------------------------------------------------------
 
@@ -582,6 +634,14 @@ ALTER TABLE `farm_land`
   ADD KEY `user_to_farm_land` (`producer_id`);
 
 --
+-- Indexes for table `favourite_sellers`
+--
+ALTER TABLE `favourite_sellers`
+  ADD PRIMARY KEY (`fav_seller_id`),
+  ADD KEY `user_fk` (`user_id`),
+  ADD KEY `seller_fk` (`seller_id`);
+
+--
 -- Indexes for table `feature_type`
 --
 ALTER TABLE `feature_type`
@@ -649,13 +709,19 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
 -- AUTO_INCREMENT for table `farm_land`
 --
 ALTER TABLE `farm_land`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `favourite_sellers`
+--
+ALTER TABLE `favourite_sellers`
+  MODIFY `fav_seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `feature_type`
@@ -673,7 +739,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT for table `product_category`
@@ -685,13 +751,13 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `product_feature`
 --
 ALTER TABLE `product_feature`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
 
 --
 -- AUTO_INCREMENT for table `sellers`
 --
 ALTER TABLE `sellers`
-  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `units`
@@ -720,6 +786,13 @@ ALTER TABLE `user_credential`
 --
 ALTER TABLE `farm_land`
   ADD CONSTRAINT `user_to_farm_land` FOREIGN KEY (`producer_id`) REFERENCES `user` (`user_id`);
+
+--
+-- Constraints for table `favourite_sellers`
+--
+ALTER TABLE `favourite_sellers`
+  ADD CONSTRAINT `seller_fk` FOREIGN KEY (`seller_id`) REFERENCES `sellers` (`seller_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `products`
