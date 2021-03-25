@@ -346,7 +346,7 @@ Looks good!
 
 
             document.getElementById("signUpBtn").onclick = function () { 
-                if (document.getElementById('userId') == 0){
+                if (document.getElementById('userId').value == 0){
                     signUp();
                 }else{
                     saveUserProfile();

@@ -270,6 +270,7 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
             setFeatureList();
             setUnits();
             setProductionPointList();
+            getSellingPoints();
             var editProductId = 0;
             var editProductName = "";
             var editProductDesc = "";
@@ -280,7 +281,10 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
             var editProductQuantity = "";
             var editProductUnit = 0;
             var editIsProcessedProduct = false;
-            var editProductLocation = 0;            
+            var editProductLocation = 0;    
+
+            var editProductSellers = [];
+            var editProductSellerId = [];
 
             if (productId == 0){
                 $('#addNewProduct').modal('show');
@@ -298,9 +302,10 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
                 document.getElementById("unit").value = editProductUnit;
                 document.getElementById("isProcessed").checked = editIsProcessedProduct;
                 document.getElementById("productionPointOptions").value = editProductLocation;
-                
-                getSellingPoints();
-                
+
+                $('#productSellers').selectpicker('val', editProductSellers);
+                document.getElementById("sellerIdArray").setAttribute('data-id', editProductSellerId);
+
                 return 0;
             }
 
@@ -329,6 +334,18 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 
                         }
 
+
+                        const sellerData = data[2] != null ? data[2] : [];
+                        if (sellerData.length !=0){
+                            const sellerDataArray =  parseProductSellers(sellerData);
+
+                            editProductSellers = sellerDataArray.sellerArray;
+                            editProductSellerId = sellerDataArray.prductSellerIdArray;
+
+                        }
+
+
+
                         editProductId = productData.product_id != null ? productData.product_id : 0;
                         editProductName = productData.product_name != null ? productData.product_name : "";
                         editProductDesc = productData.product_description != null ? productData.product_description : "";
@@ -348,6 +365,10 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
                         $('#productCategory').selectpicker('val', editProductCategory);
                         $('#productFeatures').selectpicker('val', editProductFeatures);
                         document.getElementById("featureIdArray").setAttribute('data-id', editProductFeatureId);
+
+                        $('#productSellers').selectpicker('val', editProductSellers);
+                        document.getElementById("sellerIdArray").setAttribute('data-id', editProductSellerId);
+
 
                         document.getElementById("productPrice").value = editProductPrice;
                         document.getElementById("quantity").value = editProductQuantity;
@@ -436,6 +457,18 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
                 featureIdArray.push(featureId);
             });
             return {featureTypeArray, featureIdArray};
+        }
+
+        function parseProductSellers(sellers){
+            var sellerArray = [];
+            var prductSellerIdArray = [];
+            sellers.forEach(element => {
+                seller = element.seller_id !== null ? element.seller_id : 0;
+                productSellerId = element.id !== null ? element.id : 0;
+                sellerArray.push(seller);
+                prductSellerIdArray.push(productSellerId);
+            });
+            return {sellerArray, prductSellerIdArray};
         }
 
 

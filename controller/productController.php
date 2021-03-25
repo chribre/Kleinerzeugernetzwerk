@@ -48,10 +48,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
             break;
         } else{
             if ($product->productId == 0){
-                echo addProduct($product->producerId, $product->productName, $product->productDesc, $product->productCategory, $product->productionLocation, $product->isProcessedProduct, $product->isAvailable, $product->pricePerUnit, $product->quantityOfPrice, $product->unit, $product->productRating, $files, $product->productFeatures, $product->productFeaturesId);
+                //                                echo addProduct($product->producerId, $product->productName, $product->productDesc, $product->productCategory, $product->productionLocation, $product->isProcessedProduct, $product->isAvailable, $product->pricePerUnit, $product->quantityOfPrice, $product->unit, $product->productRating, $files, $product->productFeatures, $product->productFeaturesId, $product->productSellingPointIdArray, $product->productSellingPoints);
+                echo insertNewProduct($product);
                 break;
             }else{
-                echo updateProducts($product->producerId, $product->productId,$product->productName, $product->productDesc, $product->productCategory, $product->productionLocation, $product->isProcessedProduct, $product->isAvailable, $product->pricePerUnit, $product->quantityOfPrice, $product->unit, $product->productRating, $product->productFeatures, $product->productFeaturesId);
+                echo updateProducts($product->producerId, $product->productId,$product->productName, $product->productDesc, $product->productCategory, $product->productionLocation, $product->isProcessedProduct, $product->isAvailable, $product->pricePerUnit, $product->quantityOfPrice, $product->unit, $product->productRating, $product->productFeatures, $product->productFeaturesId, $product->productSellingPointIdArray, $product->productSellingPoints);
                 break;
             }
         }
@@ -106,6 +107,53 @@ function fetchAllProducts($userId){
 }
 
 
+function insertNewProduct($productDetails){
+    global $dbConnection;
+    if (isAccessTokenValid()){
+        $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, production_location, is_processed_product, is_available, price_per_unit, quantity_of_price, unit, product_rating)"
+            . "VALUES ($productDetails->producerId, '$productDetails->productName', '$productDetails->productDesc', $productDetails->productCategory, $productDetails->productionLocation, $productDetails->isProcessedProduct, $productDetails->isAvailable, $productDetails->pricePerUnit, $productDetails->quantityOfPrice, $productDetails->unit, $productDetails->productRating);";
+
+        try{
+            if (mysqli_query($dbConnection, $productInsertQuery)){
+                $productId = $dbConnection->insert_id;
+
+                $productFeaturesCount = count($productDetails->productFeatures);
+                $productFeatureIdCount = count($productDetails->productFeaturesId);
+                $productfeatureQuery = PrepareFeatureQuery($productDetails->productFeatures, $productDetails->productFeaturesId, $productId);
+
+
+                $productSellerCount = count($productDetails->productSellingPoints);
+                $productSellerIdCount = count($productDetails->productSellingPointIdArray);
+                $productSellerQuery = PrepareProductSellerQuery($productDetails->productSellingPointIdArray, $productDetails->productSellingPoints, $productId);
+
+
+                $featureAndSellerQuery = $productfeatureQuery.$productSellerQuery;
+
+                if ($productFeaturesCount > 0 || $productFeatureIdCount > 0 || $productSellerCount > 0 || $productSellerIdCount > 0){
+                    try{
+                        if (mysqli_multi_query($dbConnection, $featureAndSellerQuery)){
+                            http_response_code(200);
+                            return true;
+                        }
+                    }catch(mysqli_sql_exception $exception){
+                        http_response_code(400);
+                    }
+                }else{
+                    http_response_code(200);
+                    return true;
+                }
+            }
+        }catch(mysqli_sql_exception $exception){
+            http_response_code(400);
+        }
+    }else{
+        http_response_code(401);
+        return false;
+    }
+    http_response_code(400);
+    return false;
+}
+
 
 
 /*
@@ -113,85 +161,76 @@ function fetchAllProducts($userId){
     INPUT       :   product details fetched from add product modal
     OUTPUT      :   return true if product details, features and images are inserted into the database successully
 */
-function addProduct($producerId, $productName, $productDescription, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating, $fileNameArray, $productFeaturesArray, $productFeatureIdArray){
-    global $dbConnection;
-    /* Start transaction */
-    mysqli_begin_transaction($dbConnection);
-    if (isAccessTokenValid()){
-        mysqli_begin_transaction($dbConnection);
-        $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, production_location, is_processed_product, is_available, price_per_unit, quantity_of_price, unit, product_rating)"
-            . "VALUES ($producerId, '$productName', '$productDescription', $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating)";
-
-
-        try{
-//            echo "trying to insert";
-//            echo "\n ".$productInsertQuery."\n";
-            if (mysqli_query($dbConnection, $productInsertQuery))
-                echo "   inserted succesfully   ";
-            //            confirmQuery($productInsertQuery);
-            $productId = $dbConnection->insert_id;
-
-
-            $productFeaturesCount = count($productFeaturesArray);
-            $productfeatureQuery = PrepareFeatureQuery($productFeaturesArray, $productFeatureIdArray, $productId);//"INSERT INTO product_feature (product_id, feature_type) VALUES ";
-            if ($productFeaturesCount > 0){
-                //                for ($i = 0; $i<$productFeaturesCount; $i++){
-                //                    $featureType = $productFeaturesArray[$i];
-                //                    $productfeatureQuery .= "($productId, $featureType)";
-                //                    if ($i===$productFeaturesCount-1){
-                //                        $productfeatureQuery .= ";";
-                //                    }else{
-                //                        $productfeatureQuery .= ", ";
-                //                    }
-                //                }
-                //                echo $productfeatureQuery;
-                if (mysqli_multi_query($dbConnection, $productfeatureQuery)){
-//                    echo "  features inserted succesfully   ";
-                    //                    mysqli_commit($dbConnection);
-                }else{
-//                    echo "product creation failed at inserting images,";
-                    mysqli_rollback($dbConnection);
-                }
-            }
-
-            $fileCount = count($fileNameArray);
-            $productImageQuery = "INSERT INTO images (image_type, image_name, entity_id) VALUES ";
-            if ($fileCount > 0){
-                for ($i = 0; $i<$fileCount; $i++){
-                    $imageName = $fileNameArray[$i];
-                    $productImageQuery .= "(1, '$imageName', $productId)";
-                    if ($i===$fileCount-1){
-                        $productImageQuery .= ";";
-                    }else{
-                        $productImageQuery .= ", ";
-                    }
-                }
-                echo $productImageQuery;
-                if (mysqli_query($dbConnection, $productImageQuery)){
-//                    echo "  Files inserted succesfully   ";
-                    mysqli_commit($dbConnection);
-                }else{
-//                    echo "product creation failed at inserting images,";
-                    mysqli_rollback($dbConnection);
-                }
-            }else{
-                mysqli_commit($dbConnection);
-//                echo "inserted";
-//                echo "product id is $productId, ";
-            }
-
-        }catch(mysqli_sql_exception $exception){
-            echo "product creation failed,";
-            mysqli_rollback($dbConnection);
-            var_dump($exception);
-            throw $exception;
-
-        }
-
-    }
-    return true;
-}
-
+//function addProduct($producerId, $productName, $productDescription, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating, $fileNameArray, $productFeaturesArray, $productFeatureIdArray, $productSellerIdArray, $sellerIdArray){
+//    global $dbConnection;
+//    /* Start transaction */
+//    //    mysqli_begin_transaction($dbConnection);
+//    if (isAccessTokenValid()){
+//        mysqli_begin_transaction($dbConnection);
+//        $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, production_location, is_processed_product, is_available, price_per_unit, quantity_of_price, unit, product_rating)"
+//            . "VALUES ($producerId, '$productName', '$productDescription', $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating)";
+//
+//
+//        try{
+//            //            echo "trying to insert";
+//            //            echo "\n ".$productInsertQuery."\n";
+//            if (mysqli_query($dbConnection, $productInsertQuery))
+//                echo "   inserted succesfully   ";
+//            //            confirmQuery($productInsertQuery);
+//            $productId = $dbConnection->insert_id;
+//
+//
+//            $productFeaturesCount = count($productFeaturesArray);
+//            $productfeatureQuery = PrepareFeatureQuery($productFeaturesArray, $productFeatureIdArray, $productId);//"INSERT INTO product_feature (product_id, feature_type) VALUES ";
+//            if ($productFeaturesCount > 0){
+//
+//                if (mysqli_multi_query($dbConnection, $productfeatureQuery)){
+//                    //                    echo "  features inserted succesfully   ";
+//                    mysqli_commit($dbConnection);
+//                }else{
+//                    //                    echo "product creation failed at inserting images,";
+//                    mysqli_rollback($dbConnection);
+//                }
+//            }
+//
+//            $fileCount = count($fileNameArray);
+//            $productImageQuery = "INSERT INTO images (image_type, image_name, entity_id) VALUES ";
+//            if ($fileCount > 0){
+//                for ($i = 0; $i<$fileCount; $i++){
+//                    $imageName = $fileNameArray[$i];
+//                    $productImageQuery .= "(1, '$imageName', $productId)";
+//                    if ($i===$fileCount-1){
+//                        $productImageQuery .= ";";
+//                    }else{
+//                        $productImageQuery .= ", ";
+//                    }
+//                }
+//                echo $productImageQuery;
+//                if (mysqli_query($dbConnection, $productImageQuery)){
+//                    //                    echo "  Files inserted succesfully   ";
+//                    mysqli_commit($dbConnection);
+//                }else{
+//                    //                    echo "product creation failed at inserting images,";
+//                    mysqli_rollback($dbConnection);
+//                }
+//            }else{
+//                mysqli_commit($dbConnection);
+//                //                echo "inserted";
+//                //                echo "product id is $productId, ";
+//            }
+//
+//        }catch(mysqli_sql_exception $exception){
+//            echo "product creation failed,";
+//            mysqli_rollback($dbConnection);
+//            var_dump($exception);
+//            throw $exception;
+//
+//        }
+//
+//    }
+//    return true;
+//}
+//
 
 
 /*
@@ -199,7 +238,7 @@ function addProduct($producerId, $productName, $productDescription, $productCate
     INPUT       :   product details fetched from add product modal
     OUTPUT      :   return true if product details, features and images are upadated successully
 */
-function updateProducts($producerId, $productId, $productName, $productDesc, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $pricePerUnit, $quantityOfPrice, $unit, $productRating, $productFeatures, $featureIdArray){
+function updateProducts($producerId, $productId, $productName, $productDesc, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $pricePerUnit, $quantityOfPrice, $unit, $productRating, $productFeatures, $featureIdArray, $productSellerId, $productSellers){
 
     ob_start();
     global $dbConnection;
@@ -214,8 +253,10 @@ function updateProducts($producerId, $productId, $productName, $productDesc, $pr
 
 
         $productfeatureQuery = PrepareFeatureQuery($productFeatures, $featureIdArray, $productId);
-
         $updateProductQuery .= $productfeatureQuery;
+
+        $productSellerQuery = PrepareProductSellerQuery($productSellerId, $productSellers, $productId);
+        $updateProductQuery .= $productSellerQuery;
 
 
         //        mysqli_begin_transaction($dbConnection);
@@ -257,6 +298,8 @@ function getProduct($productId, $producerId){
 
         $getProductQuery .= "SELECT * FROM product_feature pf ";
         $getProductQuery .= "WHERE pf.product_id = $productId;";
+
+        $getProductQuery .= "SELECT * FROM product_sellers ps WHERE ps.product_id = $productId;";
         $productData = [];
         if (mysqli_multi_query($dbConnection, $getProductQuery)) {
             do {
@@ -303,6 +346,32 @@ function PrepareFeatureQuery($featureArray, $featureIdArray, $productId){
     return $featureQuery;
 }
 
+
+/*
+    FUNCTION    :   sellers for each product is handled in this function.
+                    by comapring the seller id and product seller id it decide whether it to update, delete or insert new feature.
+    INPUT       :   seller array from add product modal, existing seller ids of the product, product id
+    OUTPUT      :   return true if product details, features and images are upadated successully
+*/
+function PrepareProductSellerQuery($productSellerIdArray, $sellerIdArray, $productId){
+    $productSellerQuery = "";
+
+    for ($i = 0; $i < count($sellerIdArray); $i++){
+        $sellerId = $sellerIdArray[$i];
+        $productSellerId = $productSellerIdArray[$i];
+        if ($productSellerId == 0 && $sellerId != 0){
+            $productSellerQuery .= "INSERT INTO product_sellers (product_id, seller_id) VALUES ";
+            $productSellerQuery .= "($productId, $sellerId);";
+        }elseif($productSellerId != 0 && $sellerId != 0){
+            $productSellerQuery .= "UPDATE product_sellers  SET product_id = $productId, seller_id = $sellerId WHERE id = $productSellerId;";
+        }elseif($productSellerId != 0 && $sellerId == 0){
+            $productSellerQuery .= "DELETE FROM product_sellers WHERE id = $productSellerId;";
+        }
+    }
+    return $productSellerQuery;
+}
+
+
 /*
     FUNCTION    :   function deletes an entry of product by a user from the database
     INPUT       :   id of the product to be deleted
@@ -312,8 +381,7 @@ function deleteProduct($productId, $producerId){
     ob_start();
     global $dbConnection;
     if (isAccessTokenValid()){
-        $deleteProductQuery = "DELETE FROM products ";
-        $deleteProductQuery .= "WHERE product_id = $productId AND producer_id = $producerId;";
+        $deleteProductQuery = "DELETE FROM products WHERE product_id = $productId AND producer_id = $producerId;";
         $deleteProductResult = mysqli_query($dbConnection, $deleteProductQuery);
         confirmQuery($deleteProductResult);
         if ($deleteProductResult == true){
@@ -342,7 +410,7 @@ function fetchAllProductsFromLocation($locationId){
     if ($result = mysqli_query($dbConnection, $productsQuery)) {
         while ($row = $result->fetch_all(MYSQLI_ASSOC)) {
             $productData = $row;
-//            array_push ($productData, $row);
+            //            array_push ($productData, $row);
         }
     }
 

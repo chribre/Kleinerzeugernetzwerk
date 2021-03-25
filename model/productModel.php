@@ -23,6 +23,8 @@ class product{
     public $productRating;
     public $productFeatures = [];
     public $productFeaturesId = [];
+    public $productSellingPoints = [];
+    public $productSellingPointIdArray = [];
     public $isDelete = false;
 
 
@@ -82,7 +84,26 @@ class product{
         $this->isAvailable = true;
 
         $this->isDelete = isset($_POST['is_delete']) ? $_POST['is_delete'] : false;
+        $sellingPoints = isset($productDataDict['selling_points']) ? $productDataDict['selling_points'] : [];
+        $productSellerIds = isset($productDataDict['product_seller_ids']) ? $productDataDict['product_seller_ids'] : [];
+        
+        $sellerCount = count($sellingPoints);
+        $productSellerIdCount = count($productSellerIds);
 
+        $deleteSellerCount = $productSellerIdCount - $sellerCount;
+        $addNewSellerCount = $sellerCount - $productSellerIdCount;
+
+        if ($deleteSellerCount > 0){
+            $sellingPoints = array_pad($sellingPoints, $productSellerIdCount, 0);
+        }
+        if ($addNewSellerCount > 0){
+            $productSellerIds = array_pad($productSellerIds, $sellerCount, 0);
+        }
+
+        if (count($sellingPoints) > 0){
+            $this->productSellingPoints = $sellingPoints;
+            $this->productSellingPointIdArray = $productSellerIds;
+        }
     }
 
 

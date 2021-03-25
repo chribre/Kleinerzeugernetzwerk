@@ -292,6 +292,18 @@
         }else{
             productFeatureIdArray = [productFeatureId];
         }
+        
+        
+        var productSeller = $('#productSellers').val();
+        var productSellerId = $('#sellerIdArray').data('id');
+        var productSellerIdArray = [];
+        if (typeof productSellerId == "string"){
+            productSellerIdArray = productSellerId.split(',')
+        }else{
+            productSellerIdArray = [productSellerId];
+        }
+        
+        
 
         //        var productFeatureIdArray = productFeatureId.split(',') != null ? productFeatureId.split(',') : [productFeatureId];
         var productPrice = document.getElementById("productPrice").value;
@@ -328,6 +340,8 @@
                 product_category: productCategory,
                 product_features: productFeatures,
                 product_features_id: productFeatureIdArray,
+                selling_points: productSeller,
+                product_seller_ids: productSellerIdArray,
                 production_location: productLocation,
                 is_processed_product: isProcessedProduct,
                 price_per_unit: productPrice,
