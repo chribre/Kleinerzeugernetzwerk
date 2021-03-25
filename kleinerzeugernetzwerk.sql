@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 16, 2021 at 07:01 PM
+-- Generation Time: Mar 25, 2021 at 05:06 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -126,7 +126,10 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (103, 16, 'DESKTOP-K1GQ9RH60437964eefcc0.82977263', '2021-03-06 12:45:24'),
 (104, 16, 'AW033301060460a0b840aa7.22438129', '2021-03-08 11:27:07'),
 (105, 16, 'AW033301060461a2fa3aa49.55906955', '2021-03-08 12:35:59'),
-(106, 16, 'AW0333010604f2ca7528010.40973882', '2021-03-15 09:45:11');
+(106, 16, 'AW0333010604f2ca7528010.40973882', '2021-03-15 09:45:11'),
+(107, 16, 'AW033301060533d75221ed5.51353841', '2021-03-18 11:45:57'),
+(108, 48, 'AW0333010605c956a652670.74651197', '2021-03-25 13:51:38'),
+(109, 16, 'AW0333010605c99153ad346.24690297', '2021-03-25 14:07:17');
 
 -- --------------------------------------------------------
 
@@ -297,29 +300,16 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_description`, `product_category`, `production_location`, `is_processed_product`, `is_available`, `price_per_unit`, `quantity_of_price`, `unit`, `product_rating`, `created_date`) VALUES
-(7, 16, 'test', 'test data', 1, 2, 1, 1, 11, 0, 1, 0, '2020-12-07 14:04:40'),
-(20, 16, 'test', 'test435', 1, 3, 1, 1, 151, 1, 3, 0, '2020-12-16 10:49:34'),
-(21, 16, 'Wild cranberries', 'fruity & slightly dry in taste\r\nWild cranberries from certified wild collection', 8, 3, 1, 1, 1.65, 220, 2, 0, '2020-12-17 13:10:54'),
-(22, 16, 'Fruit spread forest fruit', 'There are many varieties of fruit preserves globally, distinguished by method of preparation, type of fruit used, and place in a meal. Sweet fruit preserves such as jams, jellies and marmalades are often eaten at breakfast on bread or as an ingredient of a pastry or dessert, whereas more savory and acidic preserves made from vegetable fruits such as tomato, squash or zucchini, are eaten alongside savoury foods such as cheese, cold meats, and curries.', 2, 5, 1, 1, 11, 500, 2, 0, '2020-12-17 13:14:49'),
-(23, 16, 'TEST', 'test', 1, 5, 0, 1, 11, 1, 2, 0, '2020-12-17 13:32:44'),
-(24, 16, 'test', 'test', 2, 5, 0, 1, 11, 1, 2, 0, '2020-12-17 13:33:48'),
-(25, 16, 'test', 'test', 1, 3, 0, 1, 11, 1, 3, 0, '2020-12-17 13:34:43'),
-(26, 16, 'test', 'test54545', 1, 3, 1, 1, 151, 1, 5, 0, '2020-12-17 13:40:36'),
-(27, 16, 'Wild cranberries23423', 'teste1231', 1, 2, 1, 1, 11, 1, 2, 0, '2020-12-17 13:51:04'),
-(28, 16, 'test', 'test new 23', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 13:52:45'),
-(30, 16, 'uuuu', 'uuu', 1, 2, 0, 1, 11, 1, 3, 0, '2020-12-17 14:30:09'),
-(31, 16, 'Wild cranberries', 'dfsdfs', 1, 2, 0, 1, 11, 1, 3, 0, '2020-12-17 14:31:25'),
-(32, 16, 'Wild cranberries', 'ascasc', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:32:40'),
-(35, 16, 'Fruit spread forest fruit', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:39:16'),
-(36, 16, 'test', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:41:54'),
-(37, 16, 'test', '', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:51:05'),
-(38, 16, 'test', '', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 14:52:20'),
-(40, 16, 'Fruit spread forest fruit123', '123', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-17 16:07:43'),
-(54, 16, 'test', 'test', 2, 2, 0, 1, 11, 1, 2, 0, '2020-12-18 16:36:03'),
-(55, 16, 'test', 'test', 1, 2, 0, 1, 11, 1, 2, 0, '2020-12-18 16:37:19'),
-(57, 16, 'Minced Beef', 'Ground meat is used in a wide variety of dishes, by itself, or mixed with other ingredients. It may be formed into meatballs which are then fried, baked, steamed, or braised. They may be cooked on a skewer to produce dishes such as kabab koobideh, adana kebabı and ćevapi. It may be formed into patties which are then grilled or fried (hamburger), breaded and fried (menchi-katsu, Pozharsky cutlet), or braised (Salisbury steak). It may be formed into meatloaves or pâtés and baked. It may also be used as a filling or stuffing for meat pies and böreks, and also as stuffing. It may be made into meat sauce such as ragù, which in turn is used in dishes like pastitsio and moussaka, or mixed with sauce and served on a bun as a sloppy joe sandwich. It may also be cooked with beans, tomatoes, and/or spices to make chili con carne.', 2, 2, 0, 1, 2.58, 500, 2, 0, '2020-12-19 13:11:16'),
-(58, 16, 'test', 'test', 2, 4, 1, 1, 151, 1, 2, 0, '2020-12-28 14:07:14'),
-(87, 16, 'Coffee test', 'Coffee is a brewed drink prepared from roasted coffee beans, the seeds of berries from certain Coffea species. When coffee berries turn from green to bright red in color – indicating ripeness – they are picked, processed, and dried. Dried coffee seeds are roasted to varying degrees, depending on the desired flavor.', 10, 15, 1, 1, 8, 1, 2, 0, '2021-01-05 16:21:49');
+(114, 16, 'test 3', 'test', 2, 18, 1, 1, 11, 2, 2, 0, '2021-03-23 11:09:58'),
+(115, 16, 'test 4', 'test', 1, 18, 1, 1, 11, 5, 3, 0, '2021-03-23 11:12:35'),
+(116, 16, 'test 5', 'test', 2, 18, 1, 1, 14, 10, 3, 0, '2021-03-23 11:14:20'),
+(117, 16, 'test 6', 'tets', 3, 18, 1, 1, 12, 3, 2, 0, '2021-03-23 11:17:45'),
+(118, 16, 'test 7', 'test', 2, 20, 1, 1, 14, 332, 2, 0, '2021-03-23 11:23:59'),
+(119, 16, 'test 102', 'test test', 3, 22, 1, 1, 14, 34, 3, 0, '2021-03-23 11:25:23'),
+(121, 16, 'test 13', 'tets', 5, 15, 1, 1, 11, 2, 2, 0, '2021-03-24 14:03:28'),
+(122, 16, 'test 14', 'test', 2, 20, 1, 1, 11, 4, 2, 0, '2021-03-24 14:05:26'),
+(123, 16, 'test 15', 'test', 1, 20, 1, 1, 455, 2, 1, 0, '2021-03-24 14:27:56'),
+(124, 16, 'test16', 'test', 2, 21, 1, 1, 21, 3, 2, 0, '2021-03-24 14:37:19');
 
 -- --------------------------------------------------------
 
@@ -368,21 +358,90 @@ CREATE TABLE `product_feature` (
 --
 
 INSERT INTO `product_feature` (`id`, `product_id`, `feature_type`) VALUES
-(32, 87, 1),
-(71, 87, 2),
-(72, 87, 3),
-(73, 87, 4),
-(74, 87, 8),
-(75, 87, 9),
-(76, 87, 10),
-(77, 87, 11),
-(78, 87, 12),
-(79, 87, 13),
-(80, 87, 14),
-(81, 87, 15),
-(82, 58, 4),
-(83, 58, 10),
-(84, 58, 12);
+(176, 114, 1),
+(177, 114, 2),
+(178, 114, 3),
+(179, 115, 1),
+(180, 115, 2),
+(181, 115, 3),
+(182, 115, 4),
+(183, 115, 8),
+(184, 115, 1),
+(185, 115, 2),
+(186, 115, 3),
+(187, 115, 4),
+(188, 115, 8),
+(189, 116, 1),
+(190, 116, 2),
+(191, 116, 4),
+(192, 116, 8),
+(193, 116, 12),
+(194, 116, 13),
+(195, 117, 1),
+(196, 117, 2),
+(197, 117, 3),
+(198, 117, 4),
+(199, 117, 8),
+(200, 117, 9),
+(201, 117, 10),
+(202, 118, 1),
+(203, 118, 2),
+(204, 118, 3),
+(205, 118, 4),
+(206, 118, 8),
+(207, 118, 9),
+(208, 119, 1),
+(209, 119, 2),
+(210, 119, 3),
+(211, 119, 4),
+(212, 119, 9),
+(213, 119, 10),
+(214, 119, 12),
+(215, 119, 13),
+(219, 121, 1),
+(220, 121, 2),
+(221, 121, 3),
+(222, 122, 2),
+(223, 122, 4),
+(224, 122, 9),
+(225, 122, 13),
+(226, 123, 1),
+(227, 123, 3),
+(228, 123, 4),
+(229, 123, 9),
+(230, 123, 10),
+(231, 123, 11),
+(232, 123, 13),
+(233, 124, 1),
+(234, 124, 3),
+(235, 124, 9),
+(236, 124, 13),
+(237, 124, 14);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `product_sellers`
+--
+
+CREATE TABLE `product_sellers` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `seller_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product_sellers`
+--
+
+INSERT INTO `product_sellers` (`id`, `product_id`, `seller_id`) VALUES
+(1, 118, 1),
+(3, 119, 1),
+(5, 121, 1),
+(31, 124, 3),
+(32, 124, 1),
+(46, 123, 28),
+(47, 123, 24);
 
 -- --------------------------------------------------------
 
@@ -458,7 +517,8 @@ INSERT INTO `sellers` (`seller_id`, `producer_id`, `seller_name`, `seller_descri
 (24, 16, 'New Point', 'test', 'Zanderstraße', '10', 'Neubrandenburg', '17033', 0x0000000001010000005c731babb0c64a4010e7662167792a40, 'New Point', 'www.test.com', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:43:27'),
 (25, 16, 'New Point 7890', 'test', 'Am Blumenborn', '11', 'Neubrandenburg', '17033', 0x000000000101000000b011652a73c54a401ba965576c892a40, 'New Point 7890', 'www.test.com test', '1234567890', '0000012345', 0, 0, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:57:04'),
 (26, 16, 'test 8', 'test', 'Dümperstraße', '1', 'Neubrandenburg', '17033', 0x0000000001010000005c16b8e11cc74a40b238526cbb832a40, 'test 8', 'www.test.com', '1234567890', '0000012345', 0, 0, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:57:44'),
-(27, 16, 'test 5tr', 'test test', 'Otto-Vitense-Weg', 'undefined', 'Neubrandenburg', '17033', 0x00000000010100000068fe224da3c64a4043e16492a8842a40, 'test 5tr', 'www.biostore.co.in', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 1, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 16:08:01');
+(27, 16, 'test 5tr', 'test test', 'Otto-Vitense-Weg', 'undefined', 'Neubrandenburg', '17033', 0x00000000010100000068fe224da3c64a4043e16492a8842a40, 'test 5tr', 'www.biostore.co.in', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 1, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 16:08:01'),
+(28, 16, 'test zz', 'test', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x0000000001010000006bf29b49e0c64a402886dc00797f2a40, 'test zz', 'www.test.com', '000000000000', '00000000000000', 0, 1, '06:30:00', '09:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-24 09:12:23');
 
 -- --------------------------------------------------------
 
@@ -561,7 +621,8 @@ INSERT INTO `user` (`user_id`, `salutations`, `first_name`, `middle_name`, `last
 (44, '', 'Fredz', '', 'thekkekkara', '0000-00-00', 'Brodaer Straße', '', '17033', '2', '', '', 'lg2003603', '', 0, 0, 0, '2021-02-16 15:06:21', '', NULL),
 (45, '', 'Fredz', '', 'thekkekkara', '0000-00-00', 'Brodaer Straße', '', '17033', '2', '', '', 'lg2003604', '', 0, 0, 0, '2021-02-16 15:07:45', '', NULL),
 (46, '', 'Fredz', '', 'thekkekkara', '0000-00-00', 'Brodaer Straße', '', '17033', '2', '', '', 'lg2003605', '', 0, 0, 0, '2021-02-16 15:08:44', '', NULL),
-(47, '', 'Fredz', NULL, 'thekkekkara', '0000-00-00', 'Brodaer Straße', '4', '17033', '2', 'DE', '1234567890', 'testm', '12345896556', 0, 0, 0, '2021-02-18 14:25:26', '', 'testJennifer Campbell serves in a management position at Campbell Grain & Livestock.  Some days she is at the top of the corporate ladder making high-powered decisions about which child\'s turn it is feed the calves and what she is fixing for supper. Most days, however, are spent barely hanging on to the bottom rung with one hand while multi-tasking with the other. She is on call 24/7 for parts, rides, hog duty, cattle duty, running equipment, meal preparation and just about any other issue that arises.\r\n\r\nShe willingly admits that her house is never clean and jumps at any opportunity to help on the farm, which includes not only driving equipment but also pressure washing hog barns, all in the name of getting out of housework.  Her dream is to have a home she can pressure wash to keep clean.  She also spends an inordinate amount of time on social media sharing the ins and outs of life on the farm.');
+(47, '', 'Fredz', NULL, 'thekkekkara', '0000-00-00', 'Brodaer Straße', '4', '17033', '2', 'DE', '1234567890', 'testm', '12345896556', 0, 0, 0, '2021-02-18 14:25:26', '', 'testJennifer Campbell serves in a management position at Campbell Grain & Livestock.  Some days she is at the top of the corporate ladder making high-powered decisions about which child\'s turn it is feed the calves and what she is fixing for supper. Most days, however, are spent barely hanging on to the bottom rung with one hand while multi-tasking with the other. She is on call 24/7 for parts, rides, hog duty, cattle duty, running equipment, meal preparation and just about any other issue that arises.\r\n\r\nShe willingly admits that her house is never clean and jumps at any opportunity to help on the farm, which includes not only driving equipment but also pressure washing hog barns, all in the name of getting out of housework.  Her dream is to have a home she can pressure wash to keep clean.  She also spends an inordinate amount of time on social media sharing the ins and outs of life on the farm.'),
+(48, '', 'Fredy', NULL, 'davis', '0000-00-00', 'Brodaer Straße', '2', '17033', 'Neubrandenburg', 'Germany', '017630142345', 'test61', '017630142345', 0, 0, 0, '2021-03-25 13:51:19', '', 'test');
 
 -- --------------------------------------------------------
 
@@ -614,7 +675,8 @@ INSERT INTO `user_credential` (`id`, `user_id`, `user_name`, `password`) VALUES
 (31, 44, 'lg2003603', '$2y$10$3MmIhnVii2pedWi2QTVX3.bS7pM2r98Oc/W0aWNrMdHm9q.wOwQZe'),
 (32, 45, 'lg2003604', '$2y$10$VCV0O/VyRT5H7cfFR/aUruw7rmGE1OzxhNmuriUoo3JMIfImuX2v2'),
 (33, 46, 'lg2003605', '$2y$10$2whQxFHJKJSL6sYSbA/FhOOAischlsIkUjggj2NhqKfH4y4NKo1tm'),
-(34, 47, 'testm', '$2y$10$A9ae.Vqjgsckang6uSQRj.D0nqY9s2puDGtn3GoGR3CbDgAev4R1m');
+(34, 47, 'testm', '$2y$10$A9ae.Vqjgsckang6uSQRj.D0nqY9s2puDGtn3GoGR3CbDgAev4R1m'),
+(35, 48, 'test61', '$2y$10$DWS.kAuDE0Ge.eahkTKuUedh85Gv2PQZHJoSQ5yLxCZdoxaP0oQk.');
 
 --
 -- Indexes for dumped tables
@@ -676,6 +738,14 @@ ALTER TABLE `product_feature`
   ADD KEY `product_feature_type_fk` (`feature_type`);
 
 --
+-- Indexes for table `product_sellers`
+--
+ALTER TABLE `product_sellers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_seller_product_fk` (`product_id`),
+  ADD KEY `product_seller_seller_fk` (`seller_id`);
+
+--
 -- Indexes for table `sellers`
 --
 ALTER TABLE `sellers`
@@ -709,7 +779,7 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
 
 --
 -- AUTO_INCREMENT for table `farm_land`
@@ -739,7 +809,7 @@ ALTER TABLE `images`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT for table `product_category`
@@ -751,13 +821,19 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `product_feature`
 --
 ALTER TABLE `product_feature`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=254;
+
+--
+-- AUTO_INCREMENT for table `product_sellers`
+--
+ALTER TABLE `product_sellers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `sellers`
 --
 ALTER TABLE `sellers`
-  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `units`
@@ -769,13 +845,13 @@ ALTER TABLE `units`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `user_credential`
 --
 ALTER TABLE `user_credential`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- Constraints for dumped tables
@@ -807,6 +883,13 @@ ALTER TABLE `products`
 ALTER TABLE `product_feature`
   ADD CONSTRAINT `product_feature_type_fk` FOREIGN KEY (`feature_type`) REFERENCES `feature_type` (`feature_type_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `product_fk` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `product_sellers`
+--
+ALTER TABLE `product_sellers`
+  ADD CONSTRAINT `product_seller_product_fk` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `product_seller_seller_fk` FOREIGN KEY (`seller_id`) REFERENCES `sellers` (`seller_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sellers`
