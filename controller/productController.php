@@ -12,6 +12,8 @@ session_start();
 include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
 include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/productModel.php");
 
+$productUplaodLocation = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/product_img/";
+$productImagepath = "http://localhost/kleinerzeugernetzwerk_uploads/product_img/";
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         if ((isset($_GET['productId'])) && $_GET['productId'] !== 0){
@@ -52,7 +54,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 echo insertNewProduct($product);
                 break;
             }else{
-                echo updateProducts($product->producerId, $product->productId,$product->productName, $product->productDesc, $product->productCategory, $product->productionLocation, $product->isProcessedProduct, $product->isAvailable, $product->pricePerUnit, $product->quantityOfPrice, $product->unit, $product->productRating, $product->productFeatures, $product->productFeaturesId, $product->productSellingPointIdArray, $product->productSellingPoints);
+                echo updateProducts($product->producerId, $product->productId,$product->productName, $product->productDesc, $product->productCategory, $product->productionLocation, $product->isProcessedProduct, $product->isAvailable, $product->pricePerUnit, $product->quantityOfPrice, $product->unit, $product->productRating, $product->productFeatures, $product->productFeaturesId, $product->productSellingPointIdArray, $product->productSellingPoints, $product->productImageNameArray, $product->productImageIdArray);
                 break;
             }
         }
@@ -107,8 +109,16 @@ function fetchAllProducts($userId){
 }
 
 
+/*
+    FUNCTION    :   to Add product details to product table
+    INPUT       :   product details fetched from add product modal
+    OUTPUT      :   return true if product details, features and images are inserted into the database successully
+*/
 function insertNewProduct($productDetails){
     global $dbConnection;
+    global $productUplaodLocation;
+    global $productImagepath;
+        
     if (isAccessTokenValid()){
         $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, production_location, is_processed_product, is_available, price_per_unit, quantity_of_price, unit, product_rating)"
             . "VALUES ($productDetails->producerId, '$productDetails->productName', '$productDetails->productDesc', $productDetails->productCategory, $productDetails->productionLocation, $productDetails->isProcessedProduct, $productDetails->isAvailable, $productDetails->pricePerUnit, $productDetails->quantityOfPrice, $productDetails->unit, $productDetails->productRating);";
@@ -129,7 +139,14 @@ function insertNewProduct($productDetails){
 
                 $featureAndSellerQuery = $productfeatureQuery.$productSellerQuery;
 
-                if ($productFeaturesCount > 0 || $productFeatureIdCount > 0 || $productSellerCount > 0 || $productSellerIdCount > 0){
+                $fileNames = uploadPictures($productDetails->productImageNameArray, $productUplaodLocation);
+                $imageQuery = createFileUploadQuery($productDetails->productImageNameArray, $productDetails->productImageIdArray, $productImagepath, $productId, 2);
+
+                $productImageCount = count($productDetails->productImageNameArray);
+                $productImageIdCount = count($productDetails->productImageIdArray);
+
+                $featureAndSellerQuery .= $imageQuery;
+                if ($productFeaturesCount > 0 || $productFeatureIdCount > 0 || $productSellerCount > 0 || $productSellerIdCount > 0 || $productImageCount > 0 || $productImageIdCount > 0){
                     try{
                         if (mysqli_multi_query($dbConnection, $featureAndSellerQuery)){
                             http_response_code(200);
@@ -155,131 +172,121 @@ function insertNewProduct($productDetails){
 }
 
 
-
-/*
-    FUNCTION    :   to Add product details to product table
-    INPUT       :   product details fetched from add product modal
-    OUTPUT      :   return true if product details, features and images are inserted into the database successully
-*/
-//function addProduct($producerId, $productName, $productDescription, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating, $fileNameArray, $productFeaturesArray, $productFeatureIdArray, $productSellerIdArray, $sellerIdArray){
-//    global $dbConnection;
-//    /* Start transaction */
-//    //    mysqli_begin_transaction($dbConnection);
-//    if (isAccessTokenValid()){
-//        mysqli_begin_transaction($dbConnection);
-//        $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, production_location, is_processed_product, is_available, price_per_unit, quantity_of_price, unit, product_rating)"
-//            . "VALUES ($producerId, '$productName', '$productDescription', $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $productPrice, $priceQuantity, $unit, $productRating)";
+///*
+//    FUNCTION    :   to add pictures into file storage
+//    INPUT       :   pictures
+//    OUTPUT      :   return true if files uplaoded successfully successully
+//*/
+//function uploadProductPictures($productImageNameArray){
+//    global $productUplaodLocation;
+//    $fileNameArray = [];
+//    $productPictures = $_FILES['files']['name'] ? $_FILES: [];
+//    if (count($productPictures['files']['name']) > 0){
+//        $totalFiles = count($_FILES['files']['name']);
+//        for( $i=0 ; $i < $totalFiles ; $i++ ) {
 //
+//            //Get the temp file path
+//            $tmpFilePath = $_FILES['files']['tmp_name'][$i];
 //
-//        try{
-//            //            echo "trying to insert";
-//            //            echo "\n ".$productInsertQuery."\n";
-//            if (mysqli_query($dbConnection, $productInsertQuery))
-//                echo "   inserted succesfully   ";
-//            //            confirmQuery($productInsertQuery);
-//            $productId = $dbConnection->insert_id;
+//            //Make sure we have a file path
+//            if ($tmpFilePath != ""){
+//                //create a new unique file name
+//                $newFileName = $productImageNameArray[$i] ? $productImageNameArray[$i] : uniqid();
+//                //Setup our new file path
+//                $newFilePath = $productUplaodLocation . $newFileName;
 //
+//                //Upload the file into the temp dir
+//                if(move_uploaded_file($tmpFilePath, $newFilePath)) {
+//                    array_push($fileNameArray, $newFileName);
+//                    //Handle other code here
 //
-//            $productFeaturesCount = count($productFeaturesArray);
-//            $productfeatureQuery = PrepareFeatureQuery($productFeaturesArray, $productFeatureIdArray, $productId);//"INSERT INTO product_feature (product_id, feature_type) VALUES ";
-//            if ($productFeaturesCount > 0){
-//
-//                if (mysqli_multi_query($dbConnection, $productfeatureQuery)){
-//                    //                    echo "  features inserted succesfully   ";
-//                    mysqli_commit($dbConnection);
-//                }else{
-//                    //                    echo "product creation failed at inserting images,";
-//                    mysqli_rollback($dbConnection);
 //                }
 //            }
-//
-//            $fileCount = count($fileNameArray);
-//            $productImageQuery = "INSERT INTO images (image_type, image_name, entity_id) VALUES ";
-//            if ($fileCount > 0){
-//                for ($i = 0; $i<$fileCount; $i++){
-//                    $imageName = $fileNameArray[$i];
-//                    $productImageQuery .= "(1, '$imageName', $productId)";
-//                    if ($i===$fileCount-1){
-//                        $productImageQuery .= ";";
-//                    }else{
-//                        $productImageQuery .= ", ";
-//                    }
-//                }
-//                echo $productImageQuery;
-//                if (mysqli_query($dbConnection, $productImageQuery)){
-//                    //                    echo "  Files inserted succesfully   ";
-//                    mysqli_commit($dbConnection);
-//                }else{
-//                    //                    echo "product creation failed at inserting images,";
-//                    mysqli_rollback($dbConnection);
-//                }
-//            }else{
-//                mysqli_commit($dbConnection);
-//                //                echo "inserted";
-//                //                echo "product id is $productId, ";
-//            }
-//
-//        }catch(mysqli_sql_exception $exception){
-//            echo "product creation failed,";
-//            mysqli_rollback($dbConnection);
-//            var_dump($exception);
-//            throw $exception;
-//
 //        }
-//
 //    }
-//    return true;
+//    return $fileNameArray;
 //}
-//
-
+///*
+//    FUNCTION    :   to add product image path and file names into database
+//    INPUT       :   file names and product id
+//    OUTPUT      :   return query string to add to database
+//*/
+//function createFileUploadQuery($fileNames, $fileIdArray, $productId){
+//    $fileQuery = "";
+//    global $productUplaodLocation;
+//    global $productImagepath;
+//    for ($i = 0; $i < count($fileIdArray); $i++){
+//        $fileName = $fileNames[$i];
+//        $fileId = $fileIdArray[$i];
+//        $filePath = $productImagepath . $fileName;
+//        if ($fileId == 0 && $fileName != ""){
+//            $fileQuery .= "INSERT INTO images (image_type, image_name, image_path, entity_id) VALUES ";
+//            $fileQuery .= "(2, '$fileName', '$filePath', $productId);";
+//        }elseif($fileId != 0 && $fileName != ""){
+//            $fileQuery .= "UPDATE images  SET image_type = 2, image_name = '$fileName', image_path = '$filePath', entity_id =  $productId WHERE image_id = $fileId;";
+//        }elseif($fileId != 0 && $fileName == ""){
+//            $fileQuery .= "DELETE FROM images WHERE image_id = $fileId;";
+//        }
+//    }
+//    return $fileQuery;
+//}
 
 /*
     FUNCTION    :   to edit product details of an existing product in the database
     INPUT       :   product details fetched from add product modal
     OUTPUT      :   return true if product details, features and images are upadated successully
 */
-function updateProducts($producerId, $productId, $productName, $productDesc, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $pricePerUnit, $quantityOfPrice, $unit, $productRating, $productFeatures, $featureIdArray, $productSellerId, $productSellers){
+function updateProducts($producerId, $productId, $productName, $productDesc, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $pricePerUnit, $quantityOfPrice, $unit, $productRating, $productFeatures, $featureIdArray, $productSellerId, $productSellers, $productImageNameArray, $productImageIdArray){
 
     ob_start();
     global $dbConnection;
+    global $productUplaodLocation;
+    global $productImagepath;
+
+        if (isAccessTokenValid()){
+
+            $updateProductQuery = "UPDATE products ";
+            $updateProductQuery .= "SET product_name = '$productName', product_description = '$productDesc', product_category = $productCategory, production_location = $productionLocation, is_processed_product = $isProcessedProduct, is_available = $isAvailable, price_per_unit = $pricePerUnit, quantity_of_price = $quantityOfPrice, unit = $unit, product_rating = $productRating ";
+            $updateProductQuery .= "WHERE product_id = $productId AND producer_id = $producerId;";
 
 
+            $productfeatureQuery = PrepareFeatureQuery($productFeatures, $featureIdArray, $productId);
+            $updateProductQuery .= $productfeatureQuery;
 
-    if (isAccessTokenValid()){
-
-        $updateProductQuery = "UPDATE products ";
-        $updateProductQuery .= "SET product_name = '$productName', product_description = '$productDesc', product_category = $productCategory, production_location = $productionLocation, is_processed_product = $isProcessedProduct, is_available = $isAvailable, price_per_unit = $pricePerUnit, quantity_of_price = $quantityOfPrice, unit = $unit, product_rating = $productRating ";
-        $updateProductQuery .= "WHERE product_id = $productId AND producer_id = $producerId;";
-
-
-        $productfeatureQuery = PrepareFeatureQuery($productFeatures, $featureIdArray, $productId);
-        $updateProductQuery .= $productfeatureQuery;
-
-        $productSellerQuery = PrepareProductSellerQuery($productSellerId, $productSellers, $productId);
-        $updateProductQuery .= $productSellerQuery;
+            $productSellerQuery = PrepareProductSellerQuery($productSellerId, $productSellers, $productId);
+            $updateProductQuery .= $productSellerQuery;
 
 
-        //        mysqli_begin_transaction($dbConnection);
+            $fileNames = uploadPictures($productImageNameArray, $productUplaodLocation);
+            $imageQuery = createFileUploadQuery($productImageNameArray, $productImageIdArray, $productImagepath, $productId, 2);
 
-        try{
-            //            echo "<script>console.log('PHP: " . $updateProductQuery . "');</script>";
-            if (mysqli_multi_query($dbConnection, $updateProductQuery)){
-                //                mysqli_commit($dbConnection);
-                echo "<script>console.log('PHP: Successfully updated prodcut details');</script>";
-            }else{
-                echo "<script>console.log('PHP: faield to update prodcut details');</script>";
-                //                mysqli_rollback($dbConnection);
+            $productImageCount = count($productImageNameArray);
+            $productImageIdCount = count($productImageIdArray);
+
+            $updateProductQuery .= $imageQuery;
+
+
+            //        mysqli_begin_transaction($dbConnection);
+
+            try{
+                //            echo "<script>console.log('PHP: " . $updateProductQuery . "');</script>";
+                if (mysqli_multi_query($dbConnection, $updateProductQuery)){
+                    //                mysqli_commit($dbConnection);
+                    echo "<script>console.log('PHP: Successfully updated prodcut details');</script>";
+                }else{
+                    echo "<script>console.log('PHP: faield to update prodcut details');</script>";
+                    //                mysqli_rollback($dbConnection);
+                }
+            }catch(mysqli_sql_exception $exception){
+                echo "<script>console.log('PHP: faield to update prodcut details exception');</script>";
+                //            mysqli_rollback($dbConnection);
+                var_dump($exception);
+                throw $exception;
+
             }
-        }catch(mysqli_sql_exception $exception){
-            echo "<script>console.log('PHP: faield to update prodcut details exception');</script>";
-            //            mysqli_rollback($dbConnection);
-            var_dump($exception);
-            throw $exception;
-
+        }else{
+            echo "<script>console.log('PHP: Authentication Failed');</script>";
         }
-    }else{
-        echo "<script>console.log('PHP: Authentication Failed');</script>";
-    }
 }
 
 
@@ -300,6 +307,8 @@ function getProduct($productId, $producerId){
         $getProductQuery .= "WHERE pf.product_id = $productId;";
 
         $getProductQuery .= "SELECT * FROM product_sellers ps WHERE ps.product_id = $productId;";
+
+        $getProductQuery.= "SELECT * FROM images i WHERE i.entity_id = $productId AND i.image_type = 2;";
         $productData = [];
         if (mysqli_multi_query($dbConnection, $getProductQuery)) {
             do {

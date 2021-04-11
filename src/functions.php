@@ -8,6 +8,7 @@
 ****************************************************************/
 
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/config.php");
+//include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/ftp_config.php");
 
 /*
     FUNCTION    :   To redirect to different location.
@@ -549,39 +550,96 @@ function getAllProducersAndSellers(){
         echo "No products found. Try Adding some products";
     }
 }
-//function updateProducts($productId, $producerId, $productName, $productDesc, $productCategory, $productionLocation, $isProcessedProduct, $isAvailable, $pricePerUnit, $quantityOfPrice, $unit, $productRating){
-//    
-//    ob_start();
-//    global $dbConnection;
-//    
-//    $updateProductQuery = "UPDATE products";
-//    $updateProductQuery .= "SET product_name = '$productName', product_description = '$productDesc', product_category = $productCategory, production_location = $productionLocation, is_processed_product = $isProcessedProduct, is_available = $isAvailable, price_per_unit = $pricePerUnit, quantity_of_price = $quantityOfPrice, unit = $unit, product_rating = $productRating";
-//    $updateProductQuery .= "WHERE product_id = $productId AND producer_id = $producerId;";
-//    
-//    if (isTokenValid()){
-//        mysqli_begin_transaction($dbConnection);
-//
-//        try{
-//            echo "<script>console.log('PHP: " . $updateProductQuery . "');</script>";
-//            if (mysqli_query($dbConnection, $updateProductQuery)){
-//                echo "<script>console.log('PHP: Successfully updated prodcut details');</script>";
-//            }else{
-//                echo "<script>console.log('PHP: faield to update prodcut details');</script>";
-//                mysqli_rollback($dbConnection);
-//            }
-//        }catch(mysqli_sql_exception $exception){
-//            echo "<script>console.log('PHP: faield to update prodcut details exception');</script>";
-//            mysqli_rollback($dbConnection);
-//            var_dump($exception);
-//            throw $exception;
-//
-//        }
-//    }else{
-//        echo "<script>console.log('PHP: Authentication Failed');</script>";
-//    }
-//}
 
 
+/*
+    FUNCTION    :   to add pictures into file storage
+    INPUT       :   pictures
+    OUTPUT      :   return true if files uplaoded successfully successully
+*/
+function uploadPictures($fileNames, $fileUploadLocation){
+    $fileNameArray = [];
+    $productPictures = $_FILES['files']['name'] ? $_FILES: [];
+    if (count($productPictures['files']['name']) > 0){
+        $totalFiles = count($_FILES['files']['name']);
+        for( $i=0 ; $i < $totalFiles ; $i++ ) {
 
+            //Get the temp file path
+            $tmpFilePath = $_FILES['files']['tmp_name'][$i];
+
+            //Make sure we have a file path
+            if ($tmpFilePath != ""){
+                //create a new unique file name
+                $newFileName = $fileNames[$i] ? $fileNames[$i] : uniqid();
+                //Setup our new file path
+                $newFilePath = $fileUploadLocation . $newFileName;
+
+                //Upload the file into the temp dir
+                if(move_uploaded_file($tmpFilePath, $newFilePath)) {
+                    array_push($fileNameArray, $newFileName);
+                    //Handle other code here
+
+                }
+            }
+        }
+    }
+    return $fileNameArray;
+}
+/*
+    FUNCTION    :   to add product image path and file names into database
+    INPUT       :   file names and product id
+    OUTPUT      :   return query string to add to database
+*/
+function createFileUploadQuery($fileNames, $fileIdArray, $fileAccessPath, $entityId, $entityType){
+    $fileQuery = "";
+    for ($i = 0; $i < count($fileIdArray); $i++){
+        $fileName = $fileNames[$i];
+        $fileId = $fileIdArray[$i];
+        $filePath = $fileAccessPath . $fileName;
+        if ($fileId == 0 && $fileName != ""){
+            $fileQuery .= "INSERT INTO images (image_type, image_name, image_path, entity_id) VALUES ";
+            $fileQuery .= "($entityType, '$fileName', '$filePath', $entityId);";
+        }elseif($fileId != 0 && $fileName != ""){
+            $fileQuery .= "UPDATE images  SET image_type = $entityType, image_name = '$fileName', image_path = '$filePath', entity_id =  $entityId WHERE image_id = $fileId;";
+        }elseif($fileId != 0 && $fileName == ""){
+            $fileQuery .= "DELETE FROM images WHERE image_id = $fileId;";
+        }
+    }
+    return $fileQuery;
+}
+
+/*
+    FUNCTION    :   parse details of uploading files from ajax call
+    INPUT       :   files and ids
+    OUTPUT      :   returns newly generated unique file names and files id 
+                    filled with 0 if anything want to be deleted
+*/
+function parseFileData($files, $fileIds){
+    $imageCount = count($files);
+    $imageIdCount = count($fileIds);
+
+    $productImageFileName = [];
+    $imageIds = $fileIds;
+
+    if ($imageCount > 0){
+        foreach ($files as &$name) {
+            $ext = pathinfo($name, PATHINFO_EXTENSION);
+            $newFileName = uniqid().'.'.$ext;
+            array_push($productImageFileName,$newFileName);
+
+        }
+    }
+    $deleteImageCount = $imageIdCount - $imageCount;
+    $addNewImageCount = $imageCount - $imageIdCount; 
+
+    if ($deleteImageCount > 0){
+        $productImageFileName = array_pad($productImageFileName, $imageIdCount, "");
+    }
+    if ($addNewImageCount > 0){
+        $imageIds = array_pad($imageIds, $imageCount, 0);
+    }
+
+    return ['fileName' => $productImageFileName, 'fileIds' => $imageIds];
+}
 
 ?>

@@ -216,7 +216,7 @@
                         </div>
 
                     </div>
-                    
+
                     <div class="form-group">
                         <label>Selling Points</label>
 
@@ -230,7 +230,7 @@
 
                     </div>
 
-
+                    <div id="productImageIdArray" hidden></div>
                     <div class="form-group">
                         <label>Add product images</label>
                         <div class="mx-4 justify-content-center row">
@@ -280,40 +280,43 @@
 <script>
     document.getElementById("addProductSubmitBtn").onclick = function () { 
 
-        var productId = document.getElementById("productId").value;
-        var productName = document.getElementById("productName").value;
-        var productDesc = document.getElementById("productDesc").value;
-        var productCategory = document.getElementById("productCategory").value;
-        var productFeatures = $('#productFeatures').val(); //document.getElementById("productFeatures").value;
-        var productFeatureId = $('#featureIdArray').data('id');
-        var productFeatureIdArray = [];
-        if (typeof productFeatureId == "string"){
-            productFeatureIdArray = productFeatureId.split(',')
-        }else{
-            productFeatureIdArray = [productFeatureId];
-        }
-        
-        
-        var productSeller = $('#productSellers').val();
-        var productSellerId = $('#sellerIdArray').data('id');
-        var productSellerIdArray = [];
-        if (typeof productSellerId == "string"){
-            productSellerIdArray = productSellerId.split(',')
-        }else{
-            productSellerIdArray = [productSellerId];
-        }
-        
-        
+//        var productId = document.getElementById("productId").value;
+//        var productName = document.getElementById("productName").value;
+//        var productDesc = document.getElementById("productDesc").value;
+//        var productCategory = document.getElementById("productCategory").value;
+//        var productFeatures = $('#productFeatures').val(); //document.getElementById("productFeatures").value;
+//        var productFeatureId = $('#featureIdArray').data('id');
+//        var productFeatureIdArray = [];
+//        if (typeof productFeatureId == "string"){
+//            productFeatureIdArray = productFeatureId.split(',')
+//        }else{
+//            productFeatureIdArray = [productFeatureId];
+//        }
+//
+//
+//        var productSeller = $('#productSellers').val();
+//        var productSellerId = $('#sellerIdArray').data('id');
+//        var productSellerIdArray = [];
+//        if (typeof productSellerId == "string"){
+//            productSellerIdArray = productSellerId.split(',')
+//        }else{
+//            productSellerIdArray = [productSellerId];
+//        }
+//
+//
+//
+//        //        var productFeatureIdArray = productFeatureId.split(',') != null ? productFeatureId.split(',') : [productFeatureId];
+//        var productPrice = document.getElementById("productPrice").value;
+//        var productQuantity = document.getElementById("quantity").value;
+//        var productUnit = document.getElementById("unit").value;
+//        var isProcessedProduct = document.getElementById("isProcessed").value;
+//        var productLocation = document.getElementById("productionPointOptions").value;
+//
+//        const userId = localStorage.getItem('userId');
+//        var file_data = $('#gallery-photo-add').prop('files');
 
-        //        var productFeatureIdArray = productFeatureId.split(',') != null ? productFeatureId.split(',') : [productFeatureId];
-        var productPrice = document.getElementById("productPrice").value;
-        var productQuantity = document.getElementById("quantity").value;
-        var productUnit = document.getElementById("unit").value;
-        var isProcessedProduct = document.getElementById("isProcessed").value;
-        var productLocation = document.getElementById("productionPointOptions").value;
 
-        const userId = localStorage.getItem('userId');
-        
+        const fd = createFormData();
         $.ajax({
             url:"/kleinerzeugernetzwerk/controller/productController.php",    //the page containing php script
             type: "POST",    //request type,
@@ -329,25 +332,10 @@
             complete: function(){
                 $("#overlay").fadeOut (300);
             },
-            data: {
-
-
-
-                product_id: productId,
-                producer_id: userId, 
-                product_name: productName,
-                product_description: productDesc,
-                product_category: productCategory,
-                product_features: productFeatures,
-                product_features_id: productFeatureIdArray,
-                selling_points: productSeller,
-                product_seller_ids: productSellerIdArray,
-                production_location: productLocation,
-                is_processed_product: isProcessedProduct,
-                price_per_unit: productPrice,
-                quantity_of_price: productQuantity,
-                unit: productUnit
-            },
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: fd,
             success:function(result){
                 console.log(result)
                 window.location.reload();
@@ -359,7 +347,87 @@
         })
     };
 
+    function createFormData(){
 
+        var file_data = $('#gallery-photo-add').prop('files');
+
+        var productId = document.getElementById("productId").value;
+        var productName = document.getElementById("productName").value;
+        var productDesc = document.getElementById("productDesc").value;
+        var productCategory = document.getElementById("productCategory").value;
+        var productFeatures = $('#productFeatures').val(); //document.getElementById("productFeatures").value;
+        var productFeatureId = $('#featureIdArray').data('id');
+        var productFeatureIdArray = [];
+        if (productSellerId != ""){
+            if (typeof productFeatureId == "string"){
+                productFeatureIdArray = productFeatureId.split(',')
+            }else{
+                productFeatureIdArray = [productFeatureId];
+            }
+        }
+
+
+        var productSeller = $('#productSellers').val();
+        var productSellerId = $('#sellerIdArray').data('id');
+        var productSellerIdArray = [];
+        if (productSellerId != ""){
+            if (typeof productSellerId == "string"){
+                productSellerIdArray = productSellerId.split(',')
+            }else{
+                productSellerIdArray = [productSellerId];
+            }
+        }
+
+
+        var productImageId = $('#productImageIdArray').data('id');
+        var productImageIdArray = [];
+        if (productImageId != ""){
+            if (typeof productImageId == "string"){
+                productImageIdArray = productImageId.split(',')
+            }else{
+                productImageIdArray = [productImageId];
+            }
+        }
+
+
+
+        var productPrice = document.getElementById("productPrice").value;
+        var productQuantity = document.getElementById("quantity").value;
+        var productUnit = document.getElementById("unit").value;
+        var isProcessedProduct = document.getElementById("isProcessed").value;
+        var productLocation = document.getElementById("productionPointOptions").value;
+
+        const userId = localStorage.getItem('userId');
+
+
+        var fd = new FormData();
+        fd.append("product_id", productId);
+        fd.append("producer_id", userId);
+        fd.append("product_name", productName);
+        fd.append("product_description", productDesc);
+        fd.append("product_category", productCategory);
+        fd.append("product_features", productFeatures);
+        fd.append("product_features_id", productFeatureIdArray);
+        fd.append("selling_points", productSeller);
+        fd.append("product_seller_ids", productSellerIdArray);
+        fd.append("production_location", productLocation);
+        fd.append("is_processed_product", isProcessedProduct);
+        fd.append("price_per_unit", productPrice);
+        fd.append("quantity_of_price", productQuantity);
+        fd.append("unit", productUnit);
+        fd.append("product_images_id", JSON.stringify(productImageIdArray));
+
+
+        for (let i = 0; i < file_data.length; i++) {
+            let file = file_data[i];
+
+            fd.append('files[]', file);
+        }
+
+        //        fd.append("files[]", file_data);
+
+        return fd;
+    }
 
 </script>
 

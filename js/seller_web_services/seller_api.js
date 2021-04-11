@@ -7,8 +7,9 @@
 ****************************************************************/
 
 function createSeller() {
+    const sellerFormValues = fetchSellerFormData()
+    const sellerFormDataFormatted = createSellerFormData(sellerFormValues);
     const userId = localStorage.getItem('userId');
-    const sellerFormData = fetchSellerFormData()
     $.ajax({
         type: "POST",
         url: "/kleinerzeugernetzwerk/controller/sellerController.php",
@@ -18,37 +19,41 @@ function createSeller() {
             'user_id': userId,
             'action': "CREATE"
         },
+        cache: false,
+        contentType: false,
+        processData: false,
         beforeSend: function(){
             $("#overlay").fadeIn(300);　
         },
         complete: function(){
             $("#overlay").fadeOut(300);
         },
-        data: { 
-
-            producer_id: userId, 
-            seller_name: sellerFormData.sellingPointName, 
-            seller_description: sellerFormData.sellingPointDesc, 
-            street: sellerFormData.sp_street, 
-            building_number: sellerFormData.sp_houseNumber, 
-            city: sellerFormData.sp_city, 
-            zip: sellerFormData.sp_zipCode, 
-            latitude: sellerFormData.sp_latitude, 
-            longitude: sellerFormData.sp_longitude,
-            seller_email: sellerFormData.sp_email, 
-            seller_website: sellerFormData.sp_website, 
-            mobile: sellerFormData.sp_mobile, 
-            phone: sellerFormData.sp_phone, 
-            is_blocked: false, 
-            is_mon_available: checkboxStatus(sellerFormData.mon_switch), mon_open_time: sellerFormData.mon_openHourTxt, mon_close_time: sellerFormData.mon_closeHourTxt, 
-            is_tue_available: checkboxStatus(sellerFormData.tue_switch), tue_open_time: sellerFormData.tue_openHourTxt, tue_close_time: sellerFormData.tue_closeHourTxt, 
-            is_wed_available: checkboxStatus(sellerFormData.wed_switch), wed_open_time: sellerFormData.wed_openHourTxt, wed_close_time: sellerFormData.wed_closeHourTxt, 
-            is_thu_available: checkboxStatus(sellerFormData.thu_switch), thu_open_time: sellerFormData.thu_openHourTxt, thu_close_time: sellerFormData.thu_closeHourTxt, 
-            is_fri_available: checkboxStatus(sellerFormData.fri_switch), fri_open_time: sellerFormData.fri_openHourTxt, fri_close_time: sellerFormData.fri_closeHourTxt, 
-            is_sat_available: checkboxStatus(sellerFormData.sat_switch), sat_open_time: sellerFormData.sat_openHourTxt, sat_close_time: sellerFormData.sat_closeHourTxt, 
-            is_sun_available: checkboxStatus(sellerFormData.sun_switch), sun_open_time: sellerFormData.sun_openHourTxt, sun_close_time: sellerFormData.sun_closeHourTxt
-
-        },
+        data: sellerFormDataFormatted,
+        //        data: { 
+        //
+        //            producer_id: userId, 
+        //            seller_name: sellerFormData.sellingPointName, 
+        //            seller_description: sellerFormData.sellingPointDesc, 
+        //            street: sellerFormData.sp_street, 
+        //            building_number: sellerFormData.sp_houseNumber, 
+        //            city: sellerFormData.sp_city, 
+        //            zip: sellerFormData.sp_zipCode, 
+        //            latitude: sellerFormData.sp_latitude, 
+        //            longitude: sellerFormData.sp_longitude,
+        //            seller_email: sellerFormData.sp_email, 
+        //            seller_website: sellerFormData.sp_website, 
+        //            mobile: sellerFormData.sp_mobile, 
+        //            phone: sellerFormData.sp_phone, 
+        //            is_blocked: false, 
+        //            is_mon_available: checkboxStatus(sellerFormData.mon_switch), mon_open_time: sellerFormData.mon_openHourTxt, mon_close_time: sellerFormData.mon_closeHourTxt, 
+        //            is_tue_available: checkboxStatus(sellerFormData.tue_switch), tue_open_time: sellerFormData.tue_openHourTxt, tue_close_time: sellerFormData.tue_closeHourTxt, 
+        //            is_wed_available: checkboxStatus(sellerFormData.wed_switch), wed_open_time: sellerFormData.wed_openHourTxt, wed_close_time: sellerFormData.wed_closeHourTxt, 
+        //            is_thu_available: checkboxStatus(sellerFormData.thu_switch), thu_open_time: sellerFormData.thu_openHourTxt, thu_close_time: sellerFormData.thu_closeHourTxt, 
+        //            is_fri_available: checkboxStatus(sellerFormData.fri_switch), fri_open_time: sellerFormData.fri_openHourTxt, fri_close_time: sellerFormData.fri_closeHourTxt, 
+        //            is_sat_available: checkboxStatus(sellerFormData.sat_switch), sat_open_time: sellerFormData.sat_openHourTxt, sat_close_time: sellerFormData.sat_closeHourTxt, 
+        //            is_sun_available: checkboxStatus(sellerFormData.sun_switch), sun_open_time: sellerFormData.sun_openHourTxt, sun_close_time: sellerFormData.sun_closeHourTxt
+        //
+        //        },
         success: function( data ) {
             console.log(data)
             $('#addSellingPoint').modal('hide');
@@ -62,8 +67,9 @@ function createSeller() {
 
 
 function editSellerDetails(){
+    const sellerFormValues = fetchSellerFormData()
+    const sellerFormDataFormatted = createSellerFormData(sellerFormValues);
     const userId = localStorage.getItem('userId');
-    const sellerFormData = fetchSellerFormData()
     $.ajax({
         type: "POST",
         url: "/kleinerzeugernetzwerk/controller/sellerController.php",
@@ -79,31 +85,35 @@ function editSellerDetails(){
         complete: function(){
             $("#overlay").fadeOut(300);
         },
-        data: { 
-            seller_id: sellerFormData.sellingPointId,
-            producer_id: userId, 
-            seller_name: sellerFormData.sellingPointName, 
-            seller_description: sellerFormData.sellingPointDesc, 
-            street: sellerFormData.sp_street, 
-            building_number: sellerFormData.sp_houseNumber, 
-            city: sellerFormData.sp_city, 
-            zip: sellerFormData.sp_zipCode, 
-            latitude: sellerFormData.sp_latitude, 
-            longitude: sellerFormData.sp_longitude,
-            seller_email: sellerFormData.sp_email, 
-            seller_website: sellerFormData.sp_website, 
-            mobile: sellerFormData.sp_mobile, 
-            phone: sellerFormData.sp_phone, 
-            is_blocked: false, 
-            is_mon_available: checkboxStatus(sellerFormData.mon_switch), mon_open_time: sellerFormData.mon_openHourTxt, mon_close_time: sellerFormData.mon_closeHourTxt, 
-            is_tue_available: checkboxStatus(sellerFormData.tue_switch), tue_open_time: sellerFormData.tue_openHourTxt, tue_close_time: sellerFormData.tue_closeHourTxt, 
-            is_wed_available: checkboxStatus(sellerFormData.wed_switch), wed_open_time: sellerFormData.wed_openHourTxt, wed_close_time: sellerFormData.wed_closeHourTxt, 
-            is_thu_available: checkboxStatus(sellerFormData.thu_switch), thu_open_time: sellerFormData.thu_openHourTxt, thu_close_time: sellerFormData.thu_closeHourTxt, 
-            is_fri_available: checkboxStatus(sellerFormData.fri_switch), fri_open_time: sellerFormData.fri_openHourTxt, fri_close_time: sellerFormData.fri_closeHourTxt, 
-            is_sat_available: checkboxStatus(sellerFormData.sat_switch), sat_open_time: sellerFormData.sat_openHourTxt, sat_close_time: sellerFormData.sat_closeHourTxt, 
-            is_sun_available: checkboxStatus(sellerFormData.sun_switch), sun_open_time: sellerFormData.sun_openHourTxt, sun_close_time: sellerFormData.sun_closeHourTxt
-
-        },
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: sellerFormDataFormatted,
+        //        data: { 
+        //            seller_id: sellerFormData.sellingPointId,
+        //            producer_id: userId, 
+        //            seller_name: sellerFormData.sellingPointName, 
+        //            seller_description: sellerFormData.sellingPointDesc, 
+        //            street: sellerFormData.sp_street, 
+        //            building_number: sellerFormData.sp_houseNumber, 
+        //            city: sellerFormData.sp_city, 
+        //            zip: sellerFormData.sp_zipCode, 
+        //            latitude: sellerFormData.sp_latitude, 
+        //            longitude: sellerFormData.sp_longitude,
+        //            seller_email: sellerFormData.sp_email, 
+        //            seller_website: sellerFormData.sp_website, 
+        //            mobile: sellerFormData.sp_mobile, 
+        //            phone: sellerFormData.sp_phone, 
+        //            is_blocked: false, 
+        //            is_mon_available: checkboxStatus(sellerFormData.mon_switch), mon_open_time: sellerFormData.mon_openHourTxt, mon_close_time: sellerFormData.mon_closeHourTxt, 
+        //            is_tue_available: checkboxStatus(sellerFormData.tue_switch), tue_open_time: sellerFormData.tue_openHourTxt, tue_close_time: sellerFormData.tue_closeHourTxt, 
+        //            is_wed_available: checkboxStatus(sellerFormData.wed_switch), wed_open_time: sellerFormData.wed_openHourTxt, wed_close_time: sellerFormData.wed_closeHourTxt, 
+        //            is_thu_available: checkboxStatus(sellerFormData.thu_switch), thu_open_time: sellerFormData.thu_openHourTxt, thu_close_time: sellerFormData.thu_closeHourTxt, 
+        //            is_fri_available: checkboxStatus(sellerFormData.fri_switch), fri_open_time: sellerFormData.fri_openHourTxt, fri_close_time: sellerFormData.fri_closeHourTxt, 
+        //            is_sat_available: checkboxStatus(sellerFormData.sat_switch), sat_open_time: sellerFormData.sat_openHourTxt, sat_close_time: sellerFormData.sat_closeHourTxt, 
+        //            is_sun_available: checkboxStatus(sellerFormData.sun_switch), sun_open_time: sellerFormData.sun_openHourTxt, sun_close_time: sellerFormData.sun_closeHourTxt
+        //
+        //        },
         success: function( data ) {
             console.log(data)
             $('#addSellingPoint').modal('hide');
@@ -202,14 +212,17 @@ function getSellerDetails(sellerId, action){
         success: function( data ) {
             console.log(data)
             const sellerDetails = JSON.parse(data);
-            switch (action){
-                case 'EDIT':
-                    setSellerModalValue(sellerDetails);
-                    setSellerLocationOnMap();
-                    $('#addSellingPoint').modal('toggle');
+            if (sellerDetails.length > 0){
+                switch (action){
+                    case 'EDIT':
+                        setSellerModalValue(sellerDetails);
+                        setSellerLocationOnMap();
+                        $('#addSellingPoint').modal('toggle');
 
-                    break;
+                        break;
+                }
             }
+
         },
         error: function (request, status, error) {               
             console.log(error)
@@ -236,16 +249,16 @@ function listAllSellers(sellerArray){
             const address = street + ', ' + houseNumber + ', ' + city + ' - ' + zip;
             const pointLatitude = seller.latitude ? seller.latitude : 0;
             const pointLongitude = seller.longitude ? seller.longitude : 0;
-            
+
             const isFavourite = seller.isFavourite ? seller.isFavourite == 1 ? true : false : false;
 
 
             const favouriteBtn = `<button type="button" class="btn btn-outline-danger" onclick="markSellerAsFavourite('${pointId}')"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewBox="0 0 16 16">
-  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
 </svg></button>`;
 
             const unfavouriteButton = `<button type="button" class="btn btn-outline-danger" onclick="markSellerAsUnfavourite('${pointId}')"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark-fill" viewBox="0 0 16 16">
-  <path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
+<path d="M2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/>
 </svg></button>`;
 
 
@@ -297,7 +310,9 @@ function sellerDeleteConfirmation(id, pointName, address){
 
 function fetchSellerFormData(){
     const ids = ['sellingPointName','sellingPointDesc', 'sp_street', 'sp_houseNumber', 'sp_zipCode', 'sp_city', 'sp_latitude', 'sp_longitude', 'sellingPointId', 'sp_mobile', 'sp_phone', 'sp_email', 'sp_website', 'mon_switch', 'mon_openHourTxt', 'mon_closeHourTxt', 'tue_switch', 'tue_openHourTxt', 'tue_closeHourTxt', 'wed_switch', 'wed_openHourTxt', 'wed_closeHourTxt', 'thu_switch', 'thu_openHourTxt', 'thu_closeHourTxt', 'fri_switch', 'fri_openHourTxt', 'fri_closeHourTxt', 'sat_switch', 'sat_openHourTxt', 'sat_closeHourTxt', 'sun_switch', 'sun_openHourTxt', 'sun_closeHourTxt'];
+
     var formData = [];
+
 
     ids.forEach(function(element) {
         if (document.getElementById(element).type == "checkbox"){
@@ -308,11 +323,82 @@ function fetchSellerFormData(){
             formData[element] = value;
         }
 
-    }); 
+    });
+
+
+
+
     return formData
 }
 
-function setSellerModalValue(sellerDetails){
+
+function createSellerFormData(sellerData){
+    const userId = localStorage.getItem('userId');
+    var file_data = $('#seller-gallery-photo-add').prop('files');
+    var formDataCollection = new FormData();
+    for (let i = 0; i < file_data.length; i++) {
+        let file = file_data[i];
+
+        formDataCollection.append('files[]', file);
+    }
+
+    var sellerImageId = $('#sellerImageIdArray').data('id') ? $('#sellerImageIdArray').data('id') : [];
+    var sellerImageIdArray = [];
+    if (sellerImageId != ""){
+        if (typeof sellerImageId == "string"){
+            sellerImageIdArray = sellerImageId.split(',')
+        }else{
+            sellerImageIdArray = [sellerImageId];
+        }
+    }
+
+    formDataCollection.append("producer_id", userId);
+    formDataCollection.append("seller_name", sellerData.sellingPointName);
+    formDataCollection.append("seller_description", sellerData.sellingPointDesc);
+    formDataCollection.append("street", sellerData.sp_street);
+    formDataCollection.append("building_number", sellerData.sp_houseNumber);
+    formDataCollection.append("zip", sellerData.sp_zipCode);
+    formDataCollection.append("city", sellerData.sp_city);
+    formDataCollection.append("latitude", sellerData.sp_latitude);
+    formDataCollection.append("longitude", sellerData.sp_longitude);
+    formDataCollection.append("seller_id", sellerData.sellingPointId);
+    formDataCollection.append("mobile", sellerData.sp_mobile);
+    formDataCollection.append("phone", sellerData.sp_phone);
+    formDataCollection.append("seller_email", sellerData.sp_email);
+    formDataCollection.append("seller_website", sellerData.sp_website);
+    formDataCollection.append("is_blocked", false);
+    formDataCollection.append("is_mon_available", sellerData.mon_switch);
+    formDataCollection.append("mon_open_time", sellerData.mon_openHourTxt);
+    formDataCollection.append("mon_close_time", sellerData.mon_closeHourTxt);
+    formDataCollection.append("is_tue_available", sellerData.tue_switch);
+    formDataCollection.append("tue_open_time", sellerData.tue_openHourTxt);
+    formDataCollection.append("tue_close_time", sellerData.tue_closeHourTxt);
+    formDataCollection.append("is_wed_available", sellerData.wed_switch);
+    formDataCollection.append("wed_open_time", sellerData.wed_openHourTxt);
+    formDataCollection.append("wed_close_time", sellerData.wed_closeHourTxt);
+    formDataCollection.append("is_thu_available", sellerData.thu_switch);
+    formDataCollection.append("thu_open_time", sellerData.thu_openHourTxt);
+    formDataCollection.append("thu_close_time", sellerData.thu_closeHourTxt);
+    formDataCollection.append("is_fri_available", sellerData.fri_switch);
+    formDataCollection.append("fri_open_time", sellerData.fri_openHourTxt);
+    formDataCollection.append("fri_close_time", sellerData.fri_closeHourTxt);
+    formDataCollection.append("is_sat_available", sellerData.sat_switch);
+    formDataCollection.append("sat_open_time", sellerData.sat_openHourTxt);
+    formDataCollection.append("sat_close_time", sellerData.sat_closeHourTxt);
+    formDataCollection.append("is_sun_available", sellerData.sun_switch);
+    formDataCollection.append("sun_open_time", sellerData.sun_openHourTxt);
+    formDataCollection.append("sun_close_time", sellerData.sun_closeHourTxt);
+    formDataCollection.append("seller_images_id", JSON.stringify(sellerImageIdArray));
+
+    return formDataCollection;
+}
+
+
+function setSellerModalValue(sellerData){
+
+    const sellerDetails = sellerData[0] ? sellerData[0] : [];
+    const sellerImageData = sellerData[1] ? sellerData[1] : [];
+
 
     document.getElementById('sellingPointName').value = sellerDetails.sellerName ? sellerDetails.sellerName : "";
     document.getElementById('sellingPointDesc').value = sellerDetails.sellerDescription ? sellerDetails.sellerDescription : "";
@@ -349,6 +435,29 @@ function setSellerModalValue(sellerDetails){
     document.getElementById('sun_openHourTxt').value = sellerDetails.sunOpenTime ? sellerDetails.sunOpenTime : "";
     document.getElementById('sun_closeHourTxt').value = sellerDetails.sunCloseTime ? sellerDetails.sunCloseTime : "";
 
+//    document.getElementById("seller-gallery").innerHTML = '';
+    setSellerImages(sellerImageData);
+//    if (sellerImageData.length > 0){
+//        setSellerImages(sellerImageData);
+//    }
+}
+
+function setSellerImages(imageData){
+    document.getElementById("seller-gallery").innerHTML = '';
+    var sellerImageId = []; 
+    var sellerImageGallery = "";
+    imageData.forEach(element =>{
+        const path = element.image_path;
+        const id = element.image_id;
+        
+        sellerImageGallery += `<div class="image">
+<div class="overlay"></div>
+<img src="${path}" id="test" key="2">
+</div>`;
+       sellerImageId.push(id); 
+    })
+    document.getElementById("sellerImageIdArray").setAttribute('data-id', sellerImageId);
+    document.getElementById("seller-gallery").innerHTML = sellerImageGallery;
 }
 
 function checkboxStatus(value){

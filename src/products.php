@@ -16,13 +16,25 @@
 <?php
 require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProductModal.php");
 ?>
-
 <div class="d-flex justify-content-center">
-
     <button id="addProductModalBtn" onclick="openAddProductModal(0)" type="button" class="col-sm-11 col-md-5 m-3 btn btn-success">
         <i class="plus icon"></i>
         Add a new product
     </button>
+</div>
+<div class="container" id="productListContainer">
+    <ul class="my-5" id="productList">
+    </ul>
+</div>
+
+<div class="d-flex justify-content-center">
+
+    <!--
+<button id="addProductModalBtn" onclick="openAddProductModal(0)" type="button" class="col-sm-11 col-md-5 m-3 btn btn-success">
+<i class="plus icon"></i>
+Add a new product
+</button>
+-->
 
 
 
@@ -57,6 +69,12 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
                 dataType: "json",
                 success: function( data ) {
                     console.log(data) 
+                    const features = localStorage.getItem("productFeatures");
+                    const featureJson = JSON.parse(features);
+
+                    const categories = localStorage.getItem("productCategories");
+                    const categoryJson = JSON.parse(categories);
+
                     document.getElementById("productContainer").innerHTML = "";
                     if (data != null || data.length != 0){
                         data.forEach(productData => {
@@ -66,6 +84,10 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
                             const productDesc = productData.product_description != null ? productData.product_description : "";
                             const productCategory = productData.product_category != null ? productData.product_category : 0;
 
+                            const categoryDict = categoryJson.filter(
+                                function(data){ return data.category_id == productCategory }
+                            );
+                            const categoryName = categoryDict.category_name;
                             const productPrice = productData.price_per_unit != null ? productData.price_per_unit : "";
                             const productQuantity = productData.quantity_of_price != null ? productData.quantity_of_price : "";
                             const productUnit = productData.unit != null ? productData.unit : 0;
@@ -85,6 +107,85 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 
 
                             imageName = '/kleinerzeugernetzwerk/images/default_products.jpg'
+
+
+                            var card = `<div class="blog-card">
+<div class="meta">
+<div class="photo" style="background-image: url(https://previews.123rf.com/images/mcjvil40yahoocom/mcjvil40yahoocom1804/mcjvil40yahoocom180400001/98805032-low-light-food-photography-of-a-broccoli.jpg)"></div>
+        </div>
+<div class="description">
+<h1>${productName}</h1>
+<h2>${categoryName}</h2>
+<p> ${productDesc}</p> <div class="row mx-0 mb-2 d-flex justify-content-start mt-2">`;
+
+                            var featureUI = ``;
+                            featureArray.forEach(feature =>{
+                                const featureName = featureJson.forEach(featureDict => {
+                                    const id = featureDict.feature_type_id;
+                                    if(id == feature){
+                                        //                                        return featureDict.feature_name;
+                                        featureUI += `<div class="rounded-pill border border-secondary align-items-center mb-1 mr-1">
+<img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
+<h class="text-gray mx-1">${featureDict.feature_name}</h>
+        </div>`;
+                                    }                                    
+                                },"");
+
+                                card += featureUI;
+                            })
+
+                            card += `</div> <div id="manipulationBtnProducts" class="btn-group btn-group-sm mt-3 mr-auto float-right" role="group" aria-label="" value=${productId}>
+<button type="button" class="btn btn-danger" id="deleteProductBtn" onclick="showDeleteProductModal(${productId})" value="${productId}">Delete</button>
+<button type="button" class="btn btn-primary" id="editProductBtn" onclick="openAddProductModal(${productId})" value="${productId}">Edit</button>
+<button type="button" class="btn btn-success" id="viewProductBtn">View</button>
+
+
+        </div>
+
+
+
+
+
+        </div>
+
+
+        </div>`;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                             var productCard = `<div class="w3-card-4 m-4 shadow bg-white rounded productCard" id="productCard">
 <div class="overflow-hidden" width="280" height="180">
 <img src="${imageName}" alt="Avatar" width="280">
@@ -96,10 +197,21 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 
                             var featureUI = ``;
                             featureArray.forEach(feature =>{
-                                featureUI += `<div class="rounded-pill border border-secondary align-items-center mb-1">
+                                const featureName = featureJson.forEach(featureDict => {
+                                    const id = featureDict.feature_type_id;
+                                    if(id == feature){
+                                        //                                        return featureDict.feature_name;
+                                        featureUI += `<div class="rounded-pill border border-secondary align-items-center mb-1">
 <img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
-<h class="text-gray mx-1">Bio</h>
-        </div>`
+<h class="text-gray mx-1">${featureDict.feature_name}</h>
+        </div>`;
+                                    }                                    
+                                },"");
+                                console.log(featureName);
+                                //                                featureUI += `<div class="rounded-pill border border-secondary align-items-center mb-1">
+                                //<img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
+                                //<h class="text-gray mx-1">${featureName}</h>
+                                //        </div>`;
                             })
 
                             productCard += featureUI;
@@ -114,7 +226,11 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 
         </div>
         </div>`;
-                            document.getElementById("productContainer").innerHTML += productCard;
+                            //                            document.getElementById("productContainer").innerHTML += productCard;
+                            //                            document.getElementById("productContainer").innerHTML += card;
+
+                            var productListObj = document.getElementById("productListContainer");
+                            productListObj.innerHTML = productListObj.innerHTML + card;
                         })
                     }
 
@@ -286,6 +402,8 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
             var editProductSellers = [];
             var editProductSellerId = [];
 
+            var productImageId = [];
+            var imagePathArray = [];
             if (productId == 0){
                 $('#addNewProduct').modal('show');
 
@@ -305,7 +423,8 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 
                 $('#productSellers').selectpicker('val', editProductSellers);
                 document.getElementById("sellerIdArray").setAttribute('data-id', editProductSellerId);
-
+                document.getElementById("productImageIdArray").setAttribute('data-id', productImageId);
+                document.getElementById("gallery").innerHTML = '';
                 return 0;
             }
 
@@ -345,6 +464,15 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
                         }
 
 
+                        const productImageData = data[3] != null ? data[3] : [];
+                        if (productImageData.length !=0){
+                            const productImages =  parseProductImages(productImageData);
+
+                            productImageId = productImages.productImageIdArray;
+                            imagePathArray = productImages.imagePathArray;
+                        }
+
+
 
                         editProductId = productData.product_id != null ? productData.product_id : 0;
                         editProductName = productData.product_name != null ? productData.product_name : "";
@@ -375,6 +503,9 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
                         document.getElementById("unit").value = editProductUnit;
                         document.getElementById("isProcessed").checked = editIsProcessedProduct;
                         $('#productionPointOptions').selectpicker('val', editProductLocation);
+
+                        document.getElementById("productImageIdArray").setAttribute('data-id', productImageId);
+                        setProductImages(imagePathArray);
                     }
 
 
@@ -387,6 +518,17 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 
         }
 
+        function setProductImages(imagePathArray){
+            var productImageGallery = "";
+            imagePathArray.forEach(element =>{
+                const path = element;
+                productImageGallery += `<div class="image">
+<div class="overlay"></div>
+<img src="${path}" id="test" key="2">
+        </div>`;
+            })
+            document.getElementById("gallery").innerHTML = productImageGallery;
+        }
 
         /*
             function to set product seller on to the selling point drop down list 
@@ -469,6 +611,17 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
                 prductSellerIdArray.push(productSellerId);
             });
             return {sellerArray, prductSellerIdArray};
+        }
+        function parseProductImages(imageData){
+            var productImageIdArray = [];
+            var imagePathArray = [];
+            imageData.forEach(element => {
+                imageId = element.image_id !== null ? element.image_id : 0;
+                imagePath = element.image_path !== null ? element.image_path : "";
+                productImageIdArray.push(imageId);
+                imagePathArray.push(imagePath);
+            });
+            return {productImageIdArray, imagePathArray};
         }
 
 

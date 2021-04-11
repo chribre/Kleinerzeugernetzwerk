@@ -30,7 +30,6 @@
                             if (input.files) {
                                 var filesAmount = input.files.length;
                                 document.getElementById(placeToInsertImagePreview).innerHTML = ''
-                                document.getElementById('addImageBtn').className = 'plus circle icon big'
                                 for (i = 0; i < filesAmount; i++) {
                                     var reader = new FileReader();
 
@@ -43,26 +42,11 @@
 
                                         imgdiv.innerHTML = `
 <div class="overlay">
-
                     </div>
-<img src="${event.target.result}" id="test" key="${i}">
-`;
-
-                                        //If overlay botton needed then copy below code into inner html
-                                        //                                        <button type="button" class="btn btn-default edit-image-btn pull-right mt-2">
-                                        //<i class="minus circle icon colorRed"></i>
-                                        //                    </button>
+<img src="${event.target.result}" id="test" key="${i}">`;
 
                                         document.getElementById(placeToInsertImagePreview).appendChild(imgdiv);
-                                        document.getElementById('addImageBtn').className = 'edit icon large'
 
-
-
-
-
-                                        //                                        $($.parseHTML('<img>')).attr('src', event.target.result)
-                                        //                                            .attr('id', "test")
-                                        //                                            .appendTo(placeToInsertImagePreview);
                                     }
 
                                     reader.readAsDataURL(input.files[i]);
@@ -71,8 +55,8 @@
 
                         };
 
-                        $('#gallery-photo-add').on('change', function() {
-                            imagesPreview(this, 'gallery');
+                        $('#seller-gallery-photo-add').on('change', function() {
+                            imagesPreview(this, 'seller-gallery');
                         });
                     });
 
@@ -328,17 +312,24 @@
                     </table>
 
 
+                    <div id="sellerImageIdArray" hidden></div>
                     <div class="form-group">
-                        <label>Add product images</label>
-                        <div class="mx-4 justify-content-center align-middle row">
-                            <div id="gallery" class="gallery row">
+                        <label>Add Selling Point Images</label>
+                        <div class="mx-4 justify-content-center row">
+                            <div id="seller-gallery" class="row">
 
                             </div>
                             <div class="my-auto">
-                                <label class="btn btn-default rounded-circle" id="addBtn">
-                                    <i id="addImageBtn" class="plus circle icon big"></i>
-                                    <input id="gallery-photo-add" hidden type="file" name="file[]" id="file" multiple accept="image/*">
+                                <label type="button" class="btn btn-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                                    </svg>
+
+
+                                    <input id="seller-gallery-photo-add" hidden type="file" name="file[]" id="file" multiple accept="image/*">
+                                    <span class="visually-hidden"></span>
                                 </label>
+
                             </div>
 
                         </div>

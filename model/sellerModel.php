@@ -46,6 +46,8 @@ class seller{
     public $sunOpenTime;
     public $sunCloseTime;
     
+    public $sellerImageIdArray = [];
+    public $sellerImageNameArray = [];
     
     function __construct($userData){
         $this->sellerId = isset($userData['seller_id']) ? escapeSQLString($userData['seller_id']) : 0;
@@ -102,6 +104,14 @@ class seller{
         $this->isSunAvailable = isset($userData['is_sun_available']) ? escapeSQLString($userData['is_sun_available']) : false;
         $this->sunOpenTime = isset($userData['sun_open_time']) ? escapeSQLString($userData['sun_open_time']) : "";
         $this->sunCloseTime = isset($userData['sun_close_time']) ? escapeSQLString($userData['sun_close_time']) : "";
+        
+        $sellerPictures = $_FILES['files']['name'] ? $_FILES['files']['name']: [];
+        $sellerImageIds = isset($userData['seller_images_id']) && $userData['seller_images_id'] != null ? escapeSQLString($userData['seller_images_id']) : [];
+        $sellerImageIds = json_decode($sellerImageIds);
+        
+        $fileData = parseFileData($sellerPictures, $sellerImageIds);
+        $this->sellerImageIdArray = $fileData['fileIds'] != null ? $fileData['fileIds'] : [];
+        $this->sellerImageNameArray = $fileData['fileName'] != null ? $fileData['fileName'] : [];
     }
     
 }

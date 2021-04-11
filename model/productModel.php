@@ -27,6 +27,8 @@ class product{
     public $productSellingPointIdArray = [];
     public $isDelete = false;
 
+    public $productImageIdArray = [];
+    public $productImageNameArray = [];
 
     function formatProductFeatures($productFeatureInputString){
         $tempFeatureArray = []; 
@@ -86,7 +88,7 @@ class product{
         $this->isDelete = isset($_POST['is_delete']) ? $_POST['is_delete'] : false;
         $sellingPoints = isset($productDataDict['selling_points']) ? $productDataDict['selling_points'] : [];
         $productSellerIds = isset($productDataDict['product_seller_ids']) ? $productDataDict['product_seller_ids'] : [];
-        
+
         $sellerCount = count($sellingPoints);
         $productSellerIdCount = count($productSellerIds);
 
@@ -104,9 +106,42 @@ class product{
             $this->productSellingPoints = $sellingPoints;
             $this->productSellingPointIdArray = $productSellerIds;
         }
+
+
+        $productPictures = $_FILES['files']['name'] ? $_FILES['files']['name']: [];
+        $productImageIds = isset($productDataDict['product_images_id']) && $productDataDict['product_images_id'] != null ? $productDataDict['product_images_id'] : [];
+        $productImageIds = json_decode($productImageIds);
+        
+        
+//        $imageCount = count($productPictures);
+//        $imageIdCount = count($productImageIds);
+//
+//        $productImageFileName = [];
+//        if ($imageCount > 0){
+//            foreach ($productPictures as &$name) {
+//                $ext = pathinfo($name, PATHINFO_EXTENSION);
+//                $newFileName = uniqid().'.'.$ext;
+//                array_push($productImageFileName,$newFileName);
+//                
+//            }
+////            $productImageFileName = array_pad($productImageFileName, $imageCount, uniqid());
+//        }
+//        $deleteImageCount = $imageIdCount - $imageCount;
+//        $addNewImageCount = $imageCount - $imageIdCount; 
+//
+//        if ($deleteImageCount > 0){
+//            $productImageFileName = array_pad($productImageFileName, $imageIdCount, "");
+//        }
+//        if ($addNewImageCount > 0){
+//            $productImageIds = array_pad($productImageIds, $imageCount, 0);
+//        }
+
+        
+        $fileData = parseFileData($productPictures, $productImageIds);
+        $this->productImageIdArray = $fileData['fileIds'] != null ? $fileData['fileIds'] : [];
+        $this->productImageNameArray = $fileData['fileName'] != null ? $fileData['fileName'] : [];
+
     }
-
-
 }
 
 class productFeatures{
