@@ -11,6 +11,12 @@ session_start();
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php";
 include "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/productionPointModel.php";
 
+
+$productionPointUplaodLocation = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/production_point_img/";
+$productionPointImagepath = "http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/";
+
+
+
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         break;
@@ -73,8 +79,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
 */
 function addProductionPoint($productionPoint){
     global $dbConnection;
+    global $productionPointUplaodLocation;
+    global $productionPointImagepath;
     /* Start transaction */
-    mysqli_begin_transaction($dbConnection);
+//    mysqli_begin_transaction($dbConnection);
     $productionPointInsertQuery = "INSERT INTO farm_land (producer_id, farm_name, farm_desc, farm_address, street, house_number, city, zip, farm_location, farm_area	)"
         . "VALUES ($productionPoint->producerId, '$productionPoint->farmName', '$productionPoint->farmDesc', '$productionPoint->farmAddress', '$productionPoint->street', '$productionPoint->houseNumber', '$productionPoint->city', '$productionPoint->zip', POINT($productionPoint->latitude, $productionPoint->longitude), $productionPoint->farmArea)";
 
@@ -85,32 +93,28 @@ function addProductionPoint($productionPoint){
             echo "   inserted succesfully   ";
         //            confirmQuery($productInsertQuery);
         $productionPointId = $dbConnection->insert_id;
-        $fileCount = count($fileNameArray);
-        $productionPointImageQuery = "INSERT INTO images (image_type, image_name, entity_id) VALUES ";
-        if ($fileCount > 0){
-            for ($i = 0; $i<$fileCount; $i++){
-                $imageName = $fileNameArray[$i];
-                $productionPointImageQuery .= "(2, '$imageName', $productionPointId)";
-                if ($i===$fileCount-1){
-                    $productionPointImageQuery .= ";";
+        $fileNames = uploadPictures($productionPoint->productionPointImageNameArray, $productionPointUplaodLocation);
+        $imageQuery = createFileUploadQuery($productionPoint->productionPointImageNameArray, $productionPoint->productionPointImageIdArray, $productionPointImagepath, $productionPointId, 3);
+
+        $productionPointImageCount = count($productionPoint->productionPointImageNameArray);
+        $productionPointImageIdCount = count($productionPoint->productionPointImageIdArray);
+
+        if ($productionPointImageCount > 0 || $productionPointImageIdCount > 0){
+            try{
+                if (mysqli_multi_query($dbConnection, $imageQuery)){
+                    //                        mysqli_commit($dbConnection);
+                    http_response_code(200);
+                    return true;
                 }else{
-                    $productionPointImageQuery .= ", ";
+                    //                        mysqli_rollback($dbConnection);
+                    http_response_code(400);
                 }
-            }
-            echo $productionPointImageQuery;
-            if (mysqli_query($dbConnection, $productionPointImageQuery)){
-                echo "  Files inserted succesfully   ";
-                mysqli_commit($dbConnection);
-                http_response_code(200);
-                return true;
-            }else{
-                echo "product creation failed at inserting images,";
-                mysqli_rollback($dbConnection);
+            }catch(mysqli_sql_exception $exception){
+                //                    mysqli_rollback($dbConnection);
                 http_response_code(400);
-                return false;
             }
         }else{
-            mysqli_commit($dbConnection);
+            //            mysqli_commit($dbConnection);
 
             echo "inserted";
             echo "production Point id is $productionPointId, ";
@@ -119,7 +123,7 @@ function addProductionPoint($productionPoint){
         }
     }catch(mysqli_sql_exception $exception){
         echo "faild to add a new production point,";
-        mysqli_rollback($dbConnection);
+        //        mysqli_rollback($dbConnection);
         var_dump($exception);
         throw $exception;
         http_response_code(400);
@@ -147,38 +151,33 @@ function editProductionPoint($productionPoint){
     try{
         echo "trying to insert";
         echo "\n ".$productionPointUpdateQuery."\n";
-        if (mysqli_query($dbConnection, $productionPointUpdateQuery))
-            echo "   updated succesfully   ";
-        //            confirmQuery($productInsertQuery);
-        //        $productionPointId = $dbConnection->insert_id;
-        //        $fileCount = count($fileNameArray);
-        //        $productionPointImageQuery = "INSERT INTO images (image_type, image_name, entity_id) VALUES ";
-        //        if ($fileCount > 0){
-        //            for ($i = 0; $i<$fileCount; $i++){
-        //                $imageName = $fileNameArray[$i];
-        //                $productionPointImageQuery .= "(2, '$imageName', $productionPointId)";
-        //                if ($i===$fileCount-1){
-        //                    $productionPointImageQuery .= ";";
-        //                }else{
-        //                    $productionPointImageQuery .= ", ";
-        //                }
-        //            }
-        //            echo $productionPointImageQuery;
-        //            if (mysqli_query($dbConnection, $productionPointImageQuery)){
-        //                echo "  Files inserted succesfully   ";
-        //                mysqli_commit($dbConnection);
-        //            }else{
-        //                echo "product creation failed at inserting images,";
-        //                mysqli_rollback($dbConnection);
-        //            }
-        //        }else{
-        mysqli_commit($dbConnection);
+        if (mysqli_query($dbConnection, $productionPointUpdateQuery)){
+            $fileNames = uploadPictures($productionPoint->productionPointImageNameArray, $productionPointUplaodLocation);
+            $imageQuery = createFileUploadQuery($productionPoint->productionPointImageNameArray, $productionPoint->productionPointImageIdArray, $productionPointImagepath, $productionPoint->farmId, 4);
 
-        echo "updated";
-        //        echo "production Point id is $productionPointId, ";
-        //        }
-        http_response_code(200);
-        return true;
+            $productionPointImageCount = count($productionPoint->productionPointImageNameArray);
+            $productionPointImageIdCount = count($productionPoint->productionPointImageIdArray);
+
+            if ($productionPointImageCount > 0 || $productionPointImageIdCount > 0){
+                try{
+                    if (mysqli_multi_query($dbConnection, $imageQuery)){
+                        mysqli_commit($dbConnection);
+                        http_response_code(200);
+                        return true;
+                    }else{
+                        mysqli_rollback($dbConnection);
+                        http_response_code(400);
+                    }
+                }catch(mysqli_sql_exception $exception){
+                    mysqli_rollback($dbConnection);
+                    http_response_code(400);
+                }
+            }else{
+                mysqli_commit($dbConnection);
+                http_response_code(200);
+                return true;
+            }
+        }
     }catch(mysqli_sql_exception $exception){
         echo "faild to add a new production point,";
         mysqli_rollback($dbConnection);
@@ -253,6 +252,11 @@ function getProductionPointDetails($productionPoint){
     $fetchProductionPointQuery = "SELECT f.farm_id, f.producer_id, f.farm_name, f.farm_desc, f.farm_address, f.street, f.house_number, f.city, f.zip, ST_X(f.farm_location) as latitude, ST_Y(f.farm_location) as longitude, f.farm_area FROM farm_land f
     LEFT JOIN images i on (i.entity_id = f.farm_id and i.image_type = 2)
     WHERE f.producer_id = '$productionPoint->producerId' AND f.farm_id = $productionPoint->farmId";
+    
+    $fetchProductionPointImages = "SELECT * FROM images i WHERE i.entity_id = $productionPoint->farmId AND i.image_type = 3;";
+    
+    $productionPointData = [];
+    $imageData = [];
 
     $getProductionPointQuery = mysqli_query($dbConnection, $fetchProductionPointQuery);
     confirmQuery($getProductionPointQuery);
@@ -263,10 +267,27 @@ function getProductionPointDetails($productionPoint){
         return false;
     }else{
         while($row = mysqli_fetch_assoc($getProductionPointQuery)) {
+            
+            $productionPointData = [new productionPoint($row)];
 
-            $farmData = new productionPoint($row);
+            $getproductionPointImageQuery = mysqli_query($dbConnection, $fetchProductionPointImages);
+            confirmQuery($getproductionPointImageQuery);
+            $productionPointImageCount = mysqli_num_rows($getproductionPointImageQuery);
+
+            if ($productionPointImageCount != 0){
+
+                while($imgRow = mysqli_fetch_assoc($getproductionPointImageQuery)) {
+
+                    array_push($imageData, $imgRow);
+
+                }
+            }
+
+            array_push($productionPointData, $imageData);
+            
+                
             http_response_code(200);
-            return json_encode($farmData);
+            return json_encode($productionPointData);
         }
     }
     http_response_code(400);

@@ -280,40 +280,41 @@
 <script>
     document.getElementById("addProductSubmitBtn").onclick = function () { 
 
-//        var productId = document.getElementById("productId").value;
-//        var productName = document.getElementById("productName").value;
-//        var productDesc = document.getElementById("productDesc").value;
-//        var productCategory = document.getElementById("productCategory").value;
-//        var productFeatures = $('#productFeatures').val(); //document.getElementById("productFeatures").value;
-//        var productFeatureId = $('#featureIdArray').data('id');
-//        var productFeatureIdArray = [];
-//        if (typeof productFeatureId == "string"){
-//            productFeatureIdArray = productFeatureId.split(',')
-//        }else{
-//            productFeatureIdArray = [productFeatureId];
-//        }
-//
-//
-//        var productSeller = $('#productSellers').val();
-//        var productSellerId = $('#sellerIdArray').data('id');
-//        var productSellerIdArray = [];
-//        if (typeof productSellerId == "string"){
-//            productSellerIdArray = productSellerId.split(',')
-//        }else{
-//            productSellerIdArray = [productSellerId];
-//        }
-//
-//
-//
-//        //        var productFeatureIdArray = productFeatureId.split(',') != null ? productFeatureId.split(',') : [productFeatureId];
-//        var productPrice = document.getElementById("productPrice").value;
-//        var productQuantity = document.getElementById("quantity").value;
-//        var productUnit = document.getElementById("unit").value;
-//        var isProcessedProduct = document.getElementById("isProcessed").value;
-//        var productLocation = document.getElementById("productionPointOptions").value;
-//
-//        const userId = localStorage.getItem('userId');
-//        var file_data = $('#gallery-photo-add').prop('files');
+        const userId = localStorage.getItem('userId');
+        //        var productId = document.getElementById("productId").value;
+        //        var productName = document.getElementById("productName").value;
+        //        var productDesc = document.getElementById("productDesc").value;
+        //        var productCategory = document.getElementById("productCategory").value;
+        //        var productFeatures = $('#productFeatures').val(); //document.getElementById("productFeatures").value;
+        //        var productFeatureId = $('#featureIdArray').data('id');
+        //        var productFeatureIdArray = [];
+        //        if (typeof productFeatureId == "string"){
+        //            productFeatureIdArray = productFeatureId.split(',')
+        //        }else{
+        //            productFeatureIdArray = [productFeatureId];
+        //        }
+        //
+        //
+        //        var productSeller = $('#productSellers').val();
+        //        var productSellerId = $('#sellerIdArray').data('id');
+        //        var productSellerIdArray = [];
+        //        if (typeof productSellerId == "string"){
+        //            productSellerIdArray = productSellerId.split(',')
+        //        }else{
+        //            productSellerIdArray = [productSellerId];
+        //        }
+        //
+        //
+        //
+        //        //        var productFeatureIdArray = productFeatureId.split(',') != null ? productFeatureId.split(',') : [productFeatureId];
+        //        var productPrice = document.getElementById("productPrice").value;
+        //        var productQuantity = document.getElementById("quantity").value;
+        //        var productUnit = document.getElementById("unit").value;
+        //        var isProcessedProduct = document.getElementById("isProcessed").value;
+        //        var productLocation = document.getElementById("productionPointOptions").value;
+        //
+        //        const userId = localStorage.getItem('userId');
+        //        var file_data = $('#gallery-photo-add').prop('files');
 
 
         const fd = createFormData();

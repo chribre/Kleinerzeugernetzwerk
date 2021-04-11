@@ -29,31 +29,6 @@ function createSeller() {
             $("#overlay").fadeOut(300);
         },
         data: sellerFormDataFormatted,
-        //        data: { 
-        //
-        //            producer_id: userId, 
-        //            seller_name: sellerFormData.sellingPointName, 
-        //            seller_description: sellerFormData.sellingPointDesc, 
-        //            street: sellerFormData.sp_street, 
-        //            building_number: sellerFormData.sp_houseNumber, 
-        //            city: sellerFormData.sp_city, 
-        //            zip: sellerFormData.sp_zipCode, 
-        //            latitude: sellerFormData.sp_latitude, 
-        //            longitude: sellerFormData.sp_longitude,
-        //            seller_email: sellerFormData.sp_email, 
-        //            seller_website: sellerFormData.sp_website, 
-        //            mobile: sellerFormData.sp_mobile, 
-        //            phone: sellerFormData.sp_phone, 
-        //            is_blocked: false, 
-        //            is_mon_available: checkboxStatus(sellerFormData.mon_switch), mon_open_time: sellerFormData.mon_openHourTxt, mon_close_time: sellerFormData.mon_closeHourTxt, 
-        //            is_tue_available: checkboxStatus(sellerFormData.tue_switch), tue_open_time: sellerFormData.tue_openHourTxt, tue_close_time: sellerFormData.tue_closeHourTxt, 
-        //            is_wed_available: checkboxStatus(sellerFormData.wed_switch), wed_open_time: sellerFormData.wed_openHourTxt, wed_close_time: sellerFormData.wed_closeHourTxt, 
-        //            is_thu_available: checkboxStatus(sellerFormData.thu_switch), thu_open_time: sellerFormData.thu_openHourTxt, thu_close_time: sellerFormData.thu_closeHourTxt, 
-        //            is_fri_available: checkboxStatus(sellerFormData.fri_switch), fri_open_time: sellerFormData.fri_openHourTxt, fri_close_time: sellerFormData.fri_closeHourTxt, 
-        //            is_sat_available: checkboxStatus(sellerFormData.sat_switch), sat_open_time: sellerFormData.sat_openHourTxt, sat_close_time: sellerFormData.sat_closeHourTxt, 
-        //            is_sun_available: checkboxStatus(sellerFormData.sun_switch), sun_open_time: sellerFormData.sun_openHourTxt, sun_close_time: sellerFormData.sun_closeHourTxt
-        //
-        //        },
         success: function( data ) {
             console.log(data)
             $('#addSellingPoint').modal('hide');
@@ -89,31 +64,6 @@ function editSellerDetails(){
         contentType: false,
         processData: false,
         data: sellerFormDataFormatted,
-        //        data: { 
-        //            seller_id: sellerFormData.sellingPointId,
-        //            producer_id: userId, 
-        //            seller_name: sellerFormData.sellingPointName, 
-        //            seller_description: sellerFormData.sellingPointDesc, 
-        //            street: sellerFormData.sp_street, 
-        //            building_number: sellerFormData.sp_houseNumber, 
-        //            city: sellerFormData.sp_city, 
-        //            zip: sellerFormData.sp_zipCode, 
-        //            latitude: sellerFormData.sp_latitude, 
-        //            longitude: sellerFormData.sp_longitude,
-        //            seller_email: sellerFormData.sp_email, 
-        //            seller_website: sellerFormData.sp_website, 
-        //            mobile: sellerFormData.sp_mobile, 
-        //            phone: sellerFormData.sp_phone, 
-        //            is_blocked: false, 
-        //            is_mon_available: checkboxStatus(sellerFormData.mon_switch), mon_open_time: sellerFormData.mon_openHourTxt, mon_close_time: sellerFormData.mon_closeHourTxt, 
-        //            is_tue_available: checkboxStatus(sellerFormData.tue_switch), tue_open_time: sellerFormData.tue_openHourTxt, tue_close_time: sellerFormData.tue_closeHourTxt, 
-        //            is_wed_available: checkboxStatus(sellerFormData.wed_switch), wed_open_time: sellerFormData.wed_openHourTxt, wed_close_time: sellerFormData.wed_closeHourTxt, 
-        //            is_thu_available: checkboxStatus(sellerFormData.thu_switch), thu_open_time: sellerFormData.thu_openHourTxt, thu_close_time: sellerFormData.thu_closeHourTxt, 
-        //            is_fri_available: checkboxStatus(sellerFormData.fri_switch), fri_open_time: sellerFormData.fri_openHourTxt, fri_close_time: sellerFormData.fri_closeHourTxt, 
-        //            is_sat_available: checkboxStatus(sellerFormData.sat_switch), sat_open_time: sellerFormData.sat_openHourTxt, sat_close_time: sellerFormData.sat_closeHourTxt, 
-        //            is_sun_available: checkboxStatus(sellerFormData.sun_switch), sun_open_time: sellerFormData.sun_openHourTxt, sun_close_time: sellerFormData.sun_closeHourTxt
-        //
-        //        },
         success: function( data ) {
             console.log(data)
             $('#addSellingPoint').modal('hide');
@@ -435,11 +385,8 @@ function setSellerModalValue(sellerData){
     document.getElementById('sun_openHourTxt').value = sellerDetails.sunOpenTime ? sellerDetails.sunOpenTime : "";
     document.getElementById('sun_closeHourTxt').value = sellerDetails.sunCloseTime ? sellerDetails.sunCloseTime : "";
 
-//    document.getElementById("seller-gallery").innerHTML = '';
     setSellerImages(sellerImageData);
-//    if (sellerImageData.length > 0){
-//        setSellerImages(sellerImageData);
-//    }
+
 }
 
 function setSellerImages(imageData){

@@ -365,36 +365,6 @@ function getSellerDetails($seller){
     $sellerData = [];
     $imageData = [];
 
-
-
-    //    if (mysqli_multi_query($dbConnection, $fetchSellerDetailsQuery)) {
-    //        do {
-    //            // Store first result set
-    //            if ($result = mysqli_store_result($dbConnection)) {
-    //                while ($row = $result->fetch_all(MYSQLI_ASSOC)) {
-    //                    $sellerDetails = new seller($row);
-    //                    array_push ($sellerData, $sellerDetails);
-    //                }
-    //                //                    mysqli_free_result($result);
-    //            }
-    //
-    //        } while(mysqli_more_results($dbConnection) && mysqli_next_result($dbConnection));
-    //        
-    //        mysqli_close($dbConnection);
-    //        return json_encode($sellerData);
-    //    }
-
-
-
-
-
-
-
-
-
-
-
-
     $getSellerQuery = mysqli_query($dbConnection, $fetchSellerDetailsQuery);
     confirmQuery($getSellerQuery);
     $sellerCount = mysqli_num_rows($getSellerQuery);

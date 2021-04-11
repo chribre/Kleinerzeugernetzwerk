@@ -23,6 +23,8 @@ class productionPoint{
     public $longitude;
     public $farmArea;
 
+    public $productionPointImageIdArray = [];
+    public $productionPointImageNameArray = [];
 
     function __construct($productDataDict){
 
@@ -39,6 +41,17 @@ class productionPoint{
         $this->latitude = isset($productDataDict['latitude']) ? escapeSQLString($productDataDict['latitude']): 0;
         $this->longitude = isset($productDataDict['longitude']) ? escapeSQLString($productDataDict['longitude']): 0;
         $this->farmArea = isset($productDataDict['farm_area']) ? floatval(escapeSQLString($productDataDict['farm_area'])) : 0;
+        
+        
+        $productionPointPictures = $_FILES['files']['name'] ? $_FILES['files']['name']: [];
+        $productionPointImageIds = isset($productDataDict['production_point_images_id']) && $productDataDict['production_point_images_id'] != null ? escapeSQLString($productDataDict['production_point_images_id']) : [];
+        $productionPointImageIds = json_decode($productionPointImageIds) ? json_decode($productionPointImageIds) : [];
+        
+        $fileData = parseFileData($productionPointPictures, $productionPointImageIds);
+        $this->productionPointImageIdArray = $fileData['fileIds'] != null ? $fileData['fileIds'] : [];
+        $this->productionPointImageNameArray = $fileData['fileName'] != null ? $fileData['fileName'] : [];
+        
+        
     }
 }
 ?>

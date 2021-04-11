@@ -299,8 +299,8 @@ Launch demo modal
             }
         });
     }
-    
-    
+
+
     function getProductionPointDetails(pointId, action){
         const formData = fetchProductionPointFormData();
         const userId = localStorage.getItem('userId');
@@ -327,15 +327,17 @@ Launch demo modal
             success: function( data ) {
                 console.log(data)
                 const productionPointDetails = JSON.parse(data);
-                switch (action){
-                    case 'EDIT':
-                        setProductionPointModalValue(productionPointDetails);
-                        setproductionPointLocationOnMap()
-                        $('#addProductionPoint').modal('toggle');
-                        
-                        break;
-                    case 'VIEW':
-                        break;
+                if (productionPointDetails.length > 0){
+                    switch (action){
+                        case 'EDIT':
+                            setProductionPointModalValue(productionPointDetails);
+                            setproductionPointLocationOnMap()
+                            $('#addProductionPoint').modal('toggle');
+
+                            break;
+                        case 'VIEW':
+                            break;
+                    }
                 }
             },
             error: function (request, status, error) {               
@@ -343,20 +345,44 @@ Launch demo modal
             }
         });
     }
-    
-    
-    
-    function setProductionPointModalValue(productionPoint){
-        document.getElementById('productionPointName').value = productionPoint.farmName;
-        document.getElementById('productionPointDesc').value = productionPoint.farmDesc;
-        document.getElementById('street').value = productionPoint.street;
-        document.getElementById('houseNumber').value = productionPoint.houseNumber;
-        document.getElementById('zipCode').value = productionPoint.zip;
-        document.getElementById('city').value = productionPoint.city;
-        document.getElementById('latitude').value = productionPoint.latitude;
-        document.getElementById('longitude').value = productionPoint.longitude;
-        document.getElementById('productionPointId').value = productionPoint.farmId;
+
+
+
+    function setProductionPointModalValue(productionPointData){
+
+        const productionPoint = productionPointData[0] ? productionPointData[0] : [];
+        const productionPointImageData = productionPointData[1] ? productionPointData[1] : [];
+        
+        
+        document.getElementById('productionPointName').value = productionPoint.farmName ? productionPoint.farmName : "";
+        document.getElementById('productionPointDesc').value = productionPoint.farmDesc ? productionPoint.farmDesc : "";
+        document.getElementById('street').value = productionPoint.street ? productionPoint.street : "";
+        document.getElementById('houseNumber').value = productionPoint.houseNumber? productionPoint.houseNumber : "";
+        document.getElementById('zipCode').value = productionPoint.zip ? productionPoint.zip : "";
+        document.getElementById('city').value = productionPoint.city ? productionPoint.city : "";
+        document.getElementById('latitude').value = productionPoint.latitude ? productionPoint.latitude : "";
+        document.getElementById('longitude').value = productionPoint.longitude ? productionPoint.longitude : "";
+        document.getElementById('productionPointId').value = productionPoint.farmId ? productionPoint.farmId : 0;
+        
+        setProductionPointImages(productionPointImageData);
     }
-    
-    
+
+    function setProductionPointImages(imageData){
+    document.getElementById("production-point-gallery").innerHTML = '';
+    var productionPointImageId = []; 
+    var productionPointImageGallery = "";
+    imageData.forEach(element =>{
+        const path = element.image_path;
+        const id = element.image_id;
+        
+        productionPointImageGallery += `<div class="image">
+<div class="overlay"></div>
+<img src="${path}" id="test" key="2">
+</div>`;
+       productionPointImageId.push(id); 
+    })
+    document.getElementById("productionPointImageIdArray").setAttribute('data-id', productionPointImageId);
+    document.getElementById("production-point-gallery").innerHTML = productionPointImageGallery;
+}
+
 </script>

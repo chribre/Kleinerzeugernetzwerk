@@ -56,12 +56,12 @@
                                     if ($_GET['data'] == 'personal'){
                                         $profileHead = $profileHead . '<a class="btn btn-success" href="/kleinerzeugernetzwerk/src/editProfile.php" ><i class="edit icon"></i>Edit profile</a>';
                                     }elseif ($_GET['data'] == 'productionPoint'){
-                                        $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" data-target="#addProductionPoint" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Farm Land</button>';
+                                        $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddProductionPointModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Farm Land</button>';
                                     }elseif ($_GET['data'] == 'seller'){
                                         $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddSellarModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Selling Point</button>';
-                                       
-                                        
-//                                        $profileHead = $profileHead . '<button onclick="getSellerDetails()">Click me</button>';
+
+
+                                        //                                        $profileHead = $profileHead . '<button onclick="getSellerDetails()">Click me</button>';
                                     }
                                 }
                                 echo $profileHead;
@@ -112,3 +112,12 @@
         </div>
 
         </body>
+
+    <script>
+
+        function openAddProductionPointModal(){
+            setProductionPointModalValue([]);
+            $('#addProductionPoint').modal('toggle');
+        }
+
+    </script>

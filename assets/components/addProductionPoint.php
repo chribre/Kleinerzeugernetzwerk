@@ -30,7 +30,6 @@
                             if (input.files) {
                                 var filesAmount = input.files.length;
                                 document.getElementById(placeToInsertImagePreview).innerHTML = ''
-                                document.getElementById('addImageBtn').className = 'plus circle icon big'
                                 for (i = 0; i < filesAmount; i++) {
                                     var reader = new FileReader();
 
@@ -43,26 +42,11 @@
 
                                         imgdiv.innerHTML = `
 <div class="overlay">
-
                     </div>
-<img src="${event.target.result}" id="test" key="${i}">
-`;
-
-                                        //If overlay botton needed then copy below code into inner html
-                                        //                                        <button type="button" class="btn btn-default edit-image-btn pull-right mt-2">
-                                        //<i class="minus circle icon colorRed"></i>
-                                        //                    </button>
+<img src="${event.target.result}" id="test" key="${i}">`;
 
                                         document.getElementById(placeToInsertImagePreview).appendChild(imgdiv);
-                                        document.getElementById('addImageBtn').className = 'edit icon large'
 
-
-
-
-
-                                        //                                        $($.parseHTML('<img>')).attr('src', event.target.result)
-                                        //                                            .attr('id', "test")
-                                        //                                            .appendTo(placeToInsertImagePreview);
                                     }
 
                                     reader.readAsDataURL(input.files[i]);
@@ -71,8 +55,8 @@
 
                         };
 
-                        $('#gallery-photo-add').on('change', function() {
-                            imagesPreview(this, 'gallery');
+                        $('#production-point-gallery-photo-add').on('change', function() {
+                            imagesPreview(this, 'production-point-gallery');
                         });
                     });
 
@@ -153,17 +137,26 @@
                         <input type="hidden" id="productionPointId" name="productionPointId" value="0" />
                     </div>
 
+
+
+                    <div id="productionPointImageIdArray" hidden></div>
                     <div class="form-group">
-                        <label>Add product images</label>
-                        <div class="mx-4 justify-content-center align-middle row">
-                            <div id="gallery" class="gallery row">
+                        <label>Add Production Point Images</label>
+                        <div class="mx-4 justify-content-center row">
+                            <div id="production-point-gallery" class="row">
 
                             </div>
                             <div class="my-auto">
-                                <label class="btn btn-default rounded-circle" id="addBtn">
-                                    <i id="addImageBtn" class="plus circle icon big"></i>
-                                    <input id="gallery-photo-add" hidden type="file" name="file[]" id="file" multiple accept="image/*">
+                                <label type="button" class="btn btn-secondary">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                                    </svg>
+
+
+                                    <input id="production-point-gallery-photo-add" hidden type="file" name="file[]" id="file" multiple accept="image/*">
+                                    <span class="visually-hidden"></span>
                                 </label>
+
                             </div>
 
                         </div>
@@ -212,8 +205,51 @@
         formData['address'] = address;
         return formData
     }
+
+
+
+    function createProductionPointFormData(productionPointData){
+        const userId = localStorage.getItem('userId');
+        var file_data = $('#production-point-gallery-photo-add').prop('files');
+        var formDataCollection = new FormData();
+        for (let i = 0; i < file_data.length; i++) {
+            let file = file_data[i];
+
+            formDataCollection.append('files[]', file);
+        }
+
+        var productionPointImageId = $('#productionPointImageIdArray').data('id') ? $('#productionPointImageIdArray').data('id') : [];
+        var productionPointImageIdArray = [];
+        if (productionPointImageId != ""){
+            if (typeof productionPointImageId == "string"){
+                productionPointImageIdArray = productionPointImageId.split(',')
+            }else{
+                productionPointImageIdArray = [productionPointImageId];
+            }
+        }
+
+
+        formDataCollection.append("farm_id", productionPointData.productionPointId);
+        formDataCollection.append("producer_id", userId);
+        formDataCollection.append("farm_name", productionPointData.productionPointName);
+        formDataCollection.append("farm_desc", productionPointData.productionPointDesc);
+        formDataCollection.append("farm_address", productionPointData.address);
+        formDataCollection.append("street", productionPointData.street);
+        formDataCollection.append("house_number", productionPointData.houseNumber);
+        formDataCollection.append("city", productionPointData.city);
+        formDataCollection.append("zip", productionPointData.zipCode);
+        formDataCollection.append("latitude", productionPointData.latitude);
+        formDataCollection.append("longitude", productionPointData.longitude);
+        formDataCollection.append("production_point_image_id", JSON.stringify(productionPointImageIdArray));
+
+        return formDataCollection;
+    }
+
+
+
     function addNewProductionPoint(){
         const formData = fetchProductionPointFormData();
+        const formDataCollection = createProductionPointFormData(formData);
         const userId = localStorage.getItem('userId');
 
         $.ajax({
@@ -231,23 +267,29 @@
             complete: function(){
                 $("#overlay").fadeOut(300);
             },
-            data: { 
-                farm_id: 0,
-                producer_id: userId,
-                farm_name: formData.productionPointName,
-                farm_desc:formData.productionPointDesc,
-                farm_address:formData.address,
-                street:formData.street,
-                house_number:formData.houseNumber,
-                city:formData.city,
-                zip:formData.zipCode,
-                latitude:formData.latitude,
-                longitude:formData.longitude,
-
-            },
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formDataCollection,
+            //            data: { 
+            //                farm_id: 0,
+            //                producer_id: userId,
+            //                farm_name: formData.productionPointName,
+            //                farm_desc:formData.productionPointDesc,
+            //                farm_address:formData.address,
+            //                street:formData.street,
+            //                house_number:formData.houseNumber,
+            //                city:formData.city,
+            //                zip:formData.zipCode,
+            //                latitude:formData.latitude,
+            //                longitude:formData.longitude,
+            //
+            //            },
             success: function( data ) {
                 console.log(data)
-                const userDetails = JSON.parse(data);
+                $('#addProductionPointPoint').modal('hide');
+                location.reload();
+                //                const userDetails = JSON.parse(data);
             },
             error: function (request, status, error) {               
                 console.log(error)
@@ -256,8 +298,22 @@
     }
 
 
+    $('#addProductionPointPoint').on('hide.bs.modal', function (e) {
+        // do something...
+        getAllProductionPoint();
+    })
+
+    $("#addProductionPointPoint").on("hidden.bs.modal", function () {
+        // put your default event here
+        getAllProductionPoint();
+    });
+
+
+
+
     function updateProductionPoint(){
         const formData = fetchProductionPointFormData();
+        const formDataCollection = createProductionPointFormData(formData);
         const userId = localStorage.getItem('userId');
 
         $.ajax({
@@ -275,23 +331,28 @@
             complete: function(){
                 $("#overlay").fadeOut(300);
             },
-            data: { 
-                farm_id: 17,
-                producer_id: userId,
-                farm_name: 'Rooster Orchard',
-                farm_desc:'This name generator will give you 10 names fit for farms, ranches, and pastures. All the names are heavily based on real life farm names, which are often either named after whichever lifestock or crops they farm, or after the surrounding nature,. Theres a wide variety to pick from though, so, no matter the type of farm, theres bound to be a name that fits. To start, simply click on the button to generate 10 random names. Dont like the names? Simply click again to get 10 new random names.',
-                farm_address:'Zur Schwedenschanze 15, 18435 Stralsund',
-                street:formData.street,
-                house_number:formData.houseNumber,
-                city:formData.city,
-                zip:formData.zipCode,
-                latitude:'53.56435',
-                longitude:'13.213578'
-
-            },
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formDataCollection,
+            //            data: { 
+            //                farm_id: 17,
+            //                producer_id: userId,
+            //                farm_name: 'Rooster Orchard',
+            //                farm_desc:'This name generator will give you 10 names fit for farms, ranches, and pastures. All the names are heavily based on real life farm names, which are often either named after whichever lifestock or crops they farm, or after the surrounding nature,. Theres a wide variety to pick from though, so, no matter the type of farm, theres bound to be a name that fits. To start, simply click on the button to generate 10 random names. Dont like the names? Simply click again to get 10 new random names.',
+            //                farm_address:'Zur Schwedenschanze 15, 18435 Stralsund',
+            //                street:formData.street,
+            //                house_number:formData.houseNumber,
+            //                city:formData.city,
+            //                zip:formData.zipCode,
+            //                latitude:'53.56435',
+            //                longitude:'13.213578'
+            //
+            //            },
             success: function( data ) {
                 console.log(data)
-                const userDetails = JSON.parse(data);
+                $('#addProductionPointPoint').modal('hide');
+                location.reload();
             },
             error: function (request, status, error) {               
                 console.log(error)
