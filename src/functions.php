@@ -166,7 +166,12 @@ function escapeSQLString($string) {
 function getUserDetails($userId){
     $userData = [];
     global $dbConnection;
-    $userSelectQuery = mysqli_query($dbConnection, "SELECT * FROM `user` WHERE `user_id` = '$userId'");
+    
+    $userDetailsQuery = "SELECT * FROM `user` 
+    JOIN images i on (i.image_type = 1 AND i.entity_id = $userId)
+    WHERE `user_id` = '$userId'";
+    
+    $userSelectQuery = mysqli_query($dbConnection, $userDetailsQuery);
     confirmQuery($userSelectQuery);
     if (mysqli_num_rows($userSelectQuery)){
         $row = mysqli_fetch_array($userSelectQuery);
@@ -178,6 +183,8 @@ function getUserDetails($userId){
         $_SESSION["email"] = $email;
         $userData["userName"] = $fName." ".$mName." ".$lName;
         $userData["email"] = $email;
+        
+        $userData['imagePath'] = $row['image_path'];
         return $userData;
         //        redirect("/kleinerzeugernetzwerk/index.php");
     }else{

@@ -47,7 +47,7 @@
         <div class="row">
             <div class="col-md-6 p-5">
 
-                <img class="rounded-circle bg-primary" src="<?php echo $PROFILE_IMAGE_DEFAULT ?>" height="200" width="200" alt="">
+                <img id="profileImage" class="rounded-circle bg-primary" src="<?php echo $PROFILE_IMAGE_DEFAULT ?>" height="200" width="200" alt="" style="object-fit: cover;">
                 <h1 id="fullName"><?php echo $name ?></h1>
                 <text id="aboutMe">Description</text>
             </div>

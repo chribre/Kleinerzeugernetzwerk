@@ -199,6 +199,9 @@ Launch demo modal
                 const address = street + ', ' + houseNumber + ', ' + city + ' - ' + zip;
                 const pointLatitude = productionPoint.latitude ? productionPoint.latitude : 0;
                 const pointLongitude = productionPoint.longitude ? productionPoint.longitude : 0;
+                
+                const defaultImage = "https://lh3.googleusercontent.com/dG2c5YCNllE6dM2SVc0JFzfVBYA7IVoS_zdWbcniA5sDwIOkVZL_yGd65F1aKD2EVd7iUx6aH83fxVO96jbTAlbnS_o=w640-h400-e365-rj-sc0x00ffffff";
+                const imagePath = productionPoint.imagePath ? productionPoint.imagePath : defaultImage;
 
 
                 //                var productionPointListItem = `<li class="row p-2 farmLandLI">
@@ -233,7 +236,7 @@ Launch demo modal
 
                 const card = `<div class="blog-card">
 <div class="meta">
-<div class="photo" style="background-image: url(https://lh3.googleusercontent.com/dG2c5YCNllE6dM2SVc0JFzfVBYA7IVoS_zdWbcniA5sDwIOkVZL_yGd65F1aKD2EVd7iUx6aH83fxVO96jbTAlbnS_o=w640-h400-e365-rj-sc0x00ffffff)"></div>
+<div class="photo" style="background-image: url(${imagePath})"></div>
     </div>
 <div class="description">
 <h1>${pointName}</h1>

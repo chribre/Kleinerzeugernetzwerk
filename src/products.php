@@ -94,7 +94,8 @@ Add a new product
                             const isProcessedProduct = productData.is_processed_product != null ? productData.is_processed_product : false;
                             const productLocation = productData.production_location != null ? productData.production_location : 0;
 
-                            var imageName = productData.image_name != null ? productData.image_name : '/images/default_products.jpg';
+                            const defaultImage = "https://previews.123rf.com/images/mcjvil40yahoocom/mcjvil40yahoocom1804/mcjvil40yahoocom180400001/98805032-low-light-food-photography-of-a-broccoli.jpg"
+                            var imagePath = productData.image_path != null ? productData.image_path : defaultImage;
 
                             const featureData = productData.product_feature != null ? productData.product_feature : [];
                             var featureArray = [];
@@ -111,7 +112,7 @@ Add a new product
 
                             var card = `<div class="blog-card">
 <div class="meta">
-<div class="photo" style="background-image: url(https://previews.123rf.com/images/mcjvil40yahoocom/mcjvil40yahoocom1804/mcjvil40yahoocom180400001/98805032-low-light-food-photography-of-a-broccoli.jpg)"></div>
+<div class="photo" style="background-image: url(${imagePath})"></div>
         </div>
 <div class="description">
 <h1>${productName}</h1>

@@ -16,6 +16,7 @@ class seller{
     public $phone;
     public $isBlocked;
     public $isFavourite;
+    public $imagePath;
     
     public $isMonAvailable;
     public $monOpenTime;
@@ -67,6 +68,7 @@ class seller{
         $this->phone = isset($userData['phone']) ? escapeSQLString($userData['phone']) : "";
         $this->isBlocked = isset($userData['is_blocked']) ? escapeSQLString($userData['is_blocked']) : false;
         $this->isFavourite = isset($userData['is_favourite']) ? escapeSQLString($userData['is_favourite']) : false;
+        $this->imagePath = isset($userData['image_path']) ? escapeSQLString($userData['image_path']) : null;
         
         
         

@@ -197,11 +197,11 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
             if (localStorage.getItem('isLoggedIn')){
                 const userName = localStorage.getItem('userName');
                 const email = localStorage.getItem('email');
-                const profileImage = '/kleinerzeugernetzwerk/images/profile_placeholder.png';
+                const profileImage = localStorage.getItem('profileImagePath') != null && localStorage.getItem('profileImagePath') != "" ? localStorage.getItem('profileImagePath') : '/kleinerzeugernetzwerk/images/profile_placeholder.png';
                 const viewProfilePath = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=personal';
                 const logOutImage = '/kleinerzeugernetzwerk/images/logout.png';
 
-                const profileBtn = `<div class="dropdown rounded-circle bg-info p-1 ml-3" id="signInOrProfileBtn"> <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="rounded-circle bg-info"> <img src="${profileImage}" class="d-block rounded-circle" width="36px" height="36px"> </div> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel"> <a class="dropdown-item font-weight-bold text-uppercase" href="${viewProfilePath}">${userName}</br><span class=" text font-weight-light text-lowercase">${email}</span> </a> <div class="dropdown-divider"></div>  <a class="dropdown-item" href="javascript:logOut()"><img class="mr-2" src="${logOutImage}" width=20px, height=20px/>Log Out</a> </div> </div>`
+                const profileBtn = `<div class="dropdown rounded-circle bg-info p-1 ml-3" id="signInOrProfileBtn"> <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="rounded-circle bg-info"> <img src="${profileImage}" class="d-block rounded-circle" width="36px" height="36px" style="object-fit: cover;"> </div> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel"> <a class="dropdown-item font-weight-bold text-uppercase" href="${viewProfilePath}">${userName}</br><span class=" text font-weight-light text-lowercase">${email}</span> </a> <div class="dropdown-divider"></div>  <a class="dropdown-item" href="javascript:logOut()"><img class="mr-2" src="${logOutImage}" width=20px, height=20px/>Log Out</a> </div> </div>`
 
 
                 $("#signInOrProfileBtn").replaceWith(profileBtn);
@@ -226,6 +226,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
             localStorage.removeItem('token');
             localStorage.removeItem('tokenId');
             localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('profileImage');
         }
 
         function userLogin(userName, password){

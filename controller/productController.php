@@ -73,7 +73,7 @@ function fetchAllProducts($userId){
     $products = [];
     global $dbConnection;
     $fetchProductQuery = "SELECT * FROM products p
-        LEFT JOIN images i on (i.entity_id = p.product_id and i.image_type = 1)
+        LEFT JOIN images i on (i.entity_id = p.product_id and i.image_type = 2)
         WHERE p.producer_id = '$userId'
         GROUP BY p.product_id ORDER BY p.created_date DESC;";
 

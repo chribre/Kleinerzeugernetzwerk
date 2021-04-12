@@ -22,6 +22,7 @@ class productionPoint{
     public $latitude;
     public $longitude;
     public $farmArea;
+    public $imagePath;
 
     public $productionPointImageIdArray = [];
     public $productionPointImageNameArray = [];
@@ -41,6 +42,7 @@ class productionPoint{
         $this->latitude = isset($productDataDict['latitude']) ? escapeSQLString($productDataDict['latitude']): 0;
         $this->longitude = isset($productDataDict['longitude']) ? escapeSQLString($productDataDict['longitude']): 0;
         $this->farmArea = isset($productDataDict['farm_area']) ? floatval(escapeSQLString($productDataDict['farm_area'])) : 0;
+        $this->imagePath = isset($productDataDict['image_path']) ? escapeSQLString($productDataDict['image_path']) : null;
         
         
         $productionPointPictures = $_FILES['files']['name'] ? $_FILES['files']['name']: [];

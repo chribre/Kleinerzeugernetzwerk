@@ -203,8 +203,8 @@ function getAllProductionPoints($productionPoint){
     global $dbConnection;
     /* Start transaction */
 
-    $fetchProductionPointQuery = "SELECT f.farm_id, f.producer_id, f.farm_name, f.farm_desc, f.farm_address, f.street, f.house_number, f.city, f.zip, f.farm_area FROM farm_land f 
-    LEFT JOIN images i on (i.entity_id = f.farm_id and i.image_type = 2)
+    $fetchProductionPointQuery = "SELECT f.farm_id, f.producer_id, f.farm_name, f.farm_desc, f.farm_address, f.street, f.house_number, f.city, f.zip, f.farm_area, i.image_path FROM farm_land f 
+    LEFT JOIN images i on (i.entity_id = f.farm_id and i.image_type = 3)
     WHERE f.producer_id = '$productionPoint->producerId'
     GROUP BY f.farm_id ORDER BY f.created_date DESC";
 

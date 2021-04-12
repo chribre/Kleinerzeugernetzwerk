@@ -23,6 +23,12 @@ class user{
     public $isActive;
     public $isBlocked;
     public $description;
+    
+    public $imagePath;
+    public $imageId;
+    
+    public $profileImageId = [];
+    public $profileImageNameArray = [];
    
     //init function to set user class variables
     function __construct($userData){
@@ -42,6 +48,19 @@ class user{
         $this->isActive = isset($userData['is_active']) ? escapeSQLString($userData['is_active']) : 0;
         $this->isBlocked = isset($userData['is_blocked']) ? escapeSQLString($userData['is_blocked']) : 0;
         $this->description = isset($userData['description']) ? escapeSQLString($userData['description']) : "";
+        
+        
+        $this->imagePath = isset($userData['image_path']) ? escapeSQLString($userData['image_path']) : "";
+        $this->imageId = isset($userData['image_id']) ? escapeSQLString($userData['image_id']) : 0;
+        
+        
+        $profilePictures = $_FILES['files']['name'] ? $_FILES['files']['name']: [];
+        $profileImageId = isset($userData['profile_image_id']) && $userData['profile_image_id'] != null ? escapeSQLString($userData['profile_image_id']) : [];
+        $profileImageId = json_decode($profileImageId) ? json_decode($profileImageId) : [];
+        
+        $fileData = parseFileData($profilePictures, $profileImageId);
+        $this->profileImageIdArray = $fileData['fileIds'] != null ? $fileData['fileIds'] : [];
+        $this->profileImageNameArray = $fileData['fileName'] != null ? $fileData['fileName'] : [];
     }
 }
 ?>

@@ -14,120 +14,27 @@ if (session_status() == PHP_SESSION_NONE) {
 
 //$HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.php");
-
-//global $dbConnection;
-///*
-//    PHP code to recieve post method with registartion data. it is identified by a hidden value 'signUp' to get the hit here.
-//*/
-//if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['signUp'] == "true"){
-//    echo('Post method hit,');
-//    $password = escapeSQLString($_POST['password']);
-//    $repeat_password = escapeSQLString($_POST['psw-repeat']);
-//    if ($password === $repeat_password){
-//        $email = escapeSQLString($_POST['email']);
-//
-//        if (isUserAlreadyExist($email)){
-//            echo "This email is already being used";
-//            exit('This email is already being used');
-//        }else{
-//            $salutation = escapeSQLString($_POST['salutation']);
-//            $first_name = escapeSQLString($_POST['first_name']);
-//            $middle_name = escapeSQLString($_POST['middle_name']);
-//            $last_name = escapeSQLString($_POST['last_name']);
-//            $dob = escapeSQLString($_POST['dob']);
-//            $street = escapeSQLString($_POST['street']);
-//            $house_number = escapeSQLString($_POST['house_number']);
-//            $zip = escapeSQLString($_POST['zip']);
-//            $city = escapeSQLString($_POST['city']);
-//            $country = escapeSQLString($_POST['country']);
-//            $phone = escapeSQLString($_POST['phone']);
-//            $mobile = escapeSQLString($_POST['mobile']);
-//
-//
-//            $userType = 1;
-//            $isActive = 1;
-//            $isBlocked = 0;
-//
-//            //file upload for user image
-//            $fileNameNew = null;
-//            if (isset($_FILES['file'])){
-//                $file = $_FILES['file'];
-//                echo $file;
-//                $fileName = $_FILES['file']['name'];
-//                $fileTmpName = $_FILES['file']['tmp_name'];
-//                $fileSize = $_FILES['file']['size'];
-//                $fileError = $_FILES['file']['error'];
-//                $fileType = $_FILES['file']['type'];
-//
-//
-//                $fileExt = explode('.', $fileName);
-//                $fileActualExt = strtolower(end($fileExt));
-//
-//                $allowed = array('jpeg', 'jpg', 'png');
-//                echo $fileActualExt;
-//                if (in_array($fileActualExt, $allowed)){
-//                    if ($fileError === 0){
-//                        if ($fileSize < 100000 ){
-//                            $fileNameNew = uniqid('', true).".".$fileActualExt;
-//                            $fileDestination = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/".$fileNameNew;
-//                            move_uploaded_file($fileTmpName, $fileDestination);  
-//                            echo "filed upload success";
-//                        }else{
-//                            echo "your file size is too high";
-//                        }
-//                    }else{
-//                        echo "There was an error uploading your profile image";
-//                    }
-//                }else{
-//                    echo "Cannot upload file of this type";
-//                }
-//            }
-//
-//
-//
-//
-//            //create user function which is written in functions.php to generate query and insert values to the user table
-//            createUser($salutation, $first_name, $middle_name, $last_name, $dob, $street, $house_number, $zip, $city, $country, $phone, $mobile, $email, $password, $userType, $isActive, $isBlocked, $fileNameNew);
-//        }
-//    }else{
-//        echo "Passwords doesn't match.";
-//    }
-//}else{
-//    echo "post method not found!,";
-//}
-//
-//
-//function uploadprofileImage(){
-//    $file = $_FILES['profileImage'];
-//    $fileName = $_FILES['profileImage']['name'];
-//    $fileTmpName = $_FILES['profileImage']['tmp_name'];
-//    $fileSize = $_FILES['profileImage']['size'];
-//    $fileError = $_FILES['profileImage']['error'];
-//    $fileType = $_FILES['profileImage']['type'];
-//
-//
-//    $fileExt = explode('.', $fileName);
-//    $fileActualExt = strtolower(end($fileExt));
-//
-//    $allowed = array('jpeg', 'jpg', 'png');
-//
-//    if (in_array($fileActualExt, $allowed)){
-//        if ($fileError === 0){
-//            if ($fileSize < 100000 ){
-//                $fileNameNew = uniqid('', true).".".$fileActualExt;
-//                $fileDestination = '/uploads/'.$fileNameNew;
-//                move_uploaded_file($fileTmpName, $fileDestination);                
-//            }else{
-//                echo "your file size is too high";
-//            }
-//        }else{
-//            echo "There was an error uploading your profile image";
-//        }
-//    }else{
-//        echo "Cannot upload file of this type";
-//    }
-//}
 ?>
+
+<div class="modal" id="registerSuccessModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Success!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Congratulations, Your acoount has been successfully created.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Continue</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 
 <div class="container mb-5">
@@ -142,40 +49,26 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 
     <!--Form to capure data from user for registration-->
     <div class="registration_form">
-        <form enctype="multipart/form-data" class="" novalidate>
+        <form enctype="multipart/form-data" class="" onsubmit="event.preventDefault()">
             <div  class="rounded-circle pb-4" width="152px" height="152px">
-                <img src="../images/profile_placeholder.png" class="mx-auto d-block rounded-circle" width="150px" height="150px">
+                <img id="profileImage" src="../images/profile_placeholder.png" class="mx-auto d-block rounded-circle" width="150px" height="150px" style="object-fit: cover;">
                 <label class="btn btn-default">
-                    Edit <input type="file" hidden name="file">
+                    Edit <input id="profileImageFile" type="file" hidden name="file" onchange="document.getElementById('profileImage').src = window.URL.createObjectURL(this.files[0])">
                 </label>
+                <input type="hidden" name="profileImageId" value=0 id="profileImageId">
             </div>
 
             <div class="form-row">
-                <div class="col-md-2 mb-3">
-                    <label for="salutation">Salutation</label>
-                    <select class="form-control" id="salutation" name="salutation">
-                        <option>Mr.</option>
-                        <option>Ms.</option>
-                        <option>Mrs.</option>
-                    </select>
-                </div>
-                <div class="col-md-5 mb-3">
+
+                <div class="col-md-6 mb-3">
                     <label for="first_name">First name</label>
                     <input type="text" class="form-control" id="first_name" placeholder="First name" required name="first_name">
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
-                <!--
-<div class="col-md-3 mb-3">
-<label for="middle_name">Middle name</label>
-<input type="text" class="form-control" id="middle_name" placeholder="Middle name" required name="middle_name">
-<div class="valid-feedback">
-Looks good!
-</div>
-</div>
--->
-                <div class="col-md-5 mb-3">
+
+                <div class="col-md-6 mb-3">
                     <label for="last_name">Last name</label>
                     <input type="text" class="form-control" id="last_name" placeholder="Last name" required name="last_name">
                     <div class="valid-feedback">
@@ -184,33 +77,74 @@ Looks good!
                 </div>
 
             </div>
-
-            <div class="form-row">
+            <div class="form-row" id="emailSection">
                 <div class="col-md-12 mb-3">
-                    <label for="bio">Share Your Farm Story</label>
-                    <!--                    <input type="text" class="form-control" id="bio" placeholder="E-mail" required name="bio">-->
-                    <textarea class="form-control" id="bio" rows="5" placeholder="Write something about you, your farm, products etc." required name="bio"></textarea>
+                    <label for="r_email">E-mail</label>
+                    <input type="text" class="form-control" id="r_email" placeholder="E-mail" required name="r_email">
                     <div class="invalid-feedback">
-                        Please provide a description.
+                        Please provide a valid e-mail address.
                     </div>
                 </div>
             </div>
 
-            <div class="form-row">
+            <div class="form-row" id="passwordSection">
                 <div class="col-md-12 mb-3">
-                    <label for="dob_date_picker">Date of Birth</label>
-                    <input type="text" class="form-control" id="dob_date_picker" placeholder="DD/MM/YYYY" required name="dob">
-                    <script>
-                        $('#dob_date_picker').dateDropper({
-                            large: true,
-                            largeOnly: true
-                        })
-                    </script>
+                    <label for="r_password">Password</label>
+                    <input type="password" class="form-control" id="r_password" placeholder="Password" required name="r_password">
                     <div class="invalid-feedback">
-                        Please provide Date of Birth.
+                        Please provide a valid password.
                     </div>
                 </div>
-            </div>                
+            </div>
+            <div class="form-row" id="passwordrptSection">
+                <div class="col-md-12 mb-3">
+                    <label for="psw_repeat">Repeat Password</label>
+                    <input type="password" class="form-control" id="psw_repeat" placeholder="Repeat Password" required name="psw-repeat">
+                    <div class="invalid-feedback">
+                        Please provide a valid repeat password.
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <!--
+<div class="col-md-6 mb-3">
+<label for="mobile">Mobile</label>
+<input type="text" class="form-control" id="mobile" placeholder="Mobile" required name="mobile">
+<div class="invalid-feedback">
+Please provide a valid mobile number.
+</div>
+</div>
+-->
+                <div class="col-md-12 mb-3">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" placeholder="Phone" required name="phone">
+                    <div class="invalid-feedback">
+                        Please provide a valid phone number.
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--
+<div class="form-row">
+<div class="col-md-12 mb-3">
+<label for="dob_date_picker">Date of Birth</label>
+<input type="text" class="form-control" id="dob_date_picker" placeholder="DD/MM/YYYY" required name="dob">
+<script>
+$('#dob_date_picker').dateDropper({
+large: true,
+largeOnly: true
+})
+</script>
+<div class="invalid-feedback">
+Please provide Date of Birth.
+</div>
+</div>
+</div>                
+-->
             <div class="form-row">
                 <div class="col-md-7 mb-3">
                     <label for="street">Street</label>
@@ -251,49 +185,18 @@ Looks good!
                     </div>
                 </div>
             </div>
+
             <div class="form-row">
-                <div class="col-md-6 mb-3">
-                    <label for="mobile">Mobile</label>
-                    <input type="text" class="form-control" id="mobile" placeholder="Mobile" required name="mobile">
-                    <div class="invalid-feedback">
-                        Please provide a valid mobile number.
-                    </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="phone">Phone</label>
-                    <input type="text" class="form-control" id="phone" placeholder="Phone" required name="phone">
-                    <div class="invalid-feedback">
-                        Please provide a valid phone number.
-                    </div>
-                </div>
-            </div>
-            <div class="form-row" id="emailSection">
                 <div class="col-md-12 mb-3">
-                    <label for="r_email">E-mail</label>
-                    <input type="text" class="form-control" id="r_email" placeholder="E-mail" required name="r_email">
+                    <label for="bio">Share Your Farm Story</label>
+                    <!--                    <input type="text" class="form-control" id="bio" placeholder="E-mail" required name="bio">-->
+                    <textarea class="form-control" id="bio" rows="5" placeholder="Write something about you, your farm, products etc." required name="bio"></textarea>
                     <div class="invalid-feedback">
-                        Please provide a valid e-mail address.
+                        Please provide a description.
                     </div>
                 </div>
             </div>
-            <div class="form-row" id="passwordSection">
-                <div class="col-md-12 mb-3">
-                    <label for="r_password">Password</label>
-                    <input type="password" class="form-control" id="r_password" placeholder="Password" required name="r_password">
-                    <div class="invalid-feedback">
-                        Please provide a valid password.
-                    </div>
-                </div>
-            </div>
-            <div class="form-row" id="passwordrptSection">
-                <div class="col-md-12 mb-3">
-                    <label for="psw_repeat">Repeat Password</label>
-                    <input type="password" class="form-control" id="psw_repeat" placeholder="RepeatPassword" required name="psw-repeat">
-                    <div class="invalid-feedback">
-                        Please provide a valid repeat password.
-                    </div>
-                </div>
-            </div>
+
             <div class="form-group" id="agreeSection">
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required name="agree">
@@ -308,10 +211,10 @@ Looks good!
             <!--            <input type="hidden" name="signUp" value="true">-->
             <input type="hidden" name="userId" value=0 id="userId">
             <div class="col text-center">
-                <button class="btn btn-primary btn-lg col-4 rounded-pill shadow-lg" id="signUpBtn">Sign Up</button>
+                <button class="btn btn-primary btn-lg col-4 rounded-pill shadow-lg mb-5" id="signUpBtn">Sign Up</button>
             </div>
-
         </form>
+
 
         <script>
             // Example starter JavaScript for disabling form submissions if there are invalid fields
@@ -339,6 +242,8 @@ Looks good!
             //            Work in progress to implement sign up sign in as ajax call
 
 
+
+
             window.onload = function() {
                 setLoginOrProfileButton();
                 setProfileForEditing();
@@ -350,18 +255,26 @@ Looks good!
                     signUp();
                 }else{
                     saveUserProfile();
-                    
+
                 }
 
             }
 
             function fetchValueFromForm(){
-                const ids = ['first_name', 'last_name', 'bio', 'dob_date_picker', 'street', 'house_number', 'zip', 'city', 'country', 'mobile', 'phone', 'r_email', 'r_password', 'psw_repeat', 'userId'];
+                const ids = ['first_name', 'last_name', 'bio', 'street', 'house_number', 'zip', 'city', 'country', 'phone', 'r_email', 'r_password', 'psw_repeat', 'userId','profileImageId'];
                 var formData = [];
 
                 ids.forEach(function(element) {
-                    const value = document.getElementById(element).value != null ? document.getElementById(element).value: "";
-                    formData[element] = value;
+                    switch(element){
+                        case "profileImageId":
+                            const value = document.getElementById(element).value != null ? document.getElementById(element).value : 0;
+                            const imageId = [parseInt(value)];
+                            formData[element] = imageId;
+                        default:
+                            const value1 = document.getElementById(element).value != null ? document.getElementById(element).value: "";
+                            formData[element] = value1;
+
+                    }
                 }); 
                 return formData
             }
@@ -372,20 +285,23 @@ Looks good!
             */
             function signUp(){
                 const formData = fetchValueFromForm();
-                const firstName = document.getElementById("first_name").value != null ? document.getElementById("first_name").value: "";
-                const lastName = document.getElementById("last_name").value != null ? document.getElementById("last_name").value: "";
-                const description = document.getElementById("bio").value != null ? document.getElementById("bio").value: "";
-                const dob = document.getElementById("dob_date_picker").value != null ? document.getElementById("dob_date_picker").value: "";
-                const street = document.getElementById("street").value != null ? document.getElementById("street").value: "";
-                const houseNumber = document.getElementById("house_number").value != null ? document.getElementById("house_number").value: "";
-                const zip = document.getElementById("zip").value != null ? document.getElementById("zip").value: "";
-                const city = document.getElementById("city").value != null ? document.getElementById("city").value: "";
-                const country = document.getElementById("country").value != null ? document.getElementById("country").value: "";
-                const mobile = document.getElementById("mobile").value != null ? document.getElementById("mobile").value: "";
-                const phone = document.getElementById("phone").value != null ? document.getElementById("phone").value: "";
-                const email = document.getElementById("r_email").value != null ? document.getElementById("r_email").value: "";
-                const password = document.getElementById("r_password").value != null ? document.getElementById("r_password").value: "";
-                const repeatPassword = document.getElementById("psw_repeat").value != null ? document.getElementById("psw_repeat").value: "";
+                const profielFormData = createProfileFormData(formData);
+
+
+                //                const firstName = document.getElementById("first_name").value != null ? document.getElementById("first_name").value: "";
+                //                const lastName = document.getElementById("last_name").value != null ? document.getElementById("last_name").value: "";
+                //                const description = document.getElementById("bio").value != null ? document.getElementById("bio").value: "";
+                //                const dob = document.getElementById("dob_date_picker").value != null ? document.getElementById("dob_date_picker").value: "";
+                //                const street = document.getElementById("street").value != null ? document.getElementById("street").value: "";
+                //                const houseNumber = document.getElementById("house_number").value != null ? document.getElementById("house_number").value: "";
+                //                const zip = document.getElementById("zip").value != null ? document.getElementById("zip").value: "";
+                //                const city = document.getElementById("city").value != null ? document.getElementById("city").value: "";
+                //                const country = document.getElementById("country").value != null ? document.getElementById("country").value: "";
+                //                const mobile = document.getElementById("mobile").value != null ? document.getElementById("mobile").value: "";
+                //                const phone = document.getElementById("phone").value != null ? document.getElementById("phone").value: "";
+                //                const email = document.getElementById("r_email").value != null ? document.getElementById("r_email").value: "";
+                //                const password = document.getElementById("r_password").value != null ? document.getElementById("r_password").value: "";
+                //                const repeatPassword = document.getElementById("psw_repeat").value != null ? document.getElementById("psw_repeat").value: "";
 
                 $.ajax({
                     type: "POST",
@@ -399,27 +315,33 @@ Looks good!
                     headers: {
                         'action': "CREATE"
                     },
-                    data: { 
-                        user_id: 0,
-                        first_name: firstName,
-                        last_name: lastName,
-                        dob: dob,
-                        street: street,
-                        house_number: houseNumber,
-                        zip: zip,
-                        city: city,
-                        country: country,
-                        mobile: mobile,
-                        phone: phone,
-                        email:email,
-                        password: password,
-                        description: description
-                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: profielFormData,
+                    //                    data: { 
+                    //                        user_id: 0,
+                    //                        first_name: firstName,
+                    //                        last_name: lastName,
+                    //                        dob: dob,
+                    //                        street: street,
+                    //                        house_number: houseNumber,
+                    //                        zip: zip,
+                    //                        city: city,
+                    //                        country: country,
+                    //                        mobile: mobile,
+                    //                        phone: phone,
+                    //                        email:email,
+                    //                        password: password,
+                    //                        description: description
+                    //                    },
                     //                    dataType: "json",
                     //                    contentType: "application/json",
                     //                    cache: false,
                     success: function( data ) {
                         console.log(data)
+                        $("#overlay").fadeOut(300);
+                        $('#registerSuccessModal').modal('show');
                     },
                     error: function (request, status, error) {
                         alert(request.responseText);
@@ -428,6 +350,53 @@ Looks good!
                 });
 
             }
+
+
+            $('#registerSuccessModal').on('hide.bs.modal', function (event) {
+                location.replace("http://localhost/kleinerzeugernetzwerk/index.php");
+            })
+
+
+
+            function createProfileFormData(profileData){
+
+                const formData = fetchValueFromForm();
+
+
+
+                const userId = localStorage.getItem('userId');
+                var file_data = $('#profileImageFile').prop('files');
+                var formDataCollection = new FormData();
+                for (let i = 0; i < file_data.length; i++) {
+                    let file = file_data[i];
+
+                    formDataCollection.append('files[]', file);
+                }
+                const profileImageId = [profileData.profileImageId];
+
+
+                formDataCollection.append("user_id", profileData.userId);
+                formDataCollection.append("first_name", profileData.first_name);
+                formDataCollection.append("last_name", profileData.last_name);
+                //                formDataCollection.append("dob", profileData.dob_date_picker);
+                formDataCollection.append("street", profileData.street);
+                formDataCollection.append("house_number", profileData.house_number);
+                formDataCollection.append("zip", profileData.zip);
+                formDataCollection.append("city", profileData.zip);
+                formDataCollection.append("country", profileData.city);
+                //                formDataCollection.append("mobile", profileData.mobile);
+                formDataCollection.append("phone", profileData.phone);
+                formDataCollection.append("description", profileData.bio);
+
+                formDataCollection.append("email", profileData.r_email);
+                formDataCollection.append("password", profileData.r_password);
+
+                formDataCollection.append("profile_image_id", JSON.stringify([parseInt(profileImageId)]));
+
+                return formDataCollection;
+            }
+
+
 
             function setProfileForEditing(){
                 if (window.location.href.includes('editProfile.php')){
@@ -445,19 +414,21 @@ Looks good!
             }
 
             function setProfileValues(userData){
-                document.getElementById("salutation").value = userData.salutations ? userData.salutations : "Mr."; 
+                //                document.getElementById("salutation").value = userData.salutations ? userData.salutations : ""; 
                 document.getElementById("first_name").value = userData.firstName ? userData.firstName : "";
                 document.getElementById("last_name").value = userData.lastName ? userData.lastName : ""; 
                 document.getElementById("bio").value = userData.description ? userData.description : "";
-                document.getElementById("dob_date_picker").value = userData.dob ? userData.dob : ""; 
+                //                document.getElementById("dob_date_picker").value = userData.dob ? userData.dob : ""; 
                 document.getElementById("street").value = userData.street ? userData.street : "";
                 document.getElementById("house_number").value = userData.houseNumber ? userData.houseNumber : ""; 
                 document.getElementById("zip").value = userData.zip ? userData.zip : "";
                 document.getElementById("city").value = userData.city ? userData.city : ""; 
                 document.getElementById("country").value = userData.country ? userData.country : "";
-                document.getElementById("mobile").value = userData.mobile ? userData.mobile : ""; 
+                //                document.getElementById("mobile").value = userData.mobile ? userData.mobile : ""; 
                 document.getElementById("phone").value = userData.phone ? userData.phone : "";
                 document.getElementById("userId").value = userData.userId ? userData.userId : "";
+                document.getElementById("profileImage").src=userData.imagePath ? userData.imagePath : "";
+                document.getElementById("profileImageId").value=userData.imageId ? userData.imageId : 0;
             }
             function getUserDetails(){
                 const userId = localStorage.getItem('userId')
@@ -493,6 +464,8 @@ Looks good!
 
             function saveUserProfile(){
                 const formData = fetchValueFromForm();
+                const profielFormData = createProfileFormData(formData);
+
                 $.ajax({
                     type: "POST",
                     url: "/kleinerzeugernetzwerk/controller/userController.php",
@@ -507,31 +480,30 @@ Looks good!
                         'access-token': localStorage.getItem('token'),
                         'user_id': formData.userId,
                     },
-                    data: { 
-                        user_id: formData.userId,
-                        first_name: formData.first_name,
-                        last_name: formData.last_name,
-                        dob: formData.dob_date_picker,
-                        street: formData.street,
-                        house_number: formData.house_number,
-                        zip: formData.zip,
-                        city: formData.city,
-                        country: formData.country,
-                        mobile: formData.mobile,
-                        phone: formData.phone,
-                        description: formData.bio
-                    },
-                    //                    dataType: "json",
-                    //                    contentType: "application/json",
-                    //                    cache: false,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: profielFormData,
                     success: function( data ) {
                         console.log(data)
+                        const userDetails = JSON.parse(data) ? JSON.parse(data) : [];
+                        updateCache(userDetails);
+                        location.reload();
+                        
                     },
                     error: function (request, status, error) {
                         alert(request.responseText);
                         console.log(error)
                     }
                 });
+            }
+            
+            function updateCache(data){
+                let firstName = data.firstName ? data.firstName : "";
+                let lastName = data.lastName ? data.lastName : "";
+                const name = firstName + ' ' + lastName;
+                localStorage['userName'] = name;
+                localStorage['profileImagePath'] = data.imagePath ? data.imagePath : "";
             }
         </script>
     </div>
