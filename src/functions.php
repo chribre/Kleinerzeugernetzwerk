@@ -166,11 +166,11 @@ function escapeSQLString($string) {
 function getUserDetails($userId){
     $userData = [];
     global $dbConnection;
-    
+
     $userDetailsQuery = "SELECT * FROM `user` 
     JOIN images i on (i.image_type = 1 AND i.entity_id = $userId)
     WHERE `user_id` = '$userId'";
-    
+
     $userSelectQuery = mysqli_query($dbConnection, $userDetailsQuery);
     confirmQuery($userSelectQuery);
     if (mysqli_num_rows($userSelectQuery)){
@@ -183,7 +183,7 @@ function getUserDetails($userId){
         $_SESSION["email"] = $email;
         $userData["userName"] = $fName." ".$mName." ".$lName;
         $userData["email"] = $email;
-        
+
         $userData['imagePath'] = $row['image_path'];
         return $userData;
         //        redirect("/kleinerzeugernetzwerk/index.php");
@@ -532,7 +532,7 @@ function getAllProducts(){
     if ($productsQuery->num_rows > 0){
         $result = mysqli_fetch_all($productsQuery, MYSQLI_ASSOC);
         ob_end_clean();
-        return json_encode($result);
+        return json_encode($result, JSON_UNESCAPED_SLASHES);
     }else{
         echo "No products found. Try Adding some products";
     }
@@ -552,7 +552,7 @@ function getAllProducersAndSellers(){
     if ($producersQuery->num_rows > 0){
         $result = mysqli_fetch_all($producersQuery, MYSQLI_ASSOC);
         ob_end_clean();
-        return json_encode($result);
+        return json_encode($result, JSON_UNESCAPED_SLASHES);
     }else{
         echo "No products found. Try Adding some products";
     }
@@ -649,4 +649,37 @@ function parseFileData($files, $fileIds){
     return ['fileName' => $productImageFileName, 'fileIds' => $imageIds];
 }
 
+/*
+    FUNCTION    :   get root address of the server
+    INPUT       :   -----
+    OUTPUT      :   returns root address of the server as string
+*/
+function getServerRootAddress(){
+    $localServer = 'http://localhost';
+    $awsServer = 'http://ec2-18-184-142-200.eu-central-1.compute.amazonaws.com';
+
+        return $localServer;
+//    return $awsServer;
+}
+
+
+/*
+    FUNCTION    :   get image path to store images
+    INPUT       :   -----
+    OUTPUT      :   returns imagePath where the images stored as string
+*/
+function getImagePath($imageType){
+    switch($imageType){
+        case 1:
+            return "/kleinerzeugernetzwerk_uploads/profile_img/";
+        case 2:
+            return "/kleinerzeugernetzwerk_uploads/product_img/";
+        case 3:
+            return "/kleinerzeugernetzwerk_uploads/production_point_img/";
+        case 4:
+            return "/kleinerzeugernetzwerk_uploads/seller_img/";
+        default:
+            return "";
+    }
+}
 ?>

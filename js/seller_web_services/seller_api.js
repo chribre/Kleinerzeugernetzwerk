@@ -226,7 +226,7 @@ function listAllSellers(sellerArray){
 <div id="manipulationBtnSeller" class="btn-group btn-group-sm mt-3 mr-auto float-right" role="group" aria-label="" value=${pointId}>
 <button type="button" class="btn btn-danger" id="deleteSellerBtn" onclick="sellerDeleteConfirmation('${pointId}', '${pointName}','${address}')">Delete</button>
 <button type="button" class="btn btn-primary" id="editSellerBtn" onclick="getSellerDetails('${pointId}', 'EDIT')">Edit</button>
-<button type="button" class="btn btn-success" id="viewSellerBtn">View</button>
+<button type="button" class="btn btn-success" id="viewSellerBtn" onclick="viewSellerInDetail('${pointId}')">View</button>
 
 ${isFavourite ? unfavouriteButton : favouriteBtn}
 
@@ -249,6 +249,33 @@ ${isFavourite ? unfavouriteButton : favouriteBtn}
         });
     }
 }
+
+
+function viewSellerInDetail(sellerId){
+    $.ajax({
+        type: "POST",
+        url: "/kleinerzeugernetzwerk/controller/details.php",
+        headers: {
+            'action': 'SELLER',
+        },
+        beforeSend: function(){
+            $("#overlay").fadeIn(300);　
+        },
+        complete: function(){
+            $("#overlay").fadeOut(300);
+        },
+        data: { sellerId: sellerId },
+        dataType: "json",
+        success: function( data ) {
+            console.log(data);
+        },
+        error: function (request, status, error) {
+            alert(request.responseText);
+            console.log(error)
+        }
+    });
+}
+
 
 function sellerDeleteConfirmation(id, pointName, address){
     const deleteMessage = `Are you sure want to delete ${pointName} at ${address}.`
@@ -398,12 +425,12 @@ function setSellerImages(imageData){
     imageData.forEach(element =>{
         const path = element.image_path;
         const id = element.image_id;
-        
+
         sellerImageGallery += `<div class="image">
 <div class="overlay"></div>
 <img src="${path}" id="test" key="2">
 </div>`;
-       sellerImageId.push(id); 
+        sellerImageId.push(id); 
     })
     document.getElementById("sellerImageIdArray").setAttribute('data-id', sellerImageId);
     document.getElementById("seller-gallery").innerHTML = sellerImageGallery;

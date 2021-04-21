@@ -108,8 +108,8 @@ class seller{
         $this->sunCloseTime = isset($userData['sun_close_time']) ? escapeSQLString($userData['sun_close_time']) : "";
         
         $sellerPictures = $_FILES['files']['name'] ? $_FILES['files']['name']: [];
-        $sellerImageIds = isset($userData['seller_images_id']) && $userData['seller_images_id'] != null ? escapeSQLString($userData['seller_images_id']) : [];
-        $sellerImageIds = json_decode($sellerImageIds);
+        $sellerImageIds = isset($userData['seller_images_id']) && $userData['seller_images_id'] != null ? $userData['seller_images_id'] : [];
+        $sellerImageIds = json_decode($sellerImageIds, JSON_UNESCAPED_SLASHES);
         
         $fileData = parseFileData($sellerPictures, $sellerImageIds);
         $this->sellerImageIdArray = $fileData['fileIds'] != null ? $fileData['fileIds'] : [];

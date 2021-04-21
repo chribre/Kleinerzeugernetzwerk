@@ -110,32 +110,8 @@ class product{
 
         $productPictures = $_FILES['files']['name'] ? $_FILES['files']['name']: [];
         $productImageIds = isset($productDataDict['product_images_id']) && $productDataDict['product_images_id'] != null ? $productDataDict['product_images_id'] : [];
-        $productImageIds = json_decode($productImageIds);
+        $productImageIds = json_decode($productImageIds, JSON_UNESCAPED_SLASHES);
         
-        
-//        $imageCount = count($productPictures);
-//        $imageIdCount = count($productImageIds);
-//
-//        $productImageFileName = [];
-//        if ($imageCount > 0){
-//            foreach ($productPictures as &$name) {
-//                $ext = pathinfo($name, PATHINFO_EXTENSION);
-//                $newFileName = uniqid().'.'.$ext;
-//                array_push($productImageFileName,$newFileName);
-//                
-//            }
-////            $productImageFileName = array_pad($productImageFileName, $imageCount, uniqid());
-//        }
-//        $deleteImageCount = $imageIdCount - $imageCount;
-//        $addNewImageCount = $imageCount - $imageIdCount; 
-//
-//        if ($deleteImageCount > 0){
-//            $productImageFileName = array_pad($productImageFileName, $imageIdCount, "");
-//        }
-//        if ($addNewImageCount > 0){
-//            $productImageIds = array_pad($productImageIds, $imageCount, 0);
-//        }
-
         
         $fileData = parseFileData($productPictures, $productImageIds);
         $this->productImageIdArray = $fileData['fileIds'] != null ? $fileData['fileIds'] : [];

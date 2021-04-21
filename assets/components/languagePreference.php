@@ -43,5 +43,5 @@ $results = textdomain($domain);
 //echo _("Good morning");
 $language['language'] = $locale;
 //echo _("Good Morning");
-echo json_encode($language);
+echo json_encode($language, JSON_UNESCAPED_SLASHES);
 ?>

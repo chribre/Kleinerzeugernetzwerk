@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2021 at 05:06 PM
+-- Generation Time: Apr 18, 2021 at 01:27 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -129,7 +129,20 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (106, 16, 'AW0333010604f2ca7528010.40973882', '2021-03-15 09:45:11'),
 (107, 16, 'AW033301060533d75221ed5.51353841', '2021-03-18 11:45:57'),
 (108, 48, 'AW0333010605c956a652670.74651197', '2021-03-25 13:51:38'),
-(109, 16, 'AW0333010605c99153ad346.24690297', '2021-03-25 14:07:17');
+(109, 16, 'AW0333010605c99153ad346.24690297', '2021-03-25 14:07:17'),
+(110, 16, 'AW033301060741c651dd2b8.17667225', '2021-04-12 10:09:41'),
+(111, 16, 'AW033301060742551564d20.26017887', '2021-04-12 10:47:45'),
+(112, 16, 'AW03330106074265f0bda86.18683061', '2021-04-12 10:52:15'),
+(113, 16, 'AW03330106074269a40a3a7.74859690', '2021-04-12 10:53:14'),
+(114, 16, 'AW0333010607427cedefb19.57929809', '2021-04-12 10:58:22'),
+(115, 16, 'AW033301060742808cd77e8.51450634', '2021-04-12 10:59:20'),
+(116, 16, 'AW0333010607428207ecf92.70445717', '2021-04-12 10:59:44'),
+(117, 16, 'AW033301060742900d510b9.18977540', '2021-04-12 11:03:28'),
+(118, 16, 'AW033301060744931e11d40.53830069', '2021-04-12 13:20:49'),
+(119, 16, 'AW033301060744a030fcc79.54095542', '2021-04-12 13:24:19'),
+(120, 16, 'AW033301060744ddba26f86.79645090', '2021-04-12 13:40:43'),
+(121, 16, 'AW03330106076a58b339956.56306955', '2021-04-14 08:19:23'),
+(122, 16, 'AW03330106076d752501a70.93171268', '2021-04-14 11:51:46');
 
 -- --------------------------------------------------------
 
@@ -169,7 +182,14 @@ INSERT INTO `farm_land` (`farm_id`, `producer_id`, `farm_name`, `farm_desc`, `fa
 (18, 16, 'Virginia Water', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Binsenwerder, 4-6, Neubrandenburg - 17033', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x0000000001010000004a0091d1ecc64a40010000a03e7f2a40, 0, '2021-02-26 14:07:04'),
 (20, 16, 'Test Point 568', 'test point', 'Am Oberbach, 14, Neubrandenburg - 17033', 'Am Oberbach', '14', 'Neubrandenburg', '17033', 0x000000000101000000ac0cfb6cf6c64a40af15106e32802a40, 0, '2021-03-15 14:16:52'),
 (21, 16, 'Test Point 321', 'test', 'Schwedenstraße, 9, Neubrandenburg - 17033', 'Schwedenstraße', '9', 'Neubrandenburg', '17033', 0x000000000101000000df4216c87ac64a40876c5f0077852a40, 0, '2021-03-15 14:55:29'),
-(22, 16, 'test 0000002', 'test', 'John-Schehr-Straße, 36, Neubrandenburg - 17033', 'John-Schehr-Straße', '36', 'Neubrandenburg', '17033', 0x000000000101000000e10edd97f2c54a40e01adcb7c58a2a40, 0, '2021-03-15 16:13:09');
+(22, 16, 'test 0000002', 'test', 'John-Schehr-Straße, 36, Neubrandenburg - 17033', 'John-Schehr-Straße', '36', 'Neubrandenburg', '17033', 0x000000000101000000e10edd97f2c54a40e01adcb7c58a2a40, 0, '2021-03-15 16:13:09'),
+(28, 16, 'Test Point ttt', 'test', 'Mühlendamm, 1, Neubrandenburg - 17033', 'Mühlendamm', '1', 'Neubrandenburg', '17033', 0x000000000101000000d1b9910fa7c64a408e57dbadd88f2a40, 0, '2021-04-11 11:32:48'),
+(29, 16, 'Test Point ttt', 'test', 'Mühlendamm, 1, Neubrandenburg - 17033', 'Mühlendamm', '1', 'Neubrandenburg', '17033', 0x000000000101000000d1b9910fa7c64a408e57dbadd88f2a40, 0, '2021-04-11 11:33:05'),
+(30, 16, 'Test Point', 'test', 'Binsenwerder, 4-6, Neubrandenburg - 17033', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x000000000101000000a8977384e7c64a40bcd25fd9927f2a40, 0, '2021-04-11 11:34:00'),
+(31, 16, 'Test Point', 'test', 'Binsenwerder, 4-6, Neubrandenburg - 17033', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x000000000101000000a8977384e7c64a40bcd25fd9927f2a40, 0, '2021-04-11 11:34:35'),
+(32, 16, 'Test Point 666', 'test', 'Binsenwerder, 2, Neubrandenburg - 17033', 'Binsenwerder', '2', 'Neubrandenburg', '17033', 0x000000000101000000bace876db4c64a40f12d8a7a437f2a40, 0, '2021-04-11 11:40:14'),
+(33, 16, 'Test Point 890', 'test', 'Binsenwerder, 1, Neubrandenburg - 17033', 'Binsenwerder', '1', 'Neubrandenburg', '17033', 0x000000000101000000dc5e65ebf3c64a40cf673a251c7f2a40, 0, '2021-04-11 11:45:16'),
+(34, 16, 'test 1', 'test', 'Friedrich-Engels-Ring, undefined, Neubrandenburg - 17033', 'Friedrich-Engels-Ring', 'undefined', 'Neubrandenburg', '17033', 0x0000000001010000009b4ee359d8c64a405d83f193dd842a40, 0, '2021-04-13 08:54:10');
 
 -- --------------------------------------------------------
 
@@ -237,6 +257,7 @@ CREATE TABLE `images` (
   `image_id` int(11) NOT NULL,
   `image_type` int(11) NOT NULL,
   `image_name` text NOT NULL,
+  `image_path` text DEFAULT NULL,
   `entity_id` int(11) NOT NULL,
   `createdDate` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -245,33 +266,132 @@ CREATE TABLE `images` (
 -- Dumping data for table `images`
 --
 
-INSERT INTO `images` (`image_id`, `image_type`, `image_name`, `entity_id`, `createdDate`) VALUES
-(1, 1, '74c2578b-b260-4255-8802-0233b32e98b9.jpg', 48, '2020-12-18 13:30:20'),
-(2, 1, 'deb9dec0-f9f8-4b67-989b-0fca88ee3686.jpg', 51, '2020-12-18 13:30:20'),
-(3, 1, '9ec1b169-88cd-4f72-9978-4474321c4bab.jpg', 51, '2020-12-18 13:30:20'),
-(4, 1, 'c2c94e80-a9bf-4dd9-899b-57548d4105c4.png', 51, '2020-12-18 13:30:20'),
-(5, 1, '80bde851-861a-46c5-aef8-308dfe6132ae.png', 52, '2020-12-18 13:30:20'),
-(6, 1, '62c9cee8-3962-4505-9b75-eae382944325.jpg', 52, '2020-12-18 13:30:20'),
-(7, 1, '8f609f40-586b-4e06-a1c6-a093e08166d2.jpg', 52, '2020-12-18 13:30:20'),
-(8, 1, '49d2c7a0-3747-4a93-bafe-f640295736cf.png', 52, '2020-12-18 13:30:20'),
-(9, 1, 'ee61f568-3c31-487c-83de-5f0e1ed84838.jpeg', 53, '2020-12-18 16:35:31'),
-(10, 1, 'ad3f9450-b78a-4590-801d-2dd6975e34cc.jpg', 53, '2020-12-18 16:35:31'),
-(11, 1, '039905d4-0540-40e8-ae04-7c2715e6d0be.jpg', 54, '2020-12-18 16:36:03'),
-(12, 1, '09da3fb0-ceeb-4877-9f71-bbe4bebf2e35.jpg', 54, '2020-12-18 16:36:03'),
-(13, 1, '2871f1f4-562f-4d22-8e3c-3d2a01d2541a.jpg', 55, '2020-12-18 16:37:19'),
-(14, 1, '565c2415-d608-4dc8-9a75-2944f6497e85.jpg', 55, '2020-12-18 16:37:19'),
-(15, 1, '97bd3c16-c751-4905-9596-7947a2613fb9.jpg', 55, '2020-12-18 16:37:19'),
-(16, 1, '16d13cfe-2372-4937-ba70-d6633ed6f26c.jpg', 55, '2020-12-18 16:37:19'),
-(17, 1, 'a9a7add0-4cd1-4687-97e7-65742cad324f.jpeg', 55, '2020-12-18 16:37:19'),
-(18, 1, '33a90f5d-4c4c-4440-bb3b-2100f2c3769a.jpg', 55, '2020-12-18 16:37:19'),
-(19, 1, 'c344dbcc-889a-4c91-9d02-1bc642cd21fd.jpg', 56, '2020-12-18 16:37:57'),
-(20, 2, '9bfdb0a1-9165-4ecf-af0b-7e9e1b0d3d8c.jpg', 16, '2020-12-19 11:35:49'),
-(21, 2, '85214677-95d0-4ae8-a8b1-2efb9695d7ea.jpg', 16, '2020-12-19 11:35:49'),
-(22, 1, 'f5e92244-67ea-452c-ba6d-25fb06df98fe.jpg', 57, '2020-12-19 13:11:16'),
-(23, 1, '9cbd6a72-c208-43d8-ad70-b3fefc3ff3fa.jpg', 57, '2020-12-19 13:11:16'),
-(24, 1, 'edb178d1-9600-447b-961b-85af4f6adb7c.jpg', 57, '2020-12-19 13:11:16'),
-(25, 1, '6de80b31-9b6b-4330-b4d1-597fe8c1adeb.jpg', 58, '2020-12-28 14:07:14'),
-(26, 1, '7ac3c92c-6a4c-42b2-b105-a490ed31e50e.jpg', 58, '2020-12-28 14:07:14');
+INSERT INTO `images` (`image_id`, `image_type`, `image_name`, `image_path`, `entity_id`, `createdDate`) VALUES
+(1, 1, '74c2578b-b260-4255-8802-0233b32e98b9.jpg', NULL, 48, '2020-12-18 13:30:20'),
+(2, 1, 'deb9dec0-f9f8-4b67-989b-0fca88ee3686.jpg', NULL, 51, '2020-12-18 13:30:20'),
+(3, 1, '9ec1b169-88cd-4f72-9978-4474321c4bab.jpg', NULL, 51, '2020-12-18 13:30:20'),
+(4, 1, 'c2c94e80-a9bf-4dd9-899b-57548d4105c4.png', NULL, 51, '2020-12-18 13:30:20'),
+(5, 1, '80bde851-861a-46c5-aef8-308dfe6132ae.png', NULL, 52, '2020-12-18 13:30:20'),
+(6, 1, '62c9cee8-3962-4505-9b75-eae382944325.jpg', NULL, 52, '2020-12-18 13:30:20'),
+(7, 1, '8f609f40-586b-4e06-a1c6-a093e08166d2.jpg', NULL, 52, '2020-12-18 13:30:20'),
+(8, 1, '49d2c7a0-3747-4a93-bafe-f640295736cf.png', NULL, 52, '2020-12-18 13:30:20'),
+(9, 1, 'ee61f568-3c31-487c-83de-5f0e1ed84838.jpeg', NULL, 53, '2020-12-18 16:35:31'),
+(10, 1, 'ad3f9450-b78a-4590-801d-2dd6975e34cc.jpg', NULL, 53, '2020-12-18 16:35:31'),
+(11, 1, '039905d4-0540-40e8-ae04-7c2715e6d0be.jpg', NULL, 54, '2020-12-18 16:36:03'),
+(12, 1, '09da3fb0-ceeb-4877-9f71-bbe4bebf2e35.jpg', NULL, 54, '2020-12-18 16:36:03'),
+(13, 1, '2871f1f4-562f-4d22-8e3c-3d2a01d2541a.jpg', NULL, 55, '2020-12-18 16:37:19'),
+(14, 1, '565c2415-d608-4dc8-9a75-2944f6497e85.jpg', NULL, 55, '2020-12-18 16:37:19'),
+(15, 1, '97bd3c16-c751-4905-9596-7947a2613fb9.jpg', NULL, 55, '2020-12-18 16:37:19'),
+(16, 1, '16d13cfe-2372-4937-ba70-d6633ed6f26c.jpg', NULL, 55, '2020-12-18 16:37:19'),
+(17, 1, 'a9a7add0-4cd1-4687-97e7-65742cad324f.jpeg', NULL, 55, '2020-12-18 16:37:19'),
+(18, 1, '33a90f5d-4c4c-4440-bb3b-2100f2c3769a.jpg', NULL, 55, '2020-12-18 16:37:19'),
+(19, 1, 'c344dbcc-889a-4c91-9d02-1bc642cd21fd.jpg', NULL, 56, '2020-12-18 16:37:57'),
+(20, 2, '9bfdb0a1-9165-4ecf-af0b-7e9e1b0d3d8c.jpg', NULL, 16, '2020-12-19 11:35:49'),
+(21, 2, '85214677-95d0-4ae8-a8b1-2efb9695d7ea.jpg', NULL, 16, '2020-12-19 11:35:49'),
+(22, 1, 'f5e92244-67ea-452c-ba6d-25fb06df98fe.jpg', NULL, 57, '2020-12-19 13:11:16'),
+(23, 1, '9cbd6a72-c208-43d8-ad70-b3fefc3ff3fa.jpg', NULL, 57, '2020-12-19 13:11:16'),
+(24, 1, 'edb178d1-9600-447b-961b-85af4f6adb7c.jpg', NULL, 57, '2020-12-19 13:11:16'),
+(25, 1, '6de80b31-9b6b-4330-b4d1-597fe8c1adeb.jpg', NULL, 58, '2020-12-28 14:07:14'),
+(26, 1, '7ac3c92c-6a4c-42b2-b105-a490ed31e50e.jpg', NULL, 58, '2020-12-28 14:07:14'),
+(27, 2, '606f2e3991c27', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/', 144, '2021-04-08 16:24:52'),
+(28, 2, '606f2e3991c27', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/', 144, '2021-04-08 16:24:52'),
+(29, 2, '606f2e3991c27', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/', 144, '2021-04-08 16:24:52'),
+(30, 2, '606f2f2cdedd1', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/606f2f2cdedd1', 146, '2021-04-08 16:28:41'),
+(31, 2, '606f2f2cdedd1', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/606f2f2cdedd1', 146, '2021-04-08 16:28:41'),
+(32, 2, '606f2f2cdedd1', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/606f2f2cdedd1', 146, '2021-04-08 16:28:41'),
+(33, 2, '606f31358d514jpg', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/606f31358d514jpg', 147, '2021-04-08 16:37:25'),
+(34, 2, '606f314591112jpg', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/606f314591112jpg', 147, '2021-04-08 16:37:25'),
+(35, 2, '606f3145911edjpg', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/606f3145911edjpg', 147, '2021-04-08 16:37:25'),
+(36, 2, '606f31459145bjpg', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/606f31459145bjpg', 147, '2021-04-08 16:37:25'),
+(37, 2, '606f316b02599.jpg', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/606f316b02599.jpg', 148, '2021-04-08 16:38:13'),
+(38, 2, '606f3171ea0eb.jpg', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/606f3171ea0eb.jpg', 148, '2021-04-08 16:38:13'),
+(39, 2, '606f31748083a.jpg', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/606f31748083a.jpg', 148, '2021-04-08 16:38:13'),
+(40, 2, '606f317480844.jpg', 'C:/xampp/htdocs/kleinerzeugernetzwerk_uploads/product_img/606f317480844.jpg', 148, '2021-04-08 16:38:13'),
+(41, 2, '60705af7d193f.jpg', '60705af7d193f.jpg', 150, '2021-04-09 13:47:35'),
+(42, 2, '60705af7d1947.png', '60705af7d1947.png', 150, '2021-04-09 13:47:36'),
+(49, 2, '60708bd439621.png', 'http://localhost/kleinerzeugernetzwerk_uploads/product_img/60708bd439621.png', 151, '2021-04-09 17:15:33'),
+(50, 2, '60708bd439629.png', 'http://localhost/kleinerzeugernetzwerk_uploads/product_img/60708bd439629.png', 151, '2021-04-09 17:15:33'),
+(51, 2, '60708bd43962d.png', 'http://localhost/kleinerzeugernetzwerk_uploads/product_img/60708bd43962d.png', 151, '2021-04-09 17:15:33'),
+(54, 2, '607153d162a28.png', 'http://localhost/kleinerzeugernetzwerk_uploads/product_img/607153d162a28.png', 152, '2021-04-10 07:29:21'),
+(55, 2, '607153d162a30.png', 'http://localhost/kleinerzeugernetzwerk_uploads/product_img/607153d162a30.png', 152, '2021-04-10 07:29:21'),
+(56, 2, '607153d162a34.png', 'http://localhost/kleinerzeugernetzwerk_uploads/product_img/607153d162a34.png', 152, '2021-04-10 07:29:21'),
+(64, 4, '6071d2e66bb7a.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/seller_img/6071d2e66bb7a.jpg', 39, '2021-04-10 16:31:39'),
+(67, 4, '6071d4896caa2.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/seller_img/6071d4896caa2.jpg', 39, '2021-04-10 16:38:33'),
+(80, 4, '6071db5ac22d1.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/seller_img/6071db5ac22d1.PNG', 47, '2021-04-10 17:07:40'),
+(81, 4, '6071db5ac22da.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/seller_img/6071db5ac22da.PNG', 47, '2021-04-10 17:07:40'),
+(82, 4, '6071db5ac22df.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/seller_img/6071db5ac22df.PNG', 47, '2021-04-10 17:07:40'),
+(83, 2, '6072bb6e78cf6.JPG', 'http://localhost/kleinerzeugernetzwerk_uploads/product_img/6072bb6e78cf6.JPG', 153, '2021-04-11 09:03:09'),
+(84, 2, '6072bb6e78cfd.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/product_img/6072bb6e78cfd.PNG', 153, '2021-04-11 09:03:09'),
+(85, 2, '6072bb6e78d01.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/product_img/6072bb6e78d01.PNG', 153, '2021-04-11 09:03:09'),
+(96, 3, '6072de60314b2.JPG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072de60314b2.JPG', 28, '2021-04-11 11:32:52'),
+(97, 3, '6072de60314ca.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072de60314ca.PNG', 28, '2021-04-11 11:32:52'),
+(98, 3, '6072de60314d0.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072de60314d0.PNG', 28, '2021-04-11 11:32:52'),
+(99, 3, '6072de71be21c.JPG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072de71be21c.JPG', 29, '2021-04-11 11:33:09'),
+(100, 3, '6072de71be224.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072de71be224.PNG', 29, '2021-04-11 11:33:09'),
+(101, 3, '6072de71be228.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072de71be228.PNG', 29, '2021-04-11 11:33:09'),
+(102, 3, '6072dea87d1c0.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072dea87d1c0.PNG', 30, '2021-04-11 11:34:07'),
+(103, 3, '6072dea87d1c7.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072dea87d1c7.PNG', 30, '2021-04-11 11:34:07'),
+(104, 3, '6072decb66278.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072decb66278.PNG', 31, '2021-04-11 11:34:37'),
+(105, 3, '6072decb66280.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072decb66280.PNG', 31, '2021-04-11 11:34:37'),
+(106, 3, '6072e01eedef1.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072e01eedef1.PNG', 32, '2021-04-11 11:40:17'),
+(107, 3, '6072e01eedef8.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072e01eedef8.PNG', 32, '2021-04-11 11:40:17'),
+(108, 3, '6072e01eedefb.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072e01eedefb.PNG', 32, '2021-04-11 11:40:17'),
+(109, 3, '6072e14cb42d7.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072e14cb42d7.PNG', 33, '2021-04-11 11:45:20'),
+(110, 3, '6072e14cb42de.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072e14cb42de.PNG', 33, '2021-04-11 11:45:20'),
+(111, 3, '6072e14cb42e2.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6072e14cb42e2.PNG', 33, '2021-04-11 11:45:20'),
+(112, 1, '60740b6324f9a.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60740b6324f9a.PNG', 54, '2021-04-12 08:57:37'),
+(113, 1, '60740e972afc6.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60740e972afc6.PNG', 55, '2021-04-12 09:11:15'),
+(114, 1, '607415847dfa8.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/607415847dfa8.PNG', 56, '2021-04-12 09:40:23'),
+(119, 1, '6076a908f423d.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/6076a908f423d.jpg', 16, '2021-04-12 12:24:43'),
+(120, 1, '60743c2e978e3.jfif', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60743c2e978e3.jfif', 16, '2021-04-12 12:25:19'),
+(121, 1, '60744450dd199.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60744450dd199.jpeg', 16, '2021-04-12 13:00:04'),
+(122, 1, '607444bcc2536.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/607444bcc2536.jpeg', 16, '2021-04-12 13:02:04'),
+(123, 1, '607445b228fb0.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/607445b228fb0.jpeg', 16, '2021-04-12 13:06:27'),
+(124, 1, '6074460c44946.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/6074460c44946.jpeg', 16, '2021-04-12 13:08:06'),
+(125, 1, '60744794ead47.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60744794ead47.jpeg', 16, '2021-04-12 13:13:59'),
+(126, 1, '607448d3c70bf.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/607448d3c70bf.jpeg', 16, '2021-04-12 13:19:18'),
+(127, 3, '6076d8548dc61.jfif', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076d8548dc61.jfif', 34, '2021-04-13 08:54:10'),
+(128, 3, '6076d8548dc7b.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076d8548dc7b.jpg', 34, '2021-04-13 08:54:10'),
+(130, 4, '60755c4389653.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/60755c4389653.jpg', 34, '2021-04-13 08:54:27'),
+(131, 2, '6076d76fee92f.jpg', 'http://ec2-18-184-142-200.eu-central-1.compute.amazonaws.com/kleinerzeugernetzwerk_uploads/product_img/6076d76fee92f.jpg', 154, '2021-04-14 08:21:58'),
+(132, 2, '6076d76fee938.png', 'http://ec2-18-184-142-200.eu-central-1.compute.amazonaws.com/kleinerzeugernetzwerk_uploads/product_img/6076d76fee938.png', 154, '2021-04-14 08:21:58'),
+(134, 4, '6076a66606b14.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/seller_img/6076a66606b14.jpg', 48, '2021-04-14 08:23:02'),
+(135, 4, '6076a66606b2f.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/seller_img/6076a66606b2f.jpg', 48, '2021-04-14 08:23:02'),
+(136, 4, '6076a66606b33.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/seller_img/6076a66606b33.jpg', 48, '2021-04-14 08:23:02'),
+(146, 4, '6076a9b0eaf03.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076a9b0eaf03.jpg', 34, '2021-04-14 08:37:07'),
+(147, 4, '6076a9b0eaf1c.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076a9b0eaf1c.jpg', 34, '2021-04-14 08:37:07'),
+(148, 4, '6076a9b0eaf22.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076a9b0eaf22.jpg', 34, '2021-04-14 08:37:07'),
+(149, 4, '6076a9bcb6600.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076a9bcb6600.jpg', 34, '2021-04-14 08:38:05'),
+(150, 4, '6076a9bcb660e.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076a9bcb660e.jpg', 34, '2021-04-14 08:38:05'),
+(151, 4, '6076a9bcb6612.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076a9bcb6612.jpg', 34, '2021-04-14 08:38:05'),
+(152, 4, '6076aa034e859.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076aa034e859.jpg', 34, '2021-04-14 08:38:40'),
+(153, 4, '6076aa4b68fcf.png', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076aa4b68fcf.png', 34, '2021-04-14 08:39:59'),
+(154, 4, '6076aa4b68fd6.png', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076aa4b68fd6.png', 34, '2021-04-14 08:39:59'),
+(155, 4, '6076abbc27a48.png', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076abbc27a48.png', 1, '2021-04-14 08:45:49'),
+(156, 4, '6076abbc27a54.png', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076abbc27a54.png', 1, '2021-04-14 08:45:49'),
+(191, 3, '6076d8548dc80.jfif', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076d8548dc80.jfif', 34, '2021-04-14 11:56:04'),
+(192, 3, '6076d8548dc95.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076d8548dc95.jpg', 34, '2021-04-14 11:56:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `image_types`
+--
+
+CREATE TABLE `image_types` (
+  `type_id` int(11) NOT NULL,
+  `type_name` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `image_types`
+--
+
+INSERT INTO `image_types` (`type_id`, `type_name`) VALUES
+(1, 'profile'),
+(2, 'product'),
+(3, 'production point'),
+(4, 'selling point');
 
 -- --------------------------------------------------------
 
@@ -301,7 +421,6 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_description`, `product_category`, `production_location`, `is_processed_product`, `is_available`, `price_per_unit`, `quantity_of_price`, `unit`, `product_rating`, `created_date`) VALUES
 (114, 16, 'test 3', 'test', 2, 18, 1, 1, 11, 2, 2, 0, '2021-03-23 11:09:58'),
-(115, 16, 'test 4', 'test', 1, 18, 1, 1, 11, 5, 3, 0, '2021-03-23 11:12:35'),
 (116, 16, 'test 5', 'test', 2, 18, 1, 1, 14, 10, 3, 0, '2021-03-23 11:14:20'),
 (117, 16, 'test 6', 'tets', 3, 18, 1, 1, 12, 3, 2, 0, '2021-03-23 11:17:45'),
 (118, 16, 'test 7', 'test', 2, 20, 1, 1, 14, 332, 2, 0, '2021-03-23 11:23:59'),
@@ -309,7 +428,33 @@ INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_de
 (121, 16, 'test 13', 'tets', 5, 15, 1, 1, 11, 2, 2, 0, '2021-03-24 14:03:28'),
 (122, 16, 'test 14', 'test', 2, 20, 1, 1, 11, 4, 2, 0, '2021-03-24 14:05:26'),
 (123, 16, 'test 15', 'test', 1, 20, 1, 1, 455, 2, 1, 0, '2021-03-24 14:27:56'),
-(124, 16, 'test16', 'test', 2, 21, 1, 1, 21, 3, 2, 0, '2021-03-24 14:37:19');
+(124, 16, 'test16', 'test', 2, 21, 1, 1, 21, 3, 2, 0, '2021-03-24 14:37:19'),
+(129, 16, 'test', 'test', 2, 21, 1, 1, 45, 15, 2, 0, '2021-04-07 09:23:42'),
+(130, 16, 'TEST', 'test', 3, 18, 1, 1, 11, 2, 2, 0, '2021-04-07 10:20:08'),
+(131, 16, 'test', 'test', 2, 21, 1, 1, 11, 4, 3, 0, '2021-04-07 11:05:23'),
+(132, 16, 'test', 'test', 4, 21, 1, 1, 11, 4, 4, 0, '2021-04-07 11:08:37'),
+(133, 16, 'test', 'test', 3, 18, 1, 1, 11, 4, 3, 0, '2021-04-07 11:12:35'),
+(134, 16, 'test', 'test', 2, 15, 1, 1, 11, 4, 2, 0, '2021-04-08 12:19:22'),
+(135, 16, 'test', 'test', 2, 15, 1, 1, 11, 4, 2, 0, '2021-04-08 12:20:38'),
+(136, 16, 'test image', 'image', 4, 20, 1, 1, 11, 2, 2, 0, '2021-04-08 15:56:29'),
+(137, 16, 'image 2', 'image', 2, 15, 1, 1, 151, 4, 2, 0, '2021-04-08 16:01:44'),
+(138, 16, 'image 3', 'img', 2, 20, 1, 1, 151, 2, 2, 0, '2021-04-08 16:04:18'),
+(139, 16, 'image 3', 'img', 2, 20, 1, 1, 11, 4, 2, 0, '2021-04-08 16:08:03'),
+(140, 16, 'image 4', 'img', 2, 20, 1, 1, 11, 4, 2, 0, '2021-04-08 16:11:52'),
+(141, 16, 'image 5', 'test', 2, 18, 1, 1, 151, 4, 3, 0, '2021-04-08 16:13:14'),
+(142, 16, 'image 6', 'test', 3, 20, 1, 1, 11, 2, 2, 0, '2021-04-08 16:17:04'),
+(143, 16, 'image 7', 'test', 2, 15, 1, 1, 151, 2, 2, 0, '2021-04-08 16:20:32'),
+(144, 16, 'image 8', 'test', 2, 21, 1, 1, 11, 4, 2, 0, '2021-04-08 16:24:25'),
+(145, 16, 'image 8', 'tets', 3, 20, 1, 1, 11, 2, 2, 0, '2021-04-08 16:27:15'),
+(146, 16, 'image 10', 'test', 2, 21, 1, 1, 11, 2, 1, 0, '2021-04-08 16:28:28'),
+(147, 16, 'image 11', 'tsts', 2, 21, 1, 1, 11, 2, 1, 0, '2021-04-08 16:37:25'),
+(148, 16, 'image 12', 'test', 4, 20, 1, 1, 11, 4, 2, 0, '2021-04-08 16:38:12'),
+(149, 16, 'image 13', 'test', 3, 15, 1, 1, 151, 4, 3, 0, '2021-04-08 16:39:17'),
+(150, 16, 'image 20', 'test', 3, 15, 1, 1, 11, 4, 2, 0, '2021-04-09 13:47:35'),
+(151, 16, 'image 21', 'test', 3, 20, 1, 1, 11, 2, 2, 0, '2021-04-09 13:52:13'),
+(152, 16, 'test 2585', 'test', 2, 18, 1, 1, 11, 1, 2, 0, '2021-04-10 07:29:21'),
+(153, 16, 'image 21', 'test', 5, 20, 1, 1, 11, 1, 2, 0, '2021-04-11 09:03:08'),
+(154, 16, 'test 1000', 'test', 2, 32, 1, 1, 11, 0, 2, 0, '2021-04-14 08:21:58');
 
 -- --------------------------------------------------------
 
@@ -361,16 +506,6 @@ INSERT INTO `product_feature` (`id`, `product_id`, `feature_type`) VALUES
 (176, 114, 1),
 (177, 114, 2),
 (178, 114, 3),
-(179, 115, 1),
-(180, 115, 2),
-(181, 115, 3),
-(182, 115, 4),
-(183, 115, 8),
-(184, 115, 1),
-(185, 115, 2),
-(186, 115, 3),
-(187, 115, 4),
-(188, 115, 8),
 (189, 116, 1),
 (190, 116, 2),
 (191, 116, 4),
@@ -416,7 +551,41 @@ INSERT INTO `product_feature` (`id`, `product_id`, `feature_type`) VALUES
 (234, 124, 3),
 (235, 124, 9),
 (236, 124, 13),
-(237, 124, 14);
+(237, 124, 14),
+(254, 129, 1),
+(255, 129, 3),
+(256, 129, 4),
+(257, 129, 8),
+(258, 129, 9),
+(259, 129, 10),
+(260, 129, 11),
+(261, 129, 12),
+(262, 129, 13),
+(263, 129, 14),
+(264, 129, 15),
+(265, 130, 2),
+(266, 131, 1),
+(267, 132, 2),
+(268, 133, 3),
+(269, 136, 1),
+(270, 137, 4),
+(271, 138, 2),
+(272, 139, 2),
+(273, 140, 2),
+(274, 141, 2),
+(275, 142, 2),
+(276, 143, 3),
+(277, 144, 3),
+(278, 145, 2),
+(279, 146, 2),
+(280, 147, 1),
+(281, 148, 2),
+(282, 149, 2),
+(283, 150, 2),
+(284, 151, 3),
+(285, 152, 2),
+(286, 153, 2),
+(287, 154, 2);
 
 -- --------------------------------------------------------
 
@@ -441,7 +610,26 @@ INSERT INTO `product_sellers` (`id`, `product_id`, `seller_id`) VALUES
 (31, 124, 3),
 (32, 124, 1),
 (46, 123, 28),
-(47, 123, 24);
+(47, 123, 24),
+(48, 129, 12),
+(49, 129, 11),
+(50, 130, 1),
+(51, 131, 1),
+(52, 132, 1),
+(53, 133, 1),
+(56, 136, 1),
+(57, 137, 1),
+(58, 138, 1),
+(59, 139, 1),
+(64, 144, 1),
+(66, 146, 1),
+(67, 147, 1),
+(68, 148, 1),
+(70, 150, 1),
+(71, 151, 1),
+(72, 152, 1),
+(73, 153, 3),
+(74, 154, 1);
 
 -- --------------------------------------------------------
 
@@ -518,7 +706,15 @@ INSERT INTO `sellers` (`seller_id`, `producer_id`, `seller_name`, `seller_descri
 (25, 16, 'New Point 7890', 'test', 'Am Blumenborn', '11', 'Neubrandenburg', '17033', 0x000000000101000000b011652a73c54a401ba965576c892a40, 'New Point 7890', 'www.test.com test', '1234567890', '0000012345', 0, 0, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:57:04'),
 (26, 16, 'test 8', 'test', 'Dümperstraße', '1', 'Neubrandenburg', '17033', 0x0000000001010000005c16b8e11cc74a40b238526cbb832a40, 'test 8', 'www.test.com', '1234567890', '0000012345', 0, 0, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 15:57:44'),
 (27, 16, 'test 5tr', 'test test', 'Otto-Vitense-Weg', 'undefined', 'Neubrandenburg', '17033', 0x00000000010100000068fe224da3c64a4043e16492a8842a40, 'test 5tr', 'www.biostore.co.in', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 1, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 16:08:01'),
-(28, 16, 'test zz', 'test', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x0000000001010000006bf29b49e0c64a402886dc00797f2a40, 'test zz', 'www.test.com', '000000000000', '00000000000000', 0, 1, '06:30:00', '09:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-24 09:12:23');
+(28, 16, 'test zz', 'test', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x0000000001010000006bf29b49e0c64a402886dc00797f2a40, 'test zz', 'www.test.com', '000000000000', '00000000000000', 0, 1, '06:30:00', '09:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-24 09:12:23'),
+(29, 16, 'image 1', 'test', 'Brodaer Straße', '2', 'Neubrandenburg', '17033', 0x000000000101000000d3097afa2dc74a40b3382d3ec57e2a40, 'image 1', 'www.test.com', '017630142345', '017630142345', 0, 1, '07:00:00', '19:00:00', 1, '07:00:00', '19:00:00', 1, '07:00:00', '19:00:00', 1, '07:00:00', '19:00:00', 1, '07:00:00', '19:00:00', 1, '07:00:00', '19:00:00', 1, '07:00:00', 2019, '2021-04-10 08:26:55'),
+(30, 16, 'New Point 0012', 'test', 'Brodaer Straße', '2', 'Neubrandenburg', '17033', 0x0000000001010000003c9b1e660dc74a402a7a7df9be7c2a40, 'New Point 0012', 'www.test.com', '017630142345', '017630142345', 0, 1, '06:30:00', '08:30:00', 1, '00:00:00', '00:00:00', 1, '15:00:00', '00:00:00', 1, '00:00:00', '00:00:00', 1, '00:00:00', '00:00:00', 1, '00:00:00', '00:00:00', 1, '00:00:00', 0000, '2021-04-10 09:10:24'),
+(31, 16, 'New Point', 'test', 'Brodaer Straße', '11', 'Neubrandenburg', '17033', 0x000000000101000000c6ab5356f4c64a400df2522808812a40, 'New Point', 'www.test.com', '017630142345', '017630142345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-04-10 09:18:44'),
+(32, 16, 'test 56', 'test', 'Brodaer Straße', '38', 'Neubrandenburg', '17033', 0x000000000101000000bb5f864822c74a4063234ea11b822a40, 'test 56', 'www.test.com', '017630142345', '017630142345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-04-10 09:19:42'),
+(33, 16, 'New Point', 'test', 'Brodaer Straße', '6', 'Neubrandenburg', '17033', 0x00000000010100000009d1af9ad9c64a40a8ef3f4dc7812a40, 'New Point', 'www.test.com', '017630142345', '017630142345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-04-10 09:22:46'),
+(39, 16, 'New Point ghg', 'test', 'Brodaer Straße', '10', 'Neubrandenburg', '17033', 0x000000000101000000f264f86208c74a40b6842be0bd802a40, 'New Point ghg', 'www.test.com', '017630142345', '017630142345', 0, 1, '06:30:00', '08:30:00', 1, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-04-10 16:31:34'),
+(47, 16, 'New Point 1212121', 'test', 'Brodaer Straße', '11', 'Neubrandenburg', '17033', 0x0000000001010000001d2ffa4feac64a40b01ef42135812a40, 'New Point 1212121', 'www.test.com', '017630142345', '017630142345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-04-10 17:07:39'),
+(48, 16, 'test 1000', 'test', 'Schillerstraße', '2', 'Neubrandenburg', '17033', 0x000000000101000000bcfaf48902c74a40471574eccc812a40, 'test 1000', 'www.test.com', '017630142345', '017630142345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-04-14 08:23:02');
 
 -- --------------------------------------------------------
 
@@ -590,7 +786,7 @@ INSERT INTO `user` (`user_id`, `salutations`, `first_name`, `middle_name`, `last
 (11, 'Mr.', '123', '32443', '453', '0000-00-00', 'hgh', 'hv', '17033', 'Kochi', 'India', '9846194609', 'fredy123@gmail.com', '17063142345', 1, 1, 0, '2020-11-18 10:56:10', NULL, NULL),
 (14, 'Mr.', 'Fredy', 'Davis', 'Thekkekkara', '0000-00-00', 'Brodaer Strasse', 'Helo', '17033', 'Neubrandenburg', 'Germany', '9846194609', 'FREDZ@GMAIL.COM', '17063142345', 1, 1, 0, '2020-11-18 11:17:58', NULL, NULL),
 (15, 'Mr.', 'qq', 'q', 'qq', '0000-00-00', 'q', 'q', 'q', 'q', 'q', 'q', 'q', 'q', 1, 1, 0, '2020-11-18 11:18:36', NULL, NULL),
-(16, '', 'John', 'abc', 'Doe', '0000-00-00', 'Brodaer Straße', '4', '17033', 'Neubrandenburg', 'Germany', '1425698375', 'abc@abc.com', '1763025489', 1, 1, 0, '2020-11-18 11:20:18', NULL, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
+(16, '', 'John', 'abc', 'Doe', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', '17033', '1425698375', 'abc@abc.com', '', 1, 1, 0, '2020-11-18 11:20:18', NULL, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.'),
 (17, 'Mr.', 'test', 'test', 'test', '0000-00-00', 'Brodaer StraÃŸe', '4', '17033', 'Neubrandenburg', 'DE', '453453453', 'test', '123454678', 1, 1, 0, '2020-11-27 14:23:58', NULL, NULL),
 (18, 'Mr.', 'zz', 'zz', 'zzz', '0000-00-00', 'zzzz', '98645', '5661', 'Neubrandenburg', 'a', '1234567890', 'zzz', '12345896556', 1, 1, 0, '2020-11-27 18:16:32', NULL, NULL),
 (19, 'Mr.', 'test', 'fdfg', 'dfgdfg', '0000-00-00', 'a', '4', '17033', 'Neubrandenburg', 'DE', '1234567890', 'abc@abc.com1', '12345896556', 1, 1, 0, '2020-12-01 09:24:27', NULL, NULL),
@@ -622,7 +818,15 @@ INSERT INTO `user` (`user_id`, `salutations`, `first_name`, `middle_name`, `last
 (45, '', 'Fredz', '', 'thekkekkara', '0000-00-00', 'Brodaer Straße', '', '17033', '2', '', '', 'lg2003604', '', 0, 0, 0, '2021-02-16 15:07:45', '', NULL),
 (46, '', 'Fredz', '', 'thekkekkara', '0000-00-00', 'Brodaer Straße', '', '17033', '2', '', '', 'lg2003605', '', 0, 0, 0, '2021-02-16 15:08:44', '', NULL),
 (47, '', 'Fredz', NULL, 'thekkekkara', '0000-00-00', 'Brodaer Straße', '4', '17033', '2', 'DE', '1234567890', 'testm', '12345896556', 0, 0, 0, '2021-02-18 14:25:26', '', 'testJennifer Campbell serves in a management position at Campbell Grain & Livestock.  Some days she is at the top of the corporate ladder making high-powered decisions about which child\'s turn it is feed the calves and what she is fixing for supper. Most days, however, are spent barely hanging on to the bottom rung with one hand while multi-tasking with the other. She is on call 24/7 for parts, rides, hog duty, cattle duty, running equipment, meal preparation and just about any other issue that arises.\r\n\r\nShe willingly admits that her house is never clean and jumps at any opportunity to help on the farm, which includes not only driving equipment but also pressure washing hog barns, all in the name of getting out of housework.  Her dream is to have a home she can pressure wash to keep clean.  She also spends an inordinate amount of time on social media sharing the ins and outs of life on the farm.'),
-(48, '', 'Fredy', NULL, 'davis', '0000-00-00', 'Brodaer Straße', '2', '17033', 'Neubrandenburg', 'Germany', '017630142345', 'test61', '017630142345', 0, 0, 0, '2021-03-25 13:51:19', '', 'test');
+(48, '', 'Fredy', NULL, 'davis', '0000-00-00', 'Brodaer Straße', '2', '17033', 'Neubrandenburg', 'Germany', '017630142345', 'test61', '017630142345', 0, 0, 0, '2021-03-25 13:51:19', '', 'test'),
+(49, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'testfredy', '', 0, 0, 0, '2021-04-11 16:51:21', '', 'test'),
+(50, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredythekkekkara@gmail.com001', '', 0, 0, 0, '2021-04-12 08:13:29', '', 'test'),
+(51, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredythekkekkara@gmail.com002', '', 0, 0, 0, '2021-04-12 08:17:52', '', 'test'),
+(52, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredythekkekkara@gmail.com003', '', 0, 0, 0, '2021-04-12 08:46:35', '', 'test'),
+(53, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredythekkekkara@gmail.com004', '', 0, 0, 0, '2021-04-12 08:55:43', '', 'test'),
+(54, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredythekkekkara@gmail.com005', '', 0, 0, 0, '2021-04-12 08:57:28', '', 'test'),
+(55, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredythekkekkara@gmail.com006', '', 0, 0, 0, '2021-04-12 09:10:59', '', 'test'),
+(56, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredythekkekkara@gmail.com007', '', 0, 0, 0, '2021-04-12 09:40:22', '', 'test');
 
 -- --------------------------------------------------------
 
@@ -633,7 +837,7 @@ INSERT INTO `user` (`user_id`, `salutations`, `first_name`, `middle_name`, `last
 CREATE TABLE `user_credential` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `user_name` varchar(25) NOT NULL,
+  `user_name` varchar(100) NOT NULL,
   `password` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='table to save user name and password of each users';
 
@@ -676,7 +880,15 @@ INSERT INTO `user_credential` (`id`, `user_id`, `user_name`, `password`) VALUES
 (32, 45, 'lg2003604', '$2y$10$VCV0O/VyRT5H7cfFR/aUruw7rmGE1OzxhNmuriUoo3JMIfImuX2v2'),
 (33, 46, 'lg2003605', '$2y$10$2whQxFHJKJSL6sYSbA/FhOOAischlsIkUjggj2NhqKfH4y4NKo1tm'),
 (34, 47, 'testm', '$2y$10$A9ae.Vqjgsckang6uSQRj.D0nqY9s2puDGtn3GoGR3CbDgAev4R1m'),
-(35, 48, 'test61', '$2y$10$DWS.kAuDE0Ge.eahkTKuUedh85Gv2PQZHJoSQ5yLxCZdoxaP0oQk.');
+(35, 48, 'test61', '$2y$10$DWS.kAuDE0Ge.eahkTKuUedh85Gv2PQZHJoSQ5yLxCZdoxaP0oQk.'),
+(36, 49, 'testfredy', '$2y$10$tQ868kl5A98d/5zqfalrse0.GU10.Rn2pHisMnhz6UL8uyyLVaCZ.'),
+(37, 50, 'fredythekkekkara@gmail.co', '$2y$10$AhMurSp6p5ibpi0XhZ0F5u7/neHtw5qEZ16ZpJwYFoXfFjFcMJ7LO'),
+(38, 51, 'fredythekkekkara@gmail.co', '$2y$10$C2kdTywEEHqH97uwFbEa7eJat9ElcIRoP8iCVtp.UKm71eBJ90Cci'),
+(39, 52, 'fredythekkekkara@gmail.com003', '$2y$10$LyZ811rC9X2Zst.631cS4OD.KZZxN7gvjEwd72J52Ol1gg8yn.bVm'),
+(40, 53, 'fredythekkekkara@gmail.com004', '$2y$10$/KWtc6exhAMKN3jo2OjpFu3d26deYFnx..i3tDKb9xV9AgbD3dp4m'),
+(41, 54, 'fredythekkekkara@gmail.com005', '$2y$10$qb7vHjE.q.7nweJXHwrb2.c6CnlU8o6hbzDeVcCKd1e5SjqRjL3C2'),
+(42, 55, 'fredythekkekkara@gmail.com006', '$2y$10$3UGAr5pIR/w90vvv8gOGR.22HzpVNrdTxKliRhTG24zMD2R.A7NF6'),
+(43, 56, 'fredythekkekkara@gmail.com007', '$2y$10$IsHZ7e6tnYUHxVosP5t1i.i.D5waZDhkwcBP5UcMmAri6HJTAV9te');
 
 --
 -- Indexes for dumped tables
@@ -714,6 +926,13 @@ ALTER TABLE `feature_type`
 --
 ALTER TABLE `images`
   ADD PRIMARY KEY (`image_id`);
+
+--
+-- Indexes for table `image_types`
+--
+ALTER TABLE `image_types`
+  ADD PRIMARY KEY (`type_id`),
+  ADD KEY `type_id` (`type_id`);
 
 --
 -- Indexes for table `products`
@@ -779,13 +998,13 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 
 --
 -- AUTO_INCREMENT for table `farm_land`
 --
 ALTER TABLE `farm_land`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `favourite_sellers`
@@ -803,13 +1022,13 @@ ALTER TABLE `feature_type`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
 
 --
 -- AUTO_INCREMENT for table `product_category`
@@ -821,19 +1040,19 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `product_feature`
 --
 ALTER TABLE `product_feature`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=254;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
 
 --
 -- AUTO_INCREMENT for table `product_sellers`
 --
 ALTER TABLE `product_sellers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
 
 --
 -- AUTO_INCREMENT for table `sellers`
 --
 ALTER TABLE `sellers`
-  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `units`
@@ -845,13 +1064,13 @@ ALTER TABLE `units`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `user_credential`
 --
 ALTER TABLE `user_credential`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Constraints for dumped tables

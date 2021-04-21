@@ -50,124 +50,74 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 <script>
 
-    var products = {
+    //    var products = {
+    //        "type": "FeatureCollection",
+    //        "features": []
+    //    }
+
+
+
+    var productionPointMarker = {
         "type": "FeatureCollection",
         "features": []
     }
+
+    var sellingPointMarker = {
+        "type": "FeatureCollection",
+        "features": []
+    }
+
+
+    var connectingSellerIds = [];
+
+    var productionPointLocations = [];
+
+    var sellerIcon = L.icon({
+        iconUrl: '/kleinerzeugernetzwerk/images/shopping.png',
+        iconSize: [25, 25],
+    });
+
+    var productionPointIcon = L.icon({
+        iconUrl: '/kleinerzeugernetzwerk/images/greenhouse.png',
+        iconSize: [25, 25],
+    });
+
+
+
+
+
+
+
+
     $(document).ready(function(){
         $.ajax({
-            url:"/kleinerzeugernetzwerk/src/getProductsToMap.php",    //the page containing php script
-            type: "get",    //request type,
-            contentType: "application/json",
-            dataType: 'json',
+            url: "/kleinerzeugernetzwerk/controller/details.php",    //the page containing php script
+            type: "POST",
+            headers: {
+                'action': 'MAP_DATA',
+            },
+            beforeSend: function(){
+                $("#overlay").fadeIn(300);　
+            },
+            complete: function(){
+                $("#overlay").fadeOut(300);
+            },
             success:function(result){
                 console.log(result)
                 products = {
                     "type": "FeatureCollection",
                     "features": []
                 }
-                $.each(result,function(i,obj){
-                    console.log(obj)
-                    const productName = obj.product_name;
-                    const productDesc = obj.product_description;
-                    const productAddr = obj.farm_address;
-                    const latitude = parseFloat(obj.Lat);
-                    const longitude = parseFloat(obj.Lon);
-                    const productId = parseInt(obj.product_id);
+                const jsonData = JSON.parse(result) ? JSON.parse(result) : [];
+                const sellerData = jsonData.sellers ? jsonData.sellers : [];
+                const productionPointData = jsonData.productionPoints ? jsonData.productionPoints : [];
+                if (productionPointData.length > 0){
+                    addProductionPointsToMap(productionPointData);
+                }
+                if (sellerData.length > 0){
+                    addSellersToMap(sellerData);
+                }
 
-
-
-                    const farmId = obj.farm_id;
-                    const farmName = obj.farm_name;
-                    const farmAddress = obj.farm_address;
-
-                    const geom = {
-                        "type": "Point",
-                        "coordinates": [
-                            longitude, latitude
-                        ]
-                    }
-
-                    const farmPopupContent = `<a data-id="${farmId}" style="text-decoration: none" id="productionPointLoc" onclick='return showProductsInProductionPoint()'><div class="d-inline-flex m-1 p-1"> <img src="<?php echo $imagePath ?>" alt="" width="90" height="60" class="m-auto"> <div class="pl-2"> <div id="productTitle">${farmName}</div> <div>${farmAddress}</div> </div> </div></a>`
-
-                    if (products.features.some((e) => {
-                        console.log(e.geometry)
-                        return JSON.stringify(e.geometry) === JSON.stringify(geom)
-                    })) {
-                        console.log('Exists');
-                        products.features.some((feats) => {
-                            feats.properties.popupContent += farmPopupContent   
-                        })
-                    }else{
-                        const tempProductPoints = {
-                            "geometry": {
-                                "type": "Point",
-                                "coordinates": [
-                                    longitude, latitude
-                                ]
-                            },
-                            "type": "Feature",
-                            "properties": {
-                                "popupContent": farmPopupContent
-
-
-
-                                //                            "popupContent": '<div class="container bg-secondary"> <div class="row bg-success"> <div class="col-xs bg-warning"> 1 of 2 </div> <div class="col-xs">University of Neubrandenburg, Brodaer Straße 2, 17033 Neubrandenburg</div> </div> <div class="row"> <div class="col"> 1 of 3 </div> <div class="col"> 2 of 3 </div> <div class="col"> 3 of 3 </div> </div></div>'
-
-
-
-                                //                            "popupContent": '<div id="block_container" class=""> <img id="bloc1" src="<?php echo $imagePath ?>" alt="" width="80" height="50" class=""> <div id="bloc2" class=""> <div>Farm Land</div> <div>University of Neubrandenburg, Brodaer Straße 2, 17033 Neubrandenburg</div> </div> </div>'
-                            },
-                            "id": productId
-                        };
-                        products.features = [...products.features, tempProductPoints];
-                    }
-
-
-
-                    //                    const tempProductPoints = {
-                    //                        "geometry": {
-                    //                            "type": "Point",
-                    //                            "coordinates": [
-                    //                                longitude, latitude
-                    //                            ]
-                    //                        },
-                    //                        "type": "Feature",
-                    //                        "properties": {
-                    //                            "popupContent": `<div class="d-inline-flex"> <img src="<?php echo $imagePath ?>" alt="" width="90" height="60" class="m-auto"> <div class="pl-2"> <div id="productTitle">${productName}</div> <div>${productAddr}</div> </div> </div>`
-                    //
-                    //
-                    //
-                    //                            //                            "popupContent": '<div class="container bg-secondary"> <div class="row bg-success"> <div class="col-xs bg-warning"> 1 of 2 </div> <div class="col-xs">University of Neubrandenburg, Brodaer Straße 2, 17033 Neubrandenburg</div> </div> <div class="row"> <div class="col"> 1 of 3 </div> <div class="col"> 2 of 3 </div> <div class="col"> 3 of 3 </div> </div></div>'
-                    //
-                    //
-                    //
-                    //                            //                            "popupContent": '<div id="block_container" class=""> <img id="bloc1" src="<?php echo $imagePath ?>" alt="" width="80" height="50" class=""> <div id="bloc2" class=""> <div>Farm Land</div> <div>University of Neubrandenburg, Brodaer Straße 2, 17033 Neubrandenburg</div> </div> </div>'
-                    //                        },
-                    //                        "id": productId
-                    //                    };
-                    //                    products.features = [...products.features, tempProductPoints];
-                })
-                console.log(products)
-                L.geoJSON([products], {
-
-                    style: function (feature) {
-                        return feature.properties && feature.properties.style;
-                    },
-
-                    onEachFeature: onEachFeature,
-
-                    pointToLayer: function (feature, latlng) {
-                        return L.circleMarker(latlng, {
-                            radius: 6,
-                            fillColor: "#ff7800",
-                            color: "#000",
-                            weight: 1,
-                            opacity: 1,
-                            fillOpacity: 0.8
-                        });
-                    }
-                }).addTo(mymap);
             },
             error: function (request, status, error) {
                 alert(request.responseText);
@@ -175,6 +125,296 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
             }
         });
     });
+
+
+
+
+
+
+
+    function addProductionPointsToMap(productionPoints){
+        $.each(productionPoints,function(i,productionPoint){
+            const productionPointId = productionPoint.farm_id ? productionPoint.farm_id : '';
+            const productionPointName = productionPoint.farm_name ? productionPoint.farm_name : '';
+            const street = productionPoint.street ? productionPoint.street : '';
+            const houseNum = productionPoint.house_number ? productionPoint.house_number : '';
+            const city = productionPoint.city ? productionPoint.city : '';
+            const zip = productionPoint.zip ? productionPoint.zip : '';
+
+            const productionPointAddress = street + ' ' + houseNum + '\n' + city + ' ' + zip;
+
+
+            const latitude = productionPoint.latitude ? productionPoint.latitude : 0;
+            const longitude = productionPoint.longitude ? productionPoint.longitude : 0;
+            const imagePath = productionPoint.image_path ? productionPoint.image_path : ''
+
+            const sellerIds = productionPoint.production_points ? productionPoint.production_points : '';
+            const sellerIdArray = createArrayFromString(sellerIds);
+            connectingSellerIds[productionPointId] = sellerIdArray;
+            productionPointLocations[productionPointId] = {latitude: latitude, longitude: longitude};
+
+            const geom = {
+                "type": "Point",
+                "coordinates": [
+                    longitude, latitude
+                ]
+            }
+
+
+            const farmPopupContent = `<a data-id="${productionPointId}" style="text-decoration: none" id="productionPointLoc" onclick='return showProductsInProductionPoint()'><div class="d-inline-flex m-1 p-1"> <img src="${imagePath}" alt="" width="90px" height="60px" style="object-fit: cover;" class="m-auto"> <div class="pl-2"> <div id="productTitle">${productionPointName}</div> <div>${productionPointAddress}</div> </div> </div></a>`;
+
+
+
+
+            if (productionPointMarker.features.some((e) => {
+                console.log(e.geometry)
+                return JSON.stringify(e.geometry) === JSON.stringify(geom)
+            })) {
+                console.log('Exists');
+                productionPointMarker.features.some((feats) => {
+                    feats.properties.popupContent += farmPopupContent   
+                })
+            }else{
+                const tempProductionPoint = {
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            longitude, latitude
+                        ]
+                    },
+                    "type": "Feature",
+                    "properties": {
+                        "popupContent": farmPopupContent
+                    },
+                    "id": productionPointId
+                };
+                productionPointMarker.features = [...productionPointMarker.features, tempProductionPoint];
+            }
+        })
+
+
+        console.log(productionPointMarker);
+        L.geoJSON([productionPointMarker], {
+
+            style: function (feature) {
+                return feature.properties && feature.properties.style;
+            },
+
+            onEachFeature: onEachFeature,
+
+            pointToLayer: function (feature, latlng) {
+                return L.marker(latlng, {icon: productionPointIcon});
+            }
+        }).addTo(mymap);
+    }
+
+
+
+    function addSellersToMap(sellingPoints){
+        $.each(sellingPoints,function(i,sellingPoint){
+
+            const sellerId = sellingPoint.seller_id ? sellingPoint.seller_id : 0;
+            const sellerName = sellingPoint.seller_name ? sellingPoint.seller_name : '';
+            const street = sellingPoint.street ? sellingPoint.street : '';
+            const buildingNum = sellingPoint.building_number ? sellingPoint.building_number : '';
+            const city = sellingPoint.city ? sellingPoint.city : '';
+            const zip = sellingPoint.zip ? sellingPoint.zip : '';
+
+            const sellerAddress = street + ' ' + buildingNum + '\n' + city + ' ' + zip;
+
+            const latitude = sellingPoint.latitude ? sellingPoint.latitude : 0;
+            const longitude = sellingPoint.longitude ? sellingPoint.longitude : 0;
+            const imagePath = sellingPoint.image_path ? sellingPoint.image_path : ''
+
+
+            const productionPointIds = sellingPoint.production_points ? sellingPoint.production_points : '';
+            const productionPointIdArray = createArrayFromString(productionPointIds);
+            
+            if (productionPointIdArray.length > 0){
+                $.each(productionPointIdArray,function(index,id){
+                    const productionPointLoc = productionPointLocations[id] ? productionPointLocations[id] : {};
+                    const productionPointLat = productionPointLoc.latitude ? productionPointLoc.latitude : null;
+                    const productionPointLong = productionPointLoc.longitude ? productionPointLoc.longitude : null;
+                    if (productionPointLat > 0 && productionPointLong > 0 && latitude > 0 && longitude > 0){
+                        createConnectionBetweenSellerAndProductionPoint(latitude, longitude, productionPointLat, productionPointLong);
+                    }
+                })
+            }
+            
+            
+            const geom = {
+                "type": "Point",
+                "coordinates": [
+                    longitude, latitude
+                ]
+            }
+
+
+            const sellerPopupContent = `<a data-id="${sellerId}" style="text-decoration: none" id="sellerLoc" onclick='return 'seler details'><div class="d-inline-flex m-1 p-1"> <img src="${imagePath}" alt="" width="90px" height="60px" style="object-fit: cover;" class="m-auto"> <div class="pl-2"> <div id="sellerTitle">${sellerName}</div> <div>${sellerAddress}</div> </div> </div></a>`;
+
+
+
+
+            if (sellingPointMarker.features.some((e) => {
+                console.log(e.geometry)
+                return JSON.stringify(e.geometry) === JSON.stringify(geom)
+            })) {
+                console.log('Exists');
+                sellingPointMarker.features.some((feats) => {
+                    feats.properties.popupContent += sellerPopupContent   
+                })
+            }else{
+                const tempSellingPoint = {
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [
+                            longitude, latitude
+                        ]
+                    },
+                    "type": "Feature",
+                    "properties": {
+                        "popupContent": sellerPopupContent
+                    },
+                    "id": sellerId
+                };
+                sellingPointMarker.features = [...sellingPointMarker.features, tempSellingPoint];
+            }
+        })
+
+
+        console.log(sellingPointMarker);
+        L.geoJSON([sellingPointMarker], {
+
+            style: function (feature) {
+                return feature.properties && feature.properties.style;
+            },
+
+            onEachFeature: onEachFeature,
+
+            pointToLayer: function (feature, latlng) {
+                return L.marker(latlng, {icon: sellerIcon});
+            }
+        }).addTo(mymap);
+    }
+
+
+
+
+
+    function createArrayFromString(stringValues){
+        var array = stringValues.split(',') ? stringValues.split(',') : [];
+        return array;
+    }
+
+
+
+    function createConnectionBetweenSellerAndProductionPoint(latseller, longseller, latProductionPoint, longProductionPoint){
+        var pointA = new L.LatLng(latseller, longseller);
+        var pointB = new L.LatLng(latProductionPoint, longProductionPoint);
+        var pointList = [pointA, pointB];
+
+        var connectingPolyline = new L.Polyline(pointList, {
+            color: '#adb5bd',
+            weight: 2,
+            opacity: 1,
+            smoothFactor: 1
+        });
+        connectingPolyline.addTo(mymap);
+    }
+
+
+
+    //
+    //
+    //
+    //    $(document).ready(function(){
+    //        $.ajax({
+    //            url:"/kleinerzeugernetzwerk/src/getProductsToMap.php",    //the page containing php script
+    //            type: "get",    //request type,
+    //            contentType: "application/json",
+    //            dataType: 'json',
+    //            success:function(result){
+    //                console.log(result)
+    //                products = {
+    //                    "type": "FeatureCollection",
+    //                    "features": []
+    //                }
+    //                $.each(result,function(i,obj){
+    //                    console.log(obj)
+    //                    const productName = obj.product_name;
+    //                    const productDesc = obj.product_description;
+    //                    const productAddr = obj.farm_address;
+    //                    const latitude = parseFloat(obj.Lat);
+    //                    const longitude = parseFloat(obj.Lon);
+    //                    const productId = parseInt(obj.product_id);
+    //
+    //
+    //
+    //                    const farmId = obj.farm_id;
+    //                    const farmName = obj.farm_name;
+    //                    const farmAddress = obj.farm_address;
+    //
+    //                    const geom = {
+    //                        "type": "Point",
+    //                        "coordinates": [
+    //                            longitude, latitude
+    //                        ]
+    //                    }
+    //
+    //                    const farmPopupContent = `<a data-id="${farmId}" style="text-decoration: none" id="productionPointLoc" onclick='return showProductsInProductionPoint()'><div class="d-inline-flex m-1 p-1"> <img src="<?php echo $imagePath ?>" alt="" width="90" height="60" class="m-auto"> <div class="pl-2"> <div id="productTitle">${farmName}</div> <div>${farmAddress}</div> </div> </div></a>`
+    //
+    //                    if (products.features.some((e) => {
+    //                        console.log(e.geometry)
+    //                        return JSON.stringify(e.geometry) === JSON.stringify(geom)
+    //                    })) {
+    //                        console.log('Exists');
+    //                        products.features.some((feats) => {
+    //                            feats.properties.popupContent += farmPopupContent   
+    //                        })
+    //                    }else{
+    //                        const tempProductPoints = {
+    //                            "geometry": {
+    //                                "type": "Point",
+    //                                "coordinates": [
+    //                                    longitude, latitude
+    //                                ]
+    //                            },
+    //                            "type": "Feature",
+    //                            "properties": {
+    //                                "popupContent": farmPopupContent
+    //                            },
+    //                            "id": productId
+    //                        };
+    //                        products.features = [...products.features, tempProductPoints];
+    //                    }
+    //                })
+    //                console.log(products)
+    //                L.geoJSON([products], {
+    //
+    //                    style: function (feature) {
+    //                        return feature.properties && feature.properties.style;
+    //                    },
+    //
+    //                    onEachFeature: onEachFeature,
+    //
+    //                    pointToLayer: function (feature, latlng) {
+    //                        return L.circleMarker(latlng, {
+    //                            radius: 6,
+    //                            fillColor: "#ff7800",
+    //                            color: "#000",
+    //                            weight: 1,
+    //                            opacity: 1,
+    //                            fillOpacity: 0.8
+    //                        });
+    //                    }
+    //                }).addTo(mymap);
+    //            },
+    //            error: function (request, status, error) {
+    //                alert(request.responseText);
+    //                console.log(error)
+    //            }
+    //        });
+    //    });
 
 
 

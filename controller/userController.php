@@ -11,11 +11,6 @@ session_start();
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php";
 include "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/userModel.php";
 
-
-$profileUplaodLocation = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/profile_img/";
-$profileImagepath = "http://localhost/kleinerzeugernetzwerk_uploads/profile_img/";
-
-
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         break;
@@ -57,8 +52,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
 */    
 function createUser($userId, $firstName, $lastName, $dob, $street, $houseNumber, $zip, $city, $country, $phone, $email, $mobile, $userType, $isActive, $isBlocked, $password, $description,$profileImageIdArray, $profileImageNameArray){
     global $dbConnection;
-    global $profileUplaodLocation;
-    global $profileImagepath;
+    $profileUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(1);
+    $profileImagepath = getServerRootAddress().getImagePath(1);
     if (!isUserAlreadyExist($email)){
         $sql = "INSERT INTO user (salutations, first_name, last_name, dob, street, house_number, zip, city, country, phone, mobile, email, profile_image_name, user_type, is_active, is_blocked, description)"
             . "VALUES ('$salutation', '$firstName', '$lastName', '$dob', '$street', '$houseNumber', '$zip', '$city', '$country', '$phone', '$mobile', '$email', '$profileImageName', $userType, $isActive, $isBlocked, '$description')";
@@ -163,18 +158,18 @@ function isUserAlreadyExist($email){
 function getUser($userId){
     global $dbConnection;
     global $PROFILE_IMAGE_DEFAULT;
-    
+
     $userDetailsQuery = "SELECT * FROM `user` 
     JOIN images i on (i.image_type = 1 AND i.entity_id = $userId)
     WHERE `user_id` = '$userId'";
-    
+
     $userSelectQuery = mysqli_query($dbConnection, $userDetailsQuery);
     confirmQuery($userSelectQuery);
     if (mysqli_num_rows($userSelectQuery)){
         $row = mysqli_fetch_array($userSelectQuery);
         $userData = new user($row);
         http_response_code(200); //OK
-        return json_encode($userData);
+        return json_encode($userData, JSON_UNESCAPED_SLASHES);
     }
     http_response_code(400); //400 Bad Request
     return null;
@@ -187,8 +182,8 @@ function getUser($userId){
 */
 function updateUserDetails($userId, $salutation, $firstName, $lastName, $dob, $street, $houseNumber, $zip, $city, $country, $phone, $mobile, $description,$profileImageIdArray, $profileImageNameArray){
     global $dbConnection;
-    global $profileUplaodLocation;
-    global $profileImagepath;
+    $profileUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(1);
+    $profileImagepath = getServerRootAddress().getImagePath(1);
 
 
     $sql = "UPDATE user
@@ -207,8 +202,8 @@ SET salutations = '$salutation',
 WHERE user_id = $userId;";
 
     try{
-//        echo "trying to update";
-//        echo "\n ".$sql."\n";
+        //        echo "trying to update";
+        //        echo "\n ".$sql."\n";
         mysqli_query($dbConnection, $sql);
         $fileNames = uploadPictures($profileImageNameArray, $profileUplaodLocation);
         $imageQuery = createFileUploadQuery($profileImageNameArray, $profileImageIdArray, $profileImagepath, $userId, 1);
@@ -220,7 +215,7 @@ WHERE user_id = $userId;";
             try{
                 if (mysqli_multi_query($dbConnection, $imageQuery)){
                     //                        mysqli_commit($dbConnection);
-                    
+
                     http_response_code(200);
                     return getUser($userId);
                 }else{
@@ -239,7 +234,7 @@ WHERE user_id = $userId;";
             return getUser($userId);
         }
     }catch(mysqli_sql_exception $exception){
-//        echo "user creation failed,";
+        //        echo "user creation failed,";
         mysqli_rollback($dbConnection);
         var_dump($exception);
         throw $exception;

@@ -28,7 +28,6 @@ class productionPoint{
     public $productionPointImageNameArray = [];
 
     function __construct($productDataDict){
-
         $this->farmId = isset($productDataDict['farm_id']) ? escapeSQLString($productDataDict['farm_id']) : 0;
         $this->producerId = isset($productDataDict['producer_id']) ? escapeSQLString($productDataDict['producer_id']) : "";
         $this->farmName = isset($productDataDict['farm_name']) ? escapeSQLString($productDataDict['farm_name']) : "";
@@ -43,17 +42,17 @@ class productionPoint{
         $this->longitude = isset($productDataDict['longitude']) ? escapeSQLString($productDataDict['longitude']): 0;
         $this->farmArea = isset($productDataDict['farm_area']) ? floatval(escapeSQLString($productDataDict['farm_area'])) : 0;
         $this->imagePath = isset($productDataDict['image_path']) ? escapeSQLString($productDataDict['image_path']) : null;
-        
-        
+
+
         $productionPointPictures = $_FILES['files']['name'] ? $_FILES['files']['name']: [];
-        $productionPointImageIds = isset($productDataDict['production_point_images_id']) && $productDataDict['production_point_images_id'] != null ? escapeSQLString($productDataDict['production_point_images_id']) : [];
-        $productionPointImageIds = json_decode($productionPointImageIds) ? json_decode($productionPointImageIds) : [];
-        
+        $productionPointImageIds = isset($productDataDict['production_point_image_id']) && $productDataDict['production_point_image_id'] != null ? $productDataDict['production_point_image_id'] : [];
+        $productionPointImageIds = json_decode($productionPointImageIds, JSON_UNESCAPED_SLASHES) ? json_decode($productionPointImageIds, JSON_UNESCAPED_SLASHES) : [];
+
         $fileData = parseFileData($productionPointPictures, $productionPointImageIds);
         $this->productionPointImageIdArray = $fileData['fileIds'] != null ? $fileData['fileIds'] : [];
         $this->productionPointImageNameArray = $fileData['fileName'] != null ? $fileData['fileName'] : [];
-        
-        
+
+
     }
 }
 ?>

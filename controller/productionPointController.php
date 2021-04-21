@@ -7,14 +7,9 @@
    PURPOSE          :   To manage production points of a user.
                         CRUD operations on farmland table
 ****************************************************************/
-session_start();
+  session_start();
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php";
 include "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/productionPointModel.php";
-
-
-$productionPointUplaodLocation = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/production_point_img/";
-$productionPointImagepath = "http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/";
-
 
 
 switch ($_SERVER['REQUEST_METHOD']) {
@@ -79,10 +74,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
 */
 function addProductionPoint($productionPoint){
     global $dbConnection;
-    global $productionPointUplaodLocation;
-    global $productionPointImagepath;
+    $productionPointUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(3);
+    $productionPointImagepath = getServerRootAddress().getImagePath(3);
     /* Start transaction */
-//    mysqli_begin_transaction($dbConnection);
+    //    mysqli_begin_transaction($dbConnection);
     $productionPointInsertQuery = "INSERT INTO farm_land (producer_id, farm_name, farm_desc, farm_address, street, house_number, city, zip, farm_location, farm_area	)"
         . "VALUES ($productionPoint->producerId, '$productionPoint->farmName', '$productionPoint->farmDesc', '$productionPoint->farmAddress', '$productionPoint->street', '$productionPoint->houseNumber', '$productionPoint->city', '$productionPoint->zip', POINT($productionPoint->latitude, $productionPoint->longitude), $productionPoint->farmArea)";
 
@@ -139,8 +134,10 @@ function addProductionPoint($productionPoint){
 */
 function editProductionPoint($productionPoint){
     global $dbConnection;
+    $productionPointUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(3);
+    $productionPointImagepath = getServerRootAddress().getImagePath(3);
     /* Start transaction */
-    mysqli_begin_transaction($dbConnection);
+//    mysqli_begin_transaction($dbConnection);
     //    $productionPointInsertQuery = "INSERT INTO farm_land (producer_id, farm_name, farm_desc, farm_address, farm_location, farm_area	)"
     //        . "VALUES ($productionPoint->producerId, '$productionPoint->farmName', '$productionPoint->farmDesc', '$productionPoint->farmAddress', POINT($productionPoint->latitude, $productionPoint->longitude), $productionPoint->farmArea)";
 
@@ -153,7 +150,7 @@ function editProductionPoint($productionPoint){
         echo "\n ".$productionPointUpdateQuery."\n";
         if (mysqli_query($dbConnection, $productionPointUpdateQuery)){
             $fileNames = uploadPictures($productionPoint->productionPointImageNameArray, $productionPointUplaodLocation);
-            $imageQuery = createFileUploadQuery($productionPoint->productionPointImageNameArray, $productionPoint->productionPointImageIdArray, $productionPointImagepath, $productionPoint->farmId, 4);
+            $imageQuery = createFileUploadQuery($productionPoint->productionPointImageNameArray, $productionPoint->productionPointImageIdArray, $productionPointImagepath, $productionPoint->farmId, 3);
 
             $productionPointImageCount = count($productionPoint->productionPointImageNameArray);
             $productionPointImageIdCount = count($productionPoint->productionPointImageIdArray);
@@ -161,26 +158,26 @@ function editProductionPoint($productionPoint){
             if ($productionPointImageCount > 0 || $productionPointImageIdCount > 0){
                 try{
                     if (mysqli_multi_query($dbConnection, $imageQuery)){
-                        mysqli_commit($dbConnection);
+//                        mysqli_commit($dbConnection);
                         http_response_code(200);
                         return true;
                     }else{
-                        mysqli_rollback($dbConnection);
+//                        mysqli_rollback($dbConnection);
                         http_response_code(400);
                     }
                 }catch(mysqli_sql_exception $exception){
-                    mysqli_rollback($dbConnection);
+//                    mysqli_rollback($dbConnection);
                     http_response_code(400);
                 }
             }else{
-                mysqli_commit($dbConnection);
+//                mysqli_commit($dbConnection);
                 http_response_code(200);
                 return true;
             }
         }
     }catch(mysqli_sql_exception $exception){
         echo "faild to add a new production point,";
-        mysqli_rollback($dbConnection);
+//        mysqli_rollback($dbConnection);
         var_dump($exception);
         throw $exception;
         http_response_code(400);
@@ -235,7 +232,7 @@ function getAllProductionPoints($productionPoint){
         }
     }
     http_response_code(200);
-    return json_encode($productionPoitArray);
+    return json_encode($productionPoitArray, JSON_UNESCAPED_SLASHES);
 }
 /*
     FUNCTION    :   Function to read individual production points by a user.
@@ -250,11 +247,11 @@ function getProductionPointDetails($productionPoint){
     /* Start transaction */
 
     $fetchProductionPointQuery = "SELECT f.farm_id, f.producer_id, f.farm_name, f.farm_desc, f.farm_address, f.street, f.house_number, f.city, f.zip, ST_X(f.farm_location) as latitude, ST_Y(f.farm_location) as longitude, f.farm_area FROM farm_land f
-    LEFT JOIN images i on (i.entity_id = f.farm_id and i.image_type = 2)
+    LEFT JOIN images i on (i.entity_id = f.farm_id and i.image_type = 3)
     WHERE f.producer_id = '$productionPoint->producerId' AND f.farm_id = $productionPoint->farmId";
-    
+
     $fetchProductionPointImages = "SELECT * FROM images i WHERE i.entity_id = $productionPoint->farmId AND i.image_type = 3;";
-    
+
     $productionPointData = [];
     $imageData = [];
 
@@ -267,7 +264,7 @@ function getProductionPointDetails($productionPoint){
         return false;
     }else{
         while($row = mysqli_fetch_assoc($getProductionPointQuery)) {
-            
+
             $productionPointData = [new productionPoint($row)];
 
             $getproductionPointImageQuery = mysqli_query($dbConnection, $fetchProductionPointImages);
@@ -284,10 +281,10 @@ function getProductionPointDetails($productionPoint){
             }
 
             array_push($productionPointData, $imageData);
-            
-                
+
+
             http_response_code(200);
-            return json_encode($productionPointData);
+            return json_encode($productionPointData, JSON_UNESCAPED_SLASHES);
         }
     }
     http_response_code(400);

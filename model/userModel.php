@@ -55,8 +55,8 @@ class user{
         
         
         $profilePictures = $_FILES['files']['name'] ? $_FILES['files']['name']: [];
-        $profileImageId = isset($userData['profile_image_id']) && $userData['profile_image_id'] != null ? escapeSQLString($userData['profile_image_id']) : [];
-        $profileImageId = json_decode($profileImageId) ? json_decode($profileImageId) : [];
+        $profileImageId = isset($userData['profile_image_id']) && $userData['profile_image_id'] != null ? $userData['profile_image_id'] : [];
+        $profileImageId = json_decode($profileImageId, JSON_UNESCAPED_SLASHES) ? json_decode($profileImageId, JSON_UNESCAPED_SLASHES) : [];
         
         $fileData = parseFileData($profilePictures, $profileImageId);
         $this->profileImageIdArray = $fileData['fileIds'] != null ? $fileData['fileIds'] : [];

@@ -63,7 +63,7 @@ function getCache($userId){
     }
 
     mysqli_close($dbConnection);
-    return json_encode($cacheData);
+    return json_encode($cacheData, JSON_UNESCAPED_SLASHES);
 }
 
 ?>

@@ -12,8 +12,7 @@ session_start();
 include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
 include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/productModel.php");
 
-$productUplaodLocation = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/product_img/";
-$productImagepath = "http://localhost/kleinerzeugernetzwerk_uploads/product_img/";
+
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         if ((isset($_GET['productId'])) && $_GET['productId'] !== 0){
@@ -105,7 +104,7 @@ function fetchAllProducts($userId){
     }
 
     mysqli_close($dbConnection);
-    return json_encode($productData);
+    return json_encode($productData, JSON_UNESCAPED_SLASHES);
 }
 
 
@@ -116,9 +115,9 @@ function fetchAllProducts($userId){
 */
 function insertNewProduct($productDetails){
     global $dbConnection;
-    global $productUplaodLocation;
-    global $productImagepath;
-        
+    $productUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(2);
+    $productImagepath = getServerRootAddress().getImagePath(2);
+
     if (isAccessTokenValid()){
         $productInsertQuery = "INSERT INTO products (producer_id, product_name, product_description, product_category, production_location, is_processed_product, is_available, price_per_unit, quantity_of_price, unit, product_rating)"
             . "VALUES ($productDetails->producerId, '$productDetails->productName', '$productDetails->productDesc', $productDetails->productCategory, $productDetails->productionLocation, $productDetails->isProcessedProduct, $productDetails->isAvailable, $productDetails->pricePerUnit, $productDetails->quantityOfPrice, $productDetails->unit, $productDetails->productRating);";
@@ -240,53 +239,53 @@ function updateProducts($producerId, $productId, $productName, $productDesc, $pr
 
     ob_start();
     global $dbConnection;
-    global $productUplaodLocation;
-    global $productImagepath;
+    $productUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(2);
+    $productImagepath = getServerRootAddress().getImagePath(2);
 
-        if (isAccessTokenValid()){
+    if (isAccessTokenValid()){
 
-            $updateProductQuery = "UPDATE products ";
-            $updateProductQuery .= "SET product_name = '$productName', product_description = '$productDesc', product_category = $productCategory, production_location = $productionLocation, is_processed_product = $isProcessedProduct, is_available = $isAvailable, price_per_unit = $pricePerUnit, quantity_of_price = $quantityOfPrice, unit = $unit, product_rating = $productRating ";
-            $updateProductQuery .= "WHERE product_id = $productId AND producer_id = $producerId;";
-
-
-            $productfeatureQuery = PrepareFeatureQuery($productFeatures, $featureIdArray, $productId);
-            $updateProductQuery .= $productfeatureQuery;
-
-            $productSellerQuery = PrepareProductSellerQuery($productSellerId, $productSellers, $productId);
-            $updateProductQuery .= $productSellerQuery;
+        $updateProductQuery = "UPDATE products ";
+        $updateProductQuery .= "SET product_name = '$productName', product_description = '$productDesc', product_category = $productCategory, production_location = $productionLocation, is_processed_product = $isProcessedProduct, is_available = $isAvailable, price_per_unit = $pricePerUnit, quantity_of_price = $quantityOfPrice, unit = $unit, product_rating = $productRating ";
+        $updateProductQuery .= "WHERE product_id = $productId AND producer_id = $producerId;";
 
 
-            $fileNames = uploadPictures($productImageNameArray, $productUplaodLocation);
-            $imageQuery = createFileUploadQuery($productImageNameArray, $productImageIdArray, $productImagepath, $productId, 2);
+        $productfeatureQuery = PrepareFeatureQuery($productFeatures, $featureIdArray, $productId);
+        $updateProductQuery .= $productfeatureQuery;
 
-            $productImageCount = count($productImageNameArray);
-            $productImageIdCount = count($productImageIdArray);
-
-            $updateProductQuery .= $imageQuery;
+        $productSellerQuery = PrepareProductSellerQuery($productSellerId, $productSellers, $productId);
+        $updateProductQuery .= $productSellerQuery;
 
 
-            //        mysqli_begin_transaction($dbConnection);
+        $fileNames = uploadPictures($productImageNameArray, $productUplaodLocation);
+        $imageQuery = createFileUploadQuery($productImageNameArray, $productImageIdArray, $productImagepath, $productId, 2);
 
-            try{
-                //            echo "<script>console.log('PHP: " . $updateProductQuery . "');</script>";
-                if (mysqli_multi_query($dbConnection, $updateProductQuery)){
-                    //                mysqli_commit($dbConnection);
-                    echo "<script>console.log('PHP: Successfully updated prodcut details');</script>";
-                }else{
-                    echo "<script>console.log('PHP: faield to update prodcut details');</script>";
-                    //                mysqli_rollback($dbConnection);
-                }
-            }catch(mysqli_sql_exception $exception){
-                echo "<script>console.log('PHP: faield to update prodcut details exception');</script>";
-                //            mysqli_rollback($dbConnection);
-                var_dump($exception);
-                throw $exception;
+        $productImageCount = count($productImageNameArray);
+        $productImageIdCount = count($productImageIdArray);
 
+        $updateProductQuery .= $imageQuery;
+
+
+        //        mysqli_begin_transaction($dbConnection);
+
+        try{
+            //            echo "<script>console.log('PHP: " . $updateProductQuery . "');</script>";
+            if (mysqli_multi_query($dbConnection, $updateProductQuery)){
+                //                mysqli_commit($dbConnection);
+                echo "<script>console.log('PHP: Successfully updated prodcut details');</script>";
+            }else{
+                echo "<script>console.log('PHP: faield to update prodcut details');</script>";
+                //                mysqli_rollback($dbConnection);
             }
-        }else{
-            echo "<script>console.log('PHP: Authentication Failed');</script>";
+        }catch(mysqli_sql_exception $exception){
+            echo "<script>console.log('PHP: faield to update prodcut details exception');</script>";
+            //            mysqli_rollback($dbConnection);
+            var_dump($exception);
+            throw $exception;
+
         }
+    }else{
+        echo "<script>console.log('PHP: Authentication Failed');</script>";
+    }
 }
 
 
@@ -325,7 +324,7 @@ function getProduct($productId, $producerId){
         }
 
         mysqli_close($dbConnection);
-        return json_encode($productData);
+        return json_encode($productData, JSON_UNESCAPED_SLASHES);
 
     }else{
         echo "<script>console.log('PHP: Authentication Failed');</script>";
@@ -424,10 +423,6 @@ function fetchAllProductsFromLocation($locationId){
     }
 
     mysqli_close($dbConnection);
-    return json_encode($productData);
-
-
-
+    return json_encode($productData, JSON_UNESCAPED_SLASHES);
 }
-
 ?>

@@ -47,13 +47,13 @@ function loginUser($email, $password){
 
 
             http_response_code(200); //OK
-            return json_encode($loginData);
+            return json_encode($loginData, JSON_UNESCAPED_SLASHES);
         }
     }else{
 
     }
     http_response_code(400); //400 Bad Request
-    return json_encode($loginData);
+    return json_encode($loginData, JSON_UNESCAPED_SLASHES);
 }
 
 /*

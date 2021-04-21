@@ -13,11 +13,6 @@ session_start();
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php";
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/sellerModel.php";
 
-
-$sellerUplaodLocation = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/seller_img/";
-$sellerImagepath = "http://localhost/kleinerzeugernetzwerk_uploads/seller_img/";
-
-
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
         break;
@@ -96,10 +91,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
 */
 function addSeller($sellerDetails){
     global $dbConnection;
-    global $sellerUplaodLocation;
-    global $sellerImagepath;
+    $sellerUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(4);
+    $sellerImagepath = getServerRootAddress().getImagePath(4);
     /* Start transaction */
-//    mysqli_begin_transaction($dbConnection);
+    //    mysqli_begin_transaction($dbConnection);
     $sellerInsertQuery = "INSERT INTO sellers (producer_id, seller_name, seller_description, street, building_number, city, zip, seller_location, seller_email, seller_website, mobile, phone, is_blocked, is_mon_available, mon_open_time, mon_close_time, is_tue_available, tue_open_time, tue_close_time, is_wed_available, wed_open_time, wed_close_time, is_thu_available, thu_open_time, thu_close_time, is_fri_available, fri_open_time, fri_close_time, is_sat_available, sat_open_time, sat_close_time, is_sun_available, sun_open_time, sun_close_time)"
         . "VALUES ($sellerDetails->producerId, '$sellerDetails->sellerName', '$sellerDetails->sellerDescription', '$sellerDetails->street', '$sellerDetails->buildingNumber', '$sellerDetails->city', '$sellerDetails->zip', POINT($sellerDetails->latitude, $sellerDetails->longitude), '$sellerDetails->email', '$sellerDetails->website', '$sellerDetails->mobile', '$sellerDetails->phone', $sellerDetails->isBlocked, $sellerDetails->isMonAvailable, '$sellerDetails->monOpenTime', '$sellerDetails->monCloseTime', $sellerDetails->isTueAvailable, '$sellerDetails->tueOpenTime', '$sellerDetails->tueCloseTime', $sellerDetails->isWedAvailable, '$sellerDetails->wedOpenTime', '$sellerDetails->wedCloseTime', $sellerDetails->isThuAvailable, '$sellerDetails->thuOpenTime', '$sellerDetails->thuCloseTime', $sellerDetails->isFriAvailable, '$sellerDetails->friOpenTime', '$sellerDetails->friCloseTime', $sellerDetails->isSatAvailable, '$sellerDetails->satOpenTime', '$sellerDetails->satCloseTime', $sellerDetails->isSunAvailable, '$sellerDetails->sunOpenTime', '$sellerDetails->sunCloseTime')";
 
@@ -119,19 +114,19 @@ function addSeller($sellerDetails){
             if ($sellerImageCount > 0 || $sellerImageIdCount > 0){
                 try{
                     if (mysqli_multi_query($dbConnection, $imageQuery)){
-//                        mysqli_commit($dbConnection);
+                        //                        mysqli_commit($dbConnection);
                         http_response_code(200);
                         return true;
                     }else{
-//                        mysqli_rollback($dbConnection);
+                        //                        mysqli_rollback($dbConnection);
                         http_response_code(400);
                     }
                 }catch(mysqli_sql_exception $exception){
-//                    mysqli_rollback($dbConnection);
+                    //                    mysqli_rollback($dbConnection);
                     http_response_code(400);
                 }
             }else{
-//                mysqli_commit($dbConnection);
+                //                mysqli_commit($dbConnection);
                 http_response_code(200);
                 return true;
             }
@@ -144,7 +139,7 @@ function addSeller($sellerDetails){
         }
     }catch(mysqli_sql_exception $exception){
         //        echo "faild to add a new production point,";
-//        mysqli_rollback($dbConnection);
+        //        mysqli_rollback($dbConnection);
         var_dump($exception);
         throw $exception;
         http_response_code(400);
@@ -162,8 +157,8 @@ function addSeller($sellerDetails){
 */
 function editSellingPoint($sellerDetails){
     global $dbConnection;
-    global $sellerUplaodLocation;
-    global $sellerImagepath;
+    $sellerUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(4);
+    $sellerImagepath = getServerRootAddress().getImagePath(4);
     /* Start transaction */
     mysqli_begin_transaction($dbConnection);
 
@@ -337,7 +332,7 @@ function getAllSellingPoints($seller){
         }
     }
     http_response_code(200);
-    return json_encode($sellerDataArray);
+    return json_encode($sellerDataArray, JSON_UNESCAPED_SLASHES);
 }
 
 /*
@@ -391,10 +386,10 @@ function getSellerDetails($seller){
             }
 
             array_push($sellerData, $imageData);
-            
-                
+
+
             http_response_code(200);
-            return json_encode($sellerData);
+            return json_encode($sellerData, JSON_UNESCAPED_SLASHES);
         }
     }
 
