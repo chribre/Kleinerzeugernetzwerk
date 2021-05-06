@@ -17,7 +17,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 
 ?>
 
-
+<script type="text/javascript" src="/kleinerzeugernetzwerk/js/products/products_api.js"></script>
 
 
 <!-- Favicons -->
@@ -41,6 +41,19 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 
 
 
+<style>
+    .btn-price{
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+    }
+    .btn-available{
+        font-size: 15px;
+        color: white;
+    }
+
+</style>
+
 
 
 
@@ -48,9 +61,10 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 <div class="container" id="productDetails">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="0"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -58,6 +72,9 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="https://previews.123rf.com/images/vbaleha/vbaleha1910/vbaleha191000271/131688113-fresh-cherry-tomatoes-and-chilly-pepper-in-a-clay-plate-on-a-wooden-background.jpg" alt="Second slide" style="width: 100%; height: 350px; object-fit: cover;">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="https://previews.123rf.com/images/vbaleha/vbaleha1910/vbaleha191000271/131688113-fresh-cherry-tomatoes-and-chilly-pepper-in-a-clay-plate-on-a-wooden-background.jpg" alt="Third slide" style="width: 100%; height: 350px; object-fit: cover;">
             </div>
             <div class="carousel-item">
                 <img class="d-block w-100" src="https://previews.123rf.com/images/vbaleha/vbaleha1910/vbaleha191000271/131688113-fresh-cherry-tomatoes-and-chilly-pepper-in-a-clay-plate-on-a-wooden-background.jpg" alt="Third slide" style="width: 100%; height: 350px; object-fit: cover;">
@@ -76,8 +93,16 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 
 
     <div>
-        <h2>Product name</h2>
-        <h4>Category name</h4>
+        <div class="row justify-content-between p-3">
+            <div class="">
+                <h2>Product name</h2>
+                <h4>Category name</h4>
+            </div>
+            <button type="button" class="btn btn-secondary btn-lg"><h2 class="btn-price">€ 35/KG</h2>
+                <p class="btn-available">10 KG available</p></button>
+
+        </div>
+
         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
     </div>
 
@@ -280,10 +305,6 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
                     <div class="add-actions text-center">
                         <div class="project-dec">
                             <a class="venobox" data-gall="myGallery" href="https://www.teachearlyyears.com/images/made/29194c081e687370/PPfv1_630_465_84_int_s_c1.jpg">
-                                <!--
-<h4>Business City</h4>
-<span>Web Development</span>
--->
                             </a>
                         </div>
                     </div>

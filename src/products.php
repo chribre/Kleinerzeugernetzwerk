@@ -138,7 +138,7 @@ Add a new product
                             card += `</div> <div id="manipulationBtnProducts" class="btn-group btn-group-sm mt-3 mr-auto float-right" role="group" aria-label="" value=${productId}>
 <button type="button" class="btn btn-danger" id="deleteProductBtn" onclick="showDeleteProductModal(${productId})" value="${productId}">Delete</button>
 <button type="button" class="btn btn-primary" id="editProductBtn" onclick="openAddProductModal(${productId})" value="${productId}">Edit</button>
-<button type="button" class="btn btn-success" id="viewProductBtn" onclick="viewProductInDetail(${productId})">View</button>
+<button type="button" class="btn btn-success" id="viewProductBtn" onclick="goToProductDetailsPage(${productId})">View</button>
 
 
         </div>
@@ -669,9 +669,18 @@ Add a new product
         }
 
 
+        
+        function goToProductDetailsPage(productId){
+            window.location = "/kleinerzeugernetzwerk/src/productDetails.php?product="+productId;
+        }
 
 
         function viewProductInDetail(productId){
+            
+            
+            
+            
+            
             $.ajax({
                 type: "POST",
                 url: "/kleinerzeugernetzwerk/controller/details.php",

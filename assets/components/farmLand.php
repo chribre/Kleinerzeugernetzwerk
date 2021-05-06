@@ -8,6 +8,7 @@
                         productions poitns can be added/edited or deleted
 ****************************************************************/
 ?>
+<script type="text/javascript" src="/kleinerzeugernetzwerk/js/production_point_api/production_point_api.js"></script>
 <div class="container" id="productionPointListContainer">
 
 
@@ -246,7 +247,7 @@ Launch demo modal
 <div id="manipulationBtnProductionPoint" class="btn-group btn-group-sm mt-3 mr-auto float-right" role="group" aria-label="" value=${pointId}>
 <button type="button" class="btn btn-danger" id="deleteProductionPointBtn" onclick="productionPointDeleteConfirmation('${pointId}', '${pointName}','${address}')">Delete</button>
 <button type="button" class="btn btn-primary" id="editProductionPointBtn" onclick="getProductionPointDetails('${pointId}', 'EDIT')">Edit</button>
-<button type="button" class="btn btn-success" id="viewProductionPointBtn" onclick="viewProductionPointInDetail('${pointId}')">View</button></div>
+<button type="button" class="btn btn-success" id="viewProductionPointBtn" onclick="viewProductionPointInDetail('${pointId}', listproductsOnSideBar)">View</button></div>
 
     </div>
     </div>`;
@@ -304,30 +305,7 @@ Launch demo modal
     }
 
 
-    function viewProductionPointInDetail(productionPointId){
-        $.ajax({
-            type: "POST",
-            url: "/kleinerzeugernetzwerk/controller/details.php",
-            headers: {
-                'action': 'PRODUCTION_POINT',
-            },
-            beforeSend: function(){
-                $("#overlay").fadeIn(300);　
-            },
-            complete: function(){
-                $("#overlay").fadeOut(300);
-            },
-            data: { productionPointId: productionPointId },
-            dataType: "json",
-            success: function( data ) {
-                console.log(data);
-            },
-            error: function (request, status, error) {
-                alert(request.responseText);
-                console.log(error)
-            }
-        });
-    }
+    
 
     function getProductionPointDetails(pointId, action){
         const formData = fetchProductionPointFormData();
