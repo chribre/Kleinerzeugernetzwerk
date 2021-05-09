@@ -26,7 +26,7 @@ $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min
         <!--         Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
-
+        <script type="text/javascript" src="/kleinerzeugernetzwerk/js/constants.js"></script>
 
         <link rel="stylesheet" type="text/css" href="<?php echo $HOME_CSS_LOC ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo $SIDE_BAR_CSS ?>" />
@@ -77,9 +77,10 @@ $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min
 
 
         <script type="text/javascript" src="/kleinerzeugernetzwerk/js/seller_web_services/seller_api.js"></script>
+
         <script type="text/javascript" src="/kleinerzeugernetzwerk/js/config/constant.js"></script>
 
-        
+
         <link rel="stylesheet" href="/kleinerzeugernetzwerk/css/custom/card.css">
 
         <title>Kleinerzeuger Netzwerk</title>

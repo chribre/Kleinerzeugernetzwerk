@@ -247,7 +247,7 @@ Launch demo modal
 <div id="manipulationBtnProductionPoint" class="btn-group btn-group-sm mt-3 mr-auto float-right" role="group" aria-label="" value=${pointId}>
 <button type="button" class="btn btn-danger" id="deleteProductionPointBtn" onclick="productionPointDeleteConfirmation('${pointId}', '${pointName}','${address}')">Delete</button>
 <button type="button" class="btn btn-primary" id="editProductionPointBtn" onclick="getProductionPointDetails('${pointId}', 'EDIT')">Edit</button>
-<button type="button" class="btn btn-success" id="viewProductionPointBtn" onclick="viewProductionPointInDetail('${pointId}', listproductsOnSideBar)">View</button></div>
+<button type="button" class="btn btn-success" id="viewProductionPointBtn" onclick="goToProductionPointDeatailsScreen('${pointId}')">View</button></div>
 
     </div>
     </div>`;
@@ -261,6 +261,12 @@ Launch demo modal
     }
 
 
+    
+    function goToProductionPointDeatailsScreen(productionPointId){
+        window.location = "/kleinerzeugernetzwerk/src/productionpointDetails.php?productionpoint="+productionPointId;
+    }
+    
+    
     function productionPointDeleteConfirmation(id, pointName, address){
         const deleteMessage = `Are you sure want to delete ${pointName} at ${address}.`
         document.getElementById('deleteMessageText').innerHTML = deleteMessage;

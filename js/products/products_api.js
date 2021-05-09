@@ -42,11 +42,11 @@ function showProductInDetail(productData){
         const productImages = productData.productImages ? productData.productImages : [];
         if (Object.keys(productDeatils).length != 0){
             
-            productDetailsUI = `<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            productDetailsUI = `<div id="carouselExampleIndicators" class="carousel slide bg-secondary" data-ride="carousel">
         <ol class="carousel-indicators">`;
             productImages.forEach(function(productImage, index){
                 if (productImage != null){
-                    const imagePath = productImage.image_path ? productImage.image_path : '';
+                    const imagePath = productImage.image_path ? productImage.image_path : DEFAULT_PRODUCT_IMAGE;
                     productDetailsUI += `<li data-target="#carouselExampleIndicators" data-slide-to="${index}"></li>`;
                 }
             })
@@ -56,10 +56,10 @@ function showProductInDetail(productData){
             
             productImages.forEach(function(productImage, index){
                 if (productImage != null){
-                    const imagePath = productImage.image_path ? productImage.image_path : '';
+                    const imagePath = productImage.image_path ? productImage.image_path : DEFAULT_PRODUCT_IMAGE;
                     if (index == 0){
                         productDetailsUI += `<div class="carousel-item active">
-                <img class="d-block w-100" src="${imagePath}" alt="First slide" style="width: 100%; height: 350px; object-fit: cover;">
+                <img class="d-block w-100" src="${imagePath}" alt="First slide" style="width: 100%; height: 350px; object-fit: cover;" onerror="this.src=${DEFAULT_PRODUCT_IMAGE}">
             </div>`;
                     }else{
                         productDetailsUI += `<div class="carousel-item">
@@ -145,7 +145,7 @@ function showProductInDetail(productData){
                     const sBuildingNum = sellerObj.building_number ? sellerObj.building_number : '';
                     const sCity = sellerObj.city ? sellerObj.city : '';
                     const sZip = sellerObj.zip ? sellerObj.zip : '';
-                    const sImagePath = sellerObj.image_path ? sellerObj.image_path : '';
+                    const sImagePath = sellerObj.image_path ? sellerObj.image_path : DEFAULT_SELLER_IMAGE;
 
                     const sellerAddress = sStreet + ' ' + sBuildingNum + ', ' + sCity + ' ' + sZip;
                     
@@ -185,7 +185,7 @@ function showProductInDetail(productData){
             const ppZip = productionPointDetails.zip ? productionPointDetails.zip : '';
             const ppAddress = ppStreet + ' ' + ppBuildingNum + ', ' + ppCity + ' ' + ppZip;
             
-            const ppImagePath = productionPointDetails.image_path ? productionPointDetails.image_path : '';
+            const ppImagePath = productionPointDetails.image_path ? productionPointDetails.image_path : DEFAULT_PRODUCTION_POINT_IMAGE;
             
             
             const producerDetails = productData.userData ? productData.userData : [];
@@ -194,7 +194,7 @@ function showProductInDetail(productData){
             const phone = producerDetails.phone ? producerDetails.phone : '';
             const email = producerDetails.email ? producerDetails.email : '';
             
-            const producerImage = producerDetails.image_path ? producerDetails.image_path : '';
+            const producerImage = producerDetails.image_path ? producerDetails.image_path : DEFAULT_USER_IMAGE;
             productDetailsUI += `<div class="row justify-content-center my-5">
         <div class="col-md-6 mr-0">
             <img class="d-block" src="${ppImagePath}" alt="Third slide" style="height: 350px; object-fit: cover;">

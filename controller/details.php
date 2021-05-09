@@ -118,10 +118,10 @@ function getSellerInDetail(){
         $productDetails = fetchAllProductsFromSellingPoints($sellerId);// all product details in the production point
         $relatedproductionPoints = fetchAllProductionPointsRelatedToSeller($sellerId); //all selling points where these products are sold
 
-        $productData['productionPointDetails'] = $productionPointDetails;
-        $productData['productionPointImages'] = $productionPointImages;
+        $productData['sellerDetails'] = $sellerDetails;
+        $productData['sellerImages'] = $sellerImages;
         $productData['productDetails'] = $productDetails;
-        $productData['productionPoints'] = $relatedSellingPoints;
+        $productData['productionPoints'] = $relatedproductionPoints;
 
         mysqli_close($dbConnection);
         http_response_code(200);
@@ -276,12 +276,18 @@ function fetchAllProductionPointsRelatedToSeller($sellerId){
                             ST_X(f.farm_location) as latitude, 
                             ST_Y(f.farm_location) as longitude, 
                             f.farm_area, 
+                            u.user_id,
+                            u.first_name,
+                            u.last_name,
+                            u.phone, u.email, u_img.image_path as user_image_path,
                                     img.image_id, 
                                     img.image_type, 
                                     img.image_name, 
                                     img.image_path, 
                                     img.entity_id FROM farm_land f
                         LEFT JOIN images img ON img.entity_id = f.farm_id and img.image_type = 3
+                        lEFT JOIN user u ON u.user_id = f.producer_id
+                        LEFT JOIN images u_img ON u_img.entity_id = u.user_id and u_img.image_type = 1
                         WHERE f.farm_id in (SELECT DISTINCT p.production_location from products p JOIN product_sellers ps ON                ps.product_id = p.product_id WHERE ps.seller_id = $sellerId)
                         GROUP BY f.farm_id;";
     $productData = [];
