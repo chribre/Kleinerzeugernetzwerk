@@ -254,9 +254,6 @@ ${isFavourite ? unfavouriteButton : favouriteBtn}
 
 
 
-function gotoSellerDetailsScreen(sellerId){
-    window.location = "/kleinerzeugernetzwerk/src/sellerDetails.php?seller="+sellerId;
-}
 
 function sellerDeleteConfirmation(id, pointName, address){
     const deleteMessage = `Are you sure want to delete ${pointName} at ${address}.`

@@ -18,6 +18,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 ?>
 
 <script type="text/javascript" src="/kleinerzeugernetzwerk/js/products/products_api.js"></script>
+<script type="text/javascript" src="/kleinerzeugernetzwerk/js/custom/navigation.js"></script>
 
 
 <!-- Favicons -->
@@ -51,6 +52,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
         font-size: 15px;
         color: white;
     }
+   
 
 </style>
 
@@ -283,9 +285,14 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 
 
             </div>
-            <div class="row card border-0 shadow-sm rounded  align-items-center justify-content-around mt-2">
-                <h3>John Doe</h3>
+            <div class="row border-0 shadow-sm rounded  align-items-center justify-content-center mt-2 p-2">
                 <img class="rounded-circle" src="https://image.gala.de/21556500/t/Gd/v5/w960/r0.6667/-/chris-hemsworth-so-denkt-er-ueber-miley.jpg" alt="" style="width: 50px; height: 50px; object-fit: cover;">
+                <div class="ml-4">
+                    <h3 class="my-auto">John Doe</h3>
+                    <p class="my-auto">Brodaer Straße 4<br>17033 Neubrandenburg</p>
+                </div>
+                
+
             </div>
         </div>
 

@@ -16,6 +16,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 <link rel="stylesheet" type="text/css" href="<?php echo $leaflet_sidebar_css ?>" />
 <script type="text/javascript" src="/kleinerzeugernetzwerk/js/production_point_api/production_point_api.js"></script>
+<script type="text/javascript" src="/kleinerzeugernetzwerk/js/seller_web_services/seller_details.js"></script>
 <style>
     .arrow-icon {
         width: 14px;
@@ -68,6 +69,10 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         /*        white-space: nowrap; */
         text-overflow: ellipsis; 
     }
+
+    .cst-line-space-contact{
+        line-height: 1.5em;
+    }
 </style>
 
 
@@ -110,23 +115,144 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 
 
+    <!--
+<img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80" width="100%" height="220px"  style="object-fit: cover;" alt="">
+<div class="p-2">
+<h4>John Doe James</h4>
+<p class="text-dark cst-desc">In the tranquil idyll of the family game My Farm Shopplayers can experience just that without leaving their home. In turn, three dice are thrown each turn. The active player uses one die to choose a new expansion for his farm. The combination of the other two dice determines which field is activated on the farm - not only for the active player, but also for everyone else. The extensions improve the actions with which the players milk cows, shear sheep, harvest honey or collect eggs. These raw materials can then be sold. Whoever made the most money in the end wins.</p>
+
+<div class="row px-4 align-items-center justify-content-between">
+<div class="">
+<h5>+91 9846 194 609</h5>
+<h5>knfse@gmail.com</h5>
+</div>
+<div class="row justify-content-around">
+<img class="rounded-circle" src="https://image.flaticon.com/icons/png/128/1384/1384053.png" id="socialImage" alt="">
+<img class="rounded-circle" src="https://www.flaticon.com/svg/vstatic/svg/1384/1384065.svg?token=exp=1619102216~hmac=5208539dcadea913c800c5be1ae781bd" id="socialImage" alt="">
+<img class="rounded-circle" src="https://www.flaticon.com/svg/vstatic/svg/1384/1384055.svg?token=exp=1619102525~hmac=05c3613c4bd211205f4445a5e04188b2" id="socialImage" alt="">
+</div>
+<div>
+<p class="text-dark">20 products</p>
+</div>
+</div>
+
+<div class="my-3">
+<div class="rounded bg-white py-2 px-4">
+<div class="row">
+
+<img class="cst-image-cover" src="https://www.jessicagavin.com/wp-content/uploads/2019/04/types-of-lemons-1-1200.jpg" width="30%" height="160px" alt="">
+
+<div class="mx-3">
+<h5>Lemon Home Made</h5>
+<p>Vegetable</p>
+<h5>€2,5/kg</h5>
+<div class="row justify-content-between mx-1">
+<img class="cst-image-cover cst-feature-images" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg/1200px-Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg.png" alt="">
+<img class="cst-image-cover cst-feature-images" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg/1200px-Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg.png" alt="">
+<img class="cst-image-cover cst-feature-images" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg/1200px-Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg.png" alt="">
+<img class="cst-image-cover cst-feature-images" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg/1200px-Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg.png" alt="">
+</div>
+</div>
+</div>
+<div class="">
+<p class="mt-2 cst-desc cst-product-desc">The lemon, Citrus limon, is a species of small evergreen tree in the flowering plant family Rutaceae, native to South Asia, primarily Northeast India. The tree's ellipsoidal yellow fruit is used for culinary and non-culinary purposes throughout the world, primarily for its juice, which has both culinary and cleaning uses.</p>
+</div>
+
+
+<div class="cst-page-break">
+<div class="row rounded-pill mb-1 cst-bg-gray">
+<div>
+<img class="cst-feature-images rounded-circle m-1" src="https://www.eu-startups.com/wp-content/uploads/2020/05/supermarket-vegetables-fruits.jpg" alt="">
+</div>
+<div>
+<h5 class="text-white align-self-center">Bio Markt</h5>
+</div>
+
+</div>
+<div class="row rounded-pill mb-1 cst-bg-gray">
+<div>
+<img class="cst-feature-images rounded-circle m-1" src="https://www.eu-startups.com/wp-content/uploads/2020/05/supermarket-vegetables-fruits.jpg" alt="">
+</div>
+<div>
+<h5 class="text-white align-self-center">Bio Markt</h5>
+</div>
+
+</div>
+<div class="row rounded-pill mb-1 cst-bg-gray">
+<div>
+<img class="cst-feature-images rounded-circle m-1" src="https://www.eu-startups.com/wp-content/uploads/2020/05/supermarket-vegetables-fruits.jpg" alt="">
+</div>
+<div>
+<h5 class="text-white align-self-center">Bio Markt</h5>
+</div>
+
+</div>
+<div class="row rounded-pill mb-1 cst-bg-gray">
+<div>
+<img class="cst-feature-images rounded-circle m-1" src="https://www.eu-startups.com/wp-content/uploads/2020/05/supermarket-vegetables-fruits.jpg" alt="">
+</div>
+<div>
+<h5 class="text-white align-self-center">Bio Markt</h5>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+-->
+
+
+
+    <!--Selling point side bar-->
+
+
+
     <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80" width="100%" height="220px"  style="object-fit: cover;" alt="">
     <div class="p-2">
-        <h4>John Doe James</h4>
+        <h4>Selling Point Name</h4>
         <p class="text-dark cst-desc">In the tranquil idyll of the family game My Farm Shopplayers can experience just that without leaving their home. In turn, three dice are thrown each turn. The active player uses one die to choose a new expansion for his farm. The combination of the other two dice determines which field is activated on the farm - not only for the active player, but also for everyone else. The extensions improve the actions with which the players milk cows, shear sheep, harvest honey or collect eggs. These raw materials can then be sold. Whoever made the most money in the end wins.</p>
 
-        <div class="row px-4 align-items-center justify-content-between">
-            <div class="">
-                <h5>+91 9846 194 609</h5>
-                <h5>knfse@gmail.com</h5>
+
+        <div class="mx-auto row justify-content-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+            </svg>
+            <p class="ml-2 cst-line-space-contact">Brodaer Straße 4, 17033 Neubrandenburg</p>
+        </div>
+        <div class="row mx-auto justify-content-between">
+            <div class="mx-auto row my-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                </svg>
+                <p class="ml-2 cst-line-space-contact">+91946194609</p>
             </div>
-            <div class="row justify-content-around">
+            <div class="mx-auto row my-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                    <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+                </svg>
+                <p class="ml-2 cst-line-space-contact">testemail@gmail.com</p>
+            </div>
+            <div class="mx-auto row my-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-globe" viewBox="0 0 16 16">
+                    <path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4a9.267 9.267 0 0 1 .64-1.539 6.7 6.7 0 0 1 .597-.933A7.025 7.025 0 0 0 2.255 4H4.09zm-.582 3.5c.03-.877.138-1.718.312-2.5H1.674a6.958 6.958 0 0 0-.656 2.5h2.49zM4.847 5a12.5 12.5 0 0 0-.338 2.5H7.5V5H4.847zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5a12.5 12.5 0 0 0 .337 2.5H7.5V8.5H4.51zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12c.138.386.295.744.468 1.068.552 1.035 1.218 1.65 1.887 1.855V12H5.145zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11a13.652 13.652 0 0 1-.312-2.5h-2.49c.062.89.291 1.733.656 2.5H3.82zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12v2.923c.67-.204 1.335-.82 1.887-1.855.173-.324.33-.682.468-1.068H8.5zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5a6.959 6.959 0 0 0-.656-2.5H12.18c.174.782.282 1.623.312 2.5h2.49zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4a7.966 7.966 0 0 0-.468-1.068C9.835 1.897 9.17 1.282 8.5 1.077V4h2.355z"/>
+                </svg>
+                <p class="ml-2 cst-line-space-contact">www.biomarkttesttest.com</p>
+            </div>
+        </div>
+
+        <div class="row mx-auto justify-content-between">
+
+            <div class="row ml-2">
                 <img class="rounded-circle" src="https://image.flaticon.com/icons/png/128/1384/1384053.png" id="socialImage" alt="">
-                <img class="rounded-circle" src="https://www.flaticon.com/svg/vstatic/svg/1384/1384065.svg?token=exp=1619102216~hmac=5208539dcadea913c800c5be1ae781bd" id="socialImage" alt="">
+                <img class="rounded-circle" src="https://www.flaticon.com/svg/vstatic/svg/733/733579.svg?token=exp=1620563776~hmac=db6f2d43cd6da2272e3e5cc0c9dd4d18" id="socialImage" alt="">
                 <img class="rounded-circle" src="https://www.flaticon.com/svg/vstatic/svg/1384/1384055.svg?token=exp=1619102525~hmac=05c3613c4bd211205f4445a5e04188b2" id="socialImage" alt="">
             </div>
             <div>
-                <p class="text-dark">20 products</p>
+                <p class="text-dark my-auto">20 products</p>
             </div>
         </div>
 
@@ -158,35 +284,8 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
                         <div>
                             <img class="cst-feature-images rounded-circle m-1" src="https://www.eu-startups.com/wp-content/uploads/2020/05/supermarket-vegetables-fruits.jpg" alt="">
                         </div>
-                        <div>
-                            <h5 class="text-white align-self-center">Bio Markt</h5>
-                        </div>
-
-                    </div>
-                    <div class="row rounded-pill mb-1 cst-bg-gray">
-                        <div>
-                            <img class="cst-feature-images rounded-circle m-1" src="https://www.eu-startups.com/wp-content/uploads/2020/05/supermarket-vegetables-fruits.jpg" alt="">
-                        </div>
-                        <div>
-                            <h5 class="text-white align-self-center">Bio Markt</h5>
-                        </div>
-
-                    </div>
-                    <div class="row rounded-pill mb-1 cst-bg-gray">
-                        <div>
-                            <img class="cst-feature-images rounded-circle m-1" src="https://www.eu-startups.com/wp-content/uploads/2020/05/supermarket-vegetables-fruits.jpg" alt="">
-                        </div>
-                        <div>
-                            <h5 class="text-white align-self-center">Bio Markt</h5>
-                        </div>
-
-                    </div>
-                    <div class="row rounded-pill mb-1 cst-bg-gray">
-                        <div>
-                            <img class="cst-feature-images rounded-circle m-1" src="https://www.eu-startups.com/wp-content/uploads/2020/05/supermarket-vegetables-fruits.jpg" alt="">
-                        </div>
-                        <div>
-                            <h5 class="text-white align-self-center">Bio Markt</h5>
+                        <div class="my-auto">
+                            <h5 class="text-white align-self-center my-auto">Producer Name</h5>
                         </div>
 
                     </div>
@@ -197,6 +296,9 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
         </div>
     </div>
+
+
+
 
 </div>
 
@@ -399,7 +501,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
             }
 
 
-            const sellerPopupContent = `<a data-id="${sellerId}" style="text-decoration: none" id="sellerLoc" onclick='return 'seler details'><div class="d-inline-flex m-1 p-1"> <img src="${imagePath}" alt="" width="90px" height="60px" style="object-fit: cover;" class="m-auto"> <div class="pl-2"> <div id="sellerTitle">${sellerName}</div> <div>${sellerAddress}</div> </div> </div></a>`;
+            const sellerPopupContent = `<a data-id="${sellerId}" style="text-decoration: none" id="sellerLoc" onclick="viewSellerInDetail(${sellerId}, showSellerSidebar)"><div class="d-inline-flex m-1 p-1"> <img src="${imagePath}" alt="" width="90px" height="60px" style="object-fit: cover;" class="m-auto"> <div class="pl-2"> <div id="sellerTitle">${sellerName}</div> <div>${sellerAddress}</div> </div> </div></a>`;
 
 
 

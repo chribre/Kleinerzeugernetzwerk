@@ -60,3 +60,13 @@ html, body {
     font-weight: 700;
     font-style: normal;
 }
+
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.bring-to-front{
+    position: relative;
+    z-index: 10;
+}

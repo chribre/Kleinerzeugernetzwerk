@@ -33,6 +33,10 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 echo getProductionPointAndSellerDataToMap();
                 break;
 
+            case 'PRODUCER':
+                echo fetchUserData();
+                break;
+
             default:
                 http_response_code(400);
                 break;
@@ -57,15 +61,15 @@ function getProductDetails(){
 
         $userId = $productDetails['producer_id'] ? $productDetails['producer_id'] : 0;
         $userData = getUserData($userId);
-        
-        
+
+
         $productData['productDetails'] = $productDetails;
         $productData['productImages'] = $productImages;
         $productData['productFeatures'] = $productFeatures;
         $productData['productionPointDetails'] = $productionPointDetails;
         $productData['sellerDetails'] = $selelrDetails;
         $productData['userData'] = $userData;
-        
+
         mysqli_close($dbConnection);
         http_response_code(200);
         return json_encode($productData); //production point location longitude and latitude fetch in formatted way
@@ -242,12 +246,15 @@ function fetchAllProductsFromSellingPoints($sellingPoint){
 
     $productsQuery = "SELECT i.image_path, 
                                 p.*, pc.category_name, u.unit_abbr as unit_name, 
-                                GROUP_CONCAT(DISTINCT p_fea.feature_type) as features FROM products p
+                                GROUP_CONCAT(DISTINCT p_fea.feature_type) as features,
+                                f.farm_id, f.farm_name, fi.image_path as farm_image FROM products p
                         LEFT JOIN product_feature p_fea on p_fea.product_id = p.product_id
                         LEFT JOIN images i ON i.entity_id = p.product_id and i.image_type = 2
                         LEFT JOIN product_sellers ps ON ps.product_id = p.product_id
                         LEFT JOIN product_category pc ON pc.category_id = p.product_category
                         LEFT JOIN units u ON u.unit_id = p.unit
+                        LEFT JOIN farm_land f ON f.farm_id = p.production_location
+                        LEFT JOIN images fi ON fi.entity_id = p.production_location and fi.image_type = 3
                         WHERE ps.seller_id = $sellingPoint
                         GROUP BY p.product_id;";
     $productData = [];
@@ -557,7 +564,7 @@ function getUserData($userId){
 
 function fetchUserData(){
     global $dbConnection;
-    $producerId = $_POST['userId'] ? $_POST['userId'] : 0;
+    $producerId = $_POST['producerId'] ? $_POST['producerId'] : 0;
     if ($producerId != 0){
         $userData = [];
 
@@ -598,8 +605,7 @@ function getAllProductionPointsByUser($userId){
                                     ST_X(f.farm_location) as latitude, 
                                     ST_Y(f.farm_location) as longitude, 
                                     f.farm_area, 
-                                    i.image_path, 
-                                    GROUP_CONCAT(DISTINCT ps.seller_id) AS seller FROM farm_land f
+                                    i.image_path FROM farm_land f
                             LEFT JOIN images i on i.entity_id = f.farm_id and i.image_type = 3
                             WHERE f.producer_id = $userId
                             GROUP BY f.farm_id;";

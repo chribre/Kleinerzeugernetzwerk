@@ -10,7 +10,7 @@
 ****************************************************************/
 
 ?>
-
+<script type="text/javascript" src="/kleinerzeugernetzwerk/js/custom/navigation.js"></script>
 
 <div class="container" id="sellerListContainer">
     <ul class="my-5" id="sellerList">

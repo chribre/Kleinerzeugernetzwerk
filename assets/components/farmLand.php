@@ -9,6 +9,7 @@
 ****************************************************************/
 ?>
 <script type="text/javascript" src="/kleinerzeugernetzwerk/js/production_point_api/production_point_api.js"></script>
+<script type="text/javascript" src="/kleinerzeugernetzwerk/js/custom/navigation.js"></script>
 <div class="container" id="productionPointListContainer">
 
 
@@ -262,9 +263,7 @@ Launch demo modal
 
 
     
-    function goToProductionPointDeatailsScreen(productionPointId){
-        window.location = "/kleinerzeugernetzwerk/src/productionpointDetails.php?productionpoint="+productionPointId;
-    }
+    
     
     
     function productionPointDeleteConfirmation(id, pointName, address){

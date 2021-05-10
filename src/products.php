@@ -16,6 +16,7 @@
 <?php
 require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/addProductModal.php");
 ?>
+<script type="text/javascript" src="/kleinerzeugernetzwerk/js/custom/navigation.js"></script>
 <div class="d-flex justify-content-center">
     <button id="addProductModalBtn" onclick="openAddProductModal(0)" type="button" class="col-sm-11 col-md-5 m-3 btn btn-success">
         <i class="plus icon"></i>
@@ -668,11 +669,6 @@ Add a new product
 
         }
 
-
-        
-        function goToProductDetailsPage(productId){
-            window.location = "/kleinerzeugernetzwerk/src/productDetails.php?product="+productId;
-        }
 
 
         function viewProductInDetail(productId){

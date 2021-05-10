@@ -20,6 +20,8 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 <script type="text/javascript" src="/kleinerzeugernetzwerk/js/production_point_api/production_point_api.js"></script>
 
 
+
+
 <!-- Favicons -->
 <link href="http://localhost/web_design/eBusiness/assets/img/favicon.png" rel="icon">
 <link href="http://localhost/web_design/eBusiness/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -55,6 +57,18 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
         width: 30px;
         height: 30px;
         object-fit: cover;
+    }
+
+    .float-profile{
+        position:absolute;
+        bottom: 30px;
+        right: 40px;
+        z-index: 2;
+    }
+    .float-profile-image{
+        border-style:solid;
+        border-width:3px;
+        border-color: white;
     }
 
 </style>
@@ -93,7 +107,13 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
+
+        <div class="position-absolute float-profile" onclick="gotoProducerDetails(producerId)">
+            <img class=" rounded-circle float-profile-image" src="https://previews.123rf.com/images/vbaleha/vbaleha1910/vbaleha191000271/131688113-fresh-cherry-tomatoes-and-chilly-pepper-in-a-clay-plate-on-a-wooden-background.jpg" alt="" style="width: 60px; height: 60px; object-fit: cover;">
+        </div>
+
     </div>
+
 
 
 
@@ -137,6 +157,11 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 
     <h3 class="my-5">PRODUCTS</h3>
 
+  <div class="justify-content-center">
+    
+  </div>
+   
+   
     <section>
         <div>
             <div class="row">
