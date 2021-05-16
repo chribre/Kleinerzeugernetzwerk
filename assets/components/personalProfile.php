@@ -47,25 +47,24 @@
         <div class="row">
             <div class="col-md-6 p-5">
 
-                <img id="profileImage" class="rounded-circle bg-primary" src="<?php echo $PROFILE_IMAGE_DEFAULT ?>" height="200" width="200" alt="" style="object-fit: cover;">
-                <h1 id="fullName"><?php echo $name ?></h1>
+                <img id="profileImage" class="rounded-circle bg-primary" src="" height="200" width="200" alt="" style="object-fit: cover;">
+                <h1 id="fullName">Producer Name</h1>
                 <text id="aboutMe">Description</text>
             </div>
 
             <div class="col-md-6 p-5">
                 <h4>Address</h4>
-                <p id="address"><?php echo $street ?>, <?php echo $houseNum?> <br>
-                    <?php echo $zip ?> <?php echo $city ?><br>
-                    <?php echo $ccountry ?></p>
+                <p id="address">Street, House Num<br>
+                    Zip City<br></p>
 
                 <h4>Phone</h4>
-                <p id="phoneNumber"><?php echo $phone ?></p>
+                <p id="phoneNumber">+49 000 000 0000</p>
 
                 <h4>Mobile</h4>
-                <p id="mobileNumber"><?php echo $mobile ?></p>
+                <p id="mobileNumber">+49 000 000 0000</p>
 
                 <h4>E-mail</h4>
-                <p id="emailAddress"><?php echo $email ?></p>
+                <p id="emailAddress">testemail@email.com</p>
             </div>
         </div>
     </div>

@@ -70,6 +70,7 @@ function getProductDetails(){
         $productData['sellerDetails'] = $selelrDetails;
         $productData['userData'] = $userData;
 
+        ob_end_clean();
         mysqli_close($dbConnection);
         http_response_code(200);
         return json_encode($productData); //production point location longitude and latitude fetch in formatted way
@@ -100,6 +101,7 @@ function getProductionPointDetails(){
         $productData['sellerDetails'] = $relatedSellingPoints;
         $productData['userData'] = $userData;
 
+        ob_end_clean();
         mysqli_close($dbConnection);
         http_response_code(200);
         return json_encode($productData); //production point location longitude and latitude fetch in formatted way
@@ -127,6 +129,7 @@ function getSellerInDetail(){
         $productData['productDetails'] = $productDetails;
         $productData['productionPoints'] = $relatedproductionPoints;
 
+        ob_end_clean();
         mysqli_close($dbConnection);
         http_response_code(200);
         return json_encode($productData); //production point location longitude and latitude fetch in formatted way
@@ -579,6 +582,7 @@ function fetchUserData(){
         $userData['productionPointDetails'] = $productionPoints;
         $userData['sellerDetails'] = $sellingPoints;
 
+        ob_end_clean();
         mysqli_close($dbConnection);
         http_response_code(200);
         return json_encode($userData); 
@@ -625,9 +629,10 @@ function getAllProductsByUser($userId){
 
     $productQuery = "SELECT i.image_path, 
                             p.*, 
-                            GROUP_CONCAT(DISTINCT p_fea.feature_type) as features FROM products p
+                            GROUP_CONCAT(DISTINCT p_fea.feature_type) as features, u.unit_abbr as unit_name FROM products p
                     LEFT JOIN images i on i.image_type = 2 AND i.entity_id = p.product_id
                     LEFT JOIN product_feature p_fea on p_fea.product_id = p.product_id
+                    LEFT JOIN units u ON u.unit_id = p.unit
                     WHERE p.producer_id = $userId
                     GROUP BY p.product_id;";
 

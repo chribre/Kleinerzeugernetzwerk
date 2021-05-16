@@ -111,6 +111,7 @@ function addSeller($sellerDetails){
             $sellerImageCount = count($sellerDetails->sellerImageNameArray);
             $sellerImageIdCount = count($sellerDetails->sellerImageIdArray);
 
+            ob_end_clean();
             if ($sellerImageCount > 0 || $sellerImageIdCount > 0){
                 try{
                     if (mysqli_multi_query($dbConnection, $imageQuery)){
@@ -142,6 +143,7 @@ function addSeller($sellerDetails){
         //        mysqli_rollback($dbConnection);
         var_dump($exception);
         throw $exception;
+        ob_end_clean();
         http_response_code(400);
         return false;
     }
@@ -177,6 +179,7 @@ function editSellingPoint($sellerDetails){
             $sellerImageCount = count($sellerDetails->sellerImageNameArray);
             $sellerImageIdCount = count($sellerDetails->sellerImageIdArray);
 
+            ob_end_clean();
             if ($sellerImageCount > 0 || $sellerImageIdCount > 0){
                 try{
                     if (mysqli_multi_query($dbConnection, $imageQuery)){
@@ -203,9 +206,11 @@ function editSellingPoint($sellerDetails){
         var_dump($exception);
         throw $exception;
         http_response_code(400);
+        ob_end_clean();
         return false;
     }
     http_response_code(400);
+    ob_end_clean();
     return false;
 }
 
@@ -332,6 +337,7 @@ function getAllSellingPoints($seller){
         }
     }
     http_response_code(200);
+    ob_end_clean();
     return json_encode($sellerDataArray, JSON_UNESCAPED_SLASHES);
 }
 
@@ -366,6 +372,7 @@ function getSellerDetails($seller){
     if ($sellerCount == 0){
         //        $productionPoitArray = [];
         http_response_code(400);
+        ob_end_clean();
         return false;
     }else{
         while($row = mysqli_fetch_assoc($getSellerQuery)) {
@@ -389,6 +396,7 @@ function getSellerDetails($seller){
 
 
             http_response_code(200);
+            ob_end_clean();
             return json_encode($sellerData, JSON_UNESCAPED_SLASHES);
         }
     }
@@ -397,6 +405,7 @@ function getSellerDetails($seller){
 
 
     http_response_code(400);
+    ob_end_clean();
     return false;
 }
 ?>

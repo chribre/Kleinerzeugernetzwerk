@@ -84,31 +84,37 @@
                     ?>
 
                 </div>
-                <?php
+                
+                    <?php
 
-                if (isset($_GET['menu'])) {
-                    switch ($_GET['menu']){
-                        case 'profile':
-                            include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/profile.php");
-                            break;
-                        case 'products':
-                            include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/products.php");
-                            break;
-                        case 'events':
-                            echo '<h2 class="ml-3">EVENTS</h2>';
-                            break;
-                        case 'services':
-                            echo '<h2 class="ml-3">SERVICES</h2>';
-                            break;
-                        default:
-                            echo '<h2 class="ml-3">PROFILE</h2>';
-                            break;
+                    if (isset($_GET['menu'])) {
+                        switch ($_GET['menu']){
+                            case 'profile':
+                                include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/profile.php");
+                                break;
+                            case 'products':
+                                include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/products.php");
+                                break;
+                            case 'events':
+                                echo '<h2 class="ml-3">EVENTS</h2>';
+                                break;
+                            case 'services':
+                                echo '<h2 class="ml-3">SERVICES</h2>';
+                                break;
+                            default:
+                                echo '<h2 class="ml-3">PROFILE</h2>';
+                                break;
+                        }
+
                     }
+                    ?>
 
-                }
-                ?>
-
+                
             </div>
+<!--
+            <div class="container" id="sideBarContent">
+            </div>
+-->
         </div>
 
         </body>

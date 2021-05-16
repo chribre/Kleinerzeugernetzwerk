@@ -21,8 +21,8 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sideBar
         setLoginOrProfileButton();
         const url = window.location.href;
         const params = parseURLParams(url);
-        const menu = params['menu'];
-        const data = params['data'];
+        const menu = params['menu'] ? params['menu'] : '';
+        const data = params['data'] ? params['data']: '';
 
         if (menu == 'profile' && data == 'personal'){
             getUserDetails();

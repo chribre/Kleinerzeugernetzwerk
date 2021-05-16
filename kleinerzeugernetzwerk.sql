@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2021 at 01:27 PM
+-- Generation Time: May 12, 2021 at 01:19 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -142,7 +142,8 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (119, 16, 'AW033301060744a030fcc79.54095542', '2021-04-12 13:24:19'),
 (120, 16, 'AW033301060744ddba26f86.79645090', '2021-04-12 13:40:43'),
 (121, 16, 'AW03330106076a58b339956.56306955', '2021-04-14 08:19:23'),
-(122, 16, 'AW03330106076d752501a70.93171268', '2021-04-14 11:51:46');
+(122, 16, 'AW03330106076d752501a70.93171268', '2021-04-14 11:51:46'),
+(123, 16, 'AW0333010608be2343fb6f8.30943861', '2021-04-30 10:55:48');
 
 -- --------------------------------------------------------
 
@@ -226,26 +227,27 @@ INSERT INTO `favourite_sellers` (`fav_seller_id`, `user_id`, `seller_id`, `is_fa
 CREATE TABLE `feature_type` (
   `feature_type_id` int(11) NOT NULL,
   `feature_name` varchar(60) NOT NULL,
-  `feature_description` text DEFAULT NULL
+  `feature_description` text DEFAULT NULL,
+  `image_path` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `feature_type`
 --
 
-INSERT INTO `feature_type` (`feature_type_id`, `feature_name`, `feature_description`) VALUES
-(1, 'Bio EU', 'EU bio label'),
-(2, 'Vegan', 'Vegan'),
-(3, 'Vegetarian', 'Vegetarian'),
-(4, 'Non-vegetarian', 'Non-vegetarian'),
-(8, 'Lactose Free', 'This product is lactose free'),
-(9, 'Bio', 'This product complies with organic guidelines'),
-(10, 'Bio DE', 'The German state organic seal'),
-(11, 'Gluten Free', 'This product doesn\'t contain gluten'),
-(12, 'Naturland', 'Certified farmers and processing companies produce organic food according to the Naturland guidelines'),
-(13, 'No Flavouring', 'No Flavouring'),
-(14, 'No Coloring', 'No Coloring'),
-(15, 'No Preservatives', 'No Preservatives');
+INSERT INTO `feature_type` (`feature_type_id`, `feature_name`, `feature_description`, `image_path`) VALUES
+(1, 'Bio EU', 'EU bio label', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/eu_bio.png'),
+(2, 'Vegan', 'Vegan', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/vegan.webp'),
+(3, 'Vegetarian', 'Vegetarian', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/vegetarisch.png'),
+(4, 'Non-vegetarian', 'Non-vegetarian', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/nonveg.jpg'),
+(8, 'Lactose Free', 'This product is lactose free', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/lactose-free.jpg'),
+(9, 'Bio', 'This product complies with organic guidelines', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/bio_non_certified.jpg'),
+(10, 'Bio DE', 'The German state organic seal', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/bio_de.png'),
+(11, 'Gluten Free', 'This product doesn\'t contain gluten', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/gluten_free.jpg'),
+(12, 'Naturland', 'Certified farmers and processing companies produce organic food according to the Naturland guidelines', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/naturland.png'),
+(13, 'No Flavouring', 'No Flavouring', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/no-artifical-flavors.png'),
+(14, 'No Coloring', 'No Coloring', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/no_artificial_color.png'),
+(15, 'No Preservatives', 'No Preservatives', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/no_preservatives.jpg');
 
 -- --------------------------------------------------------
 
@@ -681,7 +683,7 @@ CREATE TABLE `sellers` (
 --
 
 INSERT INTO `sellers` (`seller_id`, `producer_id`, `seller_name`, `seller_description`, `street`, `building_number`, `city`, `zip`, `seller_location`, `seller_email`, `seller_website`, `mobile`, `phone`, `is_blocked`, `is_mon_available`, `mon_open_time`, `mon_close_time`, `is_tue_available`, `tue_open_time`, `tue_close_time`, `is_wed_available`, `wed_open_time`, `wed_close_time`, `is_thu_available`, `thu_open_time`, `thu_close_time`, `is_fri_available`, `fri_open_time`, `fri_close_time`, `is_sat_available`, `sat_open_time`, `sat_close_time`, `is_sun_available`, `sun_open_time`, `sun_close_time`, `created_date`) VALUES
-(1, 16, 'Bio Store NB', 'Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes.', 'Josef-Alterdinger-Straße', 'undefined', 'Neubrandenburg', '17033', 0x0000000001010000003cb85adacbc74a4041205244a76d2a40, 'Bio Store NB', 'www.biostore.co.in', '017630123456', '01255123456', 0, 0, '08:30:00', '10:30:00', 0, '10:00:00', '11:30:00', 0, '12:30:00', '12:30:00', 0, '08:00:00', '09:30:00', 0, '08:30:00', '08:30:00', 0, '08:33:00', '08:30:00', 0, '08:30:00', 2008, '2021-03-11 15:34:26'),
+(1, 16, 'Bio Store NB', 'Description is the pattern of narrative development that aims to make vivid a place, object, character, or group. Description is one of four rhetorical modes, along with exposition, argumentation, and narration. In practice it would be difficult to write literature that drew on just one of the four basic modes.', 'Josef-Alterdinger-Straße', '25', 'Neubrandenburg', '17033', 0x0000000001010000003cb85adacbc74a4041205244a76d2a40, 'biostore@testmail.com', 'www.biostore.co.in', '017630123456', '01255123456', 0, 0, '08:30:00', '10:30:00', 0, '10:00:00', '11:30:00', 0, '12:30:00', '12:30:00', 0, '08:00:00', '09:30:00', 0, '08:30:00', '08:30:00', 0, '08:33:00', '08:30:00', 0, '08:30:00', 2008, '2021-03-11 15:34:26'),
 (3, 16, 'New Point', 'test', 'Goethestraße', '2', 'Neubrandenburg', '17033', 0x00000000010100000049d4a822e6c64a40467b95492c822a40, 'New Point', 'www.test.com', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 1, '10:00:00', '11:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 14:13:50'),
 (5, 16, 'point 3', 'test', 'Große Wollweberstraße', '34', 'Neubrandenburg', '17033', 0x000000000101000000c077676c17c74a40d548eb51c4822a40, 'point 3', 'www.test.com', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 14:21:00'),
 (6, 16, 'New Point 254', 'test', '2.Werderstraße', '5', 'Neubrandenburg', '17033', 0x000000000101000000ae931c8d07c74a4061fdba25a5812a40, 'New Point 254', 'www.test.com', '1234567890', '0000012345', 0, 1, '06:30:00', '08:30:00', 1, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 1, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-03-15 14:23:34'),
@@ -941,6 +943,7 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `category_fk` (`product_category`),
   ADD KEY `product_location_fk` (`production_location`);
+ALTER TABLE `products` ADD FULLTEXT KEY `product_name` (`product_name`,`product_description`);
 
 --
 -- Indexes for table `product_category`
@@ -998,7 +1001,7 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT for table `farm_land`

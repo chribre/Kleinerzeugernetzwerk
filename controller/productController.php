@@ -103,6 +103,7 @@ function fetchAllProducts($userId){
 
     }
 
+    ob_end_clean();
     mysqli_close($dbConnection);
     return json_encode($productData, JSON_UNESCAPED_SLASHES);
 }
@@ -145,6 +146,7 @@ function insertNewProduct($productDetails){
                 $productImageIdCount = count($productDetails->productImageIdArray);
 
                 $featureAndSellerQuery .= $imageQuery;
+                ob_end_clean();
                 if ($productFeaturesCount > 0 || $productFeatureIdCount > 0 || $productSellerCount > 0 || $productSellerIdCount > 0 || $productImageCount > 0 || $productImageIdCount > 0){
                     try{
                         if (mysqli_multi_query($dbConnection, $featureAndSellerQuery)){
@@ -267,6 +269,7 @@ function updateProducts($producerId, $productId, $productName, $productDesc, $pr
 
         //        mysqli_begin_transaction($dbConnection);
 
+        ob_end_clean();
         try{
             //            echo "<script>console.log('PHP: " . $updateProductQuery . "');</script>";
             if (mysqli_multi_query($dbConnection, $updateProductQuery)){
@@ -323,6 +326,7 @@ function getProduct($productId, $producerId){
 
         }
 
+        ob_end_clean();
         mysqli_close($dbConnection);
         return json_encode($productData, JSON_UNESCAPED_SLASHES);
 
@@ -351,6 +355,7 @@ function PrepareFeatureQuery($featureArray, $featureIdArray, $productId){
             $featureQuery .= "DELETE FROM product_feature WHERE id = $featureId;";
         }
     }
+    ob_end_clean();
     return $featureQuery;
 }
 
@@ -376,6 +381,7 @@ function PrepareProductSellerQuery($productSellerIdArray, $sellerIdArray, $produ
             $productSellerQuery .= "DELETE FROM product_sellers WHERE id = $productSellerId;";
         }
     }
+    ob_end_clean();
     return $productSellerQuery;
 }
 
@@ -422,6 +428,7 @@ function fetchAllProductsFromLocation($locationId){
         }
     }
 
+    ob_end_clean();
     mysqli_close($dbConnection);
     return json_encode($productData, JSON_UNESCAPED_SLASHES);
 }

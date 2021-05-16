@@ -53,8 +53,8 @@ class user{
         $this->imagePath = isset($userData['image_path']) ? escapeSQLString($userData['image_path']) : "";
         $this->imageId = isset($userData['image_id']) ? escapeSQLString($userData['image_id']) : 0;
         
-        
-        $profilePictures = $_FILES['files']['name'] ? $_FILES['files']['name']: [];
+        $files = $_FILES['files'] ? $_FILES['files'] : [];
+        $profilePictures = $files['name'] ? $files['name']: [];
         $profileImageId = isset($userData['profile_image_id']) && $userData['profile_image_id'] != null ? $userData['profile_image_id'] : [];
         $profileImageId = json_decode($profileImageId, JSON_UNESCAPED_SLASHES) ? json_decode($profileImageId, JSON_UNESCAPED_SLASHES) : [];
         

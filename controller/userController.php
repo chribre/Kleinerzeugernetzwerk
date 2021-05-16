@@ -168,6 +168,7 @@ function getUser($userId){
     if (mysqli_num_rows($userSelectQuery)){
         $row = mysqli_fetch_array($userSelectQuery);
         $userData = new user($row);
+        ob_end_clean();
         http_response_code(200); //OK
         return json_encode($userData, JSON_UNESCAPED_SLASHES);
     }
@@ -225,11 +226,13 @@ WHERE user_id = $userId;";
                 }
             }catch(mysqli_sql_exception $exception){
                 //                    mysqli_rollback($dbConnection);
+                ob_end_clean();
                 http_response_code(400);
                 return false;
             }
         }else{
             //                mysqli_commit($dbConnection);
+            ob_end_clean();
             http_response_code(200);
             return getUser($userId);
         }

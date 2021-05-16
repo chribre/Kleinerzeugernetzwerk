@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-
+    setLoginOrProfileButton();
     var url_string = window.location;
     var url = new URL(url_string);
     var sellerId = url.searchParams.get("seller");

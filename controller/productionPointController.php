@@ -94,6 +94,7 @@ function addProductionPoint($productionPoint){
         $productionPointImageCount = count($productionPoint->productionPointImageNameArray);
         $productionPointImageIdCount = count($productionPoint->productionPointImageIdArray);
 
+        ob_end_clean();
         if ($productionPointImageCount > 0 || $productionPointImageIdCount > 0){
             try{
                 if (mysqli_multi_query($dbConnection, $imageQuery)){
@@ -155,6 +156,7 @@ function editProductionPoint($productionPoint){
             $productionPointImageCount = count($productionPoint->productionPointImageNameArray);
             $productionPointImageIdCount = count($productionPoint->productionPointImageIdArray);
 
+            ob_end_clean();
             if ($productionPointImageCount > 0 || $productionPointImageIdCount > 0){
                 try{
                     if (mysqli_multi_query($dbConnection, $imageQuery)){
@@ -208,6 +210,7 @@ function getAllProductionPoints($productionPoint){
     $getProductionPointQuery = mysqli_query($dbConnection, $fetchProductionPointQuery);
     confirmQuery($getProductionPointQuery);
     $productCount = mysqli_num_rows($getProductionPointQuery);
+    ob_end_clean();
     if ($productCount == 0){
         $productionPoitArray = [];
         http_response_code(200);
@@ -232,6 +235,7 @@ function getAllProductionPoints($productionPoint){
         }
     }
     http_response_code(200);
+    ob_end_clean();
     return json_encode($productionPoitArray, JSON_UNESCAPED_SLASHES);
 }
 /*
@@ -258,6 +262,7 @@ function getProductionPointDetails($productionPoint){
     $getProductionPointQuery = mysqli_query($dbConnection, $fetchProductionPointQuery);
     confirmQuery($getProductionPointQuery);
     $productCount = mysqli_num_rows($getProductionPointQuery);
+    ob_end_clean();
     if ($productCount == 0){
         //        $productionPoitArray = [];
         http_response_code(400);
@@ -284,6 +289,7 @@ function getProductionPointDetails($productionPoint){
 
 
             http_response_code(200);
+            ob_end_clean();
             return json_encode($productionPointData, JSON_UNESCAPED_SLASHES);
         }
     }
@@ -303,6 +309,7 @@ function deleteProduct($productionPoint){
     $deleteProductQuery .= "WHERE farm_id = $productionPoint->farmId AND producer_id = $productionPoint->producerId;";
     $deleteProductResult = mysqli_query($dbConnection, $deleteProductQuery);
     confirmQuery($deleteProductResult);
+    ob_end_clean();
     if ($deleteProductResult == true){
         ob_end_clean();
         http_response_code(200);
