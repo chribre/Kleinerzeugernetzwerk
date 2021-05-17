@@ -4,6 +4,7 @@ $(document).ready(function(){
     var url = new URL(url_string);
     var searchTerm = url.searchParams.get("search_term");
     if (searchTerm != ''){
+        document.getElementById("searchTextBox").value = searchTerm;
         searchWithText(searchTerm, searchResultUI);
     }
 
@@ -26,7 +27,7 @@ function searchWithText(searchText, actionFunction){
         dataType: "json",
         success: function( data ) {
             console.log(data);
-            actionFunction(data);
+            actionFunction(data, searchText);
             //            const jsonData = JSON.parse(data) ? JSON.parse(data) : [];
             //            actionFunction(jsonData);
         },
@@ -38,8 +39,8 @@ function searchWithText(searchText, actionFunction){
 }
 
 
-function searchResultUI(searchResults){
-
+function searchResultUI(searchResults, searchText){
+    document.getElementById("search-result-title").innerHTML = `Search results for '${searchText}'`;
     var searchUI = "";
     if (searchResults != null){
         const products = searchResults.productDetails ? searchResults.productDetails : [];
@@ -64,7 +65,7 @@ function searchResultUI(searchResults){
                 const productImage = productDeatils.product_image ? productDeatils.product_image : DEFAULT_PRODUCT_IMAGE;
                 
                 
-                searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4">
+                searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="goToProductDetailsPage(${productId})">
                 <img class="rounded my-auto" src="${productImage}"  width="100px" height="100px"alt="">
                 <div class="flex-fill pl-2 my-auto">
                     <div class="row m-auto justify-content-between">
@@ -79,7 +80,7 @@ function searchResultUI(searchResults){
                             <p class="my-auto ml-2 addr-line-height">${street} ${houseNum}<br>${zip} ${city}</p>
                         </div>
                         <div class="my-auto">
-                            <div class="row rounded-pill border border-secondary p-1 mx-auto">
+                            <div class="row rounded-pill border border-secondary p-1 mx-auto" onclick="gotoProducerDetails(${producerId})">
                                 <img class="rounded-circle" src="${producerImage}" width="32px" height="32px" alt="">
                                 <p class="my-auto ml-2">${firstName} ${lastName}</p>
                             </div>
@@ -105,6 +106,7 @@ function searchResultUI(searchResults){
         productionPoints.forEach(function(productionPointDetails, index){
             if (productionPointDetails != null){
                 const ppID = productionPointDetails.farm_id ? productionPointDetails.farm_id : 0;
+                const producerId = productionPointDetails.producer_id ? productionPointDetails.producer_id : 0;
                 const ppName = productionPointDetails.farm_name ? productionPointDetails.farm_name : '';
                 const ppDesc = productionPointDetails.farm_desc ? productionPointDetails.farm_desc : '';
 
@@ -125,7 +127,7 @@ function searchResultUI(searchResults){
                 const producerImage = productionPointDetails.user_image_path ? productionPointDetails.user_image_path : DEFAULT_USER_IMAGE;
                 
                 
-                searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4">
+                searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="goToProductionPointDeatailsScreen(${ppID})">
                 <img class="rounded my-auto" src="${ppImagePath}"  width="100px" height="100px"alt="">
                 <div class="flex-fill pl-2 my-auto">
                     <div class="row m-auto justify-content-between">
@@ -139,7 +141,7 @@ function searchResultUI(searchResults){
                             <p class="my-auto ml-2 addr-line-height">${ppStreet} ${ppBuildingNum}<br>${ppZip} ${ppCity}</p>
                         </div>
                         <div class="my-auto">
-                            <div class="row rounded-pill border border-secondary p-1 mx-auto">
+                            <div class="row rounded-pill border border-secondary p-1 mx-auto"  onclick="gotoProducerDetails(${producerId})">
                                 <img class="rounded-circle" src="${producerImage}" width="32px" height="32px" alt="">
                                 <p class="my-auto ml-2">${firstName} ${lastName}</p>
                             </div>
@@ -175,7 +177,7 @@ function searchResultUI(searchResults){
             const sellerAddress = sStreet + ' ' + sBuildingNum + ', ' + sCity + ' ' + sZip;
 
 
-            searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4">
+            searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="gotoSellerDetailsScreen(${sellerId})">
                 <img class="rounded my-auto" src="${sImagePath}"  width="100px" height="100px"alt="">
                 <div class="flex-fill pl-2 my-auto">
                     <div class="row m-auto justify-content-between">
@@ -256,7 +258,7 @@ function searchResultUI(searchResults){
             const producerImage = producerDetails.image_path ? producerDetails.image_path : DEFAULT_USER_IMAGE;
 
 
-            searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4">
+            searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="gotoProducerDetails(${producerId})">
                 <img class="rounded my-auto" src="${producerImage}"  width="100px" height="100px"alt="">
                 <div class="flex-fill pl-2 my-auto">
                     <div class="row m-auto justify-content-between">

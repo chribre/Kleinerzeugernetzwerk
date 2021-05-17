@@ -17,6 +17,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 
 ?>
 <script type="text/javascript" src="/kleinerzeugernetzwerk/js/search/search.js"></script>
+<script type="text/javascript" src="/kleinerzeugernetzwerk/js/custom/navigation.js"></script>
 <style>
     .desc-single-line{
         display: block;
@@ -91,7 +92,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
     </aside>
 
     <div class="mt-3 flex-fill">
-        <h3>Search Results for 'Test'</h3>
+        <h3 id="search-result-title">Search Results for 'Test'</h3>
 
         <div class="container" id="searchResultUI">
 

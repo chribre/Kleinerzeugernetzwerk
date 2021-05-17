@@ -14,6 +14,8 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 ?>
 
 
+<link rel="stylesheet" type="text/css" href="/kleinerzeugernetzwerk/css/custom/fab.css" />
+
 <link rel="stylesheet" type="text/css" href="<?php echo $leaflet_sidebar_css ?>" />
 <script type="text/javascript" src="/kleinerzeugernetzwerk/js/production_point_api/production_point_api.js"></script>
 <script type="text/javascript" src="/kleinerzeugernetzwerk/js/seller_web_services/seller_details.js"></script>
@@ -81,6 +83,46 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 <div id="mapid" class="full-height"></div>
 
+<div class="fab-container" id="category-menu">
+    <div class="fab fab-icon-holder">
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+        </svg>
+        <!--                        <i class="bi bi-three-dots-vertical"></i>-->
+        <!--        <img class="category-icon" width="30px" height="30px" src="https://img-premium.flaticon.com/png/512/847/847581.png?token=exp=1621266229~hmac=6a680992b11ab1c9b1631dbde5800e7c" alt="">-->
+    </div>
+
+    <ul class="fab-options" id="category-options">
+        <li>
+            <div class="fab-icon-holder">
+                <img class="icon-image" src="http://localhost/kleinerzeugernetzwerk_uploads/others/categories/fruit.png" alt="">
+            </div>
+            <span class="fab-label">Documentation</span>
+        </li>
+        <li>
+
+            <div class="fab-icon-holder">
+                <i class="fas fa-video"></i>
+            </div>
+            <span class="fab-label">Video Tutorials</span>
+        </li>
+        <li>
+
+            <div class="fab-icon-holder">
+                <i class="fas fa-comments"></i>
+            </div>
+            <span class="fab-label">Live Chat</span>
+        </li>
+        <li>
+
+            <div class="fab-icon-holder">
+                <i class="fas fa-comment-alt"></i>
+            </div>
+            <span class="fab-label">Feedback</span>
+        </li>
+    </ul>
+</div>
 
 
 <!--
@@ -341,10 +383,21 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 
 
+    function filterMapByCategory(category){
+        cancelBubbleEvent()
+        window.location = "/kleinerzeugernetzwerk/index.php?category="+category;
+    }
+
+
 
 
 
     $(document).ready(function(){
+        var categoryId = 0;
+        var url_string = window.location;
+        var url = new URL(url_string);
+        categoryId = url.searchParams.get("category") ? url.searchParams.get("category") : 0;
+
         $.ajax({
             url: "/kleinerzeugernetzwerk/controller/details.php",    //the page containing php script
             type: "POST",
@@ -357,6 +410,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
             complete: function(){
                 $("#overlay").fadeOut(300);
             },
+            data: { category: categoryId },
             success:function(result){
                 console.log(result)
                 products = {

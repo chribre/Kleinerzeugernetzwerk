@@ -60,6 +60,7 @@ fetchFarmLandData(); //Optional call, this function call has to be deleted becua
                 console.log(data)
                 const cacheJSON = JSON.parse(data);
                 const productCategories = cacheJSON['product_category'] != null ? cacheJSON['product_category'] : []
+                setCategoryFilter(productCategories);
                 const productFeatures = cacheJSON['product_feature'] != null ? cacheJSON['product_feature'] : []
                 const productUnits = cacheJSON['product_unit'] != null ? cacheJSON['product_unit'] : []
                 const productionPoint = cacheJSON['production_point'] != null ? cacheJSON['production_point'] : []
@@ -89,7 +90,28 @@ require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ma
 
 ?>
 
+<script>
 
+    function setCategoryFilter(categories){
+        var categoryOptionsUI = '';
+        if (categories){
+            categories.forEach(function (category, i) {
+                const categoryId = category.category_id ? category.category_id : 0;
+                const categoryName = category.category_name ? category.category_name : '';
+                const categoryImage = category.image_name ? category.image_name : '';
+
+                categoryOptionsUI += `<li onclick="filterMapByCategory(${categoryId})">
+<div class="fab-icon-holder">
+<img class="icon-image fab-icon-holder-img" src="${getServerRootAddress()}/kleinerzeugernetzwerk_uploads/others/categories/${categoryImage}" alt="">
+    </div>
+<span class="fab-label">${categoryName}</span>
+    </li>`;
+
+            });
+        }
+        document.getElementById('category-options').innerHTML = categoryOptionsUI;
+    }
+</script>
 <?php
 //Footer Html containig jquery scripts and other dependent bootstrap cdns
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/footer.php";

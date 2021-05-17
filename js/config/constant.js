@@ -1,5 +1,5 @@
 function getServerRootAddress(){
-    const localServer = 'http://localhost/kleinerzeugernetzwerk';
+    const localServer = 'http://localhost';
     const awsServer = 'http://ec2-18-184-142-200.eu-central-1.compute.amazonaws.com/kleinerzeugernetzwerk'
         
     return localServer;

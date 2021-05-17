@@ -105,7 +105,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                         <div class="input-group-prepend">
                             <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i class="fa fa-search"></i></button>
                         </div>
-                        <input type="search" placeholder="Search" aria-describedby="button-addon2" class="form-control border-0 bg-white rounded-pill align-middle">
+                        <input id="searchTextBox" type="search" placeholder="Search" aria-describedby="button-addon2" class="form-control border-0 bg-white rounded-pill align-middle">
                     </div>
                 </div>
 
@@ -139,6 +139,17 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
         //            setLoginOrProfileButton();
         //        };
 
+
+
+        $("#searchTextBox").keyup(function(event) {
+            if (event.keyCode === 13) {
+                const searchText = document.getElementById("searchTextBox").value;
+                if (searchText != ''){
+                    gotoSearchResultScreen(searchText)
+                }
+            }
+        });
+
         function setLanguage(language){
             if (language){
                 localStorage.setItem("language", language); 
@@ -165,9 +176,9 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                 type: "POST",
                 url: "/kleinerzeugernetzwerk/assets/components/languagePreference.php",
                 data: { language: language },
-//                dataType: "json",
-//                contentType: "application/json",
-//                cache: false,
+                //                dataType: "json",
+                //                contentType: "application/json",
+                //                cache: false,
                 success: function( data ) {
                     const language = JSON.parse(data);
                     const languagePref = language.language;

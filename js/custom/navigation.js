@@ -21,6 +21,12 @@ function gotoSellerDetailsScreen(sellerId){
 }
 
 
+function gotoSearchResultScreen(searchText){
+    cancelBubbleEvent()
+    window.location = "/kleinerzeugernetzwerk/src/search.php?search_term="+searchText;
+}
+
+
 function cancelBubbleEvent(){
     if (!e) var e = window.event;
     e.cancelBubble = true;

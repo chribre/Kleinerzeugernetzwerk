@@ -460,8 +460,20 @@ function fetchSellerDetailFromSellerId($sellerId){
 
 
 function getProductionPointAndSellerDataToMap(){
-
     $data = [];
+
+    $category = $_POST['category'] ? $_POST['category'] : 0;
+    if ($category != 0){
+        $productionPointData_cat = getAllProductionPointsBasedOnCategory($category);
+        $sellerData_cat = getAllSellingPointsByCategory($category);
+
+        $data['productionPoints'] = $productionPointData_cat;
+        $data['sellers'] = $sellerData_cat;
+
+        http_response_code(200);
+        return json_encode($data);
+    }
+
     $productionPointData = getAllProductionPoints();
     $sellerData = getAllSellingPoints();
 
@@ -471,6 +483,52 @@ function getProductionPointAndSellerDataToMap(){
     http_response_code(200);
     return json_encode($data);
 }
+
+
+
+function getAllSellingPointsByCategory($category){
+    ob_start();
+    global $dbConnection;
+
+    $sellerQuery = "SELECT s.seller_id, 
+                            s.producer_id, 
+                            s.seller_name, 
+                            s.seller_description, 
+                            s.street, 
+                            s.building_number, 
+                            s.city, s.zip, 
+                            ST_X(s.seller_location) as latitude, 
+                            ST_Y(s.seller_location) as longitude, 
+                            s.seller_email, 
+                            s.seller_website, 
+                            s.mobile, 
+                            s.phone, 
+                            s.is_blocked, 
+                            s.is_mon_available, s.mon_open_time, s.mon_close_time, 
+                            s.is_tue_available, s.tue_open_time, s.tue_close_time, 
+                            s.is_wed_available, s.wed_open_time, s.wed_close_time, 
+                            s.is_thu_available, s.thu_open_time, s.thu_close_time, 
+                            s.is_fri_available, s.fri_open_time, s.fri_close_time, 
+                            s.is_sat_available, s.sat_open_time, s.sat_close_time, 
+                            s.is_sun_available, s.sun_open_time, s.sun_close_time, 
+
+                            i.image_path, 
+                            GROUP_CONCAT(distinct p.production_location) as production_points from sellers s
+                        LEFT JOIN images i on i.entity_id = s.seller_id and i.image_type = 4
+                        LEFT JOIN product_sellers ps on ps.seller_id = s.seller_id
+                        LEFT JOIN products p on ps.product_id = p.product_id
+                        WHERE p.product_category = $category
+                        GROUP BY s.seller_id;";
+
+    $sellerData = [];
+    if ($result = mysqli_query($dbConnection, $sellerQuery)) {
+        while ($row = mysqli_fetch_all($result, MYSQLI_ASSOC)) {
+            $sellerData = $row;
+        }
+    }
+    return $sellerData;
+}
+
 
 function getAllSellingPoints(){
     ob_start();
@@ -545,6 +603,42 @@ function getAllProductionPoints(){
     }
     return $productionPointData;
 }
+
+
+
+function getAllProductionPointsBasedOnCategory($category){
+    ob_start();
+    global $dbConnection;
+
+    $productionPointQuery = "SELECT f.farm_id, 
+                                    f.producer_id, 
+                                    f.farm_name, 
+                                    f.farm_desc, 
+                                    f.farm_address, 
+                                    f.street, 
+                                    f.house_number, 
+                                    f.city, 
+                                    f.zip, 
+                                    ST_X(f.farm_location) as latitude, 
+                                    ST_Y(f.farm_location) as longitude, 
+                                    f.farm_area, 
+                                    i.image_path, 
+                                    GROUP_CONCAT(DISTINCT ps.seller_id) AS seller FROM farm_land f
+                            LEFT JOIN images i on i.entity_id = f.farm_id and i.image_type = 3
+                            LEFT JOIN products p on f.farm_id = p.production_location
+                            LEFT JOIN product_sellers ps on ps.product_id = p.product_id
+                            WHERE p.product_category = $category
+                            GROUP BY f.farm_id;";
+
+    $productionPointData = [];
+    if ($result = mysqli_query($dbConnection, $productionPointQuery)) {
+        while ($row = mysqli_fetch_all($result, MYSQLI_ASSOC)) {
+            $productionPointData = $row;
+        }
+    }
+    return $productionPointData;
+}
+
 
 
 function getUserData($userId){

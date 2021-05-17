@@ -68,7 +68,7 @@ function searchProducts($searchText){
     ob_start();
     global $dbConnection;
 
-    $productSearchQuery = "SELECT p.product_id, p.product_name, p.product_description, product_category, p.price_per_unit, p.quantity_of_price, p.unit, uni.unit_abbr,
+    $productSearchQuery = "SELECT p.product_id, p.producer_id, p.product_name, p.product_description, product_category, p.price_per_unit, p.quantity_of_price, p.unit, uni.unit_abbr,
 i.image_id, i.image_path as product_image,
 pc.category_name,
 f.street, f.house_number, f.city, f.zip,
@@ -77,9 +77,9 @@ GROUP_CONCAT(DISTINCT pf.feature_type) as features
 FROM products p
 LEFT JOIN product_category pc on pc.category_id = p.product_category
 LEFT JOIN images i ON i.entity_id = p.product_id and i.image_type = 2
-LEFT JOIN images img ON img.entity_id = p.producer_id and i.image_type = 1
 LEFT JOIN farm_land f ON f.farm_id = p.production_location
 LEFT JOIN user u on u.user_id = p.producer_id
+LEFT JOIN images img ON img.entity_id = u.user_id and img.image_type = 1
 LEFT JOIN units uni on uni.unit_id = p.unit
 LEFT JOIN product_feature pf on pf.product_id = p.product_id
 LEFT JOIN feature_type ft on ft.feature_type_id = pf.feature_type
