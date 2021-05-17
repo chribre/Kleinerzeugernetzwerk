@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 12, 2021 at 01:19 PM
+-- Generation Time: May 17, 2021 at 06:20 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -467,26 +467,34 @@ INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_de
 CREATE TABLE `product_category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(60) NOT NULL,
-  `category_description` text DEFAULT NULL
+  `category_description` text DEFAULT NULL,
+  `image_name` text NOT NULL,
+  `image_path` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `product_category`
 --
 
-INSERT INTO `product_category` (`category_id`, `category_name`, `category_description`) VALUES
-(1, 'Vegitables', 'Vegitables'),
-(2, 'Fruits', 'Fruits'),
-(3, 'Dairy Products', 'Dairy Products'),
-(4, 'Honey', 'Honey'),
-(5, 'Oil', 'Oil'),
-(6, 'Egg', 'Egg'),
-(7, 'Meat', 'Meat'),
-(8, 'Seafood', 'Seafood'),
-(9, 'Desserts', 'Desserts'),
-(10, 'Cereals', 'Cereals'),
-(11, 'Baked goods', 'Baked goods'),
-(12, 'Dried food products', 'Dried foods');
+INSERT INTO `product_category` (`category_id`, `category_name`, `category_description`, `image_name`, `image_path`) VALUES
+(1, 'Vegetable', 'Vegetable', 'vegetables.png', ''),
+(2, 'Vegetable Product', 'Vegetable Product', 'vegetable_product.png', ''),
+(3, 'Mushrooms', 'Mushrooms', 'mushrooms.png', ''),
+(4, 'Herbs, Tea and Spices', 'Herbs, Tea and Spices', 'herbs_spices.png', ''),
+(5, 'Fruit', 'Fruit', 'fruit.png', ''),
+(6, 'Fruit Products', 'Fruit Products', 'fruit_products.png', ''),
+(7, 'Nuts', 'Nuts', 'nuts.png', ''),
+(8, 'Honey', 'honey', 'honey.png', ''),
+(9, 'Juice and Beverages', 'juice and beverages', 'beverages.png', ''),
+(10, 'Corn', 'corn', 'corn.png', ''),
+(11, 'Potatoes & Root Crops', 'Potatoes & Root Crops', 'potatoes.png', ''),
+(12, 'Bread and Baked Products', 'Bread and Baked Products', 'baked_products.png', ''),
+(13, 'Sweets', 'sweets', 'sweets.png', ''),
+(14, 'Confectionery Products', 'confectionery products', 'confectionery_products.png', ''),
+(15, 'Milk, Cheese & Other Dairy Products', 'milk, cheese & other dairy products', 'milk.png', ''),
+(16, 'Eggs', 'eggs', 'eggs.png', ''),
+(17, 'Meat and Sausage Products', 'meat and sausage products', 'meat.png', ''),
+(18, 'Fish, Shellfish & Seafood', 'fish, shellfish & seafood', 'fish.png', '');
 
 -- --------------------------------------------------------
 
@@ -908,6 +916,7 @@ ALTER TABLE `access_token`
 ALTER TABLE `farm_land`
   ADD PRIMARY KEY (`farm_id`),
   ADD KEY `user_to_farm_land` (`producer_id`);
+ALTER TABLE `farm_land` ADD FULLTEXT KEY `farm_name` (`farm_name`,`farm_desc`,`street`,`house_number`,`city`,`zip`);
 
 --
 -- Indexes for table `favourite_sellers`
@@ -922,6 +931,7 @@ ALTER TABLE `favourite_sellers`
 --
 ALTER TABLE `feature_type`
   ADD PRIMARY KEY (`feature_type_id`);
+ALTER TABLE `feature_type` ADD FULLTEXT KEY `feature_name` (`feature_name`);
 
 --
 -- Indexes for table `images`
@@ -950,6 +960,7 @@ ALTER TABLE `products` ADD FULLTEXT KEY `product_name` (`product_name`,`product_
 --
 ALTER TABLE `product_category`
   ADD PRIMARY KEY (`category_id`);
+ALTER TABLE `product_category` ADD FULLTEXT KEY `category_name` (`category_name`);
 
 --
 -- Indexes for table `product_feature`
@@ -973,6 +984,8 @@ ALTER TABLE `product_sellers`
 ALTER TABLE `sellers`
   ADD PRIMARY KEY (`seller_id`),
   ADD KEY `user_to_seller` (`producer_id`);
+ALTER TABLE `sellers` ADD FULLTEXT KEY `seller_name` (`seller_name`,`seller_description`,`seller_email`,`street`,`building_number`,`city`,`zip`);
+ALTER TABLE `sellers` ADD FULLTEXT KEY `seller_name_2` (`seller_name`,`seller_description`,`seller_email`,`seller_website`,`street`,`building_number`,`city`,`zip`);
 
 --
 -- Indexes for table `units`
@@ -985,6 +998,9 @@ ALTER TABLE `units`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`user_id`);
+ALTER TABLE `user` ADD FULLTEXT KEY `first_name` (`first_name`,`last_name`,`street`,`house_number`,`city`,`zip`,`email`,`description`);
+ALTER TABLE `user` ADD FULLTEXT KEY `first_name_2` (`first_name`,`last_name`,`street`,`house_number`,`city`,`zip`,`email`,`description`);
+ALTER TABLE `user` ADD FULLTEXT KEY `first_name_3` (`first_name`,`last_name`,`description`,`street`,`house_number`,`city`,`zip`);
 
 --
 -- Indexes for table `user_credential`
@@ -1037,7 +1053,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `product_category`
 --
 ALTER TABLE `product_category`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `product_feature`
