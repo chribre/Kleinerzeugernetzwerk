@@ -27,6 +27,7 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 <div class="">   
     <div class="text-center m-3 ">
         
+<!--
 <div class="btn-group">
 
 <a href='dashboard.php?menu=profile&data=personal' class="btn btn-secondary <?php if (isset($_GET['data']) && $_GET['data'] == 'personal'){echo "active";}?>" id="segmentButtonPersonal">Personal Details</a>
@@ -36,6 +37,7 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 <a href='dashboard.php?menu=profile&data=seller' class="btn btn-secondary <?php if (isset($_GET['data']) && $_GET['data'] == 'seller'){echo "active";}?>" id="segmentButtonSeller">Selling Point</a>
 
 </div>
+-->
 
 <!--
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">

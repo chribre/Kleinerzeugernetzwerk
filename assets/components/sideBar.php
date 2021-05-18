@@ -18,6 +18,12 @@
                 <li>
                     <a href='dashboard.php?menu=products'><span class="fa fa-shopping-basket"></span> Products</a>
                 </li>
+                <li class="active">
+                    <a href='dashboard.php?menu=profile&data=productionPoint'><span class="fa fa-cubes"></span> Production Point</a>
+                </li>
+                <li class="active">
+                    <a href='dashboard.php?menu=profile&data=seller'><span class="fa fa-shopping-cart"></span> Seller</a>
+                </li>
                 <li>
                     <a href='dashboard.php?menu=events'><span class="fa fa-calendar"></span> Events</a>
                 </li>
@@ -51,13 +57,17 @@
                     if (isset($_GET['menu'])) {
                         switch ($_GET['menu']){
                             case 'profile':
-                                $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PROFILE</text></div>';
+                                $profileHead = '';
+                                
                                 if (isset($_GET['data'])){
                                     if ($_GET['data'] == 'personal'){
+                                        $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PROFILE</text></div>';
                                         $profileHead = $profileHead . '<a class="btn btn-success" href="/kleinerzeugernetzwerk/src/editProfile.php" ><i class="edit icon"></i>Edit profile</a>';
                                     }elseif ($_GET['data'] == 'productionPoint'){
+                                        $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PRODUCTION POINTS</text></div>';
                                         $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddProductionPointModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Farm Land</button>';
                                     }elseif ($_GET['data'] == 'seller'){
+                                        $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">SELLERS</text></div>';
                                         $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddSellarModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Selling Point</button>';
 
 

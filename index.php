@@ -83,6 +83,8 @@ fetchFarmLandData(); //Optional call, this function call has to be deleted becua
     }
 </script>
 
+
+
 <?php
 //MAP to show products and point features which is implemented using leafletJs and mapBox. A token should generate from mapbox and use inorder to display the map here.
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/map.php";

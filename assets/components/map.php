@@ -81,8 +81,32 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 <script src="<?php echo $leaflet_sidebar_js ?>"></script>
 
 
-<div id="mapid" class="full-height"></div>
 
+
+<!-- No Data Modal -->
+<div class="modal fade" id="no-map-data-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="no-data-title">No Data Available!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="no-data-content">
+                No products available under the category Corn
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="mapid" class="full-height"></div>
 <div class="fab-container" id="category-menu">
     <div class="fab fab-icon-holder">
 
@@ -384,11 +408,30 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 
     function filterMapByCategory(category){
-        cancelBubbleEvent()
+        cancelBubbleEvent();
         window.location = "/kleinerzeugernetzwerk/index.php?category="+category;
     }
 
 
+    function getCategoryName(categoryId){
+        const categories = localStorage.getItem("productCategories");
+        const categoryJson = JSON.parse(categories);
+
+        var category = categoryJson.filter(function(obj) {
+            return obj.category_id == categoryId;
+        });
+
+
+        if (category){
+            if (category.length != 0){
+                const categoryObj = category[0];
+                return categoryObj.category_name ? categoryObj.category_name : '';
+            }
+            
+        }
+        
+        return '';
+    }
 
 
 
@@ -397,6 +440,8 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         var url_string = window.location;
         var url = new URL(url_string);
         categoryId = url.searchParams.get("category") ? url.searchParams.get("category") : 0;
+
+        categoryName = getCategoryName(categoryId);
 
         $.ajax({
             url: "/kleinerzeugernetzwerk/controller/details.php",    //the page containing php script
@@ -420,11 +465,17 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
                 const jsonData = JSON.parse(result) ? JSON.parse(result) : [];
                 const sellerData = jsonData.sellers ? jsonData.sellers : [];
                 const productionPointData = jsonData.productionPoints ? jsonData.productionPoints : [];
-                if (productionPointData.length > 0){
+                const ppCount = productionPointData.length;
+                const sellerCount = sellerData.length;
+                if (ppCount > 0){
                     addProductionPointsToMap(productionPointData);
                 }
-                if (sellerData.length > 0){
+                if (sellerCount > 0){
                     addSellersToMap(sellerData);
+                }
+                if (ppCount == 0 && sellerCount == 0){
+                    document.getElementById('no-data-content').innerHTML = `No products available under the category '${categoryName}'`
+                    $('#no-map-data-modal').modal('toggle')
                 }
             },
             error: function (request, status, error) {
@@ -435,6 +486,9 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     });
 
 
+    $('#no-map-data-modal').on('hide.bs.modal', function (e) {
+        filterMapByCategory(0)
+    })
 
     function addProductionPointsToMap(productionPoints){
         $.each(productionPoints,function(i,productionPoint){
