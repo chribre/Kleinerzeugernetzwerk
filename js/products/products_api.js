@@ -61,16 +61,17 @@ function showProductInDetail(productData){
 
             if (productImages.length == 0){
                 productDetailsUI += `<div class="carousel-item active">
-<img class="d-block w-100" src="${DEFAULT_PRODUCT_IMAGE}" alt="First slide" style="width: 100%; height: 350px; object-fit: cover;" onerror="this.src=${DEFAULT_PRODUCT_IMAGE}">
+<img class="d-block w-100" src="${getFilePath(2, DEFAULT_PRODUCT_IMAGE)}" alt="First slide" style="width: 100%; height: 350px; object-fit: cover;" onerror="this.src=${getFilePath(2, DEFAULT_PRODUCT_IMAGE)}">
 </div>`;
             }
 
             productImages.forEach(function(productImage, index){
                 if (productImage != null){
-                    const imagePath = productImage.image_path ? productImage.image_path : DEFAULT_PRODUCT_IMAGE;
+                    const imageName = productImage.image_name ? productImage.image_name : DEFAULT_PRODUCT_IMAGE;
+                    const imagePath = getFilePath(2, imageName);
                     if (index == 0){
                         productDetailsUI += `<div class="carousel-item active">
-<img class="d-block w-100" src="${imagePath}" alt="First slide" style="width: 100%; height: 350px; object-fit: cover;" onerror="this.src=${DEFAULT_PRODUCT_IMAGE}">
+<img class="d-block w-100" src="${imagePath}" alt="First slide" style="width: 100%; height: 350px; object-fit: cover;" onerror="this.src=${imagePath}">
 </div>`;
                     }else{
                         productDetailsUI += `<div class="carousel-item">
@@ -157,7 +158,8 @@ function showProductInDetail(productData){
                     const sBuildingNum = sellerObj.building_number ? sellerObj.building_number : '';
                     const sCity = sellerObj.city ? sellerObj.city : '';
                     const sZip = sellerObj.zip ? sellerObj.zip : '';
-                    const sImagePath = sellerObj.image_path ? sellerObj.image_path : DEFAULT_SELLER_IMAGE;
+                    const sImageName = sellerObj.image_name ? sellerObj.image_name : DEFAULT_SELLER_IMAGE;
+                    const sImagePath = getFilePath(4, sImageName);
 
                     const sellerAddress = sStreet + ' ' + sBuildingNum + ', ' + sCity + ' ' + sZip;
 
@@ -241,7 +243,8 @@ function showProductInDetail(productData){
             const ppZip = productionPointDetails.zip ? productionPointDetails.zip : '';
             const ppAddress = ppStreet + ' ' + ppBuildingNum + ', ' + ppCity + ' ' + ppZip;
 
-            const ppImagePath = productionPointDetails.image_path ? productionPointDetails.image_path : DEFAULT_PRODUCTION_POINT_IMAGE;
+            const ppImageName = productionPointDetails.image_name ? productionPointDetails.image_name : DEFAULT_PRODUCTION_POINT_IMAGE;
+            const ppImagePath = getFilePath(3, ppImageName);
 
 
             const producerDetails = productData.userData ? productData.userData : [];
@@ -256,7 +259,8 @@ function showProductInDetail(productData){
             const userZip = producerDetails.zip ? producerDetails.zip : '';
             const userCity = producerDetails.city ? producerDetails.city : '';
 
-            const producerImage = producerDetails.image_path ? producerDetails.image_path : DEFAULT_USER_IMAGE;
+            const producerImageName = producerDetails.image_name ? producerDetails.image_name : DEFAULT_USER_IMAGE;
+            const producerImage = getFilePath(1, producerImageName);
             productDetailsUI += `<div class="row justify-content-center my-5 cursor-pointer" onclick="goToProductionPointDeatailsScreen(${ppID})">
 <div class="col-md-6 mr-0">
 <img class="d-block" src="${ppImagePath}" alt="Third slide" style="height: 350px; object-fit: cover;">

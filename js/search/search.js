@@ -61,8 +61,10 @@ function searchResultUI(searchResults, searchText){
                 const producerId = productDeatils.producer_id ? productDeatils.producer_id : 0;
                 const firstName = productDeatils.first_name ? productDeatils.first_name : '';
                 const lastName = productDeatils.last_name ? productDeatils.last_name : '';
-                const producerImage = productDeatils.user_image ? productDeatils.user_image : DEFAULT_USER_IMAGE;
-                const productImage = productDeatils.product_image ? productDeatils.product_image : DEFAULT_PRODUCT_IMAGE;
+                const producerImageName = productDeatils.user_image_name ? productDeatils.user_image_name : DEFAULT_USER_IMAGE;
+                const producerImage = getFilePath(1, producerImageName);
+                const productImageName = productDeatils.product_image_name ? productDeatils.product_image_name : DEFAULT_PRODUCT_IMAGE;
+                const productImage = getFilePath(2, productImageName);
                 
                 
                 searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="goToProductDetailsPage(${productId})">
@@ -116,7 +118,8 @@ function searchResultUI(searchResults, searchText){
                 const ppZip = productionPointDetails.zip ? productionPointDetails.zip : '';
                 const ppAddress = ppStreet + ' ' + ppBuildingNum + ', ' + ppCity + ' ' + ppZip;
 
-                const ppImagePath = productionPointDetails.image_path ? productionPointDetails.image_path : DEFAULT_PRODUCTION_POINT_IMAGE;
+                const ppImageName = productionPointDetails.image_name ? productionPointDetails.image_name : DEFAULT_PRODUCTION_POINT_IMAGE;
+                const ppImagePath = getFilePath(3, ppImageName);
 
 
                 const firstName = productionPointDetails.first_name ? productionPointDetails.first_name : '';
@@ -124,7 +127,8 @@ function searchResultUI(searchResults, searchText){
                 const uPhone = productionPointDetails.phone ? productionPointDetails.phone : '';
                 const uEmail = productionPointDetails.email ? productionPointDetails.email : '';
 
-                const producerImage = productionPointDetails.user_image_path ? productionPointDetails.user_image_path : DEFAULT_USER_IMAGE;
+                const producerImageName = productionPointDetails.user_image_name ? productionPointDetails.user_image_name : DEFAULT_USER_IMAGE;
+                const producerImage = getFilePath(1, producerImageName);
                 
                 
                 searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="goToProductionPointDeatailsScreen(${ppID})">
@@ -169,7 +173,8 @@ function searchResultUI(searchResults, searchText){
             const sBuildingNum = seller.building_number ? seller.building_number : '';
             const sCity = seller.city ? seller.city : '';
             const sZip = seller.zip ? seller.zip : '';
-            const sImagePath = seller.image_path ? seller.image_path : DEFAULT_SELLER_IMAGE;
+            const sImageName = seller.image_name ? seller.image_name : DEFAULT_SELLER_IMAGE;
+            const sImagePath = getFilePath(4, sImageName);
 
             const sPhone = seller.phone ? seller.phone : '';
             const sEmail = seller.seller_email ? seller.seller_email : '';
@@ -255,7 +260,8 @@ function searchResultUI(searchResults, searchText){
 
             const description = producerDetails.description ? producerDetails.description : '';
 
-            const producerImage = producerDetails.image_path ? producerDetails.image_path : DEFAULT_USER_IMAGE;
+            const producerImageName = producerDetails.image_name ? producerDetails.image_name : DEFAULT_USER_IMAGE;
+            const producerImage = getFilePath(1, producerImageName);
 
 
             searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="gotoProducerDetails(${producerId})">

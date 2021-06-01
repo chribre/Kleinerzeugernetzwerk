@@ -20,15 +20,15 @@ h1 {
 
 .fab-container {
 	position: fixed;
-	bottom: 50px;
-	left: 50px;
+	bottom: 35px;
+	left: 35px;
 	z-index: 999;
 	cursor: pointer;
 }
 
 .fab-icon-holder {
-	width: 50px;
-	height: 50px;
+	width: 35px;
+	height: 35px;
 	border-radius: 100%;
 	background: #bbdfc8;
 
@@ -44,9 +44,9 @@ h1 {
 	align-items: center;
 	justify-content: center;
 
-	height: 40px;
-    width: 40px;
-	font-size: 25px;
+	height: 30px;
+    width: 30px;
+	font-size: 18px;
 	color: #ffffff;
 }
 
@@ -55,7 +55,7 @@ h1 {
 	align-items: center;
 	justify-content: center;
 
-	font-size: 25px;
+	font-size: 18px;
 	color: #ffffff;
 }
 
@@ -97,7 +97,7 @@ h1 {
 	user-select: none;
 	white-space: nowrap;
 	border-radius: 3px;
-	font-size: 16px;
+	font-size: 14px;
 	background: #666666;
 	color: #ffffff;
 	box-shadow: 0 6px 20px rgba(0,0,0,0.2);

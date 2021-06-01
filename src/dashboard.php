@@ -15,7 +15,8 @@ if (session_status() == PHP_SESSION_NONE) {
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.php");
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sideBar.php");
 ?>
- 
+
+
 <script>
     window.onload = function() {
         setLoginOrProfileButton();
@@ -90,7 +91,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sideBar
         const zip = data.zip ? data.zip : "";
         const city = data.city ? data.city : "";
         const country = data.country ? data.country : "";
-        
+
         return (street + ", " + houseNum + "\n" + zip + " " + city + "\n" + country);
     }
     function parseURLParams(url) {
@@ -112,8 +113,8 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sideBar
         }
         return parms;
     }
-    
-    
+
+
     function getAllProductionPoint(){
         const formData = fetchProductionPointFormData();
         const userId = localStorage.getItem('userId');
@@ -138,7 +139,17 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sideBar
             },
             success: function( data ) {
                 console.log(data)
-                const productionPoints = JSON.parse(data);
+                var productionPoints = [];
+                try {
+                    productionPoints = JSON.parse(data);
+                } catch(e) {
+                    //                    alert(e); // error in the above string (in this case, yes)!
+                }
+
+                if (productionPoints.length == 0){
+                    noDataAvailable('production point', 'productionPointList')
+                    return;
+                }
                 listAllProductionPoints(productionPoints);
             },
             error: function (request, status, error) {               
@@ -146,8 +157,8 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sideBar
             }
         });
     }
-    
-    
+
+
 </script>
 
 

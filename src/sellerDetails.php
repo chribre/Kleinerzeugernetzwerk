@@ -21,13 +21,16 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 <script type="text/javascript" src="/kleinerzeugernetzwerk/js/custom/navigation.js"></script>
 
 <!-- Favicons -->
+<!--
 <link href="http://localhost/web_design/eBusiness/assets/img/favicon.png" rel="icon">
 <link href="http://localhost/web_design/eBusiness/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+-->
 
 <!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700|Raleway:300,400,400i,500,500i,700,800,900" rel="stylesheet">
 
 <!-- Vendor CSS Files -->
+<!--
 <link href="http://localhost/web_design/eBusiness/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="http://localhost/web_design/eBusiness/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
 <link href="http://localhost/web_design/eBusiness/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
@@ -35,9 +38,10 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 <link href="http://localhost/web_design/eBusiness/assets/vendor/nivo-slider/css/nivo-slider.css" rel="stylesheet">
 <link href="http://localhost/web_design/eBusiness/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
 <link href="http://localhost/web_design/eBusiness/assets/vendor/venobox/venobox.css" rel="stylesheet">
+-->
 
 <!-- Template Main CSS File -->
-<link href="http://localhost/web_design/eBusiness/assets/css/style.css" rel="stylesheet">
+<!--<link href="http://localhost/web_design/eBusiness/assets/css/style.css" rel="stylesheet">-->
 
 
 
@@ -723,6 +727,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 
 
 <!-- Vendor JS Files -->
+<!--
 <script src="http://localhost/web_design/eBusiness/assets/vendor/jquery/jquery.min.js"></script>
 <script src="http://localhost/web_design/eBusiness/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="http://localhost/web_design/eBusiness/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
@@ -736,8 +741,9 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 <script src="http://localhost/web_design/eBusiness/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
 <script src="http://localhost/web_design/eBusiness/assets/vendor/venobox/venobox.min.js"></script>
 
-<!-- Template Main JS File -->
+ Template Main JS File 
 <script src="http://localhost/web_design/eBusiness/assets/js/main.js"></script>
+-->
 
 
 

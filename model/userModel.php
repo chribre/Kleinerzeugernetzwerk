@@ -25,6 +25,7 @@ class user{
     public $description;
     
     public $imagePath;
+    public $imageName;
     public $imageId;
     
     public $profileImageId = [];
@@ -51,6 +52,7 @@ class user{
         
         
         $this->imagePath = isset($userData['image_path']) ? escapeSQLString($userData['image_path']) : "";
+        $this->imageName = isset($userData['image_name']) ? escapeSQLString($userData['image_name']) : "";
         $this->imageId = isset($userData['image_id']) ? escapeSQLString($userData['image_id']) : 0;
         
         $files = $_FILES['files'] ? $_FILES['files'] : [];

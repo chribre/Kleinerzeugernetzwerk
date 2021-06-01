@@ -110,7 +110,8 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 <div class="fab-container" id="category-menu">
     <div class="fab fab-icon-holder">
 
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+        <span id="category-loading" hidden class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        <svg id="category-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
             <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
         </svg>
         <!--                        <i class="bi bi-three-dots-vertical"></i>-->
@@ -427,9 +428,9 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
                 const categoryObj = category[0];
                 return categoryObj.category_name ? categoryObj.category_name : '';
             }
-            
+
         }
-        
+
         return '';
     }
 
@@ -504,7 +505,8 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
             const latitude = productionPoint.latitude ? productionPoint.latitude : 0;
             const longitude = productionPoint.longitude ? productionPoint.longitude : 0;
-            const imagePath = productionPoint.image_path ? productionPoint.image_path : ''
+            const imageName = productionPoint.image_name ? productionPoint.image_name : ''
+            const imagePath = getFilePath(3, imageName)
 
             const sellerIds = productionPoint.production_points ? productionPoint.production_points : '';
             const sellerIdArray = createArrayFromString(sellerIds);
@@ -583,7 +585,8 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
             const latitude = sellingPoint.latitude ? sellingPoint.latitude : 0;
             const longitude = sellingPoint.longitude ? sellingPoint.longitude : 0;
-            const imagePath = sellingPoint.image_path ? sellingPoint.image_path : ''
+            const imageName = sellingPoint.image_name ? sellingPoint.image_name : ''
+            const imagePath = getFilePath(4, imageName)
 
 
             const productionPointIds = sellingPoint.production_points ? sellingPoint.production_points : '';
@@ -820,9 +823,9 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     //        sidebar.show();
     //    }, 500);
 
-    var marker = L.marker([51.2, 7]).addTo(mymap).on('click', function () {
-        sidebar.toggle();
-    });
+    //    var marker = L.marker([51.2, 7]).addTo(mymap).on('click', function () {
+    //        sidebar.toggle();
+    //    });
 
     mymap.on('click', function () {
         sidebar.hide();
@@ -848,6 +851,62 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         console.log('Close button clicked.');
     });
 
+    mymap.on('moveend', function() { 
+        const bound = mymap.getBounds();
+        const boundEnvelope = getMapBoundEnvelope(bound);
+        if (boundEnvelope){
+            boundEnvelope.then(result => fetchProductCategoriesInMapBound(result));
+        }
+    });
+
+
+    async function getMapBoundEnvelope(bounds){
+        if (bounds){
+            const northEast = bounds._northEast ?  bounds._northEast : null
+            const southWest = bounds._southWest ?  bounds._southWest : null
+            if (northEast && southWest){
+                const xmax = northEast.lat ? northEast.lat : null
+                const ymax = northEast.lng ? northEast.lng : null
+                const xmin = southWest.lat ? southWest.lat : null
+                const ymin = southWest.lng ? southWest.lng : null
+
+                if (xmax && ymax && xmin && ymin){
+                    var coordinateEnvelope =  `${xmin} ${ymax}, ${xmax} ${ymax}, ${xmax} ${ymin}, ${xmin} ${ymin}, ${xmin} ${ymax}`;
+                    return coordinateEnvelope;
+                }
+            }
+        }
+        return null;
+    }
+
+
+    async function fetchProductCategoriesInMapBound(boundEnvelope){
+        $.ajax({
+            url: "/kleinerzeugernetzwerk/controller/details.php",    //the page containing php script
+            type: "POST",
+            beforeSend: function(){
+                $("#category-loading").show();
+                $("#category-icon").hide();　
+            },
+            complete: function(){
+                $("#category-loading").hide();
+                $("#category-icon").show();
+            },
+            headers: {
+                'action': 'CATEGORIES',
+            },
+            data: { map_boundary: boundEnvelope },
+            success:function(result){
+                console.log(result)
+                const categories = JSON.parse(result) ? JSON.parse(result) : [];
+                setCategoryFilter(categories);
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+                console.log(error)
+            }
+        });
+    }
 
 
     function showProductsInProductionPoint(){
@@ -1023,10 +1082,6 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         font-size: 15px;
         font-weight: bold;
     }
-
-
-
-
 
     .custom-popup {
         border-radius: 2px;

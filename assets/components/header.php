@@ -27,6 +27,7 @@ $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
         <script type="text/javascript" src="/kleinerzeugernetzwerk/js/constants.js"></script>
+        <script type="text/javascript" src="/kleinerzeugernetzwerk/js/custom/common_functions.js"></script>
 
         <link rel="stylesheet" type="text/css" href="<?php echo $HOME_CSS_LOC ?>" />
         <link rel="stylesheet" type="text/css" href="<?php echo $SIDE_BAR_CSS ?>" />
@@ -85,6 +86,27 @@ $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min
 
         <title>Kleinerzeuger Netzwerk</title>
 
+
+
+
+        <!--    Enjoy Hint For onboarding-->
+        <!-- From external libraries -->
+<!--        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/kineticjs/5.2.0/kinetic.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+
+        <!-- Or from internal libraries from node_modules-->
+        <!--        <script src="/kleinerzeugernetzwerk/assets/jquery/dist/jquery.min.js"></script>-->
+<!--
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/kineticjs/5.2.0/kinetic.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+-->
+
+        <!-- Enjoyhint library -->
+        <link href="/kleinerzeugernetzwerk/assets/enjoyhint/enjoyhint.css" rel="stylesheet">
+        <script src="/kleinerzeugernetzwerk/assets/enjoyhint/enjoyhint.min.js"></script>
+
+        <!--    Enjoy Hint For onboarding-->
 
     </head> 
     <body>

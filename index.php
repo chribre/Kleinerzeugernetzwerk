@@ -15,7 +15,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }else{
 }
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/languagePreference.php";
-echo _("Good Morning");
+echo gettext("Good Morning");
 //Header of the HTML page
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.php";
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/getFarmData.php";
@@ -111,7 +111,9 @@ require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ma
 
             });
         }
-        document.getElementById('category-options').innerHTML = categoryOptionsUI;
+        if (document.getElementById('category-options')){
+            document.getElementById('category-options').innerHTML = categoryOptionsUI;
+        }
     }
 </script>
 <?php

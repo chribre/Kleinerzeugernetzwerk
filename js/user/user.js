@@ -52,8 +52,12 @@ function showProducerInDetailScreen(producerData){
     const zip = producerDetails.zip ? producerDetails.zip : '';
 
     const description = producerDetails.description ? producerDetails.description : '';
-
-    const producerImage = producerDetails.image_path ? producerDetails.image_path : DEFAULT_USER_IMAGE;
+    
+    
+    const producerImageName = producerDetails.image_name ? producerDetails.image_name : DEFAULT_USER_IMAGE;
+    const producerImage = getFilePath(1, producerImageName);
+    
+    
 
     
     producerUI += `<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -129,7 +133,8 @@ function showProducerInDetailScreen(producerData){
             const availableQuantity = product.quantity_of_price ? product.quantity_of_price : '';
             const productFeatureString = product.features ? product.features : '';
             const productFeatureArray = productFeatureString.split(',');
-            const productImage = product.image_path ? product.image_path : DEFAULT_PRODUCT_IMAGE;
+            const productImageName = product.image_name ? product.image_name : DEFAULT_PRODUCT_IMAGE;
+            const productImage = getFilePath(2, productImageName)
             producerUI += `<div class="col-lg-6 mb-4 cursor-pointer" onclick="goToProductDetailsPage(${productId})">
 <div class="card border-0 shadow-sm rounded">
 <div class="card-body p-4">
@@ -191,7 +196,8 @@ function showProducerInDetailScreen(producerData){
             const ppZip = productionPointDetails.zip ? productionPointDetails.zip : '';
             const ppAddress = ppStreet + ' ' + ppBuildingNum + ', ' + ppCity + ' ' + ppZip;
 
-            const ppImagePath = productionPointDetails.image_path ? productionPointDetails.image_path : DEFAULT_PRODUCTION_POINT_IMAGE;
+            const ppImageName = productionPointDetails.image_name ? productionPointDetails.image_name : DEFAULT_PRODUCTION_POINT_IMAGE;
+            const ppImagePath = getFilePath(3, ppImageName);
 
 
             const firstName = productionPointDetails.first_name ? productionPointDetails.first_name : '';
@@ -199,7 +205,8 @@ function showProducerInDetailScreen(producerData){
             const uPhone = productionPointDetails.phone ? productionPointDetails.phone : '';
             const uEmail = productionPointDetails.email ? productionPointDetails.email : '';
 
-            const producerImage = productionPointDetails.user_image_path ? productionPointDetails.user_image_path : DEFAULT_USER_IMAGE;
+            const producerImageName = productionPointDetails.user_image_name ? productionPointDetails.user_image_name : DEFAULT_USER_IMAGE;
+            const producerImage = getFilePath(1, producerImageName);
 
             producerUI += `<div class="col-lg-6 mb-4 cursor-pointer" onclick="goToProductionPointDeatailsScreen(${ppID})">
 <div class="card border-0 shadow-sm rounded">
@@ -263,7 +270,8 @@ function showProducerInDetailScreen(producerData){
         const sBuildingNum = seller.building_number ? seller.building_number : '';
         const sCity = seller.city ? seller.city : '';
         const sZip = seller.zip ? seller.zip : '';
-        const sImagePath = seller.image_path ? seller.image_path : DEFAULT_SELLER_IMAGE;
+        const sImageName = seller.image_name ? seller.image_name : DEFAULT_SELLER_IMAGE;
+        const sImagePath = getFilePath(4, sImageName);
 
         const sPhone = seller.phone ? seller.phone : '';
         const sEmail = seller.seller_email ? seller.seller_email : '';

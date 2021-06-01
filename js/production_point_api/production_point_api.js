@@ -43,11 +43,14 @@ function listproductsOnSideBar(productsData){
     const ppId = productionPoint.farm_id ? productionPoint.farm_id : 0;
     const ppName = productionPoint.farm_name ? productionPoint.farm_name : '';
     const ppDesc = productionPoint.farm_desc ? productionPoint.farm_desc : '';
+    const latitude = productionPoint.latitude ? productionPoint.latitude : 0.0;
+    const longitude = productionPoint.longitude ? productionPoint.longitude : 0.0;
     const ppStreet = productionPoint.street ? productionPoint.street : '';
     const ppHouseNum = productionPoint.house_number ? productionPoint.house_number : '';
     const ppCity = productionPoint.city ? productionPoint.city : '';
     const ppZip = productionPoint.zip ? productionPoint.zip : '';
-    const ppImagePath = productionPoint.image_path ? productionPoint.image_path : DEFAULT_PRODUCTION_POINT_IMAGE;
+    const ppImageName = productionPoint.image_name ? productionPoint.image_name : DEFAULT_PRODUCTION_POINT_IMAGE;
+    const ppImagePath = getFilePath(3, ppImageName);
 
     const userData = productsData.userData ? productsData.userData : [];
     const phone = userData.phone ? userData.phone : '';
@@ -57,7 +60,8 @@ function listproductsOnSideBar(productsData){
 
     const name = firstName + ' ' + lastName;
 
-    const userImagePath = userData.image_path ? userData.image_path : '';
+    const userImageName = userData.image_name ? userData.image_name : '';
+    const userImagePath = getFilePath(1, userImageName);
 
     const products = productsData.productDetails ? productsData.productDetails : [];
     const productsCount = products.length;
@@ -92,7 +96,8 @@ function listproductsOnSideBar(productsData){
             const productDesc = product.product_description ? product.product_description : '';
             const productCategory = product.category_name ? product.category_name : '';
             const productUnit = product.unit_name ? product.unit_name : '';
-            const productImagePath = product.image_path ? product.image_path : DEFAULT_PRODUCT_IMAGE;
+            const productImageName = product.image_name ? product.image_name : DEFAULT_PRODUCT_IMAGE;
+            const productImagePath = getFilePath(2, productImageName);
 
             const price = product.price_per_unit ? product.price_per_unit : '';
             const quantity = product.quantity_of_price ? product.quantity_of_price : 0;
@@ -155,7 +160,8 @@ function listproductsOnSideBar(productsData){
                     const sBuildingNum = sellerObj.building_number ? sellerObj.building_number : '';
                     const sCity = sellerObj.city ? sellerObj.city : '';
                     const sZip = sellerObj.zip ? sellerObj.zip : '';
-                    const sImagePath = sellerObj.image_path ? sellerObj.image_path : DEFAULT_SELLER_IMAGE;
+                    const sImageName = sellerObj.image_name ? sellerObj.image_name : DEFAULT_SELLER_IMAGE;
+                    const sImagePath = getFilePath(4, sImageName);
 
                     const sellerAddress = sStreet + ' ' + sBuildingNum + ', ' + sCity + ' ' + sZip;
                     productCard += `<div class="row rounded-pill mb-1 cst-bg-gray cursor-pointer bring-to-front" onclick="gotoSellerDetailsScreen(${sellerId})">
@@ -179,6 +185,7 @@ function listproductsOnSideBar(productsData){
 
         document.getElementById('mapSidebar').innerHTML = sideBarUI;
         sidebar.toggle();
+        mymap.panTo(new L.LatLng(latitude, longitude));
     }
 
 }
@@ -191,7 +198,8 @@ function showProductionPointInDetailScreen(productionPointData){
     if (productionPointData){
         const productionPointDetails = productionPointData.productionPointDetails ? productionPointData.productionPointDetails : [];
         const producerDetails = productionPointData.userData ? productionPointData.userData : [];
-        const producerImage = producerDetails.image_path ? producerDetails.image_path : DEFAULT_USER_IMAGE;
+        const producerImageName = producerDetails.image_name ? producerDetails.image_name : DEFAULT_USER_IMAGE;
+        const producerImage = getFilePath(1, producerImageName);
         const producerId = producerDetails.user_id ? producerDetails.user_id : 0;
         productionPointUI  = `<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 <ol class="carousel-indicators">`;
@@ -209,12 +217,14 @@ function showProductionPointInDetailScreen(productionPointData){
 <div class="carousel-inner">`;
         if (productionPointImages.length == 0){
             productionPointUI += `<div class="carousel-item active">
-<img class="d-block w-100" src="${DEFAULT_PRODUCTION_POINT_IMAGE}" alt="First slide" style="width: 100%; height: 350px; object-fit: cover;">
+<img class="d-block w-100" src="${getFilePath(3, DEFAULT_PRODUCTION_POINT_IMAGE)}" alt="First slide" style="width: 100%; height: 350px; object-fit: cover;">
 </div>`;
         }
         productionPointImages.forEach(function(productionPointImage, index){
             if (productionPointImage != null){
-                const imagePath = productionPointImage.image_path ? productionPointImage.image_path : DEFAULT_PRODUCTION_POINT_IMAGE;
+                const imageName = productionPointImage.image_name ? productionPointImage.image_name : DEFAULT_PRODUCTION_POINT_IMAGE;
+                const imagePath = getFilePath(3, imageName);
+
 
                 if (index == 0){
                     productionPointUI += `<div class="carousel-item active">
@@ -254,10 +264,10 @@ function showProductionPointInDetailScreen(productionPointData){
         const ppZip = productionPointDetails.zip ? productionPointDetails.zip : '';
         const ppAddress = ppStreet + ' ' + ppBuildingNum + ', ' + ppCity + ' ' + ppZip;
 
-        const ppImagePath = productionPointDetails.image_path ? productionPointDetails.image_path : DEFAULT_PRODUCTION_POINT_IMAGE;
+        const ppImageName = productionPointDetails.image_name ? productionPointDetails.image_name : DEFAULT_PRODUCTION_POINT_IMAGE;
+        const ppImagePath = getFilePath(3, ppImageName);
 
 
-        
         const firstName = producerDetails.first_name ? producerDetails.first_name : '';
         const lastName = producerDetails.last_name ? producerDetails.last_name : '';
         const phone = producerDetails.phone ? producerDetails.phone : '';
@@ -322,7 +332,8 @@ function showProductionPointInDetailScreen(productionPointData){
                 const availableQuantity = product.quantity_of_price ? product.quantity_of_price : '';
                 const productFeatureString = product.features ? product.features : '';
                 const productFeatureArray = productFeatureString.split(',');
-                const productImage = product.image_path ? product.image_path : DEFAULT_PRODUCT_IMAGE;
+                const productImageName = product.image_name ? product.image_name : DEFAULT_PRODUCT_IMAGE;
+                const productImage = getFilePath(2, productImageName);
                 productionPointUI += `<div class="col-lg-6 mb-4 cursor-pointer" onclick="goToProductDetailsPage(${productId})">
 <div class="card border-0 shadow-sm rounded">
 <div class="card-body p-4">
@@ -379,7 +390,8 @@ function showProductionPointInDetailScreen(productionPointData){
             const sBuildingNum = seller.building_number ? seller.building_number : '';
             const sCity = seller.city ? seller.city : '';
             const sZip = seller.zip ? seller.zip : '';
-            const sImagePath = seller.image_path ? seller.image_path : DEFAULT_SELLER_IMAGE;
+            const sImageName = seller.image_name ? seller.image_name : DEFAULT_SELLER_IMAGE;
+            const sImagePath = getFilePath(4, sImageName);
 
             const sPhone = seller.phone ? seller.phone : '';
             const sEmail = seller.seller_email ? seller.seller_email : '';

@@ -383,7 +383,8 @@ Launch demo modal
         var productionPointImageId = []; 
         var productionPointImageGallery = "";
         imageData.forEach(element =>{
-            const path = element.image_path;
+            const name = element.image_name;
+            const path = getFilePath(3, name);
             const id = element.image_id;
 
             productionPointImageGallery += `<div class="image">

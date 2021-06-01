@@ -185,6 +185,7 @@ function getUserDetails($userId){
         $userData["email"] = $email;
 
         $userData['imagePath'] = $row['image_path'];
+        $userData['imageName'] = $row['image_name'];
         return $userData;
         //        redirect("/kleinerzeugernetzwerk/index.php");
     }else{

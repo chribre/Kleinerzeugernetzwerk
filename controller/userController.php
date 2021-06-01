@@ -106,6 +106,9 @@ function createUser($userId, $firstName, $lastName, $dob, $street, $houseNumber,
         }
         http_response_code(400);
         return false;
+    }else{
+        http_response_code(409);
+            return false;
     }
     http_response_code(400);
     return false;

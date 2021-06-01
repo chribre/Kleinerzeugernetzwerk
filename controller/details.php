@@ -36,6 +36,9 @@ switch ($_SERVER['REQUEST_METHOD']) {
             case 'PRODUCER':
                 echo fetchUserData();
                 break;
+            case 'CATEGORIES':
+                echo getCategoriesInBounds();
+                break;
 
             default:
                 http_response_code(400);
@@ -175,7 +178,7 @@ function fetchAllProductsFromProductionPoint($productionPointId){
     ob_start();
     global $dbConnection;
 
-    $productsQuery = "SELECT i.image_path, 
+    $productsQuery = "SELECT i.image_path, i.image_name,
                             p.*, pc.category_name, u.unit_abbr as unit_name, 
                             GROUP_CONCAT(DISTINCT p_fea.feature_type) as features,
                             GROUP_CONCAT(DISTINCT ps.seller_id) as sellers
@@ -247,10 +250,10 @@ function fetchAllProductsFromSellingPoints($sellingPoint){
     ob_start();
     global $dbConnection;
 
-    $productsQuery = "SELECT i.image_path, 
+    $productsQuery = "SELECT i.image_path, i.image_name,
                                 p.*, pc.category_name, u.unit_abbr as unit_name, 
                                 GROUP_CONCAT(DISTINCT p_fea.feature_type) as features,
-                                f.farm_id, f.farm_name, fi.image_path as farm_image FROM products p
+                                f.farm_id, f.farm_name, fi.image_path as farm_image, fi.image_name as farm_image_name FROM products p
                         LEFT JOIN product_feature p_fea on p_fea.product_id = p.product_id
                         LEFT JOIN images i ON i.entity_id = p.product_id and i.image_type = 2
                         LEFT JOIN product_sellers ps ON ps.product_id = p.product_id
@@ -289,7 +292,7 @@ function fetchAllProductionPointsRelatedToSeller($sellerId){
                             u.user_id,
                             u.first_name,
                             u.last_name,
-                            u.phone, u.email, u_img.image_path as user_image_path,
+                            u.phone, u.email, u_img.image_path as user_image_path, u_img.image_name as user_image_name, 
                                     img.image_id, 
                                     img.image_type, 
                                     img.image_name, 
@@ -512,7 +515,7 @@ function getAllSellingPointsByCategory($category){
                             s.is_sat_available, s.sat_open_time, s.sat_close_time, 
                             s.is_sun_available, s.sun_open_time, s.sun_close_time, 
 
-                            i.image_path, 
+                            i.image_path, i.image_name, 
                             GROUP_CONCAT(distinct p.production_location) as production_points from sellers s
                         LEFT JOIN images i on i.entity_id = s.seller_id and i.image_type = 4
                         LEFT JOIN product_sellers ps on ps.seller_id = s.seller_id
@@ -556,7 +559,7 @@ function getAllSellingPoints(){
                             s.is_sat_available, s.sat_open_time, s.sat_close_time, 
                             s.is_sun_available, s.sun_open_time, s.sun_close_time, 
 
-                            i.image_path, 
+                            i.image_path, i.image_name, 
                             GROUP_CONCAT(distinct p.production_location) as production_points from sellers s
                         LEFT JOIN images i on i.entity_id = s.seller_id and i.image_type = 4
                         LEFT JOIN product_sellers ps on ps.seller_id = s.seller_id
@@ -588,7 +591,7 @@ function getAllProductionPoints(){
                                     ST_X(f.farm_location) as latitude, 
                                     ST_Y(f.farm_location) as longitude, 
                                     f.farm_area, 
-                                    i.image_path, 
+                                    i.image_path, i.image_name, 
                                     GROUP_CONCAT(DISTINCT ps.seller_id) AS seller FROM farm_land f
                             LEFT JOIN images i on i.entity_id = f.farm_id and i.image_type = 3
                             LEFT JOIN products p on f.farm_id = p.production_location
@@ -622,7 +625,7 @@ function getAllProductionPointsBasedOnCategory($category){
                                     ST_X(f.farm_location) as latitude, 
                                     ST_Y(f.farm_location) as longitude, 
                                     f.farm_area, 
-                                    i.image_path, 
+                                    i.image_path, i.image_name,
                                     GROUP_CONCAT(DISTINCT ps.seller_id) AS seller FROM farm_land f
                             LEFT JOIN images i on i.entity_id = f.farm_id and i.image_type = 3
                             LEFT JOIN products p on f.farm_id = p.production_location
@@ -703,7 +706,7 @@ function getAllProductionPointsByUser($userId){
                                     ST_X(f.farm_location) as latitude, 
                                     ST_Y(f.farm_location) as longitude, 
                                     f.farm_area, 
-                                    i.image_path FROM farm_land f
+                                    i.image_path, i.image_name FROM farm_land f
                             LEFT JOIN images i on i.entity_id = f.farm_id and i.image_type = 3
                             WHERE f.producer_id = $userId
                             GROUP BY f.farm_id;";
@@ -721,7 +724,7 @@ function getAllProductsByUser($userId){
     ob_start();
     global $dbConnection;
 
-    $productQuery = "SELECT i.image_path, 
+    $productQuery = "SELECT i.image_path, i.image_name, 
                             p.*, 
                             GROUP_CONCAT(DISTINCT p_fea.feature_type) as features, u.unit_abbr as unit_name FROM products p
                     LEFT JOIN images i on i.image_type = 2 AND i.entity_id = p.product_id
@@ -780,5 +783,32 @@ function getAllSellersByUser($userId){
         }
     }
     return $sellerData;
+}
+
+
+function getCategoriesInBounds(){
+    global $dbConnection;
+    $mapBound = $_POST['map_boundary'] ? $_POST['map_boundary'] : 0;
+    ob_start();
+    global $dbConnection;
+
+    $categoryQuery = "SELECT pc.* FROM product_category pc
+                    LEFT JOIN products p ON p.product_category = pc.category_id 
+                    LEFT JOIN farm_land f ON f.farm_id = p.production_location 
+                    LEFT JOIN product_sellers ps ON ps.product_id = p.product_id 
+                    LEFT JOIN sellers s ON s.seller_id = ps.seller_id 
+                    WHERE ST_Within(f.farm_location, ST_GeomFromText('POLYGON(($mapBound))')) 
+                    OR ST_Within(s.seller_location, ST_GeomFromText('POLYGON(($mapBound))')) 
+                    GROUP BY pc.category_id;";
+    $categories = [];
+    if ($result = mysqli_query($dbConnection, $categoryQuery)) {
+        while ($row = mysqli_fetch_all($result, MYSQLI_ASSOC)) {
+            $categories = $row;
+        }
+    }
+    ob_end_clean();
+    mysqli_close($dbConnection);
+    http_response_code(200);
+    return json_encode($categories);
 }
 ?>

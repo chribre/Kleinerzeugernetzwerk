@@ -68,8 +68,14 @@ Add a new product
                 },
                 data: { userId: userId, fetchAllProducts: true },
                 dataType: "json",
-                success: function( data ) {
+                success: function( dataset ) {
                     console.log(data) 
+                    var data = [];
+                    try {
+                        data = JSON.parse(dataset);
+                    } catch(e) {
+                        //                    alert(e); // error in the above string (in this case, yes)!
+                    }
                     const features = localStorage.getItem("productFeatures");
                     const featureJson = JSON.parse(features);
 
@@ -96,7 +102,8 @@ Add a new product
                             const productLocation = productData.production_location != null ? productData.production_location : 0;
 
                             const defaultImage = "https://previews.123rf.com/images/mcjvil40yahoocom/mcjvil40yahoocom1804/mcjvil40yahoocom180400001/98805032-low-light-food-photography-of-a-broccoli.jpg"
-                            var imagePath = productData.image_path != null ? productData.image_path : defaultImage;
+                            var imageName = productData.image_name != null ? productData.image_name : DEFAULT_PRODUCT_IMAGE;
+                            var imagePath = getFilePath(2, imageName);
 
                             const featureData = productData.product_feature != null ? productData.product_feature : [];
                             var featureArray = [];
@@ -234,6 +241,10 @@ Add a new product
                             var productListObj = document.getElementById("productListContainer");
                             productListObj.innerHTML = productListObj.innerHTML + card;
                         })
+                    }
+                    if (data.length == 0){
+                        noDataAvailable('product', 'productListContainer')
+                        return;
                     }
 
                 },
@@ -523,7 +534,8 @@ Add a new product
         function setProductImages(imagePathArray){
             var productImageGallery = "";
             imagePathArray.forEach(element =>{
-                const path = element;
+                const name = element;
+                const path = getFilePath(2, name);
                 productImageGallery += `<div class="image">
 <div class="overlay"></div>
 <img src="${path}" id="test" key="2">
@@ -619,7 +631,7 @@ Add a new product
             var imagePathArray = [];
             imageData.forEach(element => {
                 imageId = element.image_id !== null ? element.image_id : 0;
-                imagePath = element.image_path !== null ? element.image_path : "";
+                imagePath = element.image_name !== null ? element.image_name : "";
                 productImageIdArray.push(imageId);
                 imagePathArray.push(imagePath);
             });
@@ -672,11 +684,11 @@ Add a new product
 
 
         function viewProductInDetail(productId){
-            
-            
-            
-            
-            
+
+
+
+
+
             $.ajax({
                 type: "POST",
                 url: "/kleinerzeugernetzwerk/controller/details.php",

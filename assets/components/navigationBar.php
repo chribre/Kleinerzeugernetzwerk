@@ -16,7 +16,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 $isLoggedIn = true;
 
-echo "Connected successfully, ";
+//echo "Connected successfully, ";
 
 $loginFailAlert = '<div class="alert alert-success" id="success-alert">
   <button type="button" class="close" data-dismiss="alert">x</button>
@@ -100,7 +100,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
 
             </ul>
             <div class="row mr-3" id="navEndSpace">
-                <div class="bg-white rounded rounded-pill shadow-sm mx-sm-4 align-items-center align-self-center">
+                <div class="bg-white rounded rounded-pill shadow-sm mx-sm-4 align-items-center align-self-center" id="search-bar">
                     <div class="input-group">
                         <div class="input-group-prepend">
                             <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i class="fa fa-search"></i></button>
@@ -123,7 +123,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                         <div class="dropdown-divider">
 
                         </div>  
-                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('en_EN')"><img class="mr-3" src="https://www.countryflags.io/GB/shiny/32.png">English</a> 
+                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('en_GB')"><img class="mr-3" src="https://www.countryflags.io/GB/shiny/32.png">English</a> 
                     </div> 
                 </div>
 
@@ -162,7 +162,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                 case 'de_DE':
                     document.getElementById("preferedLanguageImg").src = "https://www.countryflags.io/DE/shiny/24.png";
                     break;
-                case 'en_EN':
+                case 'en_GB':
                     document.getElementById("preferedLanguageImg").src = "https://www.countryflags.io/GB/shiny/24.png";
                     break;
                 default:
@@ -208,7 +208,8 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
             if (localStorage.getItem('isLoggedIn')){
                 const userName = localStorage.getItem('userName');
                 const email = localStorage.getItem('email');
-                const profileImage = localStorage.getItem('profileImagePath') != null && localStorage.getItem('profileImagePath') != "" ? localStorage.getItem('profileImagePath') : '/kleinerzeugernetzwerk/images/profile_placeholder.png';
+                const profileImageName = localStorage.getItem('profileImageName') != null && localStorage.getItem('profileImageName') != "" ? localStorage.getItem('profileImageName') : DEFAULT_USER_IMAGE;
+                const profileImage = getFilePath(1, profileImageName);
                 const viewProfilePath = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=personal';
                 const logOutImage = '/kleinerzeugernetzwerk/images/logout.png';
 

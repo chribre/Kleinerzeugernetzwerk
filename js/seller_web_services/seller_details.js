@@ -55,7 +55,8 @@ function showSellerInDetailScreen(sellerData){
         sellerUI += `<div class="carousel-inner">`;
         sellerImages.forEach(function(sellerImage, index){
             if (sellerImage != null){
-                const imagePath = sellerImage.image_path ? sellerImage.image_path : DEFAULT_SELLER_IMAGE;
+                const imageName = sellerImage.image_name ? sellerImage.image_name : DEFAULT_SELLER_IMAGE;
+                const imagePath = getFilePath(4, imageName);
                 if (index == 0){
                     sellerUI += `<div class="carousel-item active">
 <img class="d-block w-100" src="${imagePath}" alt="First slide" style="width: 100%; height: 350px; object-fit: cover;">
@@ -85,7 +86,8 @@ function showSellerInDetailScreen(sellerData){
         const sBuildingNum = sellerDetails.building_number ? sellerDetails.building_number : '';
         const sCity = sellerDetails.city ? sellerDetails.city : '';
         const sZip = sellerDetails.zip ? sellerDetails.zip : '';
-        const sImagePath = sellerDetails.image_path ? sellerDetails.image_path : DEFAULT_SELLER_IMAGE;
+        const sImageName = sellerDetails.image_name ? sellerDetails.image_name : DEFAULT_SELLER_IMAGE;
+        const sImagePath = getFilePath(4, sImageName);
 
         const sPhone = sellerDetails.phone ? sellerDetails.phone : '';
         const sEmail = sellerDetails.seller_email ? sellerDetails.seller_email : '';
@@ -336,7 +338,8 @@ function showSellerInDetailScreen(sellerData){
                 const availableQuantity = product.quantity_of_price ? product.quantity_of_price : '';
                 const productFeatureString = product.features ? product.features : '';
                 const productFeatureArray = productFeatureString.split(',');
-                const productImage = product.image_path ? product.image_path : DEFAULT_PRODUCT_IMAGE;
+                const productImageName = product.image_name ? product.image_name : DEFAULT_PRODUCT_IMAGE;
+                const productImage = getFilePath(2, productImageName);
                 sellerUI += `<div class="col-lg-6 mb-4 cursor-pointer" onclick="goToProductDetailsPage(${productId})">
 <div class="card border-0 shadow-sm rounded">
 <div class="card-body p-4">
@@ -395,7 +398,8 @@ function showSellerInDetailScreen(sellerData){
                 const ppZip = productionPointDetails.zip ? productionPointDetails.zip : '';
                 const ppAddress = ppStreet + ' ' + ppBuildingNum + ', ' + ppCity + ' ' + ppZip;
 
-                const ppImagePath = productionPointDetails.image_path ? productionPointDetails.image_path : DEFAULT_PRODUCTION_POINT_IMAGE;
+                const ppImageName = productionPointDetails.image_name ? productionPointDetails.image_name : DEFAULT_PRODUCTION_POINT_IMAGE;
+                const ppImagePath = getFilePath(3, ppImageName);
 
                 const producerId = productionPointDetails.producer_id ? productionPointDetails.producer_id : 0;
                 const firstName = productionPointDetails.first_name ? productionPointDetails.first_name : '';
@@ -403,7 +407,8 @@ function showSellerInDetailScreen(sellerData){
                 const uPhone = productionPointDetails.phone ? productionPointDetails.phone : '';
                 const uEmail = productionPointDetails.email ? productionPointDetails.email : '';
 
-                const producerImage = productionPointDetails.user_image_path ? productionPointDetails.user_image_path : DEFAULT_USER_IMAGE;
+                const producerImageName = productionPointDetails.user_image_name ? productionPointDetails.user_image_name : DEFAULT_USER_IMAGE;
+                const producerImage = getFilePath(1, producerImageName);
 
                 sellerUI += `<div class="col-lg-6 mb-4 cursor-pointer" onclick="goToProductionPointDeatailsScreen(${ppID})">
 <div class="card border-0 shadow-sm rounded">
@@ -466,12 +471,15 @@ function showSellerSidebar(sellerData){
     const sellerDetails = sellerData.sellerDetails ? sellerData.sellerDetails : {};
     const sellerName = sellerDetails.seller_name ? sellerDetails.seller_name : '';
     const sDesc = sellerDetails.seller_description ? sellerDetails.seller_description : '';
+    const latitude = sellerDetails.latitude ? sellerDetails.latitude : 0.0;
+    const longitude = sellerDetails.longitude ? sellerDetails.longitude : 0.0;
     const sellerId = sellerDetails.seller_id ? sellerDetails.seller_id : 0;
     const sStreet = sellerDetails.street ? sellerDetails.street : '';
     const sBuildingNum = sellerDetails.building_number ? sellerDetails.building_number : '';
     const sCity = sellerDetails.city ? sellerDetails.city : '';
     const sZip = sellerDetails.zip ? sellerDetails.zip : '';
-    const sImagePath = sellerDetails.image_path ? sellerDetails.image_path : DEFAULT_SELLER_IMAGE;
+    const sImageName = sellerDetails.image_name ? sellerDetails.image_name : DEFAULT_SELLER_IMAGE;
+    const sImagePath = getFilePath(4, sImageName);
 
     const sPhone = sellerDetails.phone ? sellerDetails.phone : '';
     const sEmail = sellerDetails.seller_email ? sellerDetails.seller_email : '';
@@ -541,12 +549,14 @@ function showSellerSidebar(sellerData){
             const availableQuantity = product.quantity_of_price ? product.quantity_of_price : '';
             const productFeatureString = product.features ? product.features : '';
             const productFeatureArray = productFeatureString.split(',');
-            const productImage = product.image_path ? product.image_path : DEFAULT_PRODUCT_IMAGE;
+            const productImageName = product.image_name ? product.image_name : DEFAULT_PRODUCT_IMAGE;
+            const productImage = getFilePath(2, productImageName);
 
 
             const ppID = product.farm_id ? product.farm_id : 0;
             const ppName = product.farm_name ? product.farm_name : '';
-            const ppImagePath = product.farm_image ? product.farm_image : '';
+            const ppImageName = product.farm_image_name ? product.farm_image_name : '';
+            const ppImagePath = getFilePath(3, ppImageName);
 
             
             sellerSideBarUI += `<div class="my-3 cursor-pointer" onClick="goToProductDetailsPage(${productId})">
@@ -602,4 +612,5 @@ function showSellerSidebar(sellerData){
 
     document.getElementById('mapSidebar').innerHTML = sellerSideBarUI;
         sidebar.toggle();
+    mymap.panTo(new L.LatLng(latitude, longitude));
 }

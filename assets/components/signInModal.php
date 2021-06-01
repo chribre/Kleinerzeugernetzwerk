@@ -143,6 +143,7 @@
             localStorage['tokenId'] = data.tokenId;
             localStorage['isLoggedIn'] = true;
             localStorage['profileImagePath'] = data.imagePath;
+            localStorage['profileImageName'] = data.imageName;
             for (var i = 0; i < localStorage.length; i++){
                 console.log(localStorage.getItem(localStorage.key(i)));
             }

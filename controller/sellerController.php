@@ -304,7 +304,7 @@ function getAllSellingPoints($seller){
     global $dbConnection;
     /* Start transaction */
 
-    $fetchAllSellerQuery = "SELECT s.seller_id, s.producer_id, s.seller_name, s.seller_description, s.street, s.building_number, s.city, s.zip, s.seller_location, s.seller_email, s.seller_website, s.mobile, s.phone, s.is_blocked, s.is_mon_available, s.mon_open_time, s.mon_close_time, s.is_tue_available, s.tue_open_time, s.tue_close_time, s.is_wed_available, s.wed_open_time, s.wed_close_time, s.is_thu_available, s.thu_open_time, s.thu_close_time, s.is_fri_available, s.fri_open_time, s.fri_close_time, s.is_sat_available, s.sat_open_time, s.sat_close_time, s.is_sun_available, s.sun_open_time, s.sun_close_time, fs.is_favourite, i.image_path FROM sellers s
+    $fetchAllSellerQuery = "SELECT s.seller_id, s.producer_id, s.seller_name, s.seller_description, s.street, s.building_number, s.city, s.zip, s.seller_location, s.seller_email, s.seller_website, s.mobile, s.phone, s.is_blocked, s.is_mon_available, s.mon_open_time, s.mon_close_time, s.is_tue_available, s.tue_open_time, s.tue_close_time, s.is_wed_available, s.wed_open_time, s.wed_close_time, s.is_thu_available, s.thu_open_time, s.thu_close_time, s.is_fri_available, s.fri_open_time, s.fri_close_time, s.is_sat_available, s.sat_open_time, s.sat_close_time, s.is_sun_available, s.sun_open_time, s.sun_close_time, fs.is_favourite, i.image_path, i.image_name FROM sellers s
     LEFT JOIN images i on (i.entity_id = s.seller_id and i.image_type = 4)
     LEFT JOIN favourite_sellers fs ON (fs.seller_id = s.seller_id AND fs.user_id = s.producer_id)
     WHERE s.producer_id = $seller->producerId
