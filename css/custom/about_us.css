@@ -1,0 +1,61 @@
+@font-face {
+    font-family: "inter-font";
+    src: url("/kleinerzeugernetzwerk/assest/font/inter/Inter-Medium.ttf");
+    src: url("/kleinerzeugernetzwerk/assest/font/inter/Inter-Black.ttf") format("black"),
+        url("/kleinerzeugernetzwerk/assest/font/inter/Inter-Bold.ttf") format("bold"),
+        url("/kleinerzeugernetzwerk/assest/font/inter/Inter-ExtraBold.ttf") format("extra-bold"),
+        url("/kleinerzeugernetzwerk/assest/font/inter/Inter-ExtraLight.ttf") format("extra-light"),
+        url("/kleinerzeugernetzwerk/assest/font/inter/Inter-Light.ttf") format("light"),
+        url("/kleinerzeugernetzwerk/assest/font/inter/Inter-Medium.ttf") format("medium"),
+        url("/kleinerzeugernetzwerk/assest/font/inter/Inter-Regular.ttf") format("regular"),
+        url("/kleinerzeugernetzwerk/assest/font/inter/Inter-SemiBold.ttf") format("semi-bold"),
+        url("/kleinerzeugernetzwerk/assest/font/inter/Inter-Thin.ttf") format("thin")
+}
+
+.inter-font{
+    font-family: 'inter';
+}
+.heading{
+    font-size: 48px;
+    font-weight:800;
+    font-style:normal;
+}
+.desc-italics{
+    font-size: 18px;
+    font-weight:400;
+    font-style:italic;
+}
+.desc-regular{
+    font-size: 18px;
+    font-weight:300;
+    font-style:normal;
+}
+.sub-heading{
+    font-size: 40px;
+    font-weight:400;
+    font-style:normal;
+}
+.name{
+    font-size: 20px;
+    font-weight:400;
+    font-style:normal;
+}
+.designation{
+    font-size: 16px;
+    font-weight:300;
+    font-style:normal;
+    color: green;
+}
+.team-desc{
+    font-size: 16px;
+    font-weight:200;
+    font-style:italic;
+}
+
+img{
+    object-fit: cover;
+}
+.img-grayscale{
+    object-fit:contain;
+    filter: grayscale(100)
+}

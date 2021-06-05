@@ -78,16 +78,16 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
             <ul class="navbar-nav font-weight-bold">
                 <div class="navbar-nav mr-auto">
                     <li class="nav-item active ml-3">
-                        <a href="#" class="nav-link" data-toggle="modal" data-target="#"><?php echo _('Map') ?><span class="sr-only">(current)</span></a>
+                        <a href="/kleinerzeugernetzwerk/index.php" class="nav-link"><?php echo _('Map') ?><span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active ml-3">
-                        <a href="#" class="nav-link" data-toggle="modal" data-target="#"><?php echo _('About Us') ?><span class="sr-only">(current)</span></a>
+                        <a href="/kleinerzeugernetzwerk/src/about_us.php" class="nav-link"><?php echo _('About Us') ?><span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active ml-3">
                         <a href="#" class="nav-link" data-toggle="modal" data-target="#"><?php echo _('Events') ?><span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item active ml-3">
-                        <a href="#" class="nav-link" data-toggle="modal" data-target="#"><?php echo _('Contact Us') ?><span class="sr-only">(current)</span></a>
+                        <a href="/kleinerzeugernetzwerk/src/contact_us.php" class="nav-link"><?php echo _('Contact Us') ?><span class="sr-only">(current)</span></a>
                     </li>
 
                     <!--

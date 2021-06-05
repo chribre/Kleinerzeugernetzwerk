@@ -1,16 +1,28 @@
 $(document).ready(function(){
     setLoginOrProfileButton();
+    fetchSearchTermFromURL();
+});
+
+function fetchSearchTermFromURL(){
     var url_string = window.location;
     var url = new URL(url_string);
     var searchTerm = url.searchParams.get("search_term");
     if (searchTerm != ''){
         document.getElementById("searchTextBox").value = searchTerm;
-        searchWithText(searchTerm, searchResultUI);
+        getFilterParameters(searchTerm)
     }
+}
 
-});
+const filterControlId = ['filter-product', 'filter-production-point', 'filter-seller', 'filter-user']
 
-function searchWithText(searchText, actionFunction){
+for (var i = 0; i < filterControlId.length; i++) {
+    const filter = document.getElementById(filterControlId[i])
+    filter.addEventListener('change', (event) => {
+        fetchSearchTermFromURL();
+    })
+}
+
+function searchWithText(searchText, filter, actionFunction){
     $.ajax({
         type: "POST",
         url: "/kleinerzeugernetzwerk/controller/search.php",
@@ -23,7 +35,7 @@ function searchWithText(searchText, actionFunction){
         complete: function(){
             $("#overlay").fadeOut(300);
         },
-        data: { searchText: searchText },
+        data: { searchText: searchText, filter: filter},
         dataType: "json",
         success: function( data ) {
             console.log(data);
@@ -36,6 +48,30 @@ function searchWithText(searchText, actionFunction){
             console.log(error)
         }
     });
+}
+
+function getFilterParameters(searchTerm){
+    const product = document.getElementById('filter-product').checked ? true : false;
+    const productionPoint = document.getElementById('filter-production-point').checked ? true : false;
+    const seller = document.getElementById('filter-seller').checked ? true : false;
+    const user = document.getElementById('filter-user').checked ? true : false;
+
+    var filter = {
+        product: product,
+        productionPoint: productionPoint,
+        seller: seller,
+        user: user
+    }
+
+    if (product == false && productionPoint == false && seller == false && user == false){
+        filter = {
+            product: true,
+            productionPoint: true,
+            seller: true,
+            user: true
+        }
+    }
+    searchWithText(searchTerm, filter, searchResultUI);
 }
 
 
@@ -65,39 +101,39 @@ function searchResultUI(searchResults, searchText){
                 const producerImage = getFilePath(1, producerImageName);
                 const productImageName = productDeatils.product_image_name ? productDeatils.product_image_name : DEFAULT_PRODUCT_IMAGE;
                 const productImage = getFilePath(2, productImageName);
-                
-                
+
+
                 searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="goToProductDetailsPage(${productId})">
-                <img class="rounded my-auto" src="${productImage}"  width="100px" height="100px"alt="">
-                <div class="flex-fill pl-2 my-auto">
-                    <div class="row m-auto justify-content-between">
-                        <div class="my-auto">
-                            <h4 class="my-auto">${productName}</h4>
-                            <p class="my-auto">${productCategory}</p>
-                        </div>
-                        <div class="row my-auto">
-                            <svg class="row my-auto mx-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                            </svg>
-                            <p class="my-auto ml-2 addr-line-height">${street} ${houseNum}<br>${zip} ${city}</p>
-                        </div>
-                        <div class="my-auto">
-                            <div class="row rounded-pill border border-secondary p-1 mx-auto" onclick="gotoProducerDetails(${producerId})">
-                                <img class="rounded-circle" src="${producerImage}" width="32px" height="32px" alt="">
-                                <p class="my-auto ml-2">${firstName} ${lastName}</p>
-                            </div>
-                            <div class="my-auto">
-                                <h4 class="text-right">€${price}/${unit}</h4>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="">
-                        <p class="mx-auto addr-line-height">${productDesc}</p>  
-                    </div>
+<img class="rounded my-auto" src="${productImage}"  width="100px" height="100px"alt="">
+<div class="flex-fill pl-2 my-auto">
+<div class="row m-auto justify-content-between">
+<div class="my-auto">
+<h4 class="my-auto">${productName}</h4>
+<p class="my-auto">${productCategory}</p>
+</div>
+<div class="row my-auto">
+<svg class="row my-auto mx-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+</svg>
+<p class="my-auto ml-2 addr-line-height">${street} ${houseNum}<br>${zip} ${city}</p>
+</div>
+<div class="my-auto">
+<div class="row rounded-pill border border-secondary p-1 mx-auto" onclick="gotoProducerDetails(${producerId})">
+<img class="rounded-circle" src="${producerImage}" width="32px" height="32px" alt="">
+<p class="my-auto ml-2">${firstName} ${lastName}</p>
+</div>
+<div class="my-auto">
+<h4 class="text-right">€${price}/${unit}</h4>
+</div>
+</div>
+</div>
+<div class="">
+<p class="mx-auto addr-line-height">${productDesc}</p>  
+</div>
 
-                </div>
+</div>
 
-            </div>`;
+</div>`;
             }
         })
 
@@ -129,35 +165,35 @@ function searchResultUI(searchResults, searchText){
 
                 const producerImageName = productionPointDetails.user_image_name ? productionPointDetails.user_image_name : DEFAULT_USER_IMAGE;
                 const producerImage = getFilePath(1, producerImageName);
-                
-                
+
+
                 searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="goToProductionPointDeatailsScreen(${ppID})">
-                <img class="rounded my-auto" src="${ppImagePath}"  width="100px" height="100px"alt="">
-                <div class="flex-fill pl-2 my-auto">
-                    <div class="row m-auto justify-content-between">
-                        <div class="my-auto">
-                            <h4 class="my-auto">${ppName}</h4>
-                        </div>
-                        <div class="row my-auto">
-                            <svg class="row my-auto mx-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                            </svg>
-                            <p class="my-auto ml-2 addr-line-height">${ppStreet} ${ppBuildingNum}<br>${ppZip} ${ppCity}</p>
-                        </div>
-                        <div class="my-auto">
-                            <div class="row rounded-pill border border-secondary p-1 mx-auto"  onclick="gotoProducerDetails(${producerId})">
-                                <img class="rounded-circle" src="${producerImage}" width="32px" height="32px" alt="">
-                                <p class="my-auto ml-2">${firstName} ${lastName}</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="my-auto">
-                        <p class="addr-line-height mt-2">${ppDesc}</p>  
-                    </div>
+<img class="rounded my-auto" src="${ppImagePath}"  width="100px" height="100px"alt="">
+<div class="flex-fill pl-2 my-auto">
+<div class="row m-auto justify-content-between">
+<div class="my-auto">
+<h4 class="my-auto">${ppName}</h4>
+</div>
+<div class="row my-auto">
+<svg class="row my-auto mx-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+</svg>
+<p class="my-auto ml-2 addr-line-height">${ppStreet} ${ppBuildingNum}<br>${ppZip} ${ppCity}</p>
+</div>
+<div class="my-auto">
+<div class="row rounded-pill border border-secondary p-1 mx-auto"  onclick="gotoProducerDetails(${producerId})">
+<img class="rounded-circle" src="${producerImage}" width="32px" height="32px" alt="">
+<p class="my-auto ml-2">${firstName} ${lastName}</p>
+</div>
+</div>
+</div>
+<div class="my-auto">
+<p class="addr-line-height mt-2">${ppDesc}</p>  
+</div>
 
-                </div>
+</div>
 
-            </div>`;
+</div>`;
 
             }
         })
@@ -183,63 +219,63 @@ function searchResultUI(searchResults, searchText){
 
 
             searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="gotoSellerDetailsScreen(${sellerId})">
-                <img class="rounded my-auto" src="${sImagePath}"  width="100px" height="100px"alt="">
-                <div class="flex-fill pl-2 my-auto">
-                    <div class="row m-auto justify-content-between">
-                        <div class="my-auto">
-                            <h4 class="my-auto">${sellerName}</h4>
-                        </div>
-                        <div class="row my-auto mr-2">
-                            <svg class="row my-auto mx-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                            </svg>
-                            <p class="my-auto ml-2 addr-line-height">${sStreet} ${sBuildingNum}<br>${sZip} ${sCity}</p>
-                        </div>
-                    </div>
-                    <div class="my-auto">
-                        <p class="addr-line-height mt-2">${sDesc}</p>  
-                    </div>
+<img class="rounded my-auto" src="${sImagePath}"  width="100px" height="100px"alt="">
+<div class="flex-fill pl-2 my-auto">
+<div class="row m-auto justify-content-between">
+<div class="my-auto">
+<h4 class="my-auto">${sellerName}</h4>
+</div>
+<div class="row my-auto mr-2">
+<svg class="row my-auto mx-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+</svg>
+<p class="my-auto ml-2 addr-line-height">${sStreet} ${sBuildingNum}<br>${sZip} ${sCity}</p>
+</div>
+</div>
+<div class="my-auto">
+<p class="addr-line-height mt-2">${sDesc}</p>  
+</div>
 
-                    <div class="row my-auto mx-auto">
+<div class="row my-auto mx-auto">
 
-                        <div class="row mx-0 mr-5">
-                            <div class="bg-success indicator-circle rounded-circle my-auto"></div>
-                            <p class="my-auto ml-2">Monday</p>
-                        </div>
-                        <div class="row mx-0 mr-5">
-                            <div class="bg-success indicator-circle rounded-circle my-auto"></div>
-                            <p class="my-auto ml-2">Tuesday</p>
-                        </div>
-
-
-                        <div class="row mx-0 mr-5">
-                            <div class="bg-success indicator-circle rounded-circle my-auto"></div>
-                            <p class="my-auto ml-2">Wednesday</p>
-                        </div>
+<div class="row mx-0 mr-5">
+<div class="bg-success indicator-circle rounded-circle my-auto"></div>
+<p class="my-auto ml-2">Monday</p>
+</div>
+<div class="row mx-0 mr-5">
+<div class="bg-success indicator-circle rounded-circle my-auto"></div>
+<p class="my-auto ml-2">Tuesday</p>
+</div>
 
 
-                        <div class="row mx-0 mr-5">
-                            <div class="bg-success indicator-circle rounded-circle my-auto"></div>
-                            <p class="my-auto ml-2">Thursday</p>
-                        </div>
+<div class="row mx-0 mr-5">
+<div class="bg-success indicator-circle rounded-circle my-auto"></div>
+<p class="my-auto ml-2">Wednesday</p>
+</div>
 
-                        <div class="row mx-0 mr-5">
-                            <div class="bg-success indicator-circle rounded-circle my-auto"></div>
-                            <p class="my-auto ml-2">Friday</p>
-                        </div>
 
-                        <div class="row mx-0 mr-5">
-                            <div class="bg-success indicator-circle rounded-circle my-auto"></div>
-                            <p class="my-auto ml-2">Saturday</p>
-                        </div>
+<div class="row mx-0 mr-5">
+<div class="bg-success indicator-circle rounded-circle my-auto"></div>
+<p class="my-auto ml-2">Thursday</p>
+</div>
 
-                        <div class="row mx-0 mr-5">
-                            <div class="bg-success indicator-circle rounded-circle my-auto"></div>
-                            <p class="my-auto ml-2">Sunday</p>
-                        </div>
-                    </div>
-                </div>
-            </div>`;
+<div class="row mx-0 mr-5">
+<div class="bg-success indicator-circle rounded-circle my-auto"></div>
+<p class="my-auto ml-2">Friday</p>
+</div>
+
+<div class="row mx-0 mr-5">
+<div class="bg-success indicator-circle rounded-circle my-auto"></div>
+<p class="my-auto ml-2">Saturday</p>
+</div>
+
+<div class="row mx-0 mr-5">
+<div class="bg-success indicator-circle rounded-circle my-auto"></div>
+<p class="my-auto ml-2">Sunday</p>
+</div>
+</div>
+</div>
+</div>`;
         })
 
 
@@ -265,45 +301,45 @@ function searchResultUI(searchResults, searchText){
 
 
             searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="gotoProducerDetails(${producerId})">
-                <img class="rounded my-auto" src="${producerImage}"  width="100px" height="100px"alt="">
-                <div class="flex-fill pl-2 my-auto">
-                    <div class="row m-auto justify-content-between">
-                        <div class="my-auto">
-                            <h4 class="my-auto">${firstName} ${lastName}</h4>
-                            <div class="row mx-auto">
-                                <div class="row mx-auto my-auto">
-                                    <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
-                                    </svg>
-                                    <p class="my-auto ml-2">${phone}</p>
-                                </div>
+<img class="rounded my-auto" src="${producerImage}"  width="100px" height="100px"alt="">
+<div class="flex-fill pl-2 my-auto">
+<div class="row m-auto justify-content-between">
+<div class="my-auto">
+<h4 class="my-auto">${firstName} ${lastName}</h4>
+<div class="row mx-auto">
+<div class="row mx-auto my-auto">
+<svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+<path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+</svg>
+<p class="my-auto ml-2">${phone}</p>
+</div>
 
-                                <div class="row my-auto ml-5">
-                                    <svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
-                                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
-                                    </svg>
-                                    <p class="my-auto ml-2">${email}</p>
-                                </div>
+<div class="row my-auto ml-5">
+<svg class="my-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+<path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
+</svg>
+<p class="my-auto ml-2">${email}</p>
+</div>
 
 
-                            </div>
-                        </div>
-                        <div class="row my-auto mr-2">
-                            <svg class="row my-auto mx-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
-                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
-                            </svg>
-                            <p class="my-auto ml-2 addr-line-height">${street} ${houseNum}<br>${zip} ${city}</p>
-                        </div>
-                    </div>
-                    <div class="my-auto">
-                        <p class="addr-line-height mt-2">${description}</p>  
-                    </div>
-                </div>
-            </div>`;
+</div>
+</div>
+<div class="row my-auto mr-2">
+<svg class="row my-auto mx-auto" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+<path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+</svg>
+<p class="my-auto ml-2 addr-line-height">${street} ${houseNum}<br>${zip} ${city}</p>
+</div>
+</div>
+<div class="my-auto">
+<p class="addr-line-height mt-2">${description}</p>  
+</div>
+</div>
+</div>`;
         })
 
 
-        
+
         document.getElementById('searchResultUI').innerHTML = searchUI;
 
     }

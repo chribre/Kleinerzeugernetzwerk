@@ -16,7 +16,6 @@ if (session_status() == PHP_SESSION_NONE) {
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.php");
 
 ?>
-<script type="text/javascript" src="/kleinerzeugernetzwerk/js/search/search.js"></script>
 <script type="text/javascript" src="/kleinerzeugernetzwerk/js/custom/navigation.js"></script>
 <style>
     .desc-single-line{
@@ -64,22 +63,22 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
                 <div class="filter-content collapse show" id="collapse_2" style="">
                     <div class="card-body">
                         <label class="custom-control custom-checkbox">
-                            <input type="checkbox" checked="" class="custom-control-input">
+                            <input id="filter-product" type="checkbox" class="custom-control-input search-filter-control">
                             <div class="custom-control-label">Product  
                                 <b class="badge badge-pill badge-light float-right">120</b>  </div>
                         </label>
                         <label class="custom-control custom-checkbox">
-                            <input type="checkbox" checked="" class="custom-control-input">
+                            <input id="filter-production-point" type="checkbox" class="custom-control-input search-filter-control">
                             <div class="custom-control-label">Production Point 
                                 <b class="badge badge-pill badge-light float-right">15</b>  </div>
                         </label>
                         <label class="custom-control custom-checkbox">
-                            <input type="checkbox" checked="" class="custom-control-input">
+                            <input id="filter-seller" type="checkbox" class="custom-control-input search-filter-control">
                             <div class="custom-control-label">Seller 
                                 <b class="badge badge-pill badge-light float-right">35</b> </div>
                         </label>
                         <label class="custom-control custom-checkbox">
-                            <input type="checkbox" checked="" class="custom-control-input">
+                            <input id="filter-user" type="checkbox" class="custom-control-input search-filter-control">
                             <div class="custom-control-label">Producer 
                                 <b class="badge badge-pill badge-light float-right">89</b> </div>
                         </label>
@@ -273,17 +272,6 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
             </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
         </div>
     </div>
 </div>
@@ -291,7 +279,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 
 
 
-
+<script type="text/javascript" src="/kleinerzeugernetzwerk/js/search/search.js"></script>
 
 <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/footer.php");?>
 

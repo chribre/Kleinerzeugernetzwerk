@@ -41,12 +41,18 @@ switch ($_SERVER['REQUEST_METHOD']) {
 function getSearchResults(){
     global $dbConnection;
     $searchText = $_POST['searchText'] ? $_POST['searchText'] : '';
+    $filter = $_POST['filter'] ? $_POST['filter'] : [];
+    $filter_product = $filter['product'] == true ? $filter['product'] : false;
+    $filter_producttion_point = $filter['productionPoint'] == true ? $filter['productionPoint'] : false;
+    $filter_seller = $filter['seller'] == true ? $filter['seler'] : false;
+    $filter_user = $filter['user'] == true ? $filter['user'] : false;
+    
     $searchData = [];
     if ($searchText != ''){
-        $productData = searchProducts($searchText);
-        $productionPointData = searchProductionPoint($searchText);
-        $sellerData = searchSeller($searchText);
-        $producerData = searchproducer($searchText);
+        $productData = $filter_product == 'true' ? searchProducts($searchText) : [];
+        $productionPointData = $filter_producttion_point == 'true' ? searchProductionPoint($searchText) : [];
+        $sellerData = $filter_seller == 'true' ? searchSeller($searchText) : [];
+        $producerData = $filter_user == 'true' ? searchproducer($searchText) : [];
         
         
         $searchData['productDetails'] = $productData;
