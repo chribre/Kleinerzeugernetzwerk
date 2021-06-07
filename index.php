@@ -95,11 +95,18 @@ require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ma
 <script>
 
     function setCategoryFilter(categories){
+        var categoryName = '';
+        const locale = localStorage.getItem('language') ? localStorage.getItem('language') : DEUTSCH;
         var categoryOptionsUI = '';
         if (categories){
             categories.forEach(function (category, i) {
                 const categoryId = category.category_id ? category.category_id : 0;
-                const categoryName = category.category_name ? category.category_name : '';
+                switch (locale){
+                    case ENGLISH:
+                        categoryName = category.category_name ? category.category_name : '';
+                    default:
+                        categoryName = category.category_name_de ? category.category_name_de : '';
+                }
                 const categoryImage = category.image_name ? category.image_name : '';
 
                 categoryOptionsUI += `<li onclick="filterMapByCategory(${categoryId})">

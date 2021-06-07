@@ -75,6 +75,14 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     .cst-line-space-contact{
         line-height: 1.5em;
     }
+
+
+    #mapid .leaflet-popup-content-wrapper {
+        background: #dfeeea;
+        border: 1px solid #dfeeea;
+        border-radius: 5px;
+    }
+
 </style>
 
 
@@ -492,6 +500,10 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     })
 
     function addProductionPointsToMap(productionPoints){
+        productionPointMarker = {
+            "type": "FeatureCollection",
+            "features": []
+        }
         $.each(productionPoints,function(i,productionPoint){
             const productionPointId = productionPoint.farm_id ? productionPoint.farm_id : '';
             const productionPointName = productionPoint.farm_name ? productionPoint.farm_name : '';
@@ -521,9 +533,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
             }
 
 
-            //            const farmPopupContent = `<a data-id="${productionPointId}" style="text-decoration: none" id="productionPointLoc" onclick='return showProductsInProductionPoint()'><div class="d-inline-flex m-1 p-1"> <img src="${imagePath}" alt="" width="90px" height="60px" style="object-fit: cover;" class="m-auto"> <div class="pl-2"> <div id="productTitle">${productionPointName}</div> <div>${productionPointAddress}</div> </div> </div></a>`;
-            const farmPopupContent = `<a data-id="${productionPointId}" onclick="viewProductionPointInDetail(${productionPointId}, listproductsOnSideBar)" style="text-decoration: none" id="productionPointLoc"><div class="d-inline-flex m-1 p-1"> <img src="${imagePath}" alt="" width="90px" height="60px" style="object-fit: cover;" class="m-auto"> <div class="pl-2"> <div id="productTitle">${productionPointName}</div> <div>${productionPointAddress}</div> </div> </div></a>`;
-
+            const farmPopupContent = `<div class="hover-background"><a data-id="${productionPointId}" onclick="viewProductionPointInDetail(${productionPointId}, listproductsOnSideBar)" style="text-decoration: none" id="productionPointLoc"><div class="d-inline-flex m-1 p-1"> <img src="${imagePath}" alt="" width="90px" height="60px" style="object-fit: cover;" class="m-auto"> <div class="pl-2"> <div id="productTitle">${productionPointName}</div> <div>${productionPointAddress}</div> </div> </div></a></div>`;
 
 
 
@@ -533,7 +543,9 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
             })) {
                 console.log('Exists');
                 productionPointMarker.features.some((feats) => {
-                    feats.properties.popupContent += farmPopupContent   
+                    if (JSON.stringify(feats.geometry) === JSON.stringify(geom)){
+                        feats.properties.popupContent += farmPopupContent 
+                    }
                 })
             }else{
                 const tempProductionPoint = {
@@ -549,7 +561,8 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
                     },
                     "id": productionPointId
                 };
-                productionPointMarker.features = [...productionPointMarker.features, tempProductionPoint];
+//                productionPointMarker.features = [...productionPointMarker.features, tempProductionPoint];
+                productionPointMarker.features.push(tempProductionPoint);
             }
         })
 
@@ -598,7 +611,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
                     const productionPointLat = productionPointLoc.latitude ? productionPointLoc.latitude : null;
                     const productionPointLong = productionPointLoc.longitude ? productionPointLoc.longitude : null;
                     if (productionPointLat > 0 && productionPointLong > 0 && latitude > 0 && longitude > 0){
-                        createConnectionBetweenSellerAndProductionPoint(latitude, longitude, productionPointLat, productionPointLong);
+                        //                        createConnectionBetweenSellerAndProductionPoint(latitude, longitude, productionPointLat, productionPointLong);
                     }
                 })
             }
@@ -612,7 +625,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
             }
 
 
-            const sellerPopupContent = `<a data-id="${sellerId}" style="text-decoration: none" id="sellerLoc" onclick="viewSellerInDetail(${sellerId}, showSellerSidebar)"><div class="d-inline-flex m-1 p-1"> <img src="${imagePath}" alt="" width="90px" height="60px" style="object-fit: cover;" class="m-auto"> <div class="pl-2"> <div id="sellerTitle">${sellerName}</div> <div>${sellerAddress}</div> </div> </div></a>`;
+            const sellerPopupContent = `<div class="hover-background"><a data-id="${sellerId}" style="text-decoration: none" id="sellerLoc" onclick="viewSellerInDetail(${sellerId}, showSellerSidebar)"><div class="d-inline-flex m-1 p-1"> <img src="${imagePath}" alt="" width="90px" height="60px" style="object-fit: cover;" class="m-auto"> <div class="pl-2"> <div id="productTitle">${sellerName}</div> <div>${sellerAddress}</div> </div> </div></a></div>`;
 
 
 
@@ -623,7 +636,9 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
             })) {
                 console.log('Exists');
                 sellingPointMarker.features.some((feats) => {
-                    feats.properties.popupContent += sellerPopupContent   
+                    if (JSON.stringify(feats.geometry) === JSON.stringify(geom)){
+                        feats.properties.popupContent += sellerPopupContent   
+                    }
                 })
             }else{
                 const tempSellingPoint = {
@@ -639,7 +654,8 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
                     },
                     "id": sellerId
                 };
-                sellingPointMarker.features = [...sellingPointMarker.features, tempSellingPoint];
+//                sellingPointMarker.features = [...sellingPointMarker.features, tempSellingPoint];
+                sellingPointMarker.features.push(tempSellingPoint);
             }
         })
 
@@ -669,13 +685,14 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     }
 
 
+    var connectingPolyline = null;
 
     function createConnectionBetweenSellerAndProductionPoint(latseller, longseller, latProductionPoint, longProductionPoint){
         var pointA = new L.LatLng(latseller, longseller);
         var pointB = new L.LatLng(latProductionPoint, longProductionPoint);
         var pointList = [pointA, pointB];
 
-        var connectingPolyline = new L.Polyline(pointList, {
+        connectingPolyline = new L.Polyline(pointList, {
             color: '#adb5bd',
             weight: 2,
             opacity: 1,
@@ -686,6 +703,19 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         //        L.featureGroup(getArrows(pointList, 'red', 6,mymap)).addTo(mymap);
     }
 
+
+    function clearMapPolylines() {
+        for(i in mymap._layers) {
+            if(mymap._layers[i]._path != undefined) {
+                try {
+                    mymap.removeLayer(mymap._layers[i]);
+                }
+                catch(e) {
+                    console.log("problem with " + e + mymap._layers[i]);
+                }
+            }
+        }
+    }
 
 
     //
@@ -784,18 +814,43 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // initialize the map
     var mymap = L.map('mapid').setView([53.55657001703077, 13.246793875395099], 15);
 
     // load a tile layer
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJlZHl0aGVra2Vra2FyYSIsImEiOiJja2hybmpxaDMxd2VsMzJteGxhNW1oa3lpIn0.Ca1L1-selQY4MnJB_p9-7Q', {
-        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-        maxZoom: 20,
-        id: 'mapbox/light-v10',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: 'your.mapbox.access.token'
-    }).addTo(mymap);
+    //    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZnJlZHl0aGVra2Vra2FyYSIsImEiOiJja2hybmpxaDMxd2VsMzJteGxhNW1oa3lpIn0.Ca1L1-selQY4MnJB_p9-7Q', {
+    //        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    //        maxZoom: 20,
+    //        id: 'mapbox/light-v10',
+    //        tileSize: 512,
+    //        zoomOffset: -1,
+    //        accessToken: 'your.mapbox.access.token'
+    //    }).addTo(mymap);
+
+
+    var CartoDB_Positron = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 20
+    });
+
+
+    CartoDB_Positron.addTo(mymap);
 
     L.popup({maxHeight: 350});
 

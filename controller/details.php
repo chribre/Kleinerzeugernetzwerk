@@ -253,7 +253,8 @@ function fetchAllProductsFromSellingPoints($sellingPoint){
     $productsQuery = "SELECT i.image_path, i.image_name,
                                 p.*, pc.category_name, u.unit_abbr as unit_name, 
                                 GROUP_CONCAT(DISTINCT p_fea.feature_type) as features,
-                                f.farm_id, f.farm_name, fi.image_path as farm_image, fi.image_name as farm_image_name FROM products p
+                                f.farm_id, f.farm_name, ST_X(f.farm_location) as latitude, 
+                            ST_Y(f.farm_location) as longitude, fi.image_path as farm_image, fi.image_name as farm_image_name FROM products p
                         LEFT JOIN product_feature p_fea on p_fea.product_id = p.product_id
                         LEFT JOIN images i ON i.entity_id = p.product_id and i.image_type = 2
                         LEFT JOIN product_sellers ps ON ps.product_id = p.product_id

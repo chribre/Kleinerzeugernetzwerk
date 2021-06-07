@@ -39,6 +39,7 @@ function viewProductionPointInDetail(productionPointId, actionFunction){
 
 function listproductsOnSideBar(productsData){
     var sideBarUI = "";
+    clearMapPolylines()
     const productionPoint = productsData.productionPointDetails ? productsData.productionPointDetails : [];
     const ppId = productionPoint.farm_id ? productionPoint.farm_id : 0;
     const ppName = productionPoint.farm_name ? productionPoint.farm_name : '';
@@ -162,6 +163,12 @@ function listproductsOnSideBar(productsData){
                     const sZip = sellerObj.zip ? sellerObj.zip : '';
                     const sImageName = sellerObj.image_name ? sellerObj.image_name : DEFAULT_SELLER_IMAGE;
                     const sImagePath = getFilePath(4, sImageName);
+
+                    const sellerLat = sellerObj.latitude ? sellerObj.latitude : null;
+                    const sellerLong = sellerObj.longitude ? sellerObj.longitude : null;
+                    if (sellerLat > 0 && sellerLong > 0 && latitude > 0 && longitude > 0){
+                        createConnectionBetweenSellerAndProductionPoint(latitude, longitude, sellerLat, sellerLong);
+                    }
 
                     const sellerAddress = sStreet + ' ' + sBuildingNum + ', ' + sCity + ' ' + sZip;
                     productCard += `<div class="row rounded-pill mb-1 cst-bg-gray cursor-pointer bring-to-front" onclick="gotoSellerDetailsScreen(${sellerId})">
