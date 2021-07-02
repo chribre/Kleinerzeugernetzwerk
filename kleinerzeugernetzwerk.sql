@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 09, 2021 at 08:54 AM
+-- Generation Time: Jul 02, 2021 at 04:33 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -148,7 +148,10 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (125, 16, 'AW033301060a78d9a0b8305.73485657', '2021-05-21 10:38:18'),
 (126, 16, 'AW033301060ae74867fc1b1.99854004', '2021-05-26 16:17:10'),
 (127, 16, 'AW033301060ae7616e59284.13086019', '2021-05-26 16:23:50'),
-(128, 61, 'AW033301060b600cface9b9.04286502', '2021-06-01 09:41:35');
+(128, 61, 'AW033301060b600cface9b9.04286502', '2021-06-01 09:41:35'),
+(129, 16, 'AW033301060c1faedc0e972.57029843', '2021-06-10 11:43:41'),
+(130, 71, 'AW033301060d08335342b13.13754379', '2021-06-21 12:16:53'),
+(131, 16, 'AW033301060d45e3bd6f251.93739816', '2021-06-24 10:28:11');
 
 -- --------------------------------------------------------
 
@@ -195,7 +198,13 @@ INSERT INTO `farm_land` (`farm_id`, `producer_id`, `farm_name`, `farm_desc`, `fa
 (31, 16, 'Test Point', 'test', 'Binsenwerder, 4-6, Neubrandenburg - 17033', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x000000000101000000a8977384e7c64a40bcd25fd9927f2a40, 0, '2021-04-11 11:34:35'),
 (32, 16, 'Test Point 666', 'test', 'Binsenwerder, 2, Neubrandenburg - 17033', 'Binsenwerder', '2', 'Neubrandenburg', '17033', 0x000000000101000000bace876db4c64a40f12d8a7a437f2a40, 0, '2021-04-11 11:40:14'),
 (33, 16, 'Test Point 890', 'test', 'Binsenwerder, 1, Neubrandenburg - 17033', 'Binsenwerder', '1', 'Neubrandenburg', '17033', 0x000000000101000000dc5e65ebf3c64a40cf673a251c7f2a40, 0, '2021-04-11 11:45:16'),
-(34, 16, 'test 1', 'test', 'Friedrich-Engels-Ring, undefined, Neubrandenburg - 17033', 'Friedrich-Engels-Ring', 'undefined', 'Neubrandenburg', '17033', 0x0000000001010000009b4ee359d8c64a405d83f193dd842a40, 0, '2021-04-13 08:54:10');
+(34, 16, 'test 1', 'test', 'Friedrich-Engels-Ring, undefined, Neubrandenburg - 17033', 'Friedrich-Engels-Ring', 'undefined', 'Neubrandenburg', '17033', 0x0000000001010000009b4ee359d8c64a405d83f193dd842a40, 0, '2021-04-13 08:54:10'),
+(35, 16, 'new test', 'test', 'Friedrich-Engels-Ring, 48, Neubrandenburg - 17033', 'Friedrich-Engels-Ring', '48', 'Neubrandenburg', '17033', 0x000000000101000000629dd280d2c64a4086aeaa9028842a40, 0, '2021-06-10 11:44:00'),
+(36, 16, 'new test 4', 'test', 'Ausbau, 5, Angermünde - 16278', 'Ausbau', '5', 'Angermünde', '16278', 0x0000000001010000002613624a747e4a40bd6ce63bd50e2c40, 0, '2021-06-10 11:44:53'),
+(37, 16, 'new test 4', 'test', 'Ausbau, 5, Angermünde - 16278', 'Ausbau', '5', 'Angermünde', '16278', 0x0000000001010000002613624a747e4a40bd6ce63bd50e2c40, 0, '2021-06-10 11:44:53'),
+(38, 16, 'new test 4', 'test', 'Ausbau, 5, Angermünde - 16278', 'Ausbau', '5', 'Angermünde', '16278', 0x0000000001010000002613624a747e4a40bd6ce63bd50e2c40, 0, '2021-06-10 11:44:53'),
+(39, 16, 'test 1585', 'test', 'Binsenwerder, 4-6, Neubrandenburg - 17033', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x0000000001010000002940addedfc64a400942b624487f2a40, 0, '2021-06-10 11:56:07'),
+(40, 16, 'test 8569', 'test', 'Große Wollweberstraße, 6, Neubrandenburg - 17033', 'Große Wollweberstraße', '6', 'Neubrandenburg', '17033', 0x0000000001010000001e9e77da1cc74a40c06d422d5b842a40, 0, '2021-06-10 11:57:31');
 
 -- --------------------------------------------------------
 
@@ -373,7 +382,8 @@ INSERT INTO `images` (`image_id`, `image_type`, `image_name`, `image_path`, `ent
 (192, 3, '6076d8548dc95.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076d8548dc95.jpg', 34, '2021-04-14 11:56:04'),
 (193, 1, '60a7870267973.jfif', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60a7870267973.jfif', 58, '2021-05-21 10:11:01'),
 (194, 1, '60a7892d62523.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60a7892d62523.jpg', 59, '2021-05-21 10:19:40'),
-(195, 1, '60b600ab54720.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60b600ab54720.jpeg', 61, '2021-06-01 09:40:59');
+(195, 1, '60b600ab54720.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60b600ab54720.jpeg', 61, '2021-06-01 09:40:59'),
+(196, 1, '60d0831337227.jfif', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60d0831337227.jfif', 71, '2021-06-21 12:16:38');
 
 -- --------------------------------------------------------
 
@@ -395,6 +405,22 @@ INSERT INTO `image_types` (`type_id`, `type_name`) VALUES
 (2, 'product'),
 (3, 'production point'),
 (4, 'selling point');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `news_feed`
+--
+
+CREATE TABLE `news_feed` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `article` text NOT NULL,
+  `author_first_name` varchar(50) NOT NULL,
+  `author_last_name` varchar(50) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `created_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -843,7 +869,17 @@ INSERT INTO `user` (`user_id`, `salutations`, `first_name`, `middle_name`, `last
 (58, '', 'Brian', NULL, 'Gavin', '0000-00-00', 'Brodaer Straße', '6', '17036', '17036', 'Neubrandenburg', '9846194609', 'brian1@test.com', '', 0, 0, 0, '2021-05-21 10:10:18', '', 'Having been a host farmer for three seasons, we’ve seen firsthand the difference this internship makes in beginning farmers and host farms alike.  As a farmer it is difficult to weigh the benefits of hosting young farmers.  Fresh energy and enthusiasm bring more to the farm than helping hands; they bring a fresh perspective and inquisitiveness that helps you look at your farm and your farming system through new eyes each season.  There is no educational model I know of that is more effective at growing farmers than the one Rogue Farm Corps has developed.'),
 (59, '', 'test', NULL, 'name', '0000-00-00', 'Brodaer Straße', '4-6', '17033', '17033', '2', '9846194609', 'testa@test.com', '', 0, 0, 0, '2021-05-21 10:19:32', '', 'test'),
 (60, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredy2580', '', 0, 0, 0, '2021-06-01 09:39:34', '', 'test'),
-(61, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredy2581', '', 0, 0, 0, '2021-06-01 09:40:59', '', 'test');
+(61, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredy2581', '', 0, 0, 0, '2021-06-01 09:40:59', '', 'test'),
+(62, '', 'Test', NULL, 'name', '0000-00-00', 'test treet', '1', '17033', '17033', 'neubrandenburg', '123456', 'testname', '', 0, 0, 0, '2021-06-21 11:00:40', '', 'test story'),
+(63, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fred', '', 0, 0, 0, '2021-06-21 11:11:50', '', 'test'),
+(64, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'ffftest', '', 0, 0, 0, '2021-06-21 11:11:57', '', 'test'),
+(65, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'mmmmmm', '', 0, 0, 0, '2021-06-21 11:12:51', '', 'test'),
+(66, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'mmmmmml', '', 0, 0, 0, '2021-06-21 11:13:40', '', 'test'),
+(67, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'mmmmmmlr', '', 0, 0, 0, '2021-06-21 11:14:55', '', 'test'),
+(68, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'mmmmmmlrt', '', 0, 0, 0, '2021-06-21 11:16:27', '', 'test'),
+(69, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'mmmmmmlrts', '', 0, 0, 0, '2021-06-21 11:22:50', '', 'test'),
+(70, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'mmmmmmlrtst', '', 0, 0, 0, '2021-06-21 11:23:41', '', 'test'),
+(71, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', 'test', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredyaaa', '', 0, 0, 0, '2021-06-21 12:16:37', '', 'test');
 
 -- --------------------------------------------------------
 
@@ -855,62 +891,73 @@ CREATE TABLE `user_credential` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `user_name` varchar(100) NOT NULL,
-  `password` text NOT NULL
+  `password` text NOT NULL,
+  `password_reset_token` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='table to save user name and password of each users';
 
 --
 -- Dumping data for table `user_credential`
 --
 
-INSERT INTO `user_credential` (`id`, `user_id`, `user_name`, `password`) VALUES
-(1, 14, 'FREDZ@GMAIL.COM', 'TEST123'),
-(2, 15, 'q', 'q'),
-(3, 16, 'abc@abc.com', '$2y$10$2whQxFHJKJSL6sYSbA/FhOOAischlsIkUjggj2NhqKfH4y4NKo1tm'),
-(4, 17, 'test', 'test'),
-(5, 18, 'zzz', 'zzz'),
-(6, 19, 'abc@abc.com1', 'abc'),
-(7, 20, 'abc@abc.com123', '123'),
-(8, 21, 'abc@abc123', '123'),
-(9, 22, 'abc@abc.com1234', '1234'),
-(10, 23, 'abc@abc.com1111', 'qwert'),
-(11, 24, 'abc@abc.com12345', 'qwert'),
-(12, 25, 'abc@abc.co.in', 'abc'),
-(13, 26, 'abc@abc.comqwertz', 'qwertz'),
-(14, 27, 'abc@abc.comyyy', 'yyy'),
-(15, 28, 'asdfghjklö', 'asd'),
-(16, 29, 'axaxaxax', 'axa'),
-(17, 30, 'asxasx', 'asd'),
-(18, 31, 'asdasdasd', 'asdasd'),
-(19, 32, 'ffffffffffff', 'fff'),
-(20, 33, 'tom@vian.com', 'tom'),
-(21, 34, 'hhh@gmail.com', 'hhh'),
-(22, 35, '', '$2y$10$ULc9dmI6c/rlyqC.B0'),
-(23, 36, 'fredythekkekkara@gmail.co', '$2y$10$qIN1cLT9wJ.LF2/MQP'),
-(24, 37, 'lg20036', '$2y$10$COBzGI3TnheLlQ5Ec4'),
-(25, 38, 'lg200361', '$2y$10$jsAwnG/z0qlsDkPJe.'),
-(26, 39, 'lg200360', '$2y$10$R8vmXaClSVyH60ryqHaJA.Ix3VscEzwIH8QJioaexkJYhNPHNEfka'),
-(27, 40, 'tst', '$2y$10$a2faXXOYWSZHZug78KC/guGXeL0DjocRi2xzIRRlKATx5Si7aqwQi'),
-(28, 41, 'lg2003600', '$2y$10$h.A23UljsYPs51ijxS6cAecyZPiRxQFyNr.6u6I6i8.d7a492Fvxe'),
-(29, 42, 'lg2003601', '$2y$10$SYVbAxAMB9tv1VDLQ4NK3uIaguCueOQDKfPeuD247vkwRwjUFEuqK'),
-(30, 43, 'lg2003602', '$2y$10$Md72pLl1TQS4OPBAvd/T2ugNgWtypiB/ldIHChwyaEX6quVtcyfhy'),
-(31, 44, 'lg2003603', '$2y$10$3MmIhnVii2pedWi2QTVX3.bS7pM2r98Oc/W0aWNrMdHm9q.wOwQZe'),
-(32, 45, 'lg2003604', '$2y$10$VCV0O/VyRT5H7cfFR/aUruw7rmGE1OzxhNmuriUoo3JMIfImuX2v2'),
-(33, 46, 'lg2003605', '$2y$10$2whQxFHJKJSL6sYSbA/FhOOAischlsIkUjggj2NhqKfH4y4NKo1tm'),
-(34, 47, 'testm', '$2y$10$A9ae.Vqjgsckang6uSQRj.D0nqY9s2puDGtn3GoGR3CbDgAev4R1m'),
-(35, 48, 'test61', '$2y$10$DWS.kAuDE0Ge.eahkTKuUedh85Gv2PQZHJoSQ5yLxCZdoxaP0oQk.'),
-(36, 49, 'testfredy', '$2y$10$tQ868kl5A98d/5zqfalrse0.GU10.Rn2pHisMnhz6UL8uyyLVaCZ.'),
-(37, 50, 'fredythekkekkara@gmail.co', '$2y$10$AhMurSp6p5ibpi0XhZ0F5u7/neHtw5qEZ16ZpJwYFoXfFjFcMJ7LO'),
-(38, 51, 'fredythekkekkara@gmail.co', '$2y$10$C2kdTywEEHqH97uwFbEa7eJat9ElcIRoP8iCVtp.UKm71eBJ90Cci'),
-(39, 52, 'fredythekkekkara@gmail.com003', '$2y$10$LyZ811rC9X2Zst.631cS4OD.KZZxN7gvjEwd72J52Ol1gg8yn.bVm'),
-(40, 53, 'fredythekkekkara@gmail.com004', '$2y$10$/KWtc6exhAMKN3jo2OjpFu3d26deYFnx..i3tDKb9xV9AgbD3dp4m'),
-(41, 54, 'fredythekkekkara@gmail.com005', '$2y$10$qb7vHjE.q.7nweJXHwrb2.c6CnlU8o6hbzDeVcCKd1e5SjqRjL3C2'),
-(42, 55, 'fredythekkekkara@gmail.com006', '$2y$10$3UGAr5pIR/w90vvv8gOGR.22HzpVNrdTxKliRhTG24zMD2R.A7NF6'),
-(43, 56, 'fredythekkekkara@gmail.com007', '$2y$10$IsHZ7e6tnYUHxVosP5t1i.i.D5waZDhkwcBP5UcMmAri6HJTAV9te'),
-(44, 57, 'brian@test.com', '$2y$10$kbPW.xFsj/NnBrtrWfkNY.m2GX1qGybFRLN3OnycSOJLNEeN5w16q'),
-(45, 58, 'brian1@test.com', '$2y$10$abDR6pDADg0I.7Ok4XLuuOeAxXKlfROSXhTCdvRMtIw0g5l4IpZqu'),
-(46, 59, 'testa@test.com', '$2y$10$2IRm7tZQG5d1NmCElUyFZuTLNB2uFat5GXew2ugWfaR7PNKxCx.x2'),
-(47, 60, 'fredy2580', '$2y$10$Q0eJIFZ/Eq4KZq1QMLX5lO6Hj36PlLGx4f5WWC4kblgJUVUsI2Xvy'),
-(48, 61, 'fredy2581', '$2y$10$lJfKQ6M/rDhzDb4kkmavyOWcao/uEALVFDStY5MJMjNBwwVrCmsZa');
+INSERT INTO `user_credential` (`id`, `user_id`, `user_name`, `password`, `password_reset_token`) VALUES
+(1, 14, 'FREDZ@GMAIL.COM', 'TEST123', NULL),
+(2, 15, 'q', 'q', NULL),
+(3, 16, 'abc@abc.com', '$2y$10$2whQxFHJKJSL6sYSbA/FhOOAischlsIkUjggj2NhqKfH4y4NKo1tm', 'AW033301060cf60df8695a4.13129413'),
+(4, 17, 'test', '$2y$10$MK/dZDDQ3/4jdQEX4JNPPuUg5d0WumEJ0./dRoWO4o/eNc7NA42EK', NULL),
+(5, 18, 'zzz', 'zzz', NULL),
+(6, 19, 'abc@abc.com1', 'abc', NULL),
+(7, 20, 'abc@abc.com123', '123', NULL),
+(8, 21, 'abc@abc123', '123', NULL),
+(9, 22, 'abc@abc.com1234', '1234', NULL),
+(10, 23, 'abc@abc.com1111', 'qwert', NULL),
+(11, 24, 'abc@abc.com12345', 'qwert', NULL),
+(12, 25, 'abc@abc.co.in', 'abc', NULL),
+(13, 26, 'abc@abc.comqwertz', 'qwertz', NULL),
+(14, 27, 'abc@abc.comyyy', 'yyy', NULL),
+(15, 28, 'asdfghjklö', 'asd', NULL),
+(16, 29, 'axaxaxax', 'axa', NULL),
+(17, 30, 'asxasx', 'asd', NULL),
+(18, 31, 'asdasdasd', 'asdasd', NULL),
+(19, 32, 'ffffffffffff', 'fff', NULL),
+(20, 33, 'tom@vian.com', '$2y$10$4mdsUtITOrWTQ1DneT4zguKTu4thXg11XS3xvR3Jjy.jOIdCP6LQS', NULL),
+(21, 34, 'hhh@gmail.com', 'hhh', NULL),
+(22, 35, '', '$2y$10$ULc9dmI6c/rlyqC.B0', NULL),
+(23, 36, 'fredythekkekkara@gmail.co', '$2y$10$qIN1cLT9wJ.LF2/MQP', NULL),
+(24, 37, 'lg20036', '$2y$10$COBzGI3TnheLlQ5Ec4', NULL),
+(25, 38, 'lg200361', '$2y$10$jsAwnG/z0qlsDkPJe.', NULL),
+(26, 39, 'lg200360', '$2y$10$R8vmXaClSVyH60ryqHaJA.Ix3VscEzwIH8QJioaexkJYhNPHNEfka', NULL),
+(27, 40, 'tst', '$2y$10$a2faXXOYWSZHZug78KC/guGXeL0DjocRi2xzIRRlKATx5Si7aqwQi', NULL),
+(28, 41, 'lg2003600', '$2y$10$h.A23UljsYPs51ijxS6cAecyZPiRxQFyNr.6u6I6i8.d7a492Fvxe', NULL),
+(29, 42, 'lg2003601', '$2y$10$SYVbAxAMB9tv1VDLQ4NK3uIaguCueOQDKfPeuD247vkwRwjUFEuqK', NULL),
+(30, 43, 'lg2003602', '$2y$10$Md72pLl1TQS4OPBAvd/T2ugNgWtypiB/ldIHChwyaEX6quVtcyfhy', NULL),
+(31, 44, 'lg2003603', '$2y$10$3MmIhnVii2pedWi2QTVX3.bS7pM2r98Oc/W0aWNrMdHm9q.wOwQZe', NULL),
+(32, 45, 'lg2003604', '$2y$10$VCV0O/VyRT5H7cfFR/aUruw7rmGE1OzxhNmuriUoo3JMIfImuX2v2', NULL),
+(33, 46, 'lg2003605', '$2y$10$2whQxFHJKJSL6sYSbA/FhOOAischlsIkUjggj2NhqKfH4y4NKo1tm', NULL),
+(34, 47, 'testm', '$2y$10$A9ae.Vqjgsckang6uSQRj.D0nqY9s2puDGtn3GoGR3CbDgAev4R1m', NULL),
+(35, 48, 'test61', '$2y$10$DWS.kAuDE0Ge.eahkTKuUedh85Gv2PQZHJoSQ5yLxCZdoxaP0oQk.', NULL),
+(36, 49, 'testfredy', '$2y$10$tQ868kl5A98d/5zqfalrse0.GU10.Rn2pHisMnhz6UL8uyyLVaCZ.', NULL),
+(37, 50, 'fredythekkekkara@gmail.co', '$2y$10$AhMurSp6p5ibpi0XhZ0F5u7/neHtw5qEZ16ZpJwYFoXfFjFcMJ7LO', NULL),
+(38, 51, 'fredythekkekkara@gmail.co', '$2y$10$C2kdTywEEHqH97uwFbEa7eJat9ElcIRoP8iCVtp.UKm71eBJ90Cci', NULL),
+(39, 52, 'fredythekkekkara@gmail.com003', '$2y$10$LyZ811rC9X2Zst.631cS4OD.KZZxN7gvjEwd72J52Ol1gg8yn.bVm', NULL),
+(40, 53, 'fredythekkekkara@gmail.com004', '$2y$10$/KWtc6exhAMKN3jo2OjpFu3d26deYFnx..i3tDKb9xV9AgbD3dp4m', NULL),
+(41, 54, 'fredythekkekkara@gmail.com005', '$2y$10$qb7vHjE.q.7nweJXHwrb2.c6CnlU8o6hbzDeVcCKd1e5SjqRjL3C2', NULL),
+(42, 55, 'fredythekkekkara@gmail.com006', '$2y$10$3UGAr5pIR/w90vvv8gOGR.22HzpVNrdTxKliRhTG24zMD2R.A7NF6', NULL),
+(43, 56, 'fredythekkekkara@gmail.com007', '$2y$10$IsHZ7e6tnYUHxVosP5t1i.i.D5waZDhkwcBP5UcMmAri6HJTAV9te', NULL),
+(44, 57, 'brian@test.com', '$2y$10$kbPW.xFsj/NnBrtrWfkNY.m2GX1qGybFRLN3OnycSOJLNEeN5w16q', NULL),
+(45, 58, 'brian1@test.com', '$2y$10$abDR6pDADg0I.7Ok4XLuuOeAxXKlfROSXhTCdvRMtIw0g5l4IpZqu', NULL),
+(46, 59, 'testa@test.com', '$2y$10$2IRm7tZQG5d1NmCElUyFZuTLNB2uFat5GXew2ugWfaR7PNKxCx.x2', NULL),
+(47, 60, 'fredy2580', '$2y$10$Q0eJIFZ/Eq4KZq1QMLX5lO6Hj36PlLGx4f5WWC4kblgJUVUsI2Xvy', NULL),
+(48, 61, 'fredy2581', '$2y$10$lJfKQ6M/rDhzDb4kkmavyOWcao/uEALVFDStY5MJMjNBwwVrCmsZa', NULL),
+(49, 62, 'testname', '$2y$10$L8HohEmpc4qPiRPzze93.OvenSyytJNq45QG0/nTpAZrL1bWPbmWW', NULL),
+(50, 63, 'fred', '$2y$10$2cyF26y4i06ik3lphCbPk.lNSK3iCxJZ/2M4pt9wcIuH2ynd21BCS', NULL),
+(51, 64, 'ffftest', '$2y$10$3d8eUkFO94W60eKIo2TqAuSNV7lgGWY/TduwXM5NUgFrBD7eYqkWe', NULL),
+(52, 65, 'mmmmmm', '$2y$10$/yvcjovfSsJhOcSqZQSXm.Ebz7aXbkfYMfeHoHe7L2we7YlzOLVw2', NULL),
+(53, 66, 'mmmmmml', '$2y$10$Wkl2JmvGRI1kD53L0p9JOe.PlIWu/DJWSG2AkFfR.xNHAaXGxJW5a', NULL),
+(54, 67, 'mmmmmmlr', '$2y$10$eMcOwC0TykJLkSbxSEHNEuQvuPZZFldOyEo3IH9hXNq.0RRcDWHSW', NULL),
+(55, 68, 'mmmmmmlrt', '$2y$10$VW7o90CXxBu8NsXf6JmzFOQM3cquX5hGiO5A79ArWmo72pNpeiPtW', NULL),
+(56, 69, 'mmmmmmlrts', '$2y$10$Kz0icnXRv908cTJsTKi0VO4p0TpF8sRjbtrBRTJpYVpD7PIpjvyJ6', NULL),
+(57, 70, 'mmmmmmlrtst', '$2y$10$wJzJ5y4ppVd4N9zKo6fWeeklXeyp9iS88DgugrMB8IOY9HYWB/O3K', NULL),
+(58, 71, 'fredyaaa', '$2y$10$92MnSwoBAC.ESoCgu1bed.tk9t0vdPKUTUE/NB0Lf2NWu0X6CqUT2', NULL);
 
 --
 -- Indexes for dumped tables
@@ -957,6 +1004,13 @@ ALTER TABLE `images`
 ALTER TABLE `image_types`
   ADD PRIMARY KEY (`type_id`),
   ADD KEY `type_id` (`type_id`);
+
+--
+-- Indexes for table `news_feed`
+--
+ALTER TABLE `news_feed`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `feed_user_fk` (`user_id`);
 
 --
 -- Indexes for table `products`
@@ -1029,13 +1083,13 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=132;
 
 --
 -- AUTO_INCREMENT for table `farm_land`
 --
 ALTER TABLE `farm_land`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `favourite_sellers`
@@ -1053,7 +1107,13 @@ ALTER TABLE `feature_type`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=197;
+
+--
+-- AUTO_INCREMENT for table `news_feed`
+--
+ALTER TABLE `news_feed`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1095,13 +1155,13 @@ ALTER TABLE `units`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `user_credential`
 --
 ALTER TABLE `user_credential`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- Constraints for dumped tables
@@ -1119,6 +1179,12 @@ ALTER TABLE `farm_land`
 ALTER TABLE `favourite_sellers`
   ADD CONSTRAINT `seller_fk` FOREIGN KEY (`seller_id`) REFERENCES `sellers` (`seller_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `news_feed`
+--
+ALTER TABLE `news_feed`
+  ADD CONSTRAINT `feed_user_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `products`
