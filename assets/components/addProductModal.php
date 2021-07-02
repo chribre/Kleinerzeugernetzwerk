@@ -132,26 +132,26 @@
             <div class="modal-header">
 
 
-                <h5 class="modal-title text-center"><i class="material-icons">&#xE147;</i>Add a new product</h5>
+                <h5 class="modal-title text-center"><i class="material-icons">&#xE147;</i><?php echo gettext("Add a new product"); ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body m-3">
-                <p>Modal body text goes here.</p>
+                <p><?php echo gettext("Modal body text goes here."); ?></p>
                 <form method="post" id="newProductForm" enctype='multipart/form-data'>
                     <input type="hidden" name="productId" id="productId" >
                     <div class="form-group">
-                        <label for="productName">Product Name</label>
+                        <label for="productName"><?php echo gettext("Product Name"); ?></label>
                         <input type="text" class="form-control" id="productName" aria-describedby="productName01" placeholder="Product name" name="productName" >
                     </div>
                     <div class="form-group">
-                        <label for="productDesc">Product Description</label>
+                        <label for="productDesc"><?php echo gettext("Product Description"); ?></label>
                         <textarea class="form-control" id="productDesc" name="productDesc" rows="4" placeholder="Write a description about your product."></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label for="productCategoryList">Product Category</label>
+                        <label for="productCategoryList"><?php echo gettext("Product Category"); ?></label>
                         <div>
                             <select class="selectpicker form-control" name="productCategory" id="productCategory">
 
@@ -162,7 +162,7 @@
 
 
                     <div class="form-group">
-                        <label>Product Features</label>
+                        <label><?php echo gettext("Product Features"); ?></label>
 
                         <div id="featureIdArray" hidden></div>
                         <div>
@@ -189,15 +189,15 @@
 
                     <div class="row form-group">
                         <div class="col">
-                            <label for="productPrice">Product Price</label>
+                            <label for="productPrice"><?php echo gettext("Product Price"); ?></label>
                             <input type="text" id="productPrice" class="form-control" name="productPrice" placeholder="Price in Euro">
                         </div>
                         <div class="col">
-                            <label for="quantity">Quantity of Price</label>
+                            <label for="quantity"><?php echo gettext("Quantity of Price"); ?></label>
                             <input type="text" id="quantity" class="form-control" name="quantity" placeholder="Quantity">
                         </div>
                         <div class="col">
-                            <label for="unit">Unit</label>
+                            <label for="unit"><?php echo gettext("Unit"); ?></label>
                             <select class="form-control" id="unit" name="unit">
 
 
@@ -208,7 +208,7 @@
 
 
                     <div class="form-group" id="productionPointSelection">
-                        <label for="productionPoint">Production Point</label>
+                        <label for="productionPoint"><?php echo gettext("Production Point"); ?></label>
                         <div>
                             <select class="selectpicker form-control" id="productionPointOptions" name="productionPoint">
 
@@ -218,7 +218,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Selling Points</label>
+                        <label><?php echo gettext("Selling Points"); ?></label>
 
                         <div id="sellerIdArray" hidden></div>
                         <div>
@@ -232,7 +232,7 @@
 
                     <div id="productImageIdArray" hidden></div>
                     <div class="form-group">
-                        <label>Add product images</label>
+                        <label><?php echo gettext("Add product images"); ?></label>
                         <div class="mx-4 justify-content-center row">
                             <div id="gallery" class="row">
 
@@ -260,12 +260,12 @@
                         <div class="form-group">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" id="isProcessed" name="isProcessed">
-                                <label class="form-check-label" for="isProcessed">It is a processed food.</label>
+                                <label class="form-check-label" for="isProcessed"><?php echo gettext("It is a processed food."); ?></label>
                             </div>
                         </div>
                         <div>
-                            <button type="button" id="addProductSubmitBtn" name="addProductMethod" value="true" class="btn btn-primary">Save</button>
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" id="addProductSubmitBtn" name="addProductMethod" value="true" class="btn btn-primary"><?php echo gettext("Save"); ?></button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo gettext("Close"); ?></button>
 
                         </div>
 

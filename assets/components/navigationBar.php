@@ -105,7 +105,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                         <div class="input-group-prepend">
                             <button id="button-addon2" type="submit" class="btn btn-link text-warning"><i class="fa fa-search"></i></button>
                         </div>
-                        <input id="searchTextBox" type="search" placeholder="Search" aria-describedby="button-addon2" class="form-control border-0 bg-white rounded-pill align-middle">
+                        <input id="searchTextBox" type="search" placeholder="<?php echo gettext("Search"); ?>" aria-describedby="button-addon2" class="form-control border-0 bg-white rounded-pill align-middle">
                     </div>
                 </div>
 
@@ -197,7 +197,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
 
 
         function setLoginOrProfileButton(){
-            const signInButton = '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right id="signInOrProfileBtn">Sign In</button>';       
+            const signInButton = '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right id="signInOrProfileBtn"><?php echo gettext("Sign In"); ?></button>';       
 
 
             //        if (!$('#signInOrProfileBtn').length > 0) {
@@ -213,7 +213,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                 const viewProfilePath = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=personal';
                 const logOutImage = '/kleinerzeugernetzwerk/images/logout.png';
 
-                const profileBtn = `<div class="dropdown rounded-circle bg-info p-1 ml-3" id="signInOrProfileBtn"> <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="rounded-circle bg-info"> <img src="${profileImage}" class="d-block rounded-circle" width="36px" height="36px" style="object-fit: cover;"> </div> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel"> <a class="dropdown-item font-weight-bold text-uppercase" href="${viewProfilePath}">${userName}</br><span class=" text font-weight-light text-lowercase">${email}</span> </a> <div class="dropdown-divider"></div>  <a class="dropdown-item" href="javascript:logOut()"><img class="mr-2" src="${logOutImage}" width=20px, height=20px/>Log Out</a> </div> </div>`
+                const profileBtn = `<div class="dropdown rounded-circle bg-info p-1 ml-3" id="signInOrProfileBtn"> <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="rounded-circle bg-info"> <img src="${profileImage}" class="d-block rounded-circle" width="36px" height="36px" style="object-fit: cover;"> </div> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel"> <a class="dropdown-item font-weight-bold text-uppercase" href="${viewProfilePath}">${userName}</br><span class=" text font-weight-light text-lowercase">${email}</span> </a> <div class="dropdown-divider"></div>  <a class="dropdown-item" href="javascript:logOut()"><img class="mr-2" src="${logOutImage}" width=20px, height=20px/><?php echo gettext("Log Out"); ?></a> </div> </div>`
 
 
                 $("#signInOrProfileBtn").replaceWith(profileBtn);

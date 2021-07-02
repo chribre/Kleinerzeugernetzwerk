@@ -34,6 +34,11 @@ foreach($db as $key => $value){
 define(strtoupper($key), $value);
 }
 
+function createDBConnection(){
+    $dbConn = new mysqli(DB_HOST, DB_USER,DB_PASS,DB_NAME);
+    return $dbConn;
+}
+
 $dbConnection = mysqli_connect(DB_HOST, DB_USER,DB_PASS,DB_NAME);
 
 

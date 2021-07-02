@@ -16,7 +16,7 @@
         <div class="modal-content form-elegant pb-4">
             <!--Header-->
             <div class="modal-header text-center">
-                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong>Sign in</strong></h3>
+                <h3 class="modal-title w-100 dark-grey-text font-weight-bold my-3" id="myModalLabel"><strong><?php echo gettext("Sign in"); ?></strong></h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -24,22 +24,22 @@
 
 
             <div class="alert alert-danger mx-4" hidden role="alert" id="loginError">
-                Please check the email and password and try again!
+                <?php echo gettext("Please check the email and password and try again!"); ?>
             </div>
 
             <div class="registration_form">
                 <form enctype="multipart/form-data" class="needs-validation" novalidate onsubmit="event.preventDefault()">
                     <div class="form-row">
                         <div class="col-md-12 mb-3">
-                            <label for="email">E-mail</label>
-                            <input type="text" class="form-control" id="email" placeholder="Enter your email address" required name="email">
+                            <label for="email"><?php echo gettext("E-mail"); ?></label>
+                            <input type="text" class="form-control" id="email" placeholder="<?php echo gettext("Enter your email address"); ?>" required name="email">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
                         </div>
                         <div class="col-md-12 mb-3">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" placeholder="Enter your password" required name="password">
+                            <label for="password"><?php echo gettext("Password"); ?></label>
+                            <input type="password" class="form-control" id="password" placeholder="<?php echo gettext("Enter your password"); ?>" required name="password">
                             <div class="valid-feedback">
                                 Looks good!
                             </div>
@@ -47,19 +47,25 @@
 
                     </div>
                     <div class="text-right">
-                        <p>Forgot password?</p>
+
+                        <a onclick="showPasswordResetForm(); return false;"  id="forgot-password-link" 
+                           href="#"><?php echo gettext("Forgot password?"); ?></a>
+                        <!--
+<a data-target="#forgot-password-modal" data-toggle="modal"  id="forgot-password-link" 
+href="#forgot-password-modal"><?php echo gettext("Forgot password?"); ?></a>
+-->
                     </div>
                     <!--                    <input type="hidden" name="signIn" value="true">-->
-                    <button class="btn btn-primary btn-block" id="signInBtn">Sign In</button>
+                    <button class="btn btn-primary btn-block" id="signInBtn"><?php echo gettext("Sign In"); ?></button>
                 </form>
                 <div class="text-center pt-3">
-                    <p>Not a memeber yet?</p>
+                    <p><?php echo gettext("Not a memeber yet?"); ?></p>
                 </div>
 
 
 
 
-                <a class="btn btn-secondary btn-block" href="<?php echo $SIGN_UP_LOC ?>"> Register</a>
+                <a class="btn btn-secondary btn-block" href="<?php echo $SIGN_UP_LOC ?>"><?php echo gettext("Register"); ?></a>
 
                 <!--                            <button class="btn btn-secondary btn-block" href="../../src/signUp.php">Register</button>-->
 
@@ -94,7 +100,35 @@
 <!-- Modal -->
 
 
+<!--Forgot password Modal-->
 
+<div class="modal fade" id="forgot-password-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Forgot Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="alert alert-danger mx-4 mt-2" hidden role="alert" id="email-error">
+                <?php echo gettext("Enter a valid email address"); ?>
+            </div>
+            <div class="modal-body">
+                <form onSubmit="return false;">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Email:</label>
+                        <input type="text" class="form-control" id="email-id">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="reset-password-btn" onclick="requestResetPassword()" type="button" class="btn btn-primary">Request Password Reset</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     document.getElementById("signInBtn").onclick = function () { 
@@ -113,6 +147,9 @@
             },
             complete: function(){
                 $("#overlay").fadeOut(300);
+            },
+            headers: {
+                'action': "CREATE"
             },
             data: { 
                 email:email,
@@ -149,4 +186,46 @@
             }
         }
     }
+
+    function showPasswordResetForm(){
+        document.getElementById('email-id').value = '';
+        document.getElementById("email-error").hidden = true
+        $('#forgot-password-modal').modal('toggle');
+    }
+
+    function requestResetPassword(){
+        const email = document.getElementById('email-id').value;
+        if (email.length > 0){
+            resetPasswordService(email);
+        }else{
+            document.getElementById("email-error").removeAttribute("hidden");
+            animateCSS('#forgot-password-modal', 'shakeX');
+        }
+    }
+
+    function resetPasswordService(email){
+        $.ajax({
+            type: "POST",
+            url: "/kleinerzeugernetzwerk/controller/userAuthController.php",
+            beforeSend: function(){
+                $("#overlay").fadeIn(300);　
+            },
+            complete: function(){
+                $("#overlay").fadeOut(300);
+            },
+            headers: {
+                'action': "RESET_PASSWORD_REQUEST"
+            },
+            data: { 
+                email:email
+            },
+            success: function( data ) {
+                console.log(data)
+            },
+            error: function (request, status, error) {
+                console.log(error)
+            }
+        });
+    }
+
 </script>

@@ -21,25 +21,25 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 
 <div>
     <div class="mt-md-5">
-        <h4 class="text-center inter-font heading">ABOUT US</h4>
-        <p class="w-75 mx-auto text-center mt-md-3 inter-font desc-italics">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <h4 class="text-center inter-font heading"><?php echo gettext("ABOUT US"); ?></h4>
+        <p class="w-75 mx-auto text-center mt-md-3 inter-font desc-italics"><?php echo gettext("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."); ?></p>
     </div>
     <div class="row mx-5 justify-content-center mt-md-5">
         <img class="col-4" src="https://dmexco.com/wp-content/uploads/2020/07/corporate-venturing.jpeg" alt="">
         <div class="col-6 my-auto">
-            <h5 class="text-center inter-font sub-heading">Our Story</h5>
-            <p class="text-center inter-font desc-regular">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+            <h5 class="text-center inter-font sub-heading"><?php echo gettext("Our Story"); ?></h5>
+            <p class="text-center inter-font desc-regular"><?php echo gettext("Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.
 
-                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                The standard chunk of Lorem Ipsum used since the 1500s below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation"); ?></p>
         </div>
     </div>
 
     <div class="row mx-5 justify-content-center mt-md-5">
         <div class="col-6 my-auto">
-            <h5 class="text-center inter-font sub-heading">Our Mission</h5>
-            <p class="text-center inter-font desc-regular">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+            <h5 class="text-center inter-font sub-heading"><?php echo gettext("Our Mission"); ?></h5>
+            <p class="text-center inter-font desc-regular"><?php echo gettext("Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.
 
-                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation"); ?></p>
         </div>
         <img class="col-4" src="https://dmexco.com/wp-content/uploads/2020/07/corporate-venturing.jpeg" alt="">
     </div>
@@ -47,41 +47,41 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
     <div class="row mx-5 justify-content-center mt-md-5">
         <img class="col-4" src="https://dmexco.com/wp-content/uploads/2020/07/corporate-venturing.jpeg" alt="">
         <div class="col-6 my-auto">
-            <h5 class="text-center inter-font sub-heading">Our Story</h5>
-            <p class="text-center inter-font desc-regular">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+            <h5 class="text-center inter-font sub-heading"><?php echo gettext("Our Story"); ?></h5>
+            <p class="text-center inter-font desc-regular"><?php echo gettext("Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.
 
-                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."); ?></p>
         </div>
     </div>
 
     <div>
-        <h5 class="text-center inter-font sub-heading mt-md-5">Our Team</h5>
+        <h5 class="text-center inter-font sub-heading mt-md-5"><?php echo gettext("Our Team"); ?></h5>
         <div class="row justify-content-center mt-md-5">
             <div class="col-md-3 px-3">
                 <img class="rounded-circle mx-auto d-block" src="https://lh3.googleusercontent.com/proxy/bpayneocT5ziuE-S4fCemZnZDBHkGjowRc-Bp-3G03mGiVupDiPSGPHCgfJgr0TU93vCj1OsPIj-T87aCIYoNmvAWBp8C6bbKjDh_w" alt="" width="150px" height="150px">
                 <p class="text-center inter-font name">John Deo</p>
-                <p class="text-center inter-font designation">Designation</p>
-                <p class="text-center inter-font team-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                <p class="text-center inter-font designation"><?php echo gettext("Designation"); ?></p>
+                <p class="text-center inter-font team-desc"><?php echo gettext("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever sinc 800s,"); ?></p>
             </div>
             <div class="col-md-3 px-3">
                 <img class="rounded-circle mx-auto d-block" src="https://lh3.googleusercontent.com/proxy/bpayneocT5ziuE-S4fCemZnZDBHkGjowRc-Bp-3G03mGiVupDiPSGPHCgfJgr0TU93vCj1OsPIj-T87aCIYoNmvAWBp8C6bbKjDh_w" alt="" width="150px" height="150px">
                 <p class="text-center inter-font name">John Deo</p>
-                <p class="text-center inter-font designation">Designation</p>
-                <p class="text-center inter-font team-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                <p class="text-center inter-font designation"><?php echo gettext("Designation"); ?></p>
+                <p class="text-center inter-font team-desc"><?php echo gettext("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"); ?></p>
             </div>
             <div class="col-md-3 px-3">
                 <img class="rounded-circle mx-auto d-block" src="https://lh3.googleusercontent.com/proxy/bpayneocT5ziuE-S4fCemZnZDBHkGjowRc-Bp-3G03mGiVupDiPSGPHCgfJgr0TU93vCj1OsPIj-T87aCIYoNmvAWBp8C6bbKjDh_w" alt="" width="150px" height="150px">
                 <p class="text-center inter-font name">John Deo</p>
-                <p class="text-center inter-font designation">Designation</p>
-                <p class="text-center inter-font team-desc">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+                <p class="text-center inter-font designation"><?php echo gettext("Designation"); ?>Designation</p>
+                <p class="text-center inter-font team-desc"><?php echo gettext("Lorem __ klj Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,"); ?></p>
             </div>
         </div>
     </div>
 
     <div>
-        <h5 class="text-center inter-font sub-heading mt-md-5">Our Patron</h5>
+        <h5 class="text-center inter-font sub-heading mt-md-5"><?php echo gettext("Our Patron"); ?></h5>
 
-        <p class="w-75 mx-auto text-center inter-font desc-regular mt-md-2">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <p class="w-75 mx-auto text-center inter-font desc-regular mt-md-2"><?php echo gettext("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen gdf book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."); ?></p>
 
         <div class="container mt-md-5">
 

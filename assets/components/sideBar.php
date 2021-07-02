@@ -13,22 +13,22 @@
 
             <ul class="list-unstyled components mb-5">
                 <li class="active">
-                    <a href='dashboard.php?menu=profile&data=personal'><span class="fa fa-user"></span> Profile</a>
+                    <a href='dashboard.php?menu=profile&data=personal'><span class="fa fa-user"></span> <?php echo gettext("Profile"); ?></a>
                 </li>
                 <li>
-                    <a href='dashboard.php?menu=products'><span class="fa fa-shopping-basket"></span> Products</a>
+                    <a href='dashboard.php?menu=products'><span class="fa fa-shopping-basket"></span> <?php echo gettext("Products"); ?></a>
                 </li>
                 <li class="active">
-                    <a href='dashboard.php?menu=profile&data=productionPoint'><span class="fa fa-cubes"></span> Production Point</a>
+                    <a href='dashboard.php?menu=profile&data=productionPoint'><span class="fa fa-cubes"></span> <?php echo gettext("Production Point"); ?></a>
                 </li>
                 <li class="active">
-                    <a href='dashboard.php?menu=profile&data=seller'><span class="fa fa-shopping-cart"></span> Seller</a>
+                    <a href='dashboard.php?menu=profile&data=seller'><span class="fa fa-shopping-cart"></span> <?php echo gettext("Seller"); ?></a>
                 </li>
                 <li>
-                    <a href='dashboard.php?menu=events'><span class="fa fa-calendar"></span> Events</a>
+                    <a href='dashboard.php?menu=events'><span class="fa fa-calendar"></span> <?php echo gettext("Events"); ?></a>
                 </li>
                 <li>
-                    <a href='dashboard.php?menu=services'><span class="fa fa-cogs"></span> Services</a>
+                    <a href='dashboard.php?menu=services'><span class="fa fa-cogs"></span> <?php echo gettext("Services"); ?></a>
                 </li>
             </ul>
 
@@ -61,13 +61,13 @@
                                 
                                 if (isset($_GET['data'])){
                                     if ($_GET['data'] == 'personal'){
-                                        $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PROFILE</text></div>';
+                                        $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("PROFILE").'</text></div>';
                                         $profileHead = $profileHead . '<a class="btn btn-success" href="/kleinerzeugernetzwerk/src/editProfile.php" ><i class="edit icon"></i>Edit profile</a>';
                                     }elseif ($_GET['data'] == 'productionPoint'){
-                                        $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PRODUCTION POINTS</text></div>';
+                                        $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'. gettext("PRODUCTION POINTS") . '</text></div>';
                                         $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddProductionPointModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Farm Land</button>';
                                     }elseif ($_GET['data'] == 'seller'){
-                                        $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">SELLERS</text></div>';
+                                        $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("SELLERS").'</text></div>';
                                         $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddSellarModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Selling Point</button>';
 
 
@@ -77,16 +77,16 @@
                                 echo $profileHead;
                                 break;
                             case 'products':
-                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PRODUCTS</text></div>';
+                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("PRODUCTS").'</text></div>';
                                 break;
                             case 'events':
-                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">EVENTS</text></div>';
+                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("EVENTS").'</text></div>';
                                 break;
                             case 'services':
-                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">SERVICES</text></div>';
+                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("SERVICES").'</text></div>';
                                 break;
                             default:
-                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">PROFILE</text></div>';
+                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("PROFILE").'</text></div>';
                                 break;
                         }
 
@@ -106,13 +106,13 @@
                                 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/products.php");
                                 break;
                             case 'events':
-                                echo '<h2 class="ml-3">EVENTS</h2>';
+                                echo '<h2 class="ml-3">'.gettext("EVENTS").'</h2>';
                                 break;
                             case 'services':
-                                echo '<h2 class="ml-3">SERVICES</h2>';
+                                echo '<h2 class="ml-3">'.gettext("SERVICES").'</h2>';
                                 break;
                             default:
-                                echo '<h2 class="ml-3">PROFILE</h2>';
+                                echo '<h2 class="ml-3">'.gettext("PROFILE").'</h2>';
                                 break;
                         }
 

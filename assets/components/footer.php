@@ -72,6 +72,6 @@ $POPPER_JS = '/kleinerzeugernetzwerk/js/popper.js';
         </div>
     </div>
 </div>
-<p class="text-center">Copyright &copy; 2021 Kleinerzeugernetzwerk. All rights reserved. <a href="">Terms of Use</a> | <a href="">Privacy Policy</a></p>
+<p class="text-center"><?php echo gettext("Copyright"); ?> &copy; 2021 Kleinerzeugernetzwerk. <?php echo gettext("All rights reserved."); ?> <a href="" data-toggle="modal" data-target="#termsAndConditionsModal"><?php echo gettext("Terms of Use"); ?></a> | <a href="" data-toggle="modal" data-target="#privacyPolicyModal"><?php echo gettext("Privacy Policy"); ?></a></p>
 </body>
 </html>

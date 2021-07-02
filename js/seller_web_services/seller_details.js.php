@@ -148,7 +148,7 @@ function showSellerInDetailScreen(sellerData){
 <p>${sDesc}</p>
 
 <div>
-<h5 class="mt-5">Opening Hours</h5>
+<h5 class="mt-5"><?php echo gettext("Opening Hours"); ?></h5>
 <table class="table table-borderless">
 <tbody>`;
 
@@ -184,71 +184,71 @@ function showSellerInDetailScreen(sellerData){
 
 
         sellerUI += `<tr>
-<th scope="row">Monday</th>`;
+<th scope="row"><?php echo gettext("Monday"); ?></th>`;
 
         if (isMonAvailable){
             sellerUI += `<td>${monOpen}</td>
 <td>${monClose}</td>`;
         }else{
-            sellerUI +=`<td>Closed</td>`;
+            sellerUI +=`<td><?php echo gettext("Closed"); ?></td>`;
         }
 
-        sellerUI += `<th scope="row">Tuesday</th>`;
+        sellerUI += `<th scope="row"><?php echo gettext("Tuesday"); ?></th>`;
         if (isTueAvailable){
             sellerUI += `<td>${tueOpen}</td>
 <td>${tueClose}</td>`;
         }else{
-            sellerUI +=`<td>Closed</td>`;
+            sellerUI +=`<td><td><?php echo gettext("Closed"); ?></td>`;
         }
 
         sellerUI += `</tr>
 <tr>`;
 
 
-        sellerUI += `<th scope="row">Wednesday</th>`;
+        sellerUI += `<th scope="row"><?php echo gettext("Wednesday"); ?></th>`;
         if (isWedAvailable){
             sellerUI += `<td>${wedOpen}</td>
 <td>${wedClose}</td>`;
         }else{
-            sellerUI +=`<td>Closed</td>`;
+            sellerUI +=`<td><td><?php echo gettext("Closed"); ?></td>`;
         }
 
-        sellerUI += `<th scope="row">Thursday</th>`;
+        sellerUI += `<th scope="row"><?php echo gettext("Thursday"); ?></th>`;
         if (isThuAvailable){
             sellerUI += `<td>${thuOpen}</td>
 <td>${thuClose}</td>`;
         }else{
-            sellerUI +=`<td>Closed</td>`;
+            sellerUI +=`<td><td><?php echo gettext("Closed"); ?></td>`;
         }
 
         sellerUI += `</tr>
 <tr>`;
 
-        sellerUI += `<th scope="row">Friday</th>`;
+        sellerUI += `<th scope="row"><?php echo gettext("Friday"); ?></th>`;
         if (isFriAvailable){
             sellerUI += `<td>${friOpen}</td>
 <td>${friClose}</td>`;
         }else{
-            sellerUI +=`<td>Closed</td>`;
+            sellerUI +=`<td><td><?php echo gettext("Closed"); ?></td>`;
         }
 
-        sellerUI += `<th scope="row">Saturday</th>`;
+        sellerUI += `<th scope="row"><?php echo gettext("Saturday"); ?></th>`;
         if (isSatAvailable){
             sellerUI += `<td>${satOpen}</td>
 <td>${satClose}</td>`;
         }else{
-            sellerUI +=`<td>Closed</td>`;
+            sellerUI +=`<td><td><?php echo gettext("Closed"); ?></td>`;
         }
 
         sellerUI += `</tr>
 <tr>`;
 
-        sellerUI += `<th scope="row">Sunday</th>`;
+        sellerUI += `<th scope="row">Sunday<?php echo gettext("Sunday"); ?><td></th>`;
         if (isSunAvailable){
             sellerUI += `<td>${sunOpen}</td>
 <td>${sunClose}</td>`;
         }else{
-            sellerUI +=`<td>Closed</td>`;
+            sellerUI +=`<td><td><?php echo gettext("Closed"); ?></td>`;
         }
 
         sellerUI += `</tr>`;
@@ -259,7 +259,7 @@ function showSellerInDetailScreen(sellerData){
 </div>
 </div>
 
-<h3 class="my-5">PRODUCTS</h3>
+<h3 class="my-5"><?php echo gettext("PRODUCTS"); ?></h3>
 
 <section>
 <div>
@@ -379,7 +379,7 @@ function showSellerInDetailScreen(sellerData){
         sellerUI += `</div>
 </div>
 </section>
-<h3 class="my-5">PRODUCTION POINT</h3>
+<h3 class="my-5"><?php echo gettext("PRODUCTION POINT"); ?></h3>
 
 <section>
 <div>

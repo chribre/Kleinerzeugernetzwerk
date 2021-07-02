@@ -20,16 +20,16 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Success!</h5>
+                <h5 class="modal-title" id="staticBackdropLabel"><?php echo gettext("Success!"); ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Congratulations, Your acoount has been successfully created.
+                <?php echo gettext("Congratulations, Your acoount has been successfully created."); ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Continue</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo gettext("Continue"); ?></button>
             </div>
         </div>
     </div>
@@ -41,8 +41,8 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 
 
     <div class="justify-content-center text-center">
-        <h3 class="pt-4" id="editTitle">Sign Up</h3>
-        <p id="editDesc">Please fill in this form to create an account.</p>
+        <h3 class="pt-4" id="editTitle"><?php echo gettext("Sign Up"); ?></h3>
+        <p id="editDesc"><?php echo gettext("Please fill in this form to create an account."); ?></p>
     </div>
 
 
@@ -53,7 +53,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
             <div  class="rounded-circle pb-4" width="152px" height="152px">
                 <img id="profileImage" src="../images/profile_placeholder.png" class="mx-auto d-block rounded-circle" width="150px" height="150px" style="object-fit: cover;">
                 <label class="btn btn-default">
-                    Edit <input id="profileImageFile" type="file" hidden name="file" onchange="document.getElementById('profileImage').src = window.URL.createObjectURL(this.files[0])">
+                    <?php echo gettext("Edit"); ?><input id="profileImageFile" type="file" hidden name="file" onchange="document.getElementById('profileImage').src = window.URL.createObjectURL(this.files[0])">
                 </label>
                 <input type="hidden" name="profileImageId" value=0 id="profileImageId">
             </div>
@@ -61,16 +61,16 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
             <div class="form-row">
 
                 <div class="col-md-6 mb-3">
-                    <label for="first_name">First name</label>
-                    <input type="text" class="form-control" id="first_name" placeholder="First name" required name="first_name">
+                    <label for="first_name"><?php echo gettext("First name"); ?></label>
+                    <input type="text" class="form-control" id="first_name" placeholder="<?php echo gettext("First name"); ?>" required name="first_name">
                     <div class="valid-feedback">
                         Looks good!
                     </div>
                 </div>
 
                 <div class="col-md-6 mb-3">
-                    <label for="last_name">Last name</label>
-                    <input type="text" class="form-control" id="last_name" placeholder="Last name" required name="last_name">
+                    <label for="last_name"><?php echo gettext("Last name"); ?></label>
+                    <input type="text" class="form-control" id="last_name" placeholder="<?php echo gettext("Last name"); ?>" required name="last_name">
                     <div class="valid-feedback">
                         Looks good!
                     </div>
@@ -79,29 +79,29 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
             </div>
             <div class="form-row" id="emailSection">
                 <div class="col-md-12 mb-3">
-                    <label for="r_email">E-mail</label>
-                    <input type="text" class="form-control" id="r_email" placeholder="E-mail" required name="r_email">
+                    <label for="r_email"><?php echo gettext("E-mai"); ?></label>
+                    <input type="text" class="form-control" id="r_email" placeholder="<?php echo gettext("E-mai"); ?>" required name="r_email">
                     <div class="invalid-feedback">
-                        Please provide a valid e-mail address.
+                        <?php echo gettext("Please provide a valid e-mail address."); ?>
                     </div>
                 </div>
             </div>
 
             <div class="form-row" id="passwordSection">
                 <div class="col-md-12 mb-3">
-                    <label for="r_password">Password</label>
-                    <input type="password" class="form-control" id="r_password" placeholder="Password" required name="r_password">
+                    <label for="r_password"><?php echo gettext("Password"); ?></label>
+                    <input type="password" class="form-control" id="r_password" placeholder="<?php echo gettext("Password"); ?>" required name="r_password">
                     <div class="invalid-feedback">
-                        Please provide a valid password.
+                        <?php echo gettext("Please provide a valid password."); ?>
                     </div>
                 </div>
             </div>
             <div class="form-row" id="passwordrptSection">
                 <div class="col-md-12 mb-3">
-                    <label for="psw_repeat">Repeat Password</label>
-                    <input type="password" class="form-control" id="psw_repeat" placeholder="Repeat Password" required name="psw-repeat">
+                    <label for="psw_repeat"><?php echo gettext("Repeat Password"); ?></label>
+                    <input type="password" class="form-control" id="psw_repeat" placeholder="<?php echo gettext("Repeat Password"); ?>" required name="psw-repeat">
                     <div class="invalid-feedback">
-                        Please provide a valid repeat password.
+                        <?php echo gettext("Please provide a valid repeat password."); ?>
                     </div>
                 </div>
             </div>
@@ -118,8 +118,8 @@ Please provide a valid mobile number.
 </div>
 -->
                 <div class="col-md-12 mb-3">
-                    <label for="phone">Phone</label>
-                    <input type="text" class="form-control" id="phone" placeholder="Phone" required name="phone">
+                    <label for="phone"><?php echo gettext("Phone"); ?></label>
+                    <input type="text" class="form-control" id="phone" placeholder="<?php echo gettext("Phone"); ?>" required name="phone">
                     <div class="invalid-feedback">
                         Please provide a valid phone number.
                     </div>
@@ -147,15 +147,15 @@ Please provide Date of Birth.
 -->
             <div class="form-row">
                 <div class="col-md-7 mb-3">
-                    <label for="street">Street</label>
-                    <input type="text" class="form-control" id="street" placeholder="Street" required name="street">
+                    <label for="street"><?php echo gettext("Street"); ?></label>
+                    <input type="text" class="form-control" id="street" placeholder="<?php echo gettext("Street"); ?>" required name="street">
                     <div class="invalid-feedback">
                         Please provide a valid Street Name.
                     </div>
                 </div>
                 <div class="col-md-5 mb-3">
-                    <label for="house_number">House Number</label>
-                    <input type="text" class="form-control" id="house_number" placeholder="House Number" required name="house_number">
+                    <label for="house_number"><?php echo gettext("House Number"); ?></label>
+                    <input type="text" class="form-control" id="house_number" placeholder="<?php echo gettext("House Number"); ?>" required name="house_number">
                     <div class="invalid-feedback">
                         Please provide a valid hosue number.
                     </div>
@@ -164,22 +164,22 @@ Please provide Date of Birth.
 
             <div class="form-row">
                 <div class="col-md-6 mb-3">
-                    <label for="zip">Zip</label>
-                    <input type="text" class="form-control" id="zip" placeholder="Zip" required name="zip">
+                    <label for="zip"><?php echo gettext("Zip"); ?></label>
+                    <input type="text" class="form-control" id="zip" placeholder="<?php echo gettext("Zip"); ?>" required name="zip">
                     <div class="invalid-feedback">
                         Please provide a valid Zip.
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label for="city">City</label>
-                    <input type="text" class="form-control" id="city" placeholder="City" required name="city">
+                    <label for="city"><?php echo gettext("City"); ?></label>
+                    <input type="text" class="form-control" id="city" placeholder="<?php echo gettext("City"); ?>" required name="city">
                     <div class="invalid-feedback">
                         Please provide a valid City.
                     </div>
                 </div>
                 <div class="col-md-3 mb-3">
-                    <label for="country">Country</label>
-                    <input type="text" class="form-control" id="country" placeholder="Country" required name="country">
+                    <label for="country"><?php echo gettext("Country"); ?></label>
+                    <input type="text" class="form-control" id="country" placeholder="<?php echo gettext("Country"); ?>" required name="country">
                     <div class="invalid-feedback">
                         Please provide a valid Country.
                     </div>
@@ -188,9 +188,9 @@ Please provide Date of Birth.
 
             <div class="form-row">
                 <div class="col-md-12 mb-3">
-                    <label for="bio">Share Your Farm Story</label>
+                    <label for="bio"><?php echo gettext("Share Your Farm Story"); ?></label>
                     <!--                    <input type="text" class="form-control" id="bio" placeholder="E-mail" required name="bio">-->
-                    <textarea class="form-control" id="bio" rows="5" placeholder="Write something about you, your farm, products etc." required name="bio"></textarea>
+                    <textarea class="form-control" id="bio" rows="5" placeholder="<?php echo gettext("Write something about you, your farm, products etc."); ?>" required name="bio"></textarea>
                     <div class="invalid-feedback">
                         Please provide a description.
                     </div>
@@ -201,17 +201,17 @@ Please provide Date of Birth.
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required name="agree">
                     <label class="form-check-label" for="invalidCheck">
-                        Agree to terms and conditions
+                        <?php echo gettext("Agree to terms and conditions"); ?>
                     </label>
                     <div class="invalid-feedback">
-                        You must agree before submitting.
+                        <?php echo gettext("You must agree before submitting."); ?>
                     </div>
                 </div>
             </div>
             <!--            <input type="hidden" name="signUp" value="true">-->
             <input type="hidden" name="userId" value=0 id="userId">
             <div class="col text-center">
-                <button class="btn btn-primary btn-lg col-4 rounded-pill shadow-lg mb-5" id="signUpBtn">Sign Up</button>
+                <button class="btn btn-primary btn-lg col-4 rounded-pill shadow-lg mb-5" id="signUpBtn"><?php echo gettext("Sign Up"); ?></button>
             </div>
         </form>
 
@@ -319,33 +319,14 @@ Please provide Date of Birth.
                     contentType: false,
                     processData: false,
                     data: profielFormData,
-                    //                    data: { 
-                    //                        user_id: 0,
-                    //                        first_name: firstName,
-                    //                        last_name: lastName,
-                    //                        dob: dob,
-                    //                        street: street,
-                    //                        house_number: houseNumber,
-                    //                        zip: zip,
-                    //                        city: city,
-                    //                        country: country,
-                    //                        mobile: mobile,
-                    //                        phone: phone,
-                    //                        email:email,
-                    //                        password: password,
-                    //                        description: description
-                    //                    },
-                    //                    dataType: "json",
-                    //                    contentType: "application/json",
-                    //                    cache: false,
                     success: function( data ) {
                         console.log(data)
                         $("#overlay").fadeOut(300);
                         $('#registerSuccessModal').modal('show');
                     },
                     error: function (request, status, error) {
-                        alert(request.responseText);
                         console.log(error)
+                        showError(request.status, '', '');
                     }
                 });
 

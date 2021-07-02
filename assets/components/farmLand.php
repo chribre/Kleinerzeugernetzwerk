@@ -162,7 +162,7 @@ Launch demo modal
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Delete Production Point</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle"><?php echo gettext("Delete Production Point"); ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -171,8 +171,8 @@ Launch demo modal
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" id="confirmProductionPointDelete">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo gettext("Close"); ?></button>
+                <button type="button" class="btn btn-danger" id="confirmProductionPointDelete"><?php echo gettext("Delete"); ?></button>
             </div>
         </div>
     </div>
@@ -246,9 +246,9 @@ Launch demo modal
 <p> ${pointDesc}</p>
 
 <div id="manipulationBtnProductionPoint" class="btn-group btn-group-sm mt-3 mr-auto float-right" role="group" aria-label="" value=${pointId}>
-<button type="button" class="btn btn-danger" id="deleteProductionPointBtn" onclick="productionPointDeleteConfirmation('${pointId}', '${pointName}','${address}')">Delete</button>
-<button type="button" class="btn btn-primary" id="editProductionPointBtn" onclick="getProductionPointDetails('${pointId}', 'EDIT')">Edit</button>
-<button type="button" class="btn btn-success" id="viewProductionPointBtn" onclick="goToProductionPointDeatailsScreen('${pointId}')">View</button></div>
+<button type="button" class="btn btn-danger" id="deleteProductionPointBtn" onclick="productionPointDeleteConfirmation('${pointId}', '${pointName}','${address}')"><?php echo gettext("Delete"); ?></button>
+<button type="button" class="btn btn-primary" id="editProductionPointBtn" onclick="getProductionPointDetails('${pointId}', 'EDIT')"><?php echo gettext("Edit"); ?></button>
+<button type="button" class="btn btn-success" id="viewProductionPointBtn" onclick="goToProductionPointDeatailsScreen('${pointId}')"><?php echo gettext("View"); ?></button></div>
 
     </div>
     </div>`;

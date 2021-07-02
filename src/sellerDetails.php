@@ -17,7 +17,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 
 ?>
 
-<script type="text/javascript" src="/kleinerzeugernetzwerk/js/seller_web_services/seller_details.js"></script>
+<script type="text/javascript" src="/kleinerzeugernetzwerk/js/seller_web_services/seller_details.js.php"></script>
 <script type="text/javascript" src="/kleinerzeugernetzwerk/js/custom/navigation.js"></script>
 
 <!-- Favicons -->

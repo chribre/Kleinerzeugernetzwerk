@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-05-24 13:09+0200\n"
-"PO-Revision-Date: 2021-05-24 13:11+0200\n"
+"POT-Creation-Date: 2021-06-29 16:31+0200\n"
+"PO-Revision-Date: 2021-06-29 16:34+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -12,9 +12,707 @@ msgstr ""
 "X-Generator: Poedit 2.2\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SearchPath-0: index.php\n"
-"X-Poedit-SearchPath-1: assets/components/navigationBar.php\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: locale\n"
+"X-Poedit-SearchPathExcluded-1: images\n"
+"X-Poedit-SearchPathExcluded-2: css\n"
+
+#: assets/components/addProductModal.php:135 src/products.php:23
+msgid "Add a new product"
+msgstr ""
+
+#: assets/components/addProductModal.php:141
+#: assets/components/addProductionPoint.php:80
+msgid "Modal body text goes here."
+msgstr ""
+
+#: assets/components/addProductModal.php:145
+msgid "Product Name"
+msgstr ""
+
+#: assets/components/addProductModal.php:149
+msgid "Product Description"
+msgstr ""
+
+#: assets/components/addProductModal.php:154
+msgid "Product Category"
+msgstr ""
+
+#: assets/components/addProductModal.php:165
+msgid "Product Features"
+msgstr ""
+
+#: assets/components/addProductModal.php:192
+msgid "Product Price"
+msgstr ""
+
+#: assets/components/addProductModal.php:196
+msgid "Quantity of Price"
+msgstr ""
+
+#: assets/components/addProductModal.php:200
+msgid "Unit"
+msgstr ""
+
+#: assets/components/addProductModal.php:211 assets/components/sideBar.php:22
+#: src/search.php:72
+msgid "Production Point"
+msgstr ""
+
+#: assets/components/addProductModal.php:221
+msgid "Selling Points"
+msgstr ""
+
+#: assets/components/addProductModal.php:235
+msgid "Add product images"
+msgstr ""
+
+#: assets/components/addProductModal.php:263
+msgid "It is a processed food."
+msgstr ""
+
+#: assets/components/addProductModal.php:267
+#: assets/components/addProductionPoint.php:167
+#: assets/components/addSellerModal.php:340
+msgid "Save"
+msgstr ""
+
+#: assets/components/addProductModal.php:268
+#: assets/components/addProductionPoint.php:169
+#: assets/components/addSellerModal.php:341
+#: assets/components/error_modal.php:14 assets/components/farmLand.php:174
+#: assets/components/map.php:108 src/products.php:775
+msgid "Close"
+msgstr ""
+
+#: assets/components/addProductionPoint.php:73
+msgid "Add new production point"
+msgstr ""
+
+#: assets/components/addProductionPoint.php:84
+#: assets/components/addProductionPoint.php:85
+msgid "Production Point Name"
+msgstr ""
+
+#: assets/components/addProductionPoint.php:88
+msgid "Production Point Description"
+msgstr ""
+
+#: assets/components/addProductionPoint.php:89
+msgid "Write a description about your production point."
+msgstr ""
+
+#: assets/components/addProductionPoint.php:101
+#: assets/components/addProductionPoint.php:102 src/signUp.php:150
+#: src/signUp.php:151
+msgid "Street"
+msgstr ""
+
+#: assets/components/addProductionPoint.php:104
+msgid "Please provide a valid Street Name."
+msgstr ""
+
+#: assets/components/addProductionPoint.php:108
+#: assets/components/addProductionPoint.php:109 src/signUp.php:157
+#: src/signUp.php:158
+msgid "House Number"
+msgstr ""
+
+#: assets/components/addProductionPoint.php:111
+msgid "Please provide a valid hosue number."
+msgstr ""
+
+#: assets/components/addProductionPoint.php:118
+#: assets/components/addProductionPoint.php:119 src/signUp.php:167
+#: src/signUp.php:168
+msgid "Zip"
+msgstr ""
+
+#: assets/components/addProductionPoint.php:121
+msgid "Please provide a valid Zip."
+msgstr ""
+
+#: assets/components/addProductionPoint.php:125
+#: assets/components/addProductionPoint.php:126 src/signUp.php:174
+#: src/signUp.php:175
+msgid "City"
+msgstr ""
+
+#: assets/components/addProductionPoint.php:128
+msgid "Please provide a valid City."
+msgstr ""
+
+#: assets/components/addProductionPoint.php:132
+msgid "Locate on map"
+msgstr ""
+
+#: assets/components/addProductionPoint.php:144
+msgid "Add Production Point Images"
+msgstr ""
+
+#: assets/components/addSellerModal.php:73
+#: assets/components/addSellerModal.php:80
+#: assets/components/addSellerModal.php:84
+#: assets/components/addSellerModal.php:85
+#: assets/components/addSellerModal.php:88
+#: assets/components/addSellerModal.php:89
+#: assets/components/addSellerModal.php:102
+#: assets/components/addSellerModal.php:103
+#: assets/components/addSellerModal.php:105
+#: assets/components/addSellerModal.php:109
+#: assets/components/addSellerModal.php:110
+#: assets/components/addSellerModal.php:112
+#: assets/components/addSellerModal.php:119
+#: assets/components/addSellerModal.php:122
+#: assets/components/addSellerModal.php:126
+#: assets/components/addSellerModal.php:127
+#: assets/components/addSellerModal.php:129
+#: assets/components/addSellerModal.php:133
+#: assets/components/addSellerModal.php:143
+#: assets/components/addSellerModal.php:144
+#: assets/components/addSellerModal.php:146
+#: assets/components/addSellerModal.php:150
+#: assets/components/addSellerModal.php:151
+#: assets/components/addSellerModal.php:153
+#: assets/components/addSellerModal.php:161
+#: assets/components/addSellerModal.php:163
+#: assets/components/addSellerModal.php:167
+#: assets/components/addSellerModal.php:168
+#: assets/components/addSellerModal.php:170
+#: assets/components/addSellerModal.php:176 src/search.php:67
+msgid "Product"
+msgstr ""
+
+#: assets/components/addSellerModal.php:186
+#: js/seller_web_services/seller_details.js.php:187
+msgid "Monday"
+msgstr ""
+
+#: assets/components/addSellerModal.php:194
+#: assets/components/addSellerModal.php:212
+#: assets/components/addSellerModal.php:230
+#: assets/components/addSellerModal.php:248
+#: assets/components/addSellerModal.php:266
+#: assets/components/addSellerModal.php:284
+#: assets/components/addSellerModal.php:302
+#, fuzzy
+#| msgid "Opening Hours"
+msgid "Opening hour"
+msgstr "Öffnungszeit"
+
+#: assets/components/addSellerModal.php:199
+#: assets/components/addSellerModal.php:217
+#: assets/components/addSellerModal.php:235
+#: assets/components/addSellerModal.php:253
+#: assets/components/addSellerModal.php:271
+#: assets/components/addSellerModal.php:289
+#: assets/components/addSellerModal.php:307
+msgid "Closing hour"
+msgstr ""
+
+#: assets/components/addSellerModal.php:204
+#: js/seller_web_services/seller_details.js.php:196
+msgid "Tuesday"
+msgstr ""
+
+#: assets/components/addSellerModal.php:222
+#: js/seller_web_services/seller_details.js.php:208
+msgid "Wednesday"
+msgstr ""
+
+#: assets/components/addSellerModal.php:240
+#: js/seller_web_services/seller_details.js.php:216
+msgid "Thursday"
+msgstr ""
+
+#: assets/components/addSellerModal.php:258
+#: js/seller_web_services/seller_details.js.php:227
+msgid "Friday"
+msgstr ""
+
+#: assets/components/addSellerModal.php:276
+#: js/seller_web_services/seller_details.js.php:235
+msgid "Saturday"
+msgstr ""
+
+#: assets/components/addSellerModal.php:294
+#: js/seller_web_services/seller_details.js.php:246
+msgid "Sunday"
+msgstr ""
+
+#: assets/components/addSellerModal.php:317
+msgid "Add Selling Point Images"
+msgstr ""
+
+#: assets/components/farmLand.php:165
+msgid "Delete Production Point"
+msgstr ""
+
+#: assets/components/farmLand.php:175 assets/components/farmLand.php:249
+#: src/products.php:150 src/products.php:776
+msgid "Delete"
+msgstr ""
+
+#: assets/components/farmLand.php:250 src/products.php:151 src/signUp.php:56
+msgid "Edit"
+msgstr ""
+
+#: assets/components/farmLand.php:251 src/products.php:152
+msgid "View"
+msgstr ""
+
+#: assets/components/footer.php:75
+msgid "Copyright"
+msgstr ""
+
+#: assets/components/footer.php:75
+msgid "All rights reserved."
+msgstr ""
+
+#: assets/components/footer.php:75
+msgid "Terms of Use"
+msgstr ""
+
+#: assets/components/footer.php:75
+msgid "Privacy Policy"
+msgstr ""
+
+#: assets/components/map.php:99
+msgid "No Data Available!"
+msgstr ""
+
+#: assets/components/map.php:105
+msgid "No products available under the category"
+msgstr ""
+
+#: assets/components/navigationBar.php:81
+msgid "Map"
+msgstr "Karte"
+
+#: assets/components/navigationBar.php:84
+msgid "About Us"
+msgstr "Über uns"
+
+#: assets/components/navigationBar.php:87 assets/components/sideBar.php:28
+msgid "Events"
+msgstr "Ereignisse"
+
+#: assets/components/navigationBar.php:90
+msgid "Contact Us"
+msgstr "Kontakt"
+
+#: assets/components/navigationBar.php:108
+msgid "Search"
+msgstr ""
+
+#: assets/components/navigationBar.php:200 assets/components/signInModal.php:59
+msgid "Sign In"
+msgstr ""
+
+#: assets/components/navigationBar.php:216
+msgid "Log Out"
+msgstr "A bmelden"
+
+#: assets/components/personalProfile.php:56
+msgid "Address"
+msgstr ""
+
+#: assets/components/personalProfile.php:60 src/signUp.php:121
+#: src/signUp.php:122
+msgid "Phone"
+msgstr ""
+
+#: assets/components/personalProfile.php:63
+msgid "Mobile"
+msgstr ""
+
+#: assets/components/personalProfile.php:66
+#: assets/components/signInModal.php:34
+msgid "E-mail"
+msgstr ""
+
+#: assets/components/sideBar.php:16
+msgid "Profile"
+msgstr ""
+
+#: assets/components/sideBar.php:19
+msgid "Products"
+msgstr ""
+
+#: assets/components/sideBar.php:25 src/search.php:77
+msgid "Seller"
+msgstr ""
+
+#: assets/components/sideBar.php:31
+msgid "Services"
+msgstr ""
+
+#: assets/components/sideBar.php:64 assets/components/sideBar.php:89
+#: assets/components/sideBar.php:115
+msgid "PROFILE"
+msgstr ""
+
+#: assets/components/sideBar.php:67
+msgid "PRODUCTION POINTS"
+msgstr ""
+
+#: assets/components/sideBar.php:70
+msgid "SELLERS"
+msgstr ""
+
+#: assets/components/sideBar.php:80
+#: js/seller_web_services/seller_details.js.php:262
+msgid "PRODUCTS"
+msgstr ""
+
+#: assets/components/sideBar.php:83 assets/components/sideBar.php:109
+msgid "EVENTS"
+msgstr ""
+
+#: assets/components/sideBar.php:86 assets/components/sideBar.php:112
+msgid "SERVICES"
+msgstr ""
+
+#: assets/components/signInModal.php:19
+msgid "Sign in"
+msgstr ""
+
+#: assets/components/signInModal.php:27
+msgid "Please check the email and password and try again!"
+msgstr ""
+
+#: assets/components/signInModal.php:35
+msgid "Enter your email address"
+msgstr ""
+
+#: assets/components/signInModal.php:41 src/reset_password.php:29
+#: src/signUp.php:92 src/signUp.php:93
+msgid "Password"
+msgstr ""
+
+#: assets/components/signInModal.php:42
+msgid "Enter your password"
+msgstr ""
+
+#: assets/components/signInModal.php:52 assets/components/signInModal.php:55
+msgid "Forgot password?"
+msgstr ""
+
+#: assets/components/signInModal.php:62
+msgid "Not a memeber yet?"
+msgstr ""
+
+#: assets/components/signInModal.php:68
+msgid "Register"
+msgstr ""
+
+#: assets/components/signInModal.php:115
+msgid "Enter a valid email address"
+msgstr ""
 
 #: index.php:18
 msgid "Good Morning"
-msgstr "Guten Morgan"
+msgstr "Guten Morgan 22"
+
+#: js/seller_web_services/seller_details.js.php:151
+msgid "Opening Hours"
+msgstr "Öffnungszeit"
+
+#: js/seller_web_services/seller_details.js.php:193
+#: js/seller_web_services/seller_details.js.php:201
+#: js/seller_web_services/seller_details.js.php:213
+#: js/seller_web_services/seller_details.js.php:221
+#: js/seller_web_services/seller_details.js.php:232
+#: js/seller_web_services/seller_details.js.php:240
+#: js/seller_web_services/seller_details.js.php:251
+msgid "Closed"
+msgstr ""
+
+#: js/seller_web_services/seller_details.js.php:382
+msgid "PRODUCTION POINT"
+msgstr ""
+
+#: src/about_us.php:24
+msgid "ABOUT US"
+msgstr ""
+
+#: src/about_us.php:25
+msgid ""
+"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+"Lorem Ipsum has been the industry's standard dummy text ever since the "
+"1500s, when an unknown printer took a galley of type and scrambled it to "
+"make a type specimen book. It has survived not only five centuries, but also "
+"the leap into electronic typesetting, remaining essentially unchanged. It "
+"was popularised in the 1960s with the release of Letraset sheets containing "
+"Lorem Ipsum passages, and more recently with desktop publishing software "
+"like Aldus PageMaker including versions of Lorem Ipsum."
+msgstr ""
+
+#: src/about_us.php:30 src/about_us.php:50
+msgid "Our Story"
+msgstr ""
+
+#: src/about_us.php:31
+msgid ""
+"Contrary to popular belief, Lorem Ipsum is not simply random text. It has "
+"roots in a piece of classical Latin literature from 45 BC, making it over "
+"2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney "
+"College in Virginia, looked up one of the more obscure Latin words, "
+"consectetur, from a Lorem Ipsum passage, and going through the cites of the "
+"word in classical literature, discovered the undoubtable source. Lorem Ipsum "
+"comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum "
+"(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a "
+"treatise on the theory of ethics, very popular during the Renaissance. The "
+"first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line "
+"in section 1.10.32.\n"
+"\n"
+"                The standard chunk of Lorem Ipsum used since the 1500s below "
+"for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum "
+"et Malorum by Cicero are also reproduced in their exact original form, "
+"accompanied by English versions from the 1914 translation"
+msgstr ""
+
+#: src/about_us.php:39
+msgid "Our Mission"
+msgstr ""
+
+#: src/about_us.php:40
+msgid ""
+"Contrary to popular belief, Lorem Ipsum is not simply random text. It has "
+"roots in a piece of classical Latin literature from 45 BC, making it over "
+"2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney "
+"College in Virginia, looked up one of the more obscure Latin words, "
+"consectetur, from a Lorem Ipsum passage, and going through the cites of the "
+"word in classical literature, discovered the undoubtable source. Lorem Ipsum "
+"comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum "
+"(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a "
+"treatise on the theory of ethics, very popular during the Renaissance. The "
+"first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line "
+"in section 1.10.32.\n"
+"\n"
+"                The standard chunk of Lorem Ipsum used since the 1500s is "
+"reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de "
+"Finibus Bonorum et Malorum by Cicero are also reproduced in their exact "
+"original form, accompanied by English versions from the 1914 translation"
+msgstr ""
+
+#: src/about_us.php:51
+msgid ""
+"Contrary to popular belief, Lorem Ipsum is not simply random text. It has "
+"roots in a piece of classical Latin literature from 45 BC, making it over "
+"2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney "
+"College in Virginia, looked up one of the more obscure Latin words, "
+"consectetur, from a Lorem Ipsum passage, and going through the cites of the "
+"word in classical literature, discovered the undoubtable source. Lorem Ipsum "
+"comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum "
+"(The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a "
+"treatise on the theory of ethics, very popular during the Renaissance. The "
+"first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line "
+"in section 1.10.32.\n"
+"\n"
+"                The standard chunk of Lorem Ipsum used since the 1500s is "
+"reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de "
+"Finibus Bonorum et Malorum by Cicero are also reproduced in their exact "
+"original form, accompanied by English versions from the 1914 translation by "
+"H. Rackham."
+msgstr ""
+
+#: src/about_us.php:58
+msgid "Our Team"
+msgstr ""
+
+#: src/about_us.php:63 src/about_us.php:69 src/about_us.php:75
+msgid "Designation"
+msgstr ""
+
+#: src/about_us.php:64
+msgid ""
+"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+"Lorem Ipsum has been the industry's standard dummy text ever sinc 800s,"
+msgstr ""
+
+#: src/about_us.php:70
+msgid ""
+"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+"Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
+msgstr ""
+
+#: src/about_us.php:76
+msgid ""
+"Lorem __ klj Ipsum is simply dummy text of the printing and typesetting "
+"industry. Lorem Ipsum has been the industry's standard dummy text ever since "
+"the 1500s,"
+msgstr ""
+
+#: src/about_us.php:82
+msgid "Our Patron"
+msgstr ""
+
+#: src/about_us.php:84
+msgid ""
+"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+"Lorem Ipsum has been the industry's standard dummy text ever since the "
+"1500s, when an unknown printer took a galley of type and scrambled it to "
+"make a type specimen gdf book. It has survived not only five centuries, but "
+"also the leap into electronic typesetting, remaining essentially unchanged. "
+"It was popularised in the 1960s with the release of Letraset sheets "
+"containing Lorem Ipsum passages, and more recently with desktop publishing "
+"software like Aldus PageMaker including versions of Lorem Ipsum."
+msgstr ""
+
+#: src/contact_us.php:22
+msgid "CONATCT US"
+msgstr ""
+
+#: src/contact_us.php:23
+msgid ""
+"Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+"Lorem Ipsum has been the industry's standard text ever since the 1500s, when "
+"an unknown printer took a galley of type and scrambled it to make a type "
+"specimen book. It has survived not only five centuries, but also the leap "
+"into electronic typesetting, remaining essentially unchanged. It was "
+"popularised in the 1960s with the release of Letraset sheets containing "
+"Lorem Ipsum passages, and more recently with desktop publishing software "
+"like Aldus PageMaker including versions of Lorem Ipsum."
+msgstr ""
+
+#: src/contact_us.php:61
+msgid "Email Form"
+msgstr ""
+
+#: src/contact_us.php:62
+msgid ""
+"We want to hear from you. Please feel free to email test@email.com, or just "
+"speak your mind below. Please allow 1 business  day to respond."
+msgstr ""
+
+#: src/contact_us.php:65
+msgid "NAME"
+msgstr ""
+
+#: src/contact_us.php:70
+msgid "EMAIL"
+msgstr ""
+
+#: src/contact_us.php:75
+msgid "MESSAGE"
+msgstr ""
+
+#: src/contact_us.php:79
+msgid "SEND"
+msgstr ""
+
+#: src/errorPage.php:48
+msgid "404 - Page not found"
+msgstr ""
+
+#: src/errorPage.php:49
+msgid ""
+"The page you are looking for might have been removed had its name changed or "
+"is temporarily unavailable."
+msgstr ""
+
+#: src/errorPage.php:50
+msgid "Go To Homepage"
+msgstr ""
+
+#: src/products.php:768
+msgid "Delete Product"
+msgstr ""
+
+#: src/products.php:772
+msgid "Are you sure want to delete this product?"
+msgstr ""
+
+#: src/reset_password.php:24
+msgid "Confirm email address"
+msgstr ""
+
+#: src/reset_password.php:28
+msgid "New Password"
+msgstr ""
+
+#: src/reset_password.php:32 src/reset_password.php:33 src/signUp.php:101
+#: src/signUp.php:102
+msgid "Repeat Password"
+msgstr ""
+
+#: src/reset_password.php:35
+msgid "Reset Password"
+msgstr ""
+
+#: src/search.php:60
+msgid "Filter"
+msgstr ""
+
+#: src/search.php:82
+msgid "Producer"
+msgstr ""
+
+#: src/search.php:94
+msgid "Search Results for "
+msgstr ""
+
+#: src/signUp.php:23
+msgid "Success!"
+msgstr ""
+
+#: src/signUp.php:29
+msgid "Congratulations, Your acoount has been successfully created."
+msgstr ""
+
+#: src/signUp.php:32
+msgid "Continue"
+msgstr ""
+
+#: src/signUp.php:44 src/signUp.php:214
+msgid "Sign Up"
+msgstr ""
+
+#: src/signUp.php:45
+msgid "Please fill in this form to create an account."
+msgstr ""
+
+#: src/signUp.php:64 src/signUp.php:65
+msgid "First name"
+msgstr ""
+
+#: src/signUp.php:72 src/signUp.php:73
+msgid "Last name"
+msgstr ""
+
+#: src/signUp.php:82 src/signUp.php:83
+msgid "E-mai"
+msgstr ""
+
+#: src/signUp.php:85
+msgid "Please provide a valid e-mail address."
+msgstr ""
+
+#: src/signUp.php:95
+msgid "Please provide a valid password."
+msgstr ""
+
+#: src/signUp.php:104
+msgid "Please provide a valid repeat password."
+msgstr ""
+
+#: src/signUp.php:181 src/signUp.php:182
+msgid "Country"
+msgstr ""
+
+#: src/signUp.php:191
+msgid "Share Your Farm Story"
+msgstr ""
+
+#: src/signUp.php:193
+msgid "Write something about you, your farm, products etc."
+msgstr ""
+
+#: src/signUp.php:204
+msgid "Agree to terms and conditions"
+msgstr ""
+
+#: src/signUp.php:207
+msgid "You must agree before submitting."
+msgstr ""

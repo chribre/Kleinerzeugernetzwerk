@@ -70,23 +70,23 @@
 
 
 
-                <div class="text-center"><h5 class="modal-title"><i class="material-icons">&#xE147;</i>Add new production point</h5></div>
+                <div class="text-center"><h5 class="modal-title"><i class="material-icons">&#xE147;</i><?php echo gettext("Add new production point"); ?></h5></div>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body m-3">
-                <p>Modal body text goes here.</p>
+                <p><?php echo gettext("Modal body text goes here."); ?></p>
                 <form id="newProductionPointForm" enctype="multipart/form-data" onsubmit="event.preventDefault()">
                     <!--                    <form method="post" id="newProductionPointForm" enctype="multipart/form-data">-->
                     <div class="form-group">
-                        <label for="productionPointName">Production Point Name</label>
-                        <input type="text" class="form-control" id="productionPointName" aria-describedby="productionPointName" placeholder="Production Point Name" name="productionPointName">
+                        <label for="productionPointName"><?php echo gettext("Production Point Name"); ?></label>
+                        <input type="text" class="form-control" id="productionPointName" aria-describedby="productionPointName" placeholder="<?php echo gettext("Production Point Name"); ?>" name="productionPointName">
                     </div>
                     <div class="form-group">
-                        <label for="productionPointDesc">Production Point Description</label>
-                        <textarea class="form-control" id="productionPointDesc" name="productionPointDesc" rows="4" placeholder="Write a description about your production point."></textarea>
+                        <label for="productionPointDesc"><?php echo gettext("Production Point Description"); ?></label>
+                        <textarea class="form-control" id="productionPointDesc" name="productionPointDesc" rows="4" placeholder="<?php echo gettext("Write a description about your production point."); ?>"></textarea>
                     </div>
 
                     <div class="row">
@@ -98,38 +98,38 @@
                         <div class="col-md-6">
                             <div class="form-row">
                                 <div class="col-md-7 mb-3">
-                                    <label for="street">Street</label>
-                                    <input type="text" class="form-control" id="street" placeholder="Street" required name="street">
+                                    <label for="street"><?php echo gettext("Street"); ?></label>
+                                    <input type="text" class="form-control" id="street" placeholder="<?php echo gettext("Street"); ?>" required name="street">
                                     <div class="invalid-feedback">
-                                        Please provide a valid Street Name.
+                                        <?php echo gettext("Please provide a valid Street Name."); ?>
                                     </div>
                                 </div>
                                 <div class="col-md-5 mb-3">
-                                    <label for="houseNumber">House Number</label>
-                                    <input type="text" class="form-control" id="houseNumber" placeholder="House Number" required name="house_number">
+                                    <label for="houseNumber"><?php echo gettext("House Number"); ?></label>
+                                    <input type="text" class="form-control" id="houseNumber" placeholder="<?php echo gettext("House Number"); ?>" required name="house_number">
                                     <div class="invalid-feedback">
-                                        Please provide a valid hosue number.
+                                        <?php echo gettext("Please provide a valid hosue number."); ?>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="zipCode">Zip</label>
-                                    <input type="text" class="form-control" id="zipCode" placeholder="Zip" required name="zip">
+                                    <label for="zipCode"><?php echo gettext("Zip"); ?></label>
+                                    <input type="text" class="form-control" id="zipCode" placeholder="<?php echo gettext("Zip"); ?>" required name="zip">
                                     <div class="invalid-feedback">
-                                        Please provide a valid Zip.
+                                        <?php echo gettext("Please provide a valid Zip."); ?>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="city">City</label>
-                                    <input type="text" class="form-control" id="city" placeholder="City" required name="city">
+                                    <label for="city"><?php echo gettext("City"); ?></label>
+                                    <input type="text" class="form-control" id="city" placeholder="<?php echo gettext("City"); ?>" required name="city">
                                     <div class="invalid-feedback">
-                                        Please provide a valid City.
+                                        <?php echo gettext("Please provide a valid City."); ?>
                                     </div>
                                 </div>
                             </div>
-                            <div class="m-4"><button type="button" class="btn btn-link col-md-12" id="locateOnMapBtn" onclick="findLocation()">Locate on map</button>
+                            <div class="m-4"><button type="button" class="btn btn-link col-md-12" id="locateOnMapBtn" onclick="findLocation()"><?php echo gettext("Locate on map"); ?></button>
                                 <input type="hidden" id="latitude" name="latitude" value="" />
                                 <input type="hidden" id="longitude" name="longitude" value="" />
                             </div>
@@ -141,7 +141,7 @@
 
                     <div id="productionPointImageIdArray" hidden></div>
                     <div class="form-group">
-                        <label>Add Production Point Images</label>
+                        <label><?php echo gettext("Add Production Point Images"); ?></label>
                         <div class="mx-4 justify-content-center row">
                             <div id="production-point-gallery" class="row">
 
@@ -164,9 +164,9 @@
 
                     <div class="modal-footer justify-content-end">
                         <div>
-                            <button class="btn btn-primary" id="saveProductionPointBtn">Save</button>
+                            <button class="btn btn-primary" id="saveProductionPointBtn"><?php echo gettext("Save"); ?></button>
                             <!--                            <button type="submit" name="addProductionPointMethod" value="true" class="btn btn-primary">Save</button>-->
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo gettext("Close"); ?></button>
 
                         </div>
 
@@ -271,20 +271,6 @@
             contentType: false,
             processData: false,
             data: formDataCollection,
-            //            data: { 
-            //                farm_id: 0,
-            //                producer_id: userId,
-            //                farm_name: formData.productionPointName,
-            //                farm_desc:formData.productionPointDesc,
-            //                farm_address:formData.address,
-            //                street:formData.street,
-            //                house_number:formData.houseNumber,
-            //                city:formData.city,
-            //                zip:formData.zipCode,
-            //                latitude:formData.latitude,
-            //                longitude:formData.longitude,
-            //
-            //            },
             success: function( data ) {
                 console.log(data)
                 $('#addProductionPointPoint').modal('hide');
@@ -293,10 +279,12 @@
             },
             error: function (request, status, error) {               
                 console.log(error)
+                $('#addProductionPointPoint').modal('hide');
+                const errorCode = request.status ? request.status : 0;
+                showError(errorCode, '', '');
             }
         });
     }
-
 
     $('#addProductionPointPoint').on('hide.bs.modal', function (e) {
         // do something...

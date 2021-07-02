@@ -1,5 +1,6 @@
 <?php
 session_start();
+clearstatcache();
 //language support configuration
 if (!function_exists("gettext")){ 
     //    echo "gettext is not installed\n"; 
@@ -26,7 +27,9 @@ if (!$results) {
 }
 
 if (defined('LC_MESSAGES')) {
-    setlocale(LC_MESSAGES, $locale); // Linux
+//    setlocale(LC_MESSAGES, $locale); // Linux
+    putenv('LANGUAGE=' . $locale);
+    setlocale(LC_ALL, $locale);
 } else {
     putenv("LC_ALL={$locale}"); // windows
 }

@@ -18,7 +18,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 <link rel="stylesheet" type="text/css" href="<?php echo $leaflet_sidebar_css ?>" />
 <script type="text/javascript" src="/kleinerzeugernetzwerk/js/production_point_api/production_point_api.js"></script>
-<script type="text/javascript" src="/kleinerzeugernetzwerk/js/seller_web_services/seller_details.js"></script>
+<script type="text/javascript" src="/kleinerzeugernetzwerk/js/seller_web_services/seller_details.js.php"></script>
 <style>
     .arrow-icon {
         width: 14px;
@@ -96,16 +96,16 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="no-data-title">No Data Available!</h5>
+                <h5 class="modal-title" id="no-data-title"><?php echo gettext("No Data Available!"); ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body" id="no-data-content">
-                No products available under the category Corn
+                <?php echo gettext("No products available under the category"); ?>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo gettext("Close"); ?></button>
             </div>
         </div>
     </div>
@@ -127,6 +127,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     </div>
 
     <ul class="fab-options" id="category-options">
+<!--
         <li>
             <div class="fab-icon-holder">
                 <img class="icon-image" src="http://localhost/kleinerzeugernetzwerk_uploads/others/categories/fruit.png" alt="">
@@ -154,6 +155,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
             </div>
             <span class="fab-label">Feedback</span>
         </li>
+-->
     </ul>
 </div>
 

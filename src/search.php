@@ -57,29 +57,29 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
                 <header class="card-header">
                     <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
                         <i class="icon-control fa fa-chevron-down"></i>
-                        <h6 class="title">Brands </h6>
+                        <h6 class="title"><?php echo gettext("Filter"); ?></h6>
                     </a>
                 </header>
                 <div class="filter-content collapse show" id="collapse_2" style="">
                     <div class="card-body">
                         <label class="custom-control custom-checkbox">
                             <input id="filter-product" type="checkbox" class="custom-control-input search-filter-control">
-                            <div class="custom-control-label">Product  
+                            <div class="custom-control-label"><?php echo gettext("Product"); ?>  
                                 <b class="badge badge-pill badge-light float-right">120</b>  </div>
                         </label>
                         <label class="custom-control custom-checkbox">
                             <input id="filter-production-point" type="checkbox" class="custom-control-input search-filter-control">
-                            <div class="custom-control-label">Production Point 
+                            <div class="custom-control-label"><?php echo gettext("Production Point"); ?> 
                                 <b class="badge badge-pill badge-light float-right">15</b>  </div>
                         </label>
                         <label class="custom-control custom-checkbox">
                             <input id="filter-seller" type="checkbox" class="custom-control-input search-filter-control">
-                            <div class="custom-control-label">Seller 
+                            <div class="custom-control-label"><?php echo gettext("Seller"); ?> 
                                 <b class="badge badge-pill badge-light float-right">35</b> </div>
                         </label>
                         <label class="custom-control custom-checkbox">
                             <input id="filter-user" type="checkbox" class="custom-control-input search-filter-control">
-                            <div class="custom-control-label">Producer 
+                            <div class="custom-control-label"><?php echo gettext("Producer"); ?> 
                                 <b class="badge badge-pill badge-light float-right">89</b> </div>
                         </label>
                     </div> <!-- card-body.// -->
@@ -91,7 +91,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
     </aside>
 
     <div class="mt-3 flex-fill">
-        <h3 id="search-result-title">Search Results for 'Test'</h3>
+        <h3 id="search-result-title"><?php echo gettext("Search Results for "); ?> 'Test'</h3>
 
         <div class="container" id="searchResultUI">
 

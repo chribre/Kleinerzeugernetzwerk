@@ -45,9 +45,9 @@ $ERROR_CSS_LOC = '/kleinerzeugernetzwerk/css/style.css';
 			<div class="notfound-404">
 				<h1>Oops!</h1>
 			</div>
-			<h2>404 - Page not found</h2>
-			<p>The page you are looking for might have been removed had its name changed or is temporarily unavailable.</p>
-			<a href="/kleinerzeugernetzwerk/index.php">Go To Homepage</a>
+			<h2><?php echo gettext("404 - Page not found"); ?></h2>
+			<p><?php echo gettext("The page you are looking for might have been removed had its name changed or is temporarily unavailable."); ?></p>
+			<a href="/kleinerzeugernetzwerk/index.php"><?php echo gettext("Go To Homepage"); ?></a>
 		</div>
 	</div>
 

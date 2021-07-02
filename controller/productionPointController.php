@@ -7,7 +7,7 @@
    PURPOSE          :   To manage production points of a user.
                         CRUD operations on farmland table
 ****************************************************************/
-  session_start();
+session_start();
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php";
 include "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/productionPointModel.php";
 
@@ -74,6 +74,11 @@ switch ($_SERVER['REQUEST_METHOD']) {
 */
 function addProductionPoint($productionPoint){
     global $dbConnection;
+    $isLimitReached = isNewProductionPointLimitReached($productionPoint->producerId);
+    if ($isLimitReached){
+        http_response_code(412);
+        return false;
+    }
     $productionPointUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(3);
     $productionPointImagepath = getServerRootAddress().getImagePath(3);
     /* Start transaction */
@@ -138,7 +143,7 @@ function editProductionPoint($productionPoint){
     $productionPointUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(3);
     $productionPointImagepath = getServerRootAddress().getImagePath(3);
     /* Start transaction */
-//    mysqli_begin_transaction($dbConnection);
+    //    mysqli_begin_transaction($dbConnection);
     //    $productionPointInsertQuery = "INSERT INTO farm_land (producer_id, farm_name, farm_desc, farm_address, farm_location, farm_area	)"
     //        . "VALUES ($productionPoint->producerId, '$productionPoint->farmName', '$productionPoint->farmDesc', '$productionPoint->farmAddress', POINT($productionPoint->latitude, $productionPoint->longitude), $productionPoint->farmArea)";
 
@@ -160,26 +165,26 @@ function editProductionPoint($productionPoint){
             if ($productionPointImageCount > 0 || $productionPointImageIdCount > 0){
                 try{
                     if (mysqli_multi_query($dbConnection, $imageQuery)){
-//                        mysqli_commit($dbConnection);
+                        //                        mysqli_commit($dbConnection);
                         http_response_code(200);
                         return true;
                     }else{
-//                        mysqli_rollback($dbConnection);
+                        //                        mysqli_rollback($dbConnection);
                         http_response_code(400);
                     }
                 }catch(mysqli_sql_exception $exception){
-//                    mysqli_rollback($dbConnection);
+                    //                    mysqli_rollback($dbConnection);
                     http_response_code(400);
                 }
             }else{
-//                mysqli_commit($dbConnection);
+                //                mysqli_commit($dbConnection);
                 http_response_code(200);
                 return true;
             }
         }
     }catch(mysqli_sql_exception $exception){
         echo "faild to add a new production point,";
-//        mysqli_rollback($dbConnection);
+        //        mysqli_rollback($dbConnection);
         var_dump($exception);
         throw $exception;
         http_response_code(400);
@@ -319,6 +324,34 @@ function deleteProduct($productionPoint){
         return "<script>console.log('PHP: No products found with the given product id');</script>";
     }
     http_response_code(400);
+    return false;
+}
+
+/*
+    FUNCTION    :   to check number of production point limit rwched for a normal producer
+    INPUT       :   id of the producer
+    OUTPUT      :   return error code if it exceeds the limit
+*/
+function isNewProductionPointLimitReached($userId){
+    ob_start();
+    global $dbConnection;
+    $producutionPointCountQuery = "SELECT COUNT(f.farm_id) as production_point_count, u.user_type FROM farm_land f 
+                                LEFT JOIN user u ON u.user_id = f.producer_id 
+                                WHERE u.user_type = 1 and u.user_id = $userId";
+
+    $producutionPointCount = [];
+    if ($result = mysqli_query($dbConnection, $producutionPointCountQuery)) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $producutionPointCount = $row;
+        }
+    }
+    $userType = $producutionPointCount['user_type'] ? $producutionPointCount['user_type'] : 0;
+    $productionPointCount = $producutionPointCount['production_point_count'] ? $producutionPointCount['production_point_count'] : 0;
+    if ($userType == 1){ //normal user nor professionla producer
+        if ($productionPointCount >= 3){
+            return true;
+        }
+    } 
     return false;
 }
 ?>

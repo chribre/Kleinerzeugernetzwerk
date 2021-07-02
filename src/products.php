@@ -20,7 +20,7 @@ require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ad
 <div class="d-flex justify-content-center">
     <button id="addProductModalBtn" onclick="openAddProductModal(0)" type="button" class="col-sm-11 col-md-5 m-3 btn btn-success">
         <i class="plus icon"></i>
-        Add a new product
+        <?php echo gettext("Add a new product"); ?>
     </button>
 </div>
 <div class="container" id="productListContainer">
@@ -75,6 +75,9 @@ Add a new product
                         data = JSON.parse(dataset);
                     } catch(e) {
                         //                    alert(e); // error in the above string (in this case, yes)!
+                    }
+                    if (typeof dataset === "object" && dataset !== null){
+                        data = dataset;
                     }
                     const features = localStorage.getItem("productFeatures");
                     const featureJson = JSON.parse(features);
@@ -144,9 +147,9 @@ Add a new product
                             })
 
                             card += `</div> <div id="manipulationBtnProducts" class="btn-group btn-group-sm mt-3 mr-auto float-right" role="group" aria-label="" value=${productId}>
-<button type="button" class="btn btn-danger" id="deleteProductBtn" onclick="showDeleteProductModal(${productId})" value="${productId}">Delete</button>
-<button type="button" class="btn btn-primary" id="editProductBtn" onclick="openAddProductModal(${productId})" value="${productId}">Edit</button>
-<button type="button" class="btn btn-success" id="viewProductBtn" onclick="goToProductDetailsPage(${productId})">View</button>
+<button type="button" class="btn btn-danger" id="deleteProductBtn" onclick="showDeleteProductModal(${productId})" value="${productId}"><?php echo gettext("Delete"); ?></button>
+<button type="button" class="btn btn-primary" id="editProductBtn" onclick="openAddProductModal(${productId})" value="${productId}"><?php echo gettext("Edit"); ?></button>
+<button type="button" class="btn btn-success" id="viewProductBtn" onclick="goToProductDetailsPage(${productId})"><?php echo gettext("View"); ?></button>
 
 
         </div>
@@ -193,48 +196,48 @@ Add a new product
 
 
 
-
-
-                            var productCard = `<div class="w3-card-4 m-4 shadow bg-white rounded productCard" id="productCard">
-<div class="overflow-hidden" width="280" height="180">
-<img src="${imageName}" alt="Avatar" width="280">
-        </div>
-<div class="p-2">
-<h4><b>${productName}</b></h4>   
-<p id="productDesc" class="overflow-hidden" style="line-height: 1.4">${productDesc}</p> 
-<div class="row mx-0 mb-2 d-flex justify-content-between">`;
-
-                            var featureUI = ``;
-                            featureArray.forEach(feature =>{
-                                const featureName = featureJson.forEach(featureDict => {
-                                    const id = featureDict.feature_type_id;
-                                    if(id == feature){
-                                        //                                        return featureDict.feature_name;
-                                        featureUI += `<div class="rounded-pill border border-secondary align-items-center mb-1">
-<img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
-<h class="text-gray mx-1">${featureDict.feature_name}</h>
-        </div>`;
-                                    }                                    
-                                },"");
-                                console.log(featureName);
-                                //                                featureUI += `<div class="rounded-pill border border-secondary align-items-center mb-1">
-                                //<img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
-                                //<h class="text-gray mx-1">${featureName}</h>
-                                //        </div>`;
-                            })
-
-                            productCard += featureUI;
-
-
-                            productCard += `</div>
-<div class="row justify-content-between align-items-center px-3">
-<button type="button" class="btn btn-primary btn-sm col-3" onclick="openAddProductModal(${productId})" value="${productId}">Edit</button>
-<button type="button" class="btn btn-danger btn-sm col-3" onclick="showDeleteProductModal(${productId})" value="${productId}">Delete</button>
-
-        </div>
-
-        </div>
-        </div>`;
+//
+//
+//                            var productCard = `<div class="w3-card-4 m-4 shadow bg-white rounded productCard" id="productCard">
+//<div class="overflow-hidden" width="280" height="180">
+//<img src="${imageName}" alt="Avatar" width="280">
+//        </div>
+//<div class="p-2">
+//<h4><b>${productName}</b></h4>   
+//<p id="productDesc" class="overflow-hidden" style="line-height: 1.4">${productDesc}</p> 
+//<div class="row mx-0 mb-2 d-flex justify-content-between">`;
+//
+//                            var featureUI = ``;
+//                            featureArray.forEach(feature =>{
+//                                const featureName = featureJson.forEach(featureDict => {
+//                                    const id = featureDict.feature_type_id;
+//                                    if(id == feature){
+//                                        //                                        return featureDict.feature_name;
+//                                        featureUI += `<div class="rounded-pill border border-secondary align-items-center mb-1">
+//<img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
+//<h class="text-gray mx-1">${featureDict.feature_name}</h>
+//        </div>`;
+//                                    }                                    
+//                                },"");
+//                                console.log(featureName);
+//                                //                                featureUI += `<div class="rounded-pill border border-secondary align-items-center mb-1">
+//                                //<img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
+//                                //<h class="text-gray mx-1">${featureName}</h>
+//                                //        </div>`;
+//                            })
+//
+//                            productCard += featureUI;
+//
+//
+//                            productCard += `</div>
+//<div class="row justify-content-between align-items-center px-3">
+//<button type="button" class="btn btn-primary btn-sm col-3" onclick="openAddProductModal(${productId})" value="${productId}">Edit</button>
+//<button type="button" class="btn btn-danger btn-sm col-3" onclick="showDeleteProductModal(${productId})" value="${productId}">Delete</button>
+//
+//        </div>
+//
+//        </div>
+//        </div>`;
                             //                            document.getElementById("productContainer").innerHTML += productCard;
                             //                            document.getElementById("productContainer").innerHTML += card;
 
@@ -762,15 +765,15 @@ Add a new product
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Delete Product</h5>
+                <h5 class="modal-title"><?php echo gettext("Delete Product"); ?></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p>Are you sure want to delete this product?.</p>
+                <p><?php echo gettext("Are you sure want to delete this product?"); ?></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" id="deleteConfirmBtn">Delete</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><?php echo gettext("Close"); ?></button>
+                <button type="button" class="btn btn-danger" id="deleteConfirmBtn"><?php echo gettext("Delete"); ?></button>
             </div>
         </div>
     </div>

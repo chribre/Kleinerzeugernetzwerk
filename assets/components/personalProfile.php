@@ -53,17 +53,17 @@
             </div>
 
             <div class="col-md-6 p-5">
-                <h4>Address</h4>
+                <h4><?php echo gettext("Address"); ?></h4>
                 <p id="address">Street, House Num<br>
                     Zip City<br></p>
 
-                <h4>Phone</h4>
+                <h4><?php echo gettext("Phone"); ?></h4>
                 <p id="phoneNumber">+49 000 000 0000</p>
 
-                <h4>Mobile</h4>
+                <h4><?php echo gettext("Mobile"); ?></h4>
                 <p id="mobileNumber">+49 000 000 0000</p>
 
-                <h4>E-mail</h4>
+                <h4><?php echo gettext("E-mail"); ?></h4>
                 <p id="emailAddress">testemail@email.com</p>
             </div>
         </div>

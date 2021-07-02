@@ -91,15 +91,15 @@ $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min
 
         <!--    Enjoy Hint For onboarding-->
         <!-- From external libraries -->
-<!--        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>-->
+        <!--        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/kineticjs/5.2.0/kinetic.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
 
         <!-- Or from internal libraries from node_modules-->
         <!--        <script src="/kleinerzeugernetzwerk/assets/jquery/dist/jquery.min.js"></script>-->
-<!--
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/kineticjs/5.2.0/kinetic.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
+        <!--
+<script src="https://cdnjs.cloudflare.com/ajax/libs/kineticjs/5.2.0/kinetic.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.min.js"></script>
 -->
 
         <!-- Enjoyhint library -->
@@ -112,6 +112,8 @@ $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min
     <body>
         <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/loadingSpinner.php");
 
+              include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/terms_and_conditions.php");
+              include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/error_modal.php");
         ?>
         <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/navigationBar.php");
 

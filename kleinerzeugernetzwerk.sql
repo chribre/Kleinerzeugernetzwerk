@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2021 at 06:20 PM
+-- Generation Time: Jun 09, 2021 at 08:54 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -143,7 +143,12 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (120, 16, 'AW033301060744ddba26f86.79645090', '2021-04-12 13:40:43'),
 (121, 16, 'AW03330106076a58b339956.56306955', '2021-04-14 08:19:23'),
 (122, 16, 'AW03330106076d752501a70.93171268', '2021-04-14 11:51:46'),
-(123, 16, 'AW0333010608be2343fb6f8.30943861', '2021-04-30 10:55:48');
+(123, 16, 'AW0333010608be2343fb6f8.30943861', '2021-04-30 10:55:48'),
+(124, 58, 'AW033301060a787543d0f61.83935749', '2021-05-21 10:11:32'),
+(125, 16, 'AW033301060a78d9a0b8305.73485657', '2021-05-21 10:38:18'),
+(126, 16, 'AW033301060ae74867fc1b1.99854004', '2021-05-26 16:17:10'),
+(127, 16, 'AW033301060ae7616e59284.13086019', '2021-05-26 16:23:50'),
+(128, 61, 'AW033301060b600cface9b9.04286502', '2021-06-01 09:41:35');
 
 -- --------------------------------------------------------
 
@@ -176,8 +181,8 @@ INSERT INTO `farm_land` (`farm_id`, `producer_id`, `farm_name`, `farm_desc`, `fa
 (4, 16, 'Test Point 3', 'new test location', 'Brodaer Straße 4, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000ced60b4ff9c64a401aea6635137e2a40, 0, '2020-12-16 09:22:04'),
 (5, 16, 'Marketplatz', 'A market, or marketplace, is a location where people regularly gather for the purchase and sale of provisions, livestock, and other goods.[1] In different parts of the world, a market place may be described as a souk (from the Arabic), bazaar (from the Persian), a fixed mercado (Spanish), or itinerant tianguis (Mexico), or palengke (Philippines). Some markets operate daily and are said to be permanent markets while others are held once a week or on less frequent specified days such as festival days and are said to be periodic markets. The form that a market adopts depends on its locality\'s population, culture, ambient and geographic conditions. The term market covers many types of trading, as market squares, market halls and food halls, and their different varieties. Due to this, marketplaces can be situated both outdoors and indoors.', 'Dorfstraße Ost 13, undefined, 16307', NULL, NULL, NULL, NULL, 0x0000000001010000002c69ad0130a44a406affff7fa0d12c40, 0, '2020-12-17 13:13:16'),
 (6, 16, 'Test Point', 'this is my new production point', 'Gartenstraße 5a, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000ae4ee359d8c64a40a900006038892a40, 0, '2020-12-19 11:08:34'),
-(10, 16, '', '', 'Binsenwerder 3, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000cc19d264fac64a400e0100a03e7f2a40, 0, '2020-12-19 11:19:41'),
-(12, 16, '', '', 'Binsenwerder 1, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000338da266ecc64a406e0000c02d7f2a40, 0, '2020-12-19 11:28:54'),
+(10, 16, 'new test', '', 'Binsenwerder 3, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000cc19d264fac64a400e0100a03e7f2a40, 0, '2020-12-19 11:19:41'),
+(12, 16, 'new test 3', '', 'Binsenwerder 1, Neubrandenburg, 17033', NULL, NULL, NULL, NULL, 0x000000000101000000338da266ecc64a406e0000c02d7f2a40, 0, '2020-12-19 11:28:54'),
 (14, 16, 'Monmouthshire', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Binsenwerder 2, Neubrandenburg, 17033', 'Sonnenkamp', '4A', 'Neubrandenburg', '17036', 0x000000000101000000e2d7ff0be4c64a40cdffffdf1c7f2a40, 0, '2020-12-19 11:29:54'),
 (15, 16, 'Salisbury', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Binsenwerder 2, Neubrandenburg, 17033', 'Dr. Brückner Weg', '5', 'Neubrandenburg', '17033', 0x00000000010100000097d559b1dbc64a40e8ffff5f337f2a40, 0, '2020-12-19 11:33:22'),
 (18, 16, 'Virginia Water', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', 'Binsenwerder, 4-6, Neubrandenburg - 17033', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x0000000001010000004a0091d1ecc64a40010000a03e7f2a40, 0, '2021-02-26 14:07:04'),
@@ -344,13 +349,6 @@ INSERT INTO `images` (`image_id`, `image_type`, `image_name`, `image_path`, `ent
 (112, 1, '60740b6324f9a.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60740b6324f9a.PNG', 54, '2021-04-12 08:57:37'),
 (113, 1, '60740e972afc6.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60740e972afc6.PNG', 55, '2021-04-12 09:11:15'),
 (114, 1, '607415847dfa8.PNG', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/607415847dfa8.PNG', 56, '2021-04-12 09:40:23'),
-(119, 1, '6076a908f423d.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/6076a908f423d.jpg', 16, '2021-04-12 12:24:43'),
-(120, 1, '60743c2e978e3.jfif', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60743c2e978e3.jfif', 16, '2021-04-12 12:25:19'),
-(121, 1, '60744450dd199.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60744450dd199.jpeg', 16, '2021-04-12 13:00:04'),
-(122, 1, '607444bcc2536.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/607444bcc2536.jpeg', 16, '2021-04-12 13:02:04'),
-(123, 1, '607445b228fb0.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/607445b228fb0.jpeg', 16, '2021-04-12 13:06:27'),
-(124, 1, '6074460c44946.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/6074460c44946.jpeg', 16, '2021-04-12 13:08:06'),
-(125, 1, '60744794ead47.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60744794ead47.jpeg', 16, '2021-04-12 13:13:59'),
 (126, 1, '607448d3c70bf.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/607448d3c70bf.jpeg', 16, '2021-04-12 13:19:18'),
 (127, 3, '6076d8548dc61.jfif', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076d8548dc61.jfif', 34, '2021-04-13 08:54:10'),
 (128, 3, '6076d8548dc7b.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076d8548dc7b.jpg', 34, '2021-04-13 08:54:10'),
@@ -372,7 +370,10 @@ INSERT INTO `images` (`image_id`, `image_type`, `image_name`, `image_path`, `ent
 (155, 4, '6076abbc27a48.png', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076abbc27a48.png', 1, '2021-04-14 08:45:49'),
 (156, 4, '6076abbc27a54.png', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076abbc27a54.png', 1, '2021-04-14 08:45:49'),
 (191, 3, '6076d8548dc80.jfif', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076d8548dc80.jfif', 34, '2021-04-14 11:56:04'),
-(192, 3, '6076d8548dc95.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076d8548dc95.jpg', 34, '2021-04-14 11:56:04');
+(192, 3, '6076d8548dc95.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/production_point_img/6076d8548dc95.jpg', 34, '2021-04-14 11:56:04'),
+(193, 1, '60a7870267973.jfif', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60a7870267973.jfif', 58, '2021-05-21 10:11:01'),
+(194, 1, '60a7892d62523.jpg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60a7892d62523.jpg', 59, '2021-05-21 10:19:40'),
+(195, 1, '60b600ab54720.jpeg', 'http://localhost/kleinerzeugernetzwerk_uploads/profile_img/60b600ab54720.jpeg', 61, '2021-06-01 09:40:59');
 
 -- --------------------------------------------------------
 
@@ -467,6 +468,7 @@ INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_de
 CREATE TABLE `product_category` (
   `category_id` int(11) NOT NULL,
   `category_name` varchar(60) NOT NULL,
+  `category_name_de` varchar(100) NOT NULL,
   `category_description` text DEFAULT NULL,
   `image_name` text NOT NULL,
   `image_path` text NOT NULL
@@ -476,25 +478,25 @@ CREATE TABLE `product_category` (
 -- Dumping data for table `product_category`
 --
 
-INSERT INTO `product_category` (`category_id`, `category_name`, `category_description`, `image_name`, `image_path`) VALUES
-(1, 'Vegetable', 'Vegetable', 'vegetables.png', ''),
-(2, 'Vegetable Product', 'Vegetable Product', 'vegetable_product.png', ''),
-(3, 'Mushrooms', 'Mushrooms', 'mushrooms.png', ''),
-(4, 'Herbs, Tea and Spices', 'Herbs, Tea and Spices', 'herbs_spices.png', ''),
-(5, 'Fruit', 'Fruit', 'fruit.png', ''),
-(6, 'Fruit Products', 'Fruit Products', 'fruit_products.png', ''),
-(7, 'Nuts', 'Nuts', 'nuts.png', ''),
-(8, 'Honey', 'honey', 'honey.png', ''),
-(9, 'Juice and Beverages', 'juice and beverages', 'beverages.png', ''),
-(10, 'Corn', 'corn', 'corn.png', ''),
-(11, 'Potatoes & Root Crops', 'Potatoes & Root Crops', 'potatoes.png', ''),
-(12, 'Bread and Baked Products', 'Bread and Baked Products', 'baked_products.png', ''),
-(13, 'Sweets', 'sweets', 'sweets.png', ''),
-(14, 'Confectionery Products', 'confectionery products', 'confectionery_products.png', ''),
-(15, 'Milk, Cheese & Other Dairy Products', 'milk, cheese & other dairy products', 'milk.png', ''),
-(16, 'Eggs', 'eggs', 'eggs.png', ''),
-(17, 'Meat and Sausage Products', 'meat and sausage products', 'meat.png', ''),
-(18, 'Fish, Shellfish & Seafood', 'fish, shellfish & seafood', 'fish.png', '');
+INSERT INTO `product_category` (`category_id`, `category_name`, `category_name_de`, `category_description`, `image_name`, `image_path`) VALUES
+(1, 'Vegetable', 'Gemüse', 'Vegetable', 'vegetables.png', ''),
+(2, 'Vegetable Product', 'Gemüseerzeugnisse', 'Vegetable Product', 'vegetable_product.png', ''),
+(3, 'Mushrooms', 'Pilze', 'Mushrooms', 'mushrooms.png', ''),
+(4, 'Herbs, Tea and Spices', 'Kräuter, Tee und Gewürze', 'Herbs, Tea and Spices', 'herbs_spices.png', ''),
+(5, 'Fruit', 'Obst', 'Fruit', 'fruit.png', ''),
+(6, 'Fruit Products', 'Obsterzeugnisse', 'Fruit Products', 'fruit_products.png', ''),
+(7, 'Nuts', 'Nüsse', 'Nuts', 'nuts.png', ''),
+(8, 'Honey', 'Honig', 'honey', 'honey.png', ''),
+(9, 'Juice and Beverages', 'Saft und Getränke', 'juice and beverages', 'beverages.png', ''),
+(10, 'Corn', 'Getreide', 'corn', 'corn.png', ''),
+(11, 'Potatoes & Root Crops', 'Kartoffeln & Hackfrüchte', 'Potatoes & Root Crops', 'potatoes.png', ''),
+(12, 'Bread and Baked Products', 'Brot und Backwaren', 'Bread and Baked Products', 'baked_products.png', ''),
+(13, 'Sweets', 'Süßwaren', 'sweets', 'sweets.png', ''),
+(14, 'Confectionery Products', 'Konditorprodukte', 'confectionery products', 'confectionery_products.png', ''),
+(15, 'Milk, Cheese & Other Dairy Products', 'Milch, Käse & andere Molkereiprodukte', 'milk, cheese & other dairy products', 'milk.png', ''),
+(16, 'Eggs', 'Eier', 'eggs', 'eggs.png', ''),
+(17, 'Meat and Sausage Products', 'Fleisch- und Wurstwaren', 'meat and sausage products', 'meat.png', ''),
+(18, 'Fish, Shellfish & Seafood', 'Fisch, Krebse und Meeresfrüchte', 'fish, shellfish & seafood', 'fish.png', '');
 
 -- --------------------------------------------------------
 
@@ -836,7 +838,12 @@ INSERT INTO `user` (`user_id`, `salutations`, `first_name`, `middle_name`, `last
 (53, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredythekkekkara@gmail.com004', '', 0, 0, 0, '2021-04-12 08:55:43', '', 'test'),
 (54, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredythekkekkara@gmail.com005', '', 0, 0, 0, '2021-04-12 08:57:28', '', 'test'),
 (55, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredythekkekkara@gmail.com006', '', 0, 0, 0, '2021-04-12 09:10:59', '', 'test'),
-(56, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredythekkekkara@gmail.com007', '', 0, 0, 0, '2021-04-12 09:40:22', '', 'test');
+(56, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredythekkekkara@gmail.com007', '', 0, 0, 0, '2021-04-12 09:40:22', '', 'test'),
+(57, '', 'Brian', NULL, 'Gavin', '0000-00-00', 'Brodaer Straße', '6', '17036', '17036', 'Neubrandenburg', '9846194609', 'brian@test.com', '', 0, 0, 0, '2021-05-21 10:02:31', '', 'Having been a host farmer for three seasons, we’ve seen firsthand the difference this internship makes in beginning farmers and host farms alike.  As a farmer it is difficult to weigh the benefits of hosting young farmers.  Fresh energy and enthusiasm bring more to the farm than helping hands; they bring a fresh perspective and inquisitiveness that helps you look at your farm and your farming system through new eyes each season.  There is no educational model I know of that is more effective at growing farmers than the one Rogue Farm Corps has developed.'),
+(58, '', 'Brian', NULL, 'Gavin', '0000-00-00', 'Brodaer Straße', '6', '17036', '17036', 'Neubrandenburg', '9846194609', 'brian1@test.com', '', 0, 0, 0, '2021-05-21 10:10:18', '', 'Having been a host farmer for three seasons, we’ve seen firsthand the difference this internship makes in beginning farmers and host farms alike.  As a farmer it is difficult to weigh the benefits of hosting young farmers.  Fresh energy and enthusiasm bring more to the farm than helping hands; they bring a fresh perspective and inquisitiveness that helps you look at your farm and your farming system through new eyes each season.  There is no educational model I know of that is more effective at growing farmers than the one Rogue Farm Corps has developed.'),
+(59, '', 'test', NULL, 'name', '0000-00-00', 'Brodaer Straße', '4-6', '17033', '17033', '2', '9846194609', 'testa@test.com', '', 0, 0, 0, '2021-05-21 10:19:32', '', 'test'),
+(60, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredy2580', '', 0, 0, 0, '2021-06-01 09:39:34', '', 'test'),
+(61, '', 'Fredy', NULL, 'Davis', '0000-00-00', 'Brodaer Straße, 4', '4', '17033', '17033', 'Neubrandenburg', '017630142345', 'fredy2581', '', 0, 0, 0, '2021-06-01 09:40:59', '', 'test');
 
 -- --------------------------------------------------------
 
@@ -898,7 +905,12 @@ INSERT INTO `user_credential` (`id`, `user_id`, `user_name`, `password`) VALUES
 (40, 53, 'fredythekkekkara@gmail.com004', '$2y$10$/KWtc6exhAMKN3jo2OjpFu3d26deYFnx..i3tDKb9xV9AgbD3dp4m'),
 (41, 54, 'fredythekkekkara@gmail.com005', '$2y$10$qb7vHjE.q.7nweJXHwrb2.c6CnlU8o6hbzDeVcCKd1e5SjqRjL3C2'),
 (42, 55, 'fredythekkekkara@gmail.com006', '$2y$10$3UGAr5pIR/w90vvv8gOGR.22HzpVNrdTxKliRhTG24zMD2R.A7NF6'),
-(43, 56, 'fredythekkekkara@gmail.com007', '$2y$10$IsHZ7e6tnYUHxVosP5t1i.i.D5waZDhkwcBP5UcMmAri6HJTAV9te');
+(43, 56, 'fredythekkekkara@gmail.com007', '$2y$10$IsHZ7e6tnYUHxVosP5t1i.i.D5waZDhkwcBP5UcMmAri6HJTAV9te'),
+(44, 57, 'brian@test.com', '$2y$10$kbPW.xFsj/NnBrtrWfkNY.m2GX1qGybFRLN3OnycSOJLNEeN5w16q'),
+(45, 58, 'brian1@test.com', '$2y$10$abDR6pDADg0I.7Ok4XLuuOeAxXKlfROSXhTCdvRMtIw0g5l4IpZqu'),
+(46, 59, 'testa@test.com', '$2y$10$2IRm7tZQG5d1NmCElUyFZuTLNB2uFat5GXew2ugWfaR7PNKxCx.x2'),
+(47, 60, 'fredy2580', '$2y$10$Q0eJIFZ/Eq4KZq1QMLX5lO6Hj36PlLGx4f5WWC4kblgJUVUsI2Xvy'),
+(48, 61, 'fredy2581', '$2y$10$lJfKQ6M/rDhzDb4kkmavyOWcao/uEALVFDStY5MJMjNBwwVrCmsZa');
 
 --
 -- Indexes for dumped tables
@@ -1017,7 +1029,7 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
 -- AUTO_INCREMENT for table `farm_land`
@@ -1041,7 +1053,7 @@ ALTER TABLE `feature_type`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=193;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
 
 --
 -- AUTO_INCREMENT for table `products`
@@ -1083,13 +1095,13 @@ ALTER TABLE `units`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `user_credential`
 --
 ALTER TABLE `user_credential`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Constraints for dumped tables

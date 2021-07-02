@@ -9,7 +9,7 @@
 ****************************************************************/
 session_start();
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php";
-include "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/userModel.php";
+require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/userModel.php";
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
@@ -59,12 +59,12 @@ function createUser($userId, $firstName, $lastName, $dob, $street, $houseNumber,
             . "VALUES ('$salutation', '$firstName', '$lastName', '$dob', '$street', '$houseNumber', '$zip', '$city', '$country', '$phone', '$mobile', '$email', '$profileImageName', $userType, $isActive, $isBlocked, '$description')";
 
         try{
-            echo "trying to insert";
-            echo "\n ".$sql."\n";
+//            echo "trying to insert";
+//            echo "\n ".$sql."\n";
             mysqli_query($dbConnection, $sql);
             $user_id = $dbConnection->insert_id;
-            echo "inserted";
-            echo "user id is $user_id, ";
+//            echo "inserted";
+//            echo "user id is $user_id, ";
             if (saveUserCredentials($user_id, $email, $password)){
                 $fileNames = uploadPictures($profileImageNameArray, $profileUplaodLocation);
                 $imageQuery = createFileUploadQuery($profileImageNameArray, $profileImageIdArray, $profileImagepath, $user_id, 1);
@@ -72,7 +72,7 @@ function createUser($userId, $firstName, $lastName, $dob, $street, $houseNumber,
                 $profileImageCount = count($profileImageNameArray);
                 $profileImageIdCount = count($profileImageIdArray);
 
-                if ($profileImageCount > 0 || $profileImageIdCount > 0){
+                if (($profileImageCount > 0 || $profileImageIdCount > 0) && $imageQuery != ''){
                     try{
                         if (mysqli_multi_query($dbConnection, $imageQuery)){
                             //                        mysqli_commit($dbConnection);
@@ -108,7 +108,7 @@ function createUser($userId, $firstName, $lastName, $dob, $street, $houseNumber,
         return false;
     }else{
         http_response_code(409);
-            return false;
+        return false;
     }
     http_response_code(400);
     return false;

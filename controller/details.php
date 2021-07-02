@@ -788,7 +788,6 @@ function getAllSellersByUser($userId){
 
 
 function getCategoriesInBounds(){
-    global $dbConnection;
     $mapBound = $_POST['map_boundary'] ? $_POST['map_boundary'] : 0;
     ob_start();
     global $dbConnection;

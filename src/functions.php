@@ -7,7 +7,7 @@
    PURPOSE:   All commonly used functions are written here
 ****************************************************************/
 
-include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/config.php");
+require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/config.php");
 //include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/ftp_config.php");
 
 /*
@@ -679,6 +679,8 @@ function getImagePath($imageType){
             return "/kleinerzeugernetzwerk_uploads/production_point_img/";
         case 4:
             return "/kleinerzeugernetzwerk_uploads/seller_img/";
+        case 5:
+            return "/kleinerzeugernetzwerk_uploads/news_feeds/";
         default:
             return "";
     }

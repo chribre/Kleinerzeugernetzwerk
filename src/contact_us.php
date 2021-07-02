@@ -19,8 +19,8 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 <link href="/kleinerzeugernetzwerk/css/custom/about_us.css" rel="stylesheet">
 
 <div class="mx-auto justify-content-center mt-md-5">
-    <h3 class="text-center inter-font heading">CONATCT US</h3>
-    <p class="text-center mx-md-5 px-md-5 mt-md-5 desc-italics">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <h3 class="text-center inter-font heading"><?php echo gettext("CONATCT US"); ?></h3>
+    <p class="text-center mx-md-5 px-md-5 mt-md-5 desc-italics"><?php echo gettext("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."); ?></p>
 </div>
 <div class="mt-md-5">
     <div class="row mx-auto justify-content-center">
@@ -58,25 +58,25 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
 
         </div>
         <div class="col-md-5 px-5">
-            <h5 class="inter-font sub-heading ">Email Form</h5>
-            <p class="inter-font desc-regular">We want to hear from you. Please feel free to email test@email.com, or just speak your mind below. Please allow 1 business  day to respond.</p>
+            <h5 class="inter-font sub-heading "><?php echo gettext("Email Form"); ?></h5>
+            <p class="inter-font desc-regular"><?php echo gettext("We want to hear from you. Please feel free to email test@email.com, or just speak your mind below. Please allow 1 business  day to respond."); ?></p>
             <div>
                 <div class="row mt-4">
-                    <p class="col-md-3 my-auto inter-font desc-regular">NAME</p>
+                    <p class="col-md-3 my-auto inter-font desc-regular"><?php echo gettext("NAME"); ?></p>
                     <input class="col-md-9 my-auto  inter-font desc-regular" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
 
                 <div class="row mt-4">
-                    <p  class="col-md-3 my-auto inter-font desc-regular">EMAIL</p>
+                    <p  class="col-md-3 my-auto inter-font desc-regular"><?php echo gettext("EMAIL"); ?></p>
                     <input class="col-md-9 my-auto inter-font desc-regular" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 </div>
 
                 <div class="row mt-4">
-                    <p class="col-md-3 my-auto inter-font desc-regular">MESSAGE</p>
+                    <p class="col-md-3 my-auto inter-font desc-regular"><?php echo gettext("MESSAGE"); ?></p>
                     <textarea class="col-md-9 my-auto inter-font desc-regular" class="form-control" id="exampleFormControlTextarea1" rows="6"></textarea>
                 </div>
 
-                <button type="button" class="btn btn-primary btn-lg mt-5 inter-font name">SEND</button>
+                <button type="button" class="btn btn-primary btn-lg mt-5 inter-font name"><?php echo gettext("SEND"); ?></button>
 
             </div>
         </div>
