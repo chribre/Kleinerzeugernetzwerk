@@ -70,23 +70,23 @@
 
 
 
-                <div class="text-center"><h5 class="modal-title"><i class="material-icons">&#xE147;</i><?php echo gettext("Product"); ?>Add a new seller</h5></div>
+                <div class="text-center"><h5 class="modal-title"><i class="material-icons">&#xE147;</i><?php echo gettext("Add a new seller"); ?></h5></div>
 
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body m-3">
-                <p><?php echo gettext("Product"); ?>Modal body text goes here.</p>
+                <p><?php echo gettext("Modal body text goes here."); ?></p>
                 <form id="newSellingPointForm" enctype="multipart/form-data" onsubmit="event.preventDefault()">
                     <!--                    <form method="post" id="newProductionPointForm" enctype="multipart/form-data">-->
                     <div class="form-group">
-                        <label for="sellingPointName"><?php echo gettext("Product"); ?>Seller Name</label>
-                        <input type="text" class="form-control" id="sellingPointName" aria-describedby="sellingPointName" placeholder="<?php echo gettext("Product"); ?>Selling Point Name" name="sellingPointName">
+                        <label for="sellingPointName"><?php echo gettext("Seller Name"); ?></label>
+                        <input type="text" class="form-control" id="sellingPointName" aria-describedby="sellingPointName" placeholder="<?php echo gettext("Selling Point Name"); ?>" name="sellingPointName">
                     </div>
                     <div class="form-group">
-                        <label for="sellingPointDesc"><?php echo gettext("Product"); ?>Seller Description</label>
-                        <textarea class="form-control" id="sellingPointDesc" name="productionPointDesc" rows="4" placeholder="<?php echo gettext("Product"); ?>Write a description about your selling point."></textarea>
+                        <label for="sellingPointDesc"><?php echo gettext("Seller Description"); ?></label>
+                        <textarea class="form-control" id="sellingPointDesc" name="productionPointDesc" rows="4" placeholder="<?php echo gettext("Write a description about your selling point."); ?>"></textarea>
                     </div>
 
                     <div class="row">
@@ -99,38 +99,38 @@
                         <div class="col-md-6">
                             <div class="form-row">
                                 <div class="col-md-7 mb-3">
-                                    <label for="sp_street"><?php echo gettext("Product"); ?>Street</label>
-                                    <input type="text" class="form-control" id="sp_street" placeholder="<?php echo gettext("Product"); ?>Street" required name="sp_street">
+                                    <label for="sp_street"><?php echo gettext("Street"); ?></label>
+                                    <input type="text" class="form-control" id="sp_street" placeholder="<?php echo gettext("Street"); ?>" required name="sp_street">
                                     <div class="invalid-feedback">
-                                        <?php echo gettext("Product"); ?>Please provide a valid Street Name.
+                                        <?php echo gettext("Please provide a valid Street Name."); ?>
                                     </div>
                                 </div>
                                 <div class="col-md-5 mb-3">
-                                    <label for="sp_houseNumber"><?php echo gettext("Product"); ?>Building Number</label>
-                                    <input type="text" class="form-control" id="sp_houseNumber" placeholder="<?php echo gettext("Product"); ?>House Number" required name="sp_house_number">
+                                    <label for="sp_houseNumber"><?php echo gettext("Building Number"); ?></label>
+                                    <input type="text" class="form-control" id="sp_houseNumber" placeholder="<?php echo gettext("House Number"); ?>" required name="sp_house_number">
                                     <div class="invalid-feedback">
-                                        <?php echo gettext("Product"); ?>Please provide a valid building number.
+                                        <?php echo gettext("Please provide a valid building number."); ?>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="sp_zipCode"><?php echo gettext("Product"); ?>Zip</label>
-                                    <input type="text" class="form-control" id="sp_zipCode" placeholder="Zip" required name="sp_zip">
+                                    <label for="sp_zipCode"><?php echo gettext("Zip"); ?></label>
+                                    <input type="text" class="form-control" id="sp_zipCode" placeholder="<?php echo gettext("Zip"); ?>" required name="sp_zip">
                                     <div class="invalid-feedback">
-                                        <?php echo gettext("Product"); ?>Please provide a valid Zip.
+                                        <?php echo gettext("Please provide a valid Zip."); ?>
                                     </div>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="sp_city"><?php echo gettext("Product"); ?>City</label>
-                                    <input type="text" class="form-control" id="sp_city" placeholder="<?php echo gettext("Product"); ?>City" required name="sp_city">
+                                    <label for="sp_city"><?php echo gettext("City"); ?></label>
+                                    <input type="text" class="form-control" id="sp_city" placeholder="<?php echo gettext("City"); ?>" required name="sp_city">
                                     <div class="invalid-feedback">
-                                        <?php echo gettext("Product"); ?>Please provide a valid City.
+                                        <?php echo gettext("Please provide a valid City."); ?>
                                     </div>
                                 </div>
                             </div>
-                            <div class="m-4"><button type="button" class="btn btn-link col-md-12" id="sp_locateOnMapBtn" onclick="findSllerLocation()"><?php echo gettext("Product"); ?>Locate on map</button>
+                            <div class="m-4"><button type="button" class="btn btn-link col-md-12" id="sp_locateOnMapBtn" onclick="findSllerLocation()"><?php echo gettext("Locate on map"); ?></button>
                                 <input type="hidden" id="sp_latitude" name="sp_latitude" value="" />
                                 <input type="hidden" id="sp_longitude" name="sp_longitude" value="" />
                             </div>
@@ -140,17 +140,17 @@
 
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label for="sp_mobile"><?php echo gettext("Product"); ?>Mobile</label>
-                            <input type="text" class="form-control" id="sp_mobile" placeholder="<?php echo gettext("Product"); ?>Mobile" required name="sp_mobile">
+                            <label for="sp_mobile"><?php echo gettext("Mobile"); ?></label>
+                            <input type="text" class="form-control" id="sp_mobile" placeholder="<?php echo gettext("Mobile"); ?>" required name="sp_mobile">
                             <div class="invalid-feedback">
-                                <?php echo gettext("Product"); ?>Please provide a valid mobile number.
+                                <?php echo gettext("Please provide a valid mobile number."); ?>
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="sp_phone"><?php echo gettext("Product"); ?>Phone</label>
-                            <input type="text" class="form-control" id="sp_phone" placeholder="<?php echo gettext("Product"); ?>Phone" required name="sp_phone">
+                            <label for="sp_phone"><?php echo gettext("Phone"); ?></label>
+                            <input type="text" class="form-control" id="sp_phone" placeholder="<?php echo gettext("Phone"); ?>" required name="sp_phone">
                             <div class="invalid-feedback">
-                                <?php echo gettext("Product"); ?>Please provide a valid phone number.
+                                <?php echo gettext("Please provide a valid phone number."); ?>
                             </div>
                         </div>
                     </div>
@@ -158,22 +158,22 @@
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="sp_email">Email</label>
-                            <input type="text" class="form-control" id="sp_email" placeholder="<?php echo gettext("Product"); ?>Email" required name="sp_email">
+                            <input type="text" class="form-control" id="sp_email" placeholder="<?php echo gettext("Email"); ?>" required name="sp_email">
                             <div class="invalid-feedback">
-                                <?php echo gettext("Product"); ?>Please provide a valid mobile number.
+                                <?php echo gettext("Please provide a valid mobile number."); ?>
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="sp_website"><?php echo gettext("Product"); ?>Website</label>
-                            <input type="text" class="form-control" id="sp_website" placeholder="<?php echo gettext("Product"); ?>Website" required name="sp_website">
+                            <label for="sp_website"><?php echo gettext("Website"); ?></label>
+                            <input type="text" class="form-control" id="sp_website" placeholder="<?php echo gettext("Website"); ?>" required name="sp_website">
                             <div class="invalid-feedback">
-                                <?php echo gettext("Product"); ?>Please provide a valid phone number.
+                                <?php echo gettext("Please provide a valid phone number."); ?>
                             </div>
                         </div>
                     </div>
 
 
-                    <div><?php echo gettext("Product"); ?>Opening Hours</div>
+                    <div><?php echo gettext("Opening Hours"); ?></div>
 
 
 

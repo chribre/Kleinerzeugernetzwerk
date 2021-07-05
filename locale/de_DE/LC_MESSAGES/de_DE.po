@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2021-06-29 16:31+0200\n"
-"PO-Revision-Date: 2021-06-29 16:34+0200\n"
+"POT-Creation-Date: 2021-07-05 11:08+0200\n"
+"PO-Revision-Date: 2021-07-05 11:08+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -23,6 +23,7 @@ msgstr ""
 
 #: assets/components/addProductModal.php:141
 #: assets/components/addProductionPoint.php:80
+#: assets/components/addSellerModal.php:80
 msgid "Modal body text goes here."
 msgstr ""
 
@@ -103,17 +104,21 @@ msgid "Write a description about your production point."
 msgstr ""
 
 #: assets/components/addProductionPoint.php:101
-#: assets/components/addProductionPoint.php:102 src/signUp.php:150
+#: assets/components/addProductionPoint.php:102
+#: assets/components/addSellerModal.php:102
+#: assets/components/addSellerModal.php:103 src/signUp.php:150
 #: src/signUp.php:151
 msgid "Street"
 msgstr ""
 
 #: assets/components/addProductionPoint.php:104
+#: assets/components/addSellerModal.php:105
 msgid "Please provide a valid Street Name."
 msgstr ""
 
 #: assets/components/addProductionPoint.php:108
-#: assets/components/addProductionPoint.php:109 src/signUp.php:157
+#: assets/components/addProductionPoint.php:109
+#: assets/components/addSellerModal.php:110 src/signUp.php:157
 #: src/signUp.php:158
 msgid "House Number"
 msgstr ""
@@ -123,26 +128,33 @@ msgid "Please provide a valid hosue number."
 msgstr ""
 
 #: assets/components/addProductionPoint.php:118
-#: assets/components/addProductionPoint.php:119 src/signUp.php:167
+#: assets/components/addProductionPoint.php:119
+#: assets/components/addSellerModal.php:119
+#: assets/components/addSellerModal.php:120 src/signUp.php:167
 #: src/signUp.php:168
 msgid "Zip"
 msgstr ""
 
 #: assets/components/addProductionPoint.php:121
+#: assets/components/addSellerModal.php:122
 msgid "Please provide a valid Zip."
 msgstr ""
 
 #: assets/components/addProductionPoint.php:125
-#: assets/components/addProductionPoint.php:126 src/signUp.php:174
+#: assets/components/addProductionPoint.php:126
+#: assets/components/addSellerModal.php:126
+#: assets/components/addSellerModal.php:127 src/signUp.php:174
 #: src/signUp.php:175
 msgid "City"
 msgstr ""
 
 #: assets/components/addProductionPoint.php:128
+#: assets/components/addSellerModal.php:129
 msgid "Please provide a valid City."
 msgstr ""
 
 #: assets/components/addProductionPoint.php:132
+#: assets/components/addSellerModal.php:133
 msgid "Locate on map"
 msgstr ""
 
@@ -151,37 +163,69 @@ msgid "Add Production Point Images"
 msgstr ""
 
 #: assets/components/addSellerModal.php:73
-#: assets/components/addSellerModal.php:80
+msgid "Add a new seller"
+msgstr ""
+
 #: assets/components/addSellerModal.php:84
+msgid "Seller Name"
+msgstr ""
+
 #: assets/components/addSellerModal.php:85
+msgid "Selling Point Name"
+msgstr ""
+
 #: assets/components/addSellerModal.php:88
+msgid "Seller Description"
+msgstr ""
+
 #: assets/components/addSellerModal.php:89
-#: assets/components/addSellerModal.php:102
-#: assets/components/addSellerModal.php:103
-#: assets/components/addSellerModal.php:105
+msgid "Write a description about your selling point."
+msgstr ""
+
 #: assets/components/addSellerModal.php:109
-#: assets/components/addSellerModal.php:110
+msgid "Building Number"
+msgstr ""
+
 #: assets/components/addSellerModal.php:112
-#: assets/components/addSellerModal.php:119
-#: assets/components/addSellerModal.php:122
-#: assets/components/addSellerModal.php:126
-#: assets/components/addSellerModal.php:127
-#: assets/components/addSellerModal.php:129
-#: assets/components/addSellerModal.php:133
+msgid "Please provide a valid building number."
+msgstr ""
+
 #: assets/components/addSellerModal.php:143
 #: assets/components/addSellerModal.php:144
+#: assets/components/personalProfile.php:63
+msgid "Mobile"
+msgstr ""
+
 #: assets/components/addSellerModal.php:146
+#: assets/components/addSellerModal.php:163
+msgid "Please provide a valid mobile number."
+msgstr ""
+
 #: assets/components/addSellerModal.php:150
 #: assets/components/addSellerModal.php:151
+#: assets/components/personalProfile.php:60 src/signUp.php:121
+#: src/signUp.php:122
+msgid "Phone"
+msgstr ""
+
 #: assets/components/addSellerModal.php:153
+#: assets/components/addSellerModal.php:170
+msgid "Please provide a valid phone number."
+msgstr ""
+
 #: assets/components/addSellerModal.php:161
-#: assets/components/addSellerModal.php:163
+msgid "Email"
+msgstr ""
+
 #: assets/components/addSellerModal.php:167
 #: assets/components/addSellerModal.php:168
-#: assets/components/addSellerModal.php:170
-#: assets/components/addSellerModal.php:176 src/search.php:67
-msgid "Product"
+msgid "Website"
 msgstr ""
+
+#: assets/components/addSellerModal.php:176
+#: js/seller_web_services/seller_details.js.php:151
+msgid "Opening Hours"
+msgstr "Öffnungszeit"
 
 #: assets/components/addSellerModal.php:186
 #: js/seller_web_services/seller_details.js.php:187
@@ -317,15 +361,6 @@ msgstr "A bmelden"
 msgid "Address"
 msgstr ""
 
-#: assets/components/personalProfile.php:60 src/signUp.php:121
-#: src/signUp.php:122
-msgid "Phone"
-msgstr ""
-
-#: assets/components/personalProfile.php:63
-msgid "Mobile"
-msgstr ""
-
 #: assets/components/personalProfile.php:66
 #: assets/components/signInModal.php:34
 msgid "E-mail"
@@ -413,10 +448,6 @@ msgstr ""
 #: index.php:18
 msgid "Good Morning"
 msgstr "Guten Morgan 22"
-
-#: js/seller_web_services/seller_details.js.php:151
-msgid "Opening Hours"
-msgstr "Öffnungszeit"
 
 #: js/seller_web_services/seller_details.js.php:193
 #: js/seller_web_services/seller_details.js.php:201
@@ -643,6 +674,10 @@ msgstr ""
 
 #: src/search.php:60
 msgid "Filter"
+msgstr ""
+
+#: src/search.php:67
+msgid "Product"
 msgstr ""
 
 #: src/search.php:82
