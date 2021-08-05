@@ -30,6 +30,9 @@
                 <li>
                     <a href='dashboard.php?menu=services'><span class="fa fa-cogs"></span> <?php echo gettext("Services"); ?></a>
                 </li>
+                <li>
+                    <a href='dashboard.php?menu=feeds'><span class="fa fa-newspaper-o"></span> <?php echo gettext("Feeds & Posts"); ?></a>
+                </li>
             </ul>
 
             <div class="footer">
@@ -58,17 +61,17 @@
                         switch ($_GET['menu']){
                             case 'profile':
                                 $profileHead = '';
-                                
+
                                 if (isset($_GET['data'])){
                                     if ($_GET['data'] == 'personal'){
                                         $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("PROFILE").'</text></div>';
-                                        $profileHead = $profileHead . '<a class="btn btn-success" href="/kleinerzeugernetzwerk/src/editProfile.php" ><i class="edit icon"></i>Edit profile</a>';
+                                        $profileHead = $profileHead . '<a class="btn btn-success" href="/kleinerzeugernetzwerk/src/editProfile.php" ><i class="edit icon"></i>'.gettext("Edit profile").'</a>';
                                     }elseif ($_GET['data'] == 'productionPoint'){
                                         $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'. gettext("PRODUCTION POINTS") . '</text></div>';
-                                        $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddProductionPointModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Farm Land</button>';
+                                        $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddProductionPointModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>'.gettext("Add Farm Land").'</button>';
                                     }elseif ($_GET['data'] == 'seller'){
                                         $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("SELLERS").'</text></div>';
-                                        $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddSellarModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>Add Selling Point</button>';
+                                        $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddSellarModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>'.gettext("Add Selling Point").'</button>';
 
 
                                         //                                        $profileHead = $profileHead . '<button onclick="getSellerDetails()">Click me</button>';
@@ -85,6 +88,11 @@
                             case 'services':
                                 echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("SERVICES").'</text></div>';
                                 break;
+                            case 'feeds':
+                                $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("NEWS & FEEDS").'</text></div>';
+                                $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddFeedPostModal([])" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>'.gettext("Add Feed Post").'</button>';
+                                echo $profileHead;
+                                break;
                             default:
                                 echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("PROFILE").'</text></div>';
                                 break;
@@ -94,36 +102,39 @@
                     ?>
 
                 </div>
-                
-                    <?php
 
-                    if (isset($_GET['menu'])) {
-                        switch ($_GET['menu']){
-                            case 'profile':
-                                include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/profile.php");
-                                break;
-                            case 'products':
-                                include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/products.php");
-                                break;
-                            case 'events':
-                                echo '<h2 class="ml-3">'.gettext("EVENTS").'</h2>';
-                                break;
-                            case 'services':
-                                echo '<h2 class="ml-3">'.gettext("SERVICES").'</h2>';
-                                break;
-                            default:
-                                echo '<h2 class="ml-3">'.gettext("PROFILE").'</h2>';
-                                break;
-                        }
+                <?php
 
+                if (isset($_GET['menu'])) {
+                    switch ($_GET['menu']){
+                        case 'profile':
+                            include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/profile.php");
+                            break;
+                        case 'products':
+                            include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/products.php");
+                            break;
+                        case 'events':
+                            echo '<h2 class="ml-3">'.gettext("EVENTS").'</h2>';
+                            break;
+                        case 'services':
+                            echo '<h2 class="ml-3">'.gettext("SERVICES").'</h2>';
+                            break;
+                        case 'feeds':
+                            include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/feeds-by-user.php");
+                            break;
+                        default:
+                            echo '<h2 class="ml-3">'.gettext("PROFILE").'</h2>';
+                            break;
                     }
-                    ?>
 
-                
+                }
+                ?>
+
+
             </div>
-<!--
-            <div class="container" id="sideBarContent">
-            </div>
+            <!--
+<div class="container" id="sideBarContent">
+</div>
 -->
         </div>
 

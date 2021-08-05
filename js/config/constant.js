@@ -25,6 +25,12 @@ function getFilePath(fileType, fileName){
             case 4:
                 folderPath = 'seller_img/';
                 break;
+            case 5:
+                folderPath = 'news_feeds/';
+                break;
+            case 6:
+                folderPath = 'features_features/';
+                break;
         }
     }else{
         file = 'default-image.png'

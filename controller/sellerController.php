@@ -316,7 +316,7 @@ function getAllSellingPoints($seller){
     if ($sellerCount == 0){
         $SellerArray = [];
         http_response_code(200);
-        return $productionPoitArray;
+        return $SellerArray;
     }else{
         while($row = mysqli_fetch_assoc($getAllSellerQuery)) {
 

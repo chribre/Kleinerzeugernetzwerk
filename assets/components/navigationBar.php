@@ -86,6 +86,12 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                     <li class="nav-item active ml-3">
                         <a href="#" class="nav-link" data-toggle="modal" data-target="#"><?php echo _('Events') ?><span class="sr-only">(current)</span></a>
                     </li>
+                    
+                    <li class="nav-item active ml-3">
+                        <a href="/kleinerzeugernetzwerk/src/feeds.php" class="nav-link"><?php echo _('News Feeds') ?><span class="sr-only">(current)</span></a>
+                    </li>
+                    
+                    
                     <li class="nav-item active ml-3">
                         <a href="/kleinerzeugernetzwerk/src/contact_us.php" class="nav-link"><?php echo _('Contact Us') ?><span class="sr-only">(current)</span></a>
                     </li>

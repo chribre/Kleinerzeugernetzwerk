@@ -11,7 +11,6 @@
 ?>
 
 
-
 <div class="modal fade" id="addSellingPoint">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="form">
         <div class="modal-content">

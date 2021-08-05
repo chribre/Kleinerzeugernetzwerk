@@ -243,7 +243,7 @@ function showSellerInDetailScreen(sellerData){
         sellerUI += `</tr>
 <tr>`;
 
-        sellerUI += `<th scope="row">Sunday<?php echo gettext("Sunday"); ?><td></th>`;
+        sellerUI += `<th scope="row"><?php echo gettext("Sunday"); ?><td></th>`;
         if (isSunAvailable){
             sellerUI += `<td>${sunOpen}</td>
 <td>${sunClose}</td>`;

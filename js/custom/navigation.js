@@ -32,3 +32,8 @@ function cancelBubbleEvent(){
     e.cancelBubble = true;
     if (e.stopPropagation) e.stopPropagation();
 }
+
+function goToFeedDetailsPage(feedId){
+    cancelBubbleEvent()
+    window.location = "/kleinerzeugernetzwerk/src/feed-in-detail.php?feed="+feedId;
+}
