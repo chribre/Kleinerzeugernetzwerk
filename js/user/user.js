@@ -57,8 +57,11 @@ function showProducerInDetailScreen(producerData){
     const producerImageName = producerDetails.image_name ? producerDetails.image_name : DEFAULT_USER_IMAGE;
     const producerImage = getFilePath(1, producerImageName);
     
-    
+    const chatUserName = producerDetails.chat_user_name ? producerDetails.chat_user_name : '';
+    const userChatAvailable = localStorage.getItem('isChatLoggedIn') == 'true' ? true :  false;
 
+    
+    
     
     producerUI += `<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -68,8 +71,15 @@ function showProducerInDetailScreen(producerData){
             <div class="carousel-item active">
                 <img class="d-block w-100" src="${producerImage}" alt="First slide" style="width: 100%; height: 350px; object-fit: cover;">
             </div>
-        </div>
-    </div>
+        </div>`;
+
+    if (userChatAvailable == true && chatUserName != ''){
+        producerUI += `<div class="position-absolute float-profile" onclick="gotoDirectMessage('${chatUserName}')">
+            <img class=" rounded-circle float-profile-image" src="${DIRECT_MESSAGE_ICON}" alt="" style="width: 60px; height: 60px; object-fit: cover;">
+        </div>`;
+    }
+    
+    producerUI += `</div>
 
 
 

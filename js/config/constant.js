@@ -1,14 +1,23 @@
 function getServerRootAddress(){
     const localServer = 'http://localhost';
-    const awsServer = 'http://ec2-18-184-142-200.eu-central-1.compute.amazonaws.com'
+    const awsServer = 'http://ec2-3-68-74-178.eu-central-1.compute.amazonaws.com'
 
     return localServer;
 }
 
+function getChatServerURL(){
+    return 'http://ec2-3-68-74-178.eu-central-1.compute.amazonaws.com:3000';
+}
+
+function chatServerAPI(action){
+    return `${getChatServerURL()}/api/v1/${action}`;
+}
+
+
 function getFilePath(fileType, fileName){
     var file = fileName;
     const localServer = 'http://localhost/kleinerzeugernetzwerk_uploads/';
-    const awsServer = 'http://ec2-18-184-142-200.eu-central-1.compute.amazonaws.com/kleinerzeugernetzwerk_uploads/'
+    const awsServer = 'http://ec2-3-68-74-178.eu-central-1.compute.amazonaws.com/kleinerzeugernetzwerk_uploads/'
 
     var folderPath = '';
     if (file != ''){

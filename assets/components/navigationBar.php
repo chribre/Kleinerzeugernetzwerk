@@ -86,12 +86,12 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                     <li class="nav-item active ml-3">
                         <a href="#" class="nav-link" data-toggle="modal" data-target="#"><?php echo _('Events') ?><span class="sr-only">(current)</span></a>
                     </li>
-                    
+
                     <li class="nav-item active ml-3">
                         <a href="/kleinerzeugernetzwerk/src/feeds.php" class="nav-link"><?php echo _('News Feeds') ?><span class="sr-only">(current)</span></a>
                     </li>
-                    
-                    
+
+
                     <li class="nav-item active ml-3">
                         <a href="/kleinerzeugernetzwerk/src/contact_us.php" class="nav-link"><?php echo _('Contact Us') ?><span class="sr-only">(current)</span></a>
                     </li>
@@ -146,7 +146,11 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
         //        };
 
 
-
+        /*
+    FUNCTION    :   search keyword on user press enter key on keyboard
+    INPUT       :   event
+    OUTPUT      :   go to search result screen
+*/
         $("#searchTextBox").keyup(function(event) {
             if (event.keyCode === 13) {
                 const searchText = document.getElementById("searchTextBox").value;
@@ -155,13 +159,22 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                 }
             }
         });
-
+/*
+    FUNCTION    :   set language prefeerence into local storage
+    INPUT       :   language
+    OUTPUT      :   store language in local storage
+*/
         function setLanguage(language){
             if (language){
                 localStorage.setItem("language", language); 
             }
         }
 
+/*
+    FUNCTION    :   set language prefeerence on navigation bar as icon
+    INPUT       :   language(from local storage)
+    OUTPUT      :   returns flag of language and set it to navigation bar
+*/
         function setLanguagePreferenceOnNav(){
             var languagePreference = localStorage.getItem("language");
             switch (languagePreference){
@@ -176,7 +189,11 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                     break;
             }        
         }
-
+/*
+    FUNCTION    :   ajax call to set language prefeerence
+    INPUT       :   language
+    OUTPUT      :   set language if success
+*/
         function setLanguagePreferenceServer(language){
             $.ajax({
                 type: "POST",
@@ -201,7 +218,11 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
         }
 
 
-
+/*
+    FUNCTION    :   set login button or profile button on navigation bar
+    INPUT       :   logged in or not
+    OUTPUT      :   set login button if not logged in, set profile picture if already logged in
+*/
         function setLoginOrProfileButton(){
             const signInButton = '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right id="signInOrProfileBtn"><?php echo gettext("Sign In"); ?></button>';       
 
@@ -232,11 +253,39 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
 
             setLanguagePreferenceOnNav();
         }
+        
+/*
+    FUNCTION    :   logout user from chat as well as dashboard
+    INPUT       :   
+    OUTPUT      :   
+*/
         function logOut(){
+            if(localStorage.getItem('isChatLoggedIn') == 'true'){
+                logoutUserFromChat(logoutUser);
+            }else{
+                logoutUser();
+            }
+
+        }
+        
+        
+/*
+    FUNCTION    :   remove cache on logou success
+    INPUT       :   
+    OUTPUT      :   reload index page
+*/
+        function logoutUser(){
             console.log('log out');
             removeLoginCache();
             window.location.href = "/kleinerzeugernetzwerk/index.php";
         }
+        
+        
+/*
+    FUNCTION    :   remove values from local storage on logout
+    INPUT       :   
+    OUTPUT      :   
+*/
         function removeLoginCache(){
             localStorage.removeItem('userId');
             localStorage.removeItem('userName');
@@ -245,8 +294,16 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
             localStorage.removeItem('tokenId');
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('profileImage');
+            localStorage.removeItem('chatUserId');
+            localStorage.removeItem('chatAuthToken');
         }
 
+        
+/*
+    FUNCTION    :   ajax call to login a user into the system
+    INPUT       :   username and password
+    OUTPUT      :   return success if user crediantilas are correct
+*/
         function userLogin(userName, password){
 
             $.ajax({

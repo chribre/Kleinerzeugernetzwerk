@@ -180,19 +180,18 @@
 
 
 <script>
+    //execute this function when user submit production point form to add 
+    //it as new or update existing production point based on id
     document.getElementById("saveProductionPointBtn").onclick = function () { 
         if (document.getElementById('productionPointId').value == 0){
             addNewProductionPoint();
-            //            updateProductionPoint();
-            //            getAllProductionPoint();
-            //            getProductionPointDetails();
-            //            deleteProductionPoint()
         }else{
             updateProductionPoint();
         }
 
     }
 
+//    function to fetch user data from production point form
     function fetchProductionPointFormData(){
         const ids = ['productionPointName', 'productionPointDesc', 'street', 'houseNumber', 'zipCode', 'city', 'latitude', 'longitude', 'productionPointId'];
         var formData = [];
@@ -207,7 +206,7 @@
     }
 
 
-
+//create data form for submission including images and return formData
     function createProductionPointFormData(productionPointData){
         const userId = localStorage.getItem('userId');
         var file_data = $('#production-point-gallery-photo-add').prop('files');
@@ -246,7 +245,7 @@
     }
 
 
-
+//ajax call to create new production point
     function addNewProductionPoint(){
         const formData = fetchProductionPointFormData();
         const formDataCollection = createProductionPointFormData(formData);
@@ -286,11 +285,12 @@
         });
     }
 
+//    trigger this function when production point modal form hides
     $('#addProductionPointPoint').on('hide.bs.modal', function (e) {
         // do something...
         getAllProductionPoint();
     })
-
+//    trigger this function when production point modal form hides
     $("#addProductionPointPoint").on("hidden.bs.modal", function () {
         // put your default event here
         getAllProductionPoint();
@@ -298,7 +298,7 @@
 
 
 
-
+//ajax call to update existing production point details
     function updateProductionPoint(){
         const formData = fetchProductionPointFormData();
         const formDataCollection = createProductionPointFormData(formData);
@@ -351,18 +351,6 @@
 
 </script>
 
-
-
-
-
-
-<!--
-<script>
-$("#newProductForm").submit(function(e) {
-e.preventDefault();
-});
-</script>
--->
 
 
 <style>

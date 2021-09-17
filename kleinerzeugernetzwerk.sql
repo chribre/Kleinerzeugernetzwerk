@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 27, 2021 at 04:41 PM
+-- Generation Time: Aug 14, 2021 at 04:08 PM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -243,26 +243,27 @@ CREATE TABLE `feature_type` (
   `feature_type_id` int(11) NOT NULL,
   `feature_name` varchar(60) NOT NULL,
   `feature_description` text DEFAULT NULL,
-  `image_path` varchar(150) DEFAULT NULL
+  `image_path` varchar(150) DEFAULT NULL,
+  `image_name` varchar(70) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `feature_type`
 --
 
-INSERT INTO `feature_type` (`feature_type_id`, `feature_name`, `feature_description`, `image_path`) VALUES
-(1, 'Bio EU', 'EU bio label', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/eu_bio.png'),
-(2, 'Vegan', 'Vegan', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/vegan.webp'),
-(3, 'Vegetarian', 'Vegetarian', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/vegetarisch.png'),
-(4, 'Non-vegetarian', 'Non-vegetarian', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/nonveg.jpg'),
-(8, 'Lactose Free', 'This product is lactose free', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/lactose-free.jpg'),
-(9, 'Bio', 'This product complies with organic guidelines', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/bio_non_certified.jpg'),
-(10, 'Bio DE', 'The German state organic seal', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/bio_de.png'),
-(11, 'Gluten Free', 'This product doesn\'t contain gluten', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/gluten_free.jpg'),
-(12, 'Naturland', 'Certified farmers and processing companies produce organic food according to the Naturland guidelines', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/naturland.png'),
-(13, 'No Flavouring', 'No Flavouring', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/no-artifical-flavors.png'),
-(14, 'No Coloring', 'No Coloring', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/no_artificial_color.png'),
-(15, 'No Preservatives', 'No Preservatives', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/no_preservatives.jpg');
+INSERT INTO `feature_type` (`feature_type_id`, `feature_name`, `feature_description`, `image_path`, `image_name`) VALUES
+(1, 'Bio EU', 'EU bio label', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/eu_bio.png', 'eu_bio.png'),
+(2, 'Vegan', 'Vegan', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/vegan.webp', 'vegan.webp'),
+(3, 'Vegetarian', 'Vegetarian', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/vegetarisch.png', 'vegetarisch.png'),
+(4, 'Non-vegetarian', 'Non-vegetarian', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/nonveg.jpg', 'nonveg.jpg'),
+(8, 'Lactose Free', 'This product is lactose free', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/lactose-free.jpg', 'lactose-free.jpg'),
+(9, 'Bio', 'This product complies with organic guidelines', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/bio_non_certified.jpg', 'bio_non_certified.jpg'),
+(10, 'Bio DE', 'The German state organic seal', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/bio_de.png', 'bio_de.png'),
+(11, 'Gluten Free', 'This product doesn\'t contain gluten', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/gluten_free.jpg', 'gluten_free.jpg'),
+(12, 'Naturland', 'Certified farmers and processing companies produce organic food according to the Naturland guidelines', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/naturland.png', 'naturland.png'),
+(13, 'No Flavouring', 'No Flavouring', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/no-artifical-flavors.png', 'no-artifical-flavors.png'),
+(14, 'No Coloring', 'No Coloring', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/no_artificial_color.png', 'no_artificial_color.png'),
+(15, 'No Preservatives', 'No Preservatives', 'http://localhost/kleinerzeugernetzwerk_uploads/features_features/no_preservatives.jpg', 'no_preservatives.jpg');
 
 -- --------------------------------------------------------
 

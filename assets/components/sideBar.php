@@ -33,6 +33,9 @@
                 <li>
                     <a href='dashboard.php?menu=feeds'><span class="fa fa-newspaper-o"></span> <?php echo gettext("Feeds & Posts"); ?></a>
                 </li>
+                <li>
+                    <a href='dashboard.php?menu=messages'><span class="fa fa-comments"></span> <?php echo gettext("Message"); ?></a>
+                </li>
             </ul>
 
             <div class="footer">
@@ -93,6 +96,9 @@
                                 $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddFeedPostModal([])" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>'.gettext("Add Feed Post").'</button>';
                                 echo $profileHead;
                                 break;
+                            case 'messages':
+                                echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("MESSAGES").'</text></div>';
+                                break;
                             default:
                                 echo '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("PROFILE").'</text></div>';
                                 break;
@@ -121,6 +127,9 @@
                             break;
                         case 'feeds':
                             include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/feeds-by-user.php");
+                            break;
+                        case 'messages':
+                            include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/messages.php");
                             break;
                         default:
                             echo '<h2 class="ml-3">'.gettext("PROFILE").'</h2>';

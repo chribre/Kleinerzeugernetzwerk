@@ -10,72 +10,6 @@
 ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/10.31.0/js/jquery.fileupload.min.js" integrity="sha512-qPkNWpUqYz8bhO5bGNPBvlCB9hPZBil2ez5Mo8yVmpCKI315UDDPQeg/TE7KwZ+U/wdSO8JguwVxYY/Ha7U+vQ==" crossorigin="anonymous"></script>
 
-<?php
-//global $dbConnection;
-//if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-//    echo('add product post method hit,');
-//    $fileNameArray = [];
-//    if (isset($_FILES['file'])){
-//        $fileCount = count($_FILES['file']['name']);
-//        for ($idx = 0; $idx < $fileCount; $idx++){
-//            $fileNameNew = null;
-//            $fileName = $_FILES['file']['name'][$idx];
-//            $fileTmpName = $_FILES['file']['tmp_name'][$idx];
-//            $fileSize = $_FILES['file']['size'][$idx];
-//            $fileError = $_FILES['file']['error'][$idx];
-//            $fileType = $_FILES['file']['type'][$idx];
-//
-//
-//            $fileExt = explode('.', $fileName);
-//            $fileActualExt = strtolower(end($fileExt));
-//
-//            $allowed = array('jpeg', 'jpg', 'png');
-//            echo $fileActualExt;
-//            if (in_array($fileActualExt, $allowed)){
-//                if ($fileError === 0){
-//                    if ($fileSize < 10000000 ){
-//                        $fileNameNew = generateFileName().".".$fileActualExt;//uniqid('', true).".".$fileActualExt;
-//                        $fileDestination = "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk_uploads/product_img/".$fileNameNew;
-//                        move_uploaded_file($fileTmpName, $fileDestination);  
-//                        array_push($fileNameArray,$fileNameNew);
-//                        echo "filed upload success";
-//                    }else{
-//                        echo "your file size is too high";
-//                    }
-//                }else{
-//                    echo "There was an error uploading your profile image";
-//                }
-//            }else{
-//                echo "Cannot upload file of this type";
-//            }
-//        }
-//    }
-//
-//    //PHP code to recieve post method with product data. it is identified by a hidden value 'addProductMethod' to get the hit here.
-//    if (isset($_POST['addProductMethod'])){
-//        print_r($_POST);
-//        $productName = isset($_POST['productName']) ? escapeSQLString($_POST['productName']) : "";
-//        $productDesc = isset($_POST['productDesc']) ? escapeSQLString($_POST['productDesc']) : "";
-//        $productCategory = isset($_POST['productCategory']) ? escapeSQLString($_POST['productCategory']) : 0;
-//        $productFeatures = isset($_POST['productFeatures']) ? $_POST['productFeatures'] : [];
-//        $productionPoint = isset($_POST['productionPoint']) ? escapeSQLString($_POST['productionPoint']): 0;
-//        $productPrice = isset($_POST['productPrice']) ? floatval(escapeSQLString($_POST['productPrice'])) : 0;
-//        $productQuantity = isset($_POST['quantity']) ? floatval(escapeSQLString($_POST['quantity'])) : 0;
-//        $productUnit = isset($_POST['unit']) ? escapeSQLString($_POST['unit']): 0;
-//        $isProcessedFood = (isset($_POST['isProcessed']) && $_POST['isProcessed'] === true) ? 1 : 0;
-//        $isAvailable = true;
-//        $productRating = 0;
-//
-//
-//        $productFeaturesArray = explode (",", $productFeatures);
-//
-//        addProduct($productName, $productDesc, $productCategory, $productionPoint, $isProcessedFood, $isAvailable, $productPrice, $productQuantity, $productUnit, $productRating, $fileNameArray, $productFeaturesArray);
-//    }
-//}
-
-?>
-
-
 
 <script type="text/javascript">
 
@@ -278,45 +212,15 @@
 </div>
 
 <script>
+   
+/*
+    FUNCTION    :   ajax call to create a product on submit of product form data
+    INPUT       :   
+    OUTPUT      :   create form data dictionary and reload window on success
+*/
     document.getElementById("addProductSubmitBtn").onclick = function () { 
 
         const userId = localStorage.getItem('userId');
-        //        var productId = document.getElementById("productId").value;
-        //        var productName = document.getElementById("productName").value;
-        //        var productDesc = document.getElementById("productDesc").value;
-        //        var productCategory = document.getElementById("productCategory").value;
-        //        var productFeatures = $('#productFeatures').val(); //document.getElementById("productFeatures").value;
-        //        var productFeatureId = $('#featureIdArray').data('id');
-        //        var productFeatureIdArray = [];
-        //        if (typeof productFeatureId == "string"){
-        //            productFeatureIdArray = productFeatureId.split(',')
-        //        }else{
-        //            productFeatureIdArray = [productFeatureId];
-        //        }
-        //
-        //
-        //        var productSeller = $('#productSellers').val();
-        //        var productSellerId = $('#sellerIdArray').data('id');
-        //        var productSellerIdArray = [];
-        //        if (typeof productSellerId == "string"){
-        //            productSellerIdArray = productSellerId.split(',')
-        //        }else{
-        //            productSellerIdArray = [productSellerId];
-        //        }
-        //
-        //
-        //
-        //        //        var productFeatureIdArray = productFeatureId.split(',') != null ? productFeatureId.split(',') : [productFeatureId];
-        //        var productPrice = document.getElementById("productPrice").value;
-        //        var productQuantity = document.getElementById("quantity").value;
-        //        var productUnit = document.getElementById("unit").value;
-        //        var isProcessedProduct = document.getElementById("isProcessed").value;
-        //        var productLocation = document.getElementById("productionPointOptions").value;
-        //
-        //        const userId = localStorage.getItem('userId');
-        //        var file_data = $('#gallery-photo-add').prop('files');
-
-
         const fd = createFormData();
         $.ajax({
             url:"/kleinerzeugernetzwerk/controller/productController.php",    //the page containing php script
@@ -348,6 +252,12 @@
         })
     };
 
+    
+/*
+    FUNCTION    :   function to create product form data to submit to the backend
+    INPUT       :   
+    OUTPUT      :   returns dictionary of form data along with the files
+*/
     function createFormData(){
 
         var file_data = $('#gallery-photo-add').prop('files');

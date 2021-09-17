@@ -13,4 +13,14 @@ $LOG_OUT_IMG = '/kleinerzeugernetzwerk/images/logout.png';
 $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php';
 
 
+
+function getChatServerURL(){
+    return 'http://ec2-3-68-74-178.eu-central-1.compute.amazonaws.com:3000';
+}
+
+function getChatAPI(){
+    return  getChatServerURL().'/api/v1/';
+}
+
+
 ?>

@@ -649,8 +649,9 @@ function getUserData($userId){
     ob_start();
     global $dbConnection;
 
-    $userQuery = "SELECT * FROM user u
+    $userQuery = "SELECT u.*, i.*, cu.id, cu.chat_user_name FROM user u
                 LEFT JOIN images i on i.entity_id = u.user_id and i.image_type = 1
+                LEFT JOIN chat_user_credentials cu on u.user_id = cu.user_id
                 WHERE u.user_id = $userId
                 GROUP BY u.user_id;";
 

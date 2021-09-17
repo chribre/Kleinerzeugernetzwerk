@@ -9,8 +9,9 @@
 session_start(); 
 ?>
 
-<?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/constants.php");
-include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
+<?php 
+include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/constants.php");
+include_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php");
 $HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
 $SIDE_BAR_CSS = '/kleinerzeugernetzwerk/css/custom/sideBar.css';
 $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min.js';
@@ -82,6 +83,8 @@ $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min
 
         <script type="text/javascript" src="/kleinerzeugernetzwerk/js/config/constant.js"></script>
         <script type="text/javascript" src="/kleinerzeugernetzwerk/js/custom/navigation.js"></script>
+<!--        Chat authentication functions-->
+        <script type="text/javascript" src="/kleinerzeugernetzwerk/js/chat/chat_auth.js"></script>
 
         <link rel="stylesheet" href="/kleinerzeugernetzwerk/css/custom/card.css">
 

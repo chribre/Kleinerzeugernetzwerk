@@ -35,7 +35,11 @@
 
     var popup = L.popup();
 
-    //    function returns address of latitude and logitude from osm using nominatim : geocoding
+/*
+    FUNCTION    :   function returns address of latitude and logitude from osm using nominatim : geocoding
+    INPUT       :   event containing latitude and longitude
+    OUTPUT      :   display address on fields
+*/
     function onSellerMapClick(e) {
         const lat = e.latlng.lat;
         const lon = e.latlng.lng;
@@ -78,10 +82,11 @@
             .openOn(sellerMap);
     }
 
-    //    document.getElementById("locateOnMapBtn").onclick(function(){
-    //        findLocation();
-    //    });
-
+/*
+    FUNCTION    :   find geolocation from address
+    INPUT       :   house number, street, city, zip
+    OUTPUT      :   display address on map
+*/
     function findSllerLocation() {
 
         const houseNumber = document.getElementById("sp_houseNumber").value
@@ -120,7 +125,11 @@
     }
 
 
-
+/*
+    FUNCTION    :   set location marker on map when an address is identified
+    INPUT       :   longitude, atitude
+    OUTPUT      :   display address on map
+*/
     function setSellerLocationOnMap(){
         const point_latitude = document.getElementById('sp_latitude').value;
         const point_longitude = document.getElementById('sp_longitude').value;
