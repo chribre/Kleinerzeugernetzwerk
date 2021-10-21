@@ -15,7 +15,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php';
 
 
 function getChatServerURL(){
-    return 'http://ec2-3-68-74-178.eu-central-1.compute.amazonaws.com:3000';
+    return 'http://202.61.242.150:3000';
 }
 
 function getChatAPI(){

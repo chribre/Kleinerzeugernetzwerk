@@ -80,6 +80,8 @@ function searchResultUI(searchResults, searchText){
     var searchUI = "";
     if (searchResults != null){
         const products = searchResults.productDetails ? searchResults.productDetails : [];
+        const productCount = products.length;
+        document.getElementById('productCount').innerHTML = productCount;
         products.forEach(function(productDeatils){
             if (productDeatils){
                 const productId = productDeatils.product_id ? productDeatils.product_id : 0;
@@ -141,6 +143,8 @@ function searchResultUI(searchResults, searchText){
 
 
         const productionPoints = searchResults.productionPointDetails ? searchResults.productionPointDetails : [];
+        const productionPointCount = productionPoints.length;
+        document.getElementById('productionPointCount').innerHTML = productionPointCount;
         productionPoints.forEach(function(productionPointDetails, index){
             if (productionPointDetails != null){
                 const ppID = productionPointDetails.farm_id ? productionPointDetails.farm_id : 0;
@@ -201,6 +205,8 @@ function searchResultUI(searchResults, searchText){
 
 
         const productSellers = searchResults.sellerDetails ? searchResults.sellerDetails : [];
+        const sellerCount = productSellers.length;
+        document.getElementById('sellerCount').innerHTML = sellerCount;
         productSellers.forEach(function(seller){
             const sellerName = seller.seller_name ? seller.seller_name : '';
             const sDesc = seller.seller_description ? seller.seller_description : '';
@@ -282,6 +288,8 @@ function searchResultUI(searchResults, searchText){
 
 
         const producers = searchResults.userDetails ? searchResults.userDetails : [];
+        const producerCount = producers.length;
+        document.getElementById('producerCount').innerHTML = producerCount;
         producers.forEach(function(producerDetails){
             const producerId = producerDetails.user_id ? producerDetails.user_id : 0;
             const firstName = producerDetails.first_name ? producerDetails.first_name : '';

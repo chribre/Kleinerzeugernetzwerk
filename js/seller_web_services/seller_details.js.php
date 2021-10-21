@@ -93,6 +93,9 @@ function showSellerInDetailScreen(sellerData){
         const sEmail = sellerDetails.seller_email ? sellerDetails.seller_email : '';
         const sWeb = sellerDetails.seller_website ? sellerDetails.seller_website : '';
         const sellerAddress = sStreet + ' ' + sBuildingNum + ', ' + sCity + ' ' + sZip;
+        
+        const chatUserName = sellerDetails.chat_user_name ? sellerDetails.chat_user_name : '';
+        const userChatAvailable = localStorage.getItem('isChatLoggedIn') == 'true' ? true :  false;
 
 
         sellerUI += `<div>
@@ -141,6 +144,21 @@ function showSellerInDetailScreen(sellerData){
 <h5 class="my-auto ml-3">${sWeb}</h5>
 </div>`;
         }
+        
+        if (userChatAvailable == true && chatUserName != ''){
+
+                sellerUI += `<div class="row">
+<button type="button" class="btn btn-secondary ml-2" onclick="gotoDirectMessage('${chatUserName}')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-dots-fill" viewBox="0 0 16 16">
+<path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+</svg>
+Direct Message
+</button>
+
+
+
+</div>`;
+
+            }
 
         sellerUI += `</div>
 
