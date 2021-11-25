@@ -89,6 +89,14 @@ class product{
         $sellingPoints = isset($productDataDict['selling_points']) ? $productDataDict['selling_points'] : [];
         $productSellerIds = isset($productDataDict['product_seller_ids']) ? $productDataDict['product_seller_ids'] : [];
 
+        if ((is_array($sellingPoints) == false) && ($sellingPoints != null)){
+            $sellingPoints = [$sellingPoints];
+        }
+        
+        if ((is_array($productSellerIds) == false) && ($productSellerIds != null)){
+            $productSellerIds = [$productSellerIds];
+        }
+        
         $sellerCount = count($sellingPoints);
         $productSellerIdCount = count($productSellerIds);
 

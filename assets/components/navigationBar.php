@@ -122,14 +122,14 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
 
                 <div class="dropdown p-1 ml-3" id="languageSwitch"> 
                     <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > 
-                        <img id="preferedLanguageImg" src="">
+                        <img id="preferedLanguageImg" width="22px" height="18px" src="">
                     </div> 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel"> 
-                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('de_DE')"><img class="mr-3" src="https://www.countryflags.io/DE/shiny/32.png">Deutsch</a>  
+                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('de_DE')"><img class="mr-3" src="http://localhost/kleinerzeugernetzwerk_uploads/country/de.svg" width="22px" height="18px">Deutsch</a>  
                         <div class="dropdown-divider">
 
                         </div>  
-                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('en_GB')"><img class="mr-3" src="https://www.countryflags.io/GB/shiny/32.png">English</a> 
+                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('en_GB')"><img class="mr-3" src="http://localhost/kleinerzeugernetzwerk_uploads/country/gb.svg" width="22px" height="18px">English</a> 
                     </div> 
                 </div>
 
@@ -179,13 +179,13 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
             var languagePreference = localStorage.getItem("language");
             switch (languagePreference){
                 case 'de_DE':
-                    document.getElementById("preferedLanguageImg").src = "https://www.countryflags.io/DE/shiny/24.png";
+                    document.getElementById("preferedLanguageImg").src = "http://localhost/kleinerzeugernetzwerk_uploads/country/de.svg";
                     break;
                 case 'en_GB':
-                    document.getElementById("preferedLanguageImg").src = "https://www.countryflags.io/GB/shiny/24.png";
+                    document.getElementById("preferedLanguageImg").src = "http://localhost/kleinerzeugernetzwerk_uploads/country/gb.svg";
                     break;
                 default:
-                    document.getElementById("preferedLanguageImg").src = "https://www.countryflags.io/DE/shiny/24.png";
+                    document.getElementById("preferedLanguageImg").src = "http://localhost/kleinerzeugernetzwerk_uploads/country/de.svg";
                     break;
             }        
         }

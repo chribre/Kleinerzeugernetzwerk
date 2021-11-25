@@ -69,7 +69,7 @@ Add a new product
                 data: { userId: userId, fetchAllProducts: true },
                 dataType: "json",
                 success: function( dataset ) {
-                    console.log(data) 
+                    console.log(dataset) 
                     var data = [];
                     try {
                         data = JSON.parse(dataset);
