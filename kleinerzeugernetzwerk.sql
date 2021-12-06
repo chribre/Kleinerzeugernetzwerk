@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2021 at 12:30 PM
+-- Generation Time: Dec 06, 2021 at 11:25 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.2.22
 
@@ -238,7 +238,14 @@ INSERT INTO `access_token` (`token_id`, `user_id`, `token`, `created_time`) VALU
 (215, 95, 'AW033301061548402538ba1.44988102', '2021-09-29 15:19:30'),
 (216, 95, 'AW0333010615584809f3984.39178904', '2021-09-30 09:33:52'),
 (217, 95, 'AW0333010615eb0df0fd2b6.67807521', '2021-10-07 08:33:35'),
-(218, 95, 'AW0333010615eb55d42f1f2.98489045', '2021-10-07 08:52:45');
+(218, 95, 'AW0333010615eb55d42f1f2.98489045', '2021-10-07 08:52:45'),
+(219, 95, 'AW03330106183ca5f245b29.84781033', '2021-11-04 11:56:15'),
+(220, 95, 'AW0333010618e4a98b92b66.95964477', '2021-11-12 11:06:00'),
+(221, 95, 'AW03330106196669b24abc2.46074183', '2021-11-18 14:43:39'),
+(222, 95, 'AW0333010619672515f65b9.41694968', '2021-11-18 15:33:37'),
+(223, 95, 'AW03330106196726c710f39.07526056', '2021-11-18 15:34:04'),
+(224, 95, 'AW03330106196729e317219.51683408', '2021-11-18 15:34:54'),
+(225, 95, 'AW0333010619675e8cf9aa3.07740834', '2021-11-18 15:48:56');
 
 -- --------------------------------------------------------
 
@@ -314,7 +321,8 @@ INSERT INTO `farm_land` (`farm_id`, `producer_id`, `farm_name`, `farm_desc`, `fa
 (38, 16, 'new test 4', 'test', 'Ausbau, 5, Angermünde - 16278', 'Ausbau', '5', 'Angermünde', '16278', 0x0000000001010000002613624a747e4a40bd6ce63bd50e2c40, 0, '2021-06-10 11:44:53'),
 (39, 16, 'test 1585', 'test', 'Binsenwerder, 4-6, Neubrandenburg - 17033', 'Binsenwerder', '4-6', 'Neubrandenburg', '17033', 0x0000000001010000002940addedfc64a400942b624487f2a40, 0, '2021-06-10 11:56:07'),
 (40, 16, 'test 8569', 'test', 'Große Wollweberstraße, 6, Neubrandenburg - 17033', 'Große Wollweberstraße', '6', 'Neubrandenburg', '17033', 0x0000000001010000001e9e77da1cc74a40c06d422d5b842a40, 0, '2021-06-10 11:57:31'),
-(41, 92, 'test 1', 'test', 'Binsenwerder, 2, Neubrandenburg - 17033', 'Binsenwerder', '2', 'Neubrandenburg', '17033', 0x00000000010100000086d559b1dbc64a40d7d8258be87e2a40, 0, '2021-08-31 14:50:33');
+(41, 92, 'test 1', 'test', 'Binsenwerder, 2, Neubrandenburg - 17033', 'Binsenwerder', '2', 'Neubrandenburg', '17033', 0x00000000010100000086d559b1dbc64a40d7d8258be87e2a40, 0, '2021-08-31 14:50:33'),
+(42, 95, 'test 1', 'test', 'Binsenwerder, 2, undefined - 17033', 'Binsenwerder', '2', 'undefined', '17033', 0x000000000101000000189c5139e8c64a401298bd271b7f2a40, 0, '2021-11-12 10:36:55');
 
 -- --------------------------------------------------------
 
@@ -618,7 +626,14 @@ INSERT INTO `products` (`product_id`, `producer_id`, `product_name`, `product_de
 (151, 16, 'image 21', 'test', 3, 20, 1, 1, 11, 2, 2, 0, '2021-04-09 13:52:13'),
 (152, 16, 'test 2585', 'test', 2, 18, 1, 1, 11, 1, 2, 0, '2021-04-10 07:29:21'),
 (153, 16, 'image 21', 'test', 5, 20, 1, 1, 11, 1, 2, 0, '2021-04-11 09:03:08'),
-(154, 16, 'test 1000', 'test', 2, 32, 1, 1, 11, 0, 2, 0, '2021-04-14 08:21:58');
+(154, 16, 'test 1000', 'test', 2, 32, 1, 1, 11, 0, 2, 0, '2021-04-14 08:21:58'),
+(155, 95, 'test product', 'test desc', 2, 42, 1, 1, 1.56, 1, 1, 0, '2021-11-18 16:05:19'),
+(156, 95, 'test  5', 'test', 2, 42, 1, 1, 11, 1, 1, 0, '2021-11-18 16:23:25'),
+(157, 95, 'test pro 3', 'test', 2, 42, 1, 1, 3, 1, 2, 0, '2021-11-18 16:25:44'),
+(158, 95, 'image 21', 'tet', 2, 42, 1, 1, 151, 2, 2, 0, '2021-11-18 16:26:57'),
+(159, 95, 'test', 'test', 2, 42, 1, 1, 151, 1, 1, 0, '2021-11-18 16:32:44'),
+(160, 95, 'test', 'test', 2, 42, 1, 1, 151, 1, 2, 0, '2021-11-18 16:34:41'),
+(161, 95, 'test', 'test 3', 1, 42, 1, 1, 6, 6, 1, 0, '2021-11-19 14:58:14');
 
 -- --------------------------------------------------------
 
@@ -747,7 +762,14 @@ INSERT INTO `product_feature` (`id`, `product_id`, `feature_type`) VALUES
 (284, 151, 3),
 (285, 152, 2),
 (286, 153, 2),
-(287, 154, 2);
+(287, 154, 2),
+(288, 155, 3),
+(289, 156, 2),
+(290, 157, 2),
+(291, 158, 2),
+(292, 159, 1),
+(293, 160, 2),
+(294, 161, 2);
 
 -- --------------------------------------------------------
 
@@ -791,7 +813,14 @@ INSERT INTO `product_sellers` (`id`, `product_id`, `seller_id`) VALUES
 (71, 151, 1),
 (72, 152, 1),
 (73, 153, 3),
-(74, 154, 1);
+(74, 154, 1),
+(75, 155, 5),
+(76, 156, 5),
+(77, 157, 5),
+(78, 158, 5),
+(79, 159, 5),
+(80, 160, 5),
+(81, 161, 50);
 
 -- --------------------------------------------------------
 
@@ -877,7 +906,8 @@ INSERT INTO `sellers` (`seller_id`, `producer_id`, `seller_name`, `seller_descri
 (39, 16, 'New Point ghg', 'test', 'Brodaer Straße', '10', 'Neubrandenburg', '17033', 0x000000000101000000f264f86208c74a40b6842be0bd802a40, 'New Point ghg', 'www.test.com', '017630142345', '017630142345', 0, 1, '06:30:00', '08:30:00', 1, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-04-10 16:31:34'),
 (47, 16, 'New Point 1212121', 'test', 'Brodaer Straße', '11', 'Neubrandenburg', '17033', 0x0000000001010000001d2ffa4feac64a40b01ef42135812a40, 'New Point 1212121', 'www.test.com', '017630142345', '017630142345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-04-10 17:07:39'),
 (48, 16, 'test 1000', 'test', 'Schillerstraße', '2', 'Neubrandenburg', '17033', 0x000000000101000000bcfaf48902c74a40471574eccc812a40, 'test 1000', 'www.test.com', '017630142345', '017630142345', 0, 1, '06:30:00', '08:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-04-14 08:23:02'),
-(49, 92, 'New Point', 'test', 'Brodaer Straße', '4', 'Neubrandenburg', '17033', 0x0000000001010000003da503c8ddc64a40daf678de897f2a40, 'New Point', 'www.test.com', '017630142345', '017630142345', 0, 1, '00:30:00', '01:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-08-31 14:50:17');
+(49, 92, 'New Point', 'test', 'Brodaer Straße', '4', 'Neubrandenburg', '17033', 0x0000000001010000003da503c8ddc64a40daf678de897f2a40, 'New Point', 'www.test.com', '017630142345', '017630142345', 0, 1, '00:30:00', '01:30:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-08-31 14:50:17'),
+(50, 95, 'test 2', 'test', 'Am Kaufhof-Süd', '3', 'Neubrandenburg', '17033', 0x0000000001010000001f0eb7e809c64a407678be558d882a40, 'test 2', 'www.biostore.co.intest', '99662626262', '12452452452452', 0, 1, '00:00:00', '14:10:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', '00:00:00', 0, '00:00:00', 0000, '2021-11-18 16:04:09');
 
 -- --------------------------------------------------------
 
@@ -1262,7 +1292,7 @@ ALTER TABLE `user_credential`
 -- AUTO_INCREMENT for table `access_token`
 --
 ALTER TABLE `access_token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=219;
+  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=226;
 
 --
 -- AUTO_INCREMENT for table `chat_user_credentials`
@@ -1274,7 +1304,7 @@ ALTER TABLE `chat_user_credentials`
 -- AUTO_INCREMENT for table `farm_land`
 --
 ALTER TABLE `farm_land`
-  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `farm_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT for table `favourite_sellers`
@@ -1304,7 +1334,7 @@ ALTER TABLE `news_feed`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=162;
 
 --
 -- AUTO_INCREMENT for table `product_category`
@@ -1316,19 +1346,19 @@ ALTER TABLE `product_category`
 -- AUTO_INCREMENT for table `product_feature`
 --
 ALTER TABLE `product_feature`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=288;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=295;
 
 --
 -- AUTO_INCREMENT for table `product_sellers`
 --
 ALTER TABLE `product_sellers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `sellers`
 --
 ALTER TABLE `sellers`
-  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `units`
