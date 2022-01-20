@@ -793,7 +793,7 @@ function getCategoriesInBounds(){
     ob_start();
     global $dbConnection;
 
-    $categoryQuery = "SELECT pc.* FROM product_category pc
+    $categoryQuery = "SELECT pc.*, count(p.product_id) as product_count FROM product_category pc
                     LEFT JOIN products p ON p.product_category = pc.category_id 
                     LEFT JOIN farm_land f ON f.farm_id = p.production_location 
                     LEFT JOIN product_sellers ps ON ps.product_id = p.product_id 

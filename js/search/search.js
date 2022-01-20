@@ -105,7 +105,7 @@ function searchResultUI(searchResults, searchText){
                 const productImage = getFilePath(2, productImageName);
 
 
-                searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="goToProductDetailsPage(${productId})">
+                searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4 cursor-pointer" onclick="goToProductDetailsPage(${productId})">
 <img class="rounded my-auto" src="${productImage}"  width="100px" height="100px"alt="">
 <div class="flex-fill pl-2 my-auto">
 <div class="row m-auto justify-content-between">
@@ -171,7 +171,7 @@ function searchResultUI(searchResults, searchText){
                 const producerImage = getFilePath(1, producerImageName);
 
 
-                searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="goToProductionPointDeatailsScreen(${ppID})">
+                searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4 cursor-pointer" onclick="goToProductionPointDeatailsScreen(${ppID})">
 <img class="rounded my-auto" src="${ppImagePath}"  width="100px" height="100px"alt="">
 <div class="flex-fill pl-2 my-auto">
 <div class="row m-auto justify-content-between">
@@ -224,7 +224,7 @@ function searchResultUI(searchResults, searchText){
             const sellerAddress = sStreet + ' ' + sBuildingNum + ', ' + sCity + ' ' + sZip;
 
 
-            searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="gotoSellerDetailsScreen(${sellerId})">
+            searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4 cursor-pointer" onclick="gotoSellerDetailsScreen(${sellerId})">
 <img class="rounded my-auto" src="${sImagePath}"  width="100px" height="100px"alt="">
 <div class="flex-fill pl-2 my-auto">
 <div class="row m-auto justify-content-between">
@@ -308,7 +308,7 @@ function searchResultUI(searchResults, searchText){
             const producerImage = getFilePath(1, producerImageName);
 
 
-            searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="gotoProducerDetails(${producerId})">
+            searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4 cursor-pointer" onclick="gotoProducerDetails(${producerId})">
 <img class="rounded my-auto" src="${producerImage}"  width="100px" height="100px"alt="">
 <div class="flex-fill pl-2 my-auto">
 <div class="row m-auto justify-content-between">

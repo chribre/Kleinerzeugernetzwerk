@@ -44,7 +44,7 @@ function getSearchResults(){
     $filter = $_POST['filter'] ? $_POST['filter'] : [];
     $filter_product = $filter['product'] == true ? $filter['product'] : false;
     $filter_producttion_point = $filter['productionPoint'] == true ? $filter['productionPoint'] : false;
-    $filter_seller = $filter['seller'] == true ? $filter['seler'] : false;
+    $filter_seller = $filter['seller'] == true ? $filter['seller'] : false;
     $filter_user = $filter['user'] == true ? $filter['user'] : false;
     
     $searchData = [];
