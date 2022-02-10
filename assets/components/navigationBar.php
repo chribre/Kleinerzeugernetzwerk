@@ -125,11 +125,11 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                         <img id="preferedLanguageImg" src="">
                     </div> 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel"> 
-                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('de_DE')"><img class="mr-3" src="https://www.countryflags.io/DE/shiny/32.png">Deutsch</a>  
+                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('de_DE')"><img class="mr-3" style="height:30px;" src="images/icons/oesvg_color/1F1E9-1F1EA.svg">Deutsch</a>  
                         <div class="dropdown-divider">
 
                         </div>  
-                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('en_GB')"><img class="mr-3" src="https://www.countryflags.io/GB/shiny/32.png">English</a> 
+                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('en_GB')"><img class="mr-3" style="height:30px;" src="images/icons/oesvg_color/1F1EC-1F1E7.svg">English</a> 
                     </div> 
                 </div>
 
