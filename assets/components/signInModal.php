@@ -179,8 +179,15 @@ href="#forgot-password-modal"><?php echo gettext("Forgot password?"); ?></a>
             localStorage['token'] = data.token;
             localStorage['tokenId'] = data.tokenId;
             localStorage['isLoggedIn'] = true;
-            localStorage['profileImagePath'] = data.imagePath;
-            localStorage['profileImageName'] = data.imageName;
+            localStorage['profileImagePath'] = data.imagePath ? data.imagePath : '';
+            localStorage['profileImageName'] = data.imageName ? data.imageName : '';
+            localStorage['isChatLoggedIn'] = false;
+            if (data.chatUserId && data.chatAuthToken){
+                localStorage['isChatLoggedIn'] = true;
+                localStorage['chatUserId'] = data.chatUserId;
+                localStorage['chatAuthToken'] = data.chatAuthToken;
+            }
+
             for (var i = 0; i < localStorage.length; i++){
                 console.log(localStorage.getItem(localStorage.key(i)));
             }

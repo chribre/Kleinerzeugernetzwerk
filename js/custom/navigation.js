@@ -26,6 +26,13 @@ function gotoSearchResultScreen(searchText){
     window.location = "/kleinerzeugernetzwerk/src/search.php?search_term="+searchText;
 }
 
+function gotoDirectMessage(chatUserName){
+    console.log('chat');
+    cancelBubbleEvent();
+    if(chatUserName != ''){
+        window.location = "http://localhost/kleinerzeugernetzwerk/src/dashboard.php?menu=messages&dm_to="+chatUserName;
+    }
+}
 
 function cancelBubbleEvent(){
     if (!e) var e = window.event;

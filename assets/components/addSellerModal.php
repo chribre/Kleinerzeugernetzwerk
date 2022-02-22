@@ -351,6 +351,12 @@
 
 
 <script>
+/*
+    FUNCTION    :   triggers create seller or update seller details based on 
+                    seller id on the seller modal form on submit
+    INPUT       :   
+    OUTPUT      :   
+*/
     document.getElementById("saveSellingPointBtn").onclick = function () { 
 
         $('#addSellingPoint').on('submit', 'newSellingPointForm', function (event) {
@@ -366,7 +372,11 @@
 
     }  
 
-
+/*
+    FUNCTION    :   clockpicker to select time in opening and closing time fields in seller modal form
+    INPUT       :   
+    OUTPUT      :   
+*/
     $('.clockpicker').clockpicker({
         placement: 'top',
         align: 'left',

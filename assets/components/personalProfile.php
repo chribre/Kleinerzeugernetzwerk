@@ -9,36 +9,6 @@
                         also to edit user profile details
 ****************************************************************/
 
-
-//getUserProfile();
-
-
-/*
-    FUNCTION    :   to fetch user details from the database to show in the profile screen.
-    INPUT       :   user id
-    OUTPUT      :   return user detaisl from the user table
-*/
-//function getUserProfile(){
-//    global $dbConnection;
-//    global $PROFILE_IMAGE_DEFAULT;
-//    $userId = $_SESSION["userId"];
-//    $userSelectQuery = mysqli_query($dbConnection, "SELECT * FROM `user` WHERE `user_id` = '$userId'");
-//    confirmQuery($userSelectQuery);
-//    if (mysqli_num_rows($userSelectQuery)){
-//        $row = mysqli_fetch_array($userSelectQuery);
-//        $fName = $row['first_name'] !== null ? $row['first_name']: "";
-//        $mName = $row['middle_name'] !== null ? $row['middle_name']: "";
-//        $lName = $row['last_name'] !== null ? $row['last_name']: "";
-//        $name = $fName." ".$mName." ".$lName;
-//        $email = $row['email'] !== null ? $row['email']: "";
-//        $street = $row['street'] !== null ? $row['street']: "";
-//        $houseNum = $row['house_number'] !== null ? $row['house_number']: "";
-//        $city = $row['city'] !== null ? $row['city']: "";
-//        $zip = $row['zip'] !== null ? $row['zip']: "";
-//        $ccountry = $row['country'] !== null ? $row['country']: "";
-//        $phone = $row['phone'] !== null ? $row['phone']: "";
-//        $mobile = $row['mobile'] !== null ? $row['mobile']: "";
-
 ?>
 
 

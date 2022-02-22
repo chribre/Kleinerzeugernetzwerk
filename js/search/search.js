@@ -80,6 +80,8 @@ function searchResultUI(searchResults, searchText){
     var searchUI = "";
     if (searchResults != null){
         const products = searchResults.productDetails ? searchResults.productDetails : [];
+        const productCount = products.length;
+        document.getElementById('productCount').innerHTML = productCount;
         products.forEach(function(productDeatils){
             if (productDeatils){
                 const productId = productDeatils.product_id ? productDeatils.product_id : 0;
@@ -103,7 +105,7 @@ function searchResultUI(searchResults, searchText){
                 const productImage = getFilePath(2, productImageName);
 
 
-                searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="goToProductDetailsPage(${productId})">
+                searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4 cursor-pointer" onclick="goToProductDetailsPage(${productId})">
 <img class="rounded my-auto" src="${productImage}"  width="100px" height="100px"alt="">
 <div class="flex-fill pl-2 my-auto">
 <div class="row m-auto justify-content-between">
@@ -141,6 +143,8 @@ function searchResultUI(searchResults, searchText){
 
 
         const productionPoints = searchResults.productionPointDetails ? searchResults.productionPointDetails : [];
+        const productionPointCount = productionPoints.length;
+        document.getElementById('productionPointCount').innerHTML = productionPointCount;
         productionPoints.forEach(function(productionPointDetails, index){
             if (productionPointDetails != null){
                 const ppID = productionPointDetails.farm_id ? productionPointDetails.farm_id : 0;
@@ -167,7 +171,7 @@ function searchResultUI(searchResults, searchText){
                 const producerImage = getFilePath(1, producerImageName);
 
 
-                searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="goToProductionPointDeatailsScreen(${ppID})">
+                searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4 cursor-pointer" onclick="goToProductionPointDeatailsScreen(${ppID})">
 <img class="rounded my-auto" src="${ppImagePath}"  width="100px" height="100px"alt="">
 <div class="flex-fill pl-2 my-auto">
 <div class="row m-auto justify-content-between">
@@ -201,6 +205,8 @@ function searchResultUI(searchResults, searchText){
 
 
         const productSellers = searchResults.sellerDetails ? searchResults.sellerDetails : [];
+        const sellerCount = productSellers.length;
+        document.getElementById('sellerCount').innerHTML = sellerCount;
         productSellers.forEach(function(seller){
             const sellerName = seller.seller_name ? seller.seller_name : '';
             const sDesc = seller.seller_description ? seller.seller_description : '';
@@ -218,7 +224,7 @@ function searchResultUI(searchResults, searchText){
             const sellerAddress = sStreet + ' ' + sBuildingNum + ', ' + sCity + ' ' + sZip;
 
 
-            searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="gotoSellerDetailsScreen(${sellerId})">
+            searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4 cursor-pointer" onclick="gotoSellerDetailsScreen(${sellerId})">
 <img class="rounded my-auto" src="${sImagePath}"  width="100px" height="100px"alt="">
 <div class="flex-fill pl-2 my-auto">
 <div class="row m-auto justify-content-between">
@@ -282,6 +288,8 @@ function searchResultUI(searchResults, searchText){
 
 
         const producers = searchResults.userDetails ? searchResults.userDetails : [];
+        const producerCount = producers.length;
+        document.getElementById('producerCount').innerHTML = producerCount;
         producers.forEach(function(producerDetails){
             const producerId = producerDetails.user_id ? producerDetails.user_id : 0;
             const firstName = producerDetails.first_name ? producerDetails.first_name : '';
@@ -300,7 +308,7 @@ function searchResultUI(searchResults, searchText){
             const producerImage = getFilePath(1, producerImageName);
 
 
-            searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4" onclick="gotoProducerDetails(${producerId})">
+            searchUI += `<div class="row shadow-sm bg-white rounded p-2 gradient-green mb-4 cursor-pointer" onclick="gotoProducerDetails(${producerId})">
 <img class="rounded my-auto" src="${producerImage}"  width="100px" height="100px"alt="">
 <div class="flex-fill pl-2 my-auto">
 <div class="row m-auto justify-content-between">

@@ -10,6 +10,7 @@
 session_start();
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php";
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/userModel.php";
+require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/controller/chat_auth.php";
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
@@ -59,15 +60,17 @@ function createUser($userId, $firstName, $lastName, $dob, $street, $houseNumber,
             . "VALUES ('$salutation', '$firstName', '$lastName', '$dob', '$street', '$houseNumber', '$zip', '$city', '$country', '$phone', '$mobile', '$email', '$profileImageName', $userType, $isActive, $isBlocked, '$description')";
 
         try{
-//            echo "trying to insert";
-//            echo "\n ".$sql."\n";
+            //            echo "trying to insert";
+            //            echo "\n ".$sql."\n";
             mysqli_query($dbConnection, $sql);
             $user_id = $dbConnection->insert_id;
-//            echo "inserted";
-//            echo "user id is $user_id, ";
+            //            echo "inserted";
+            //            echo "user id is $user_id, ";
             if (saveUserCredentials($user_id, $email, $password)){
                 $fileNames = uploadPictures($profileImageNameArray, $profileUplaodLocation);
                 $imageQuery = createFileUploadQuery($profileImageNameArray, $profileImageIdArray, $profileImagepath, $user_id, 1);
+                //register user into chat
+                registerUserToChat($user_id, $email, $firstName . ' ' . $lastName, $password);
 
                 $profileImageCount = count($profileImageNameArray);
                 $profileImageIdCount = count($profileImageIdArray);
@@ -163,7 +166,7 @@ function getUser($userId){
     global $PROFILE_IMAGE_DEFAULT;
 
     $userDetailsQuery = "SELECT * FROM `user` 
-    JOIN images i on (i.image_type = 1 AND i.entity_id = $userId)
+    LEFT JOIN images i on (i.image_type = 1 AND i.entity_id = $userId)
     WHERE `user_id` = '$userId'";
 
     $userSelectQuery = mysqli_query($dbConnection, $userDetailsQuery);

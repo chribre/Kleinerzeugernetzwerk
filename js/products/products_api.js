@@ -261,6 +261,10 @@ function showProductInDetail(productData){
 
             const producerImageName = producerDetails.image_name ? producerDetails.image_name : DEFAULT_USER_IMAGE;
             const producerImage = getFilePath(1, producerImageName);
+            
+            const chatUserName = producerDetails.chat_user_name ? producerDetails.chat_user_name : '';
+            const userChatAvailable = localStorage.getItem('isChatLoggedIn') == 'true' ? true :  false;
+            
             productDetailsUI += `<div class="row justify-content-center my-5 cursor-pointer" onclick="goToProductionPointDeatailsScreen(${ppID})">
 <div class="col-md-6 mr-0">
 <img class="d-block" src="${ppImagePath}" alt="Third slide" style="height: 350px; object-fit: cover;">
@@ -292,18 +296,32 @@ ${ppCity} - ${ppZip}</p>
 <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555zM0 4.697v7.104l5.803-3.558L0 4.697zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757zm3.436-.586L16 11.801V4.697l-5.803 3.546z"/>
 </svg>
 <p class="text-muted my-auto ml-3">${email}</p>
-</div>
+</div>`;
+            
 
 
-<div class="row mx-1 my-3 justify-content-between">
-<img src="https://image.flaticon.com/icons/png/128/145/145802.png" alt="" height="50px" width="50px">
-<img src="https://image.flaticon.com/icons/png/128/145/145812.png" alt="" height="50px" width="50px">
-<img src="https://image.flaticon.com/icons/png/128/2111/2111646.png" alt="" height="50px" width="50px">
-<img src="https://image.flaticon.com/icons/png/128/145/145807.png" alt="" height="50px" width="50px">
-<img src="https://image.flaticon.com/icons/png/128/355/355980.png" alt="" height="50px" width="50px">
+
+            productDetailsUI += `<div class="row mx-1 my-3 justify-content-between">
+<img src="https://image.flaticon.com/icons/png/128/145/145802.png" alt="" height="50px" width="50px">`
+            
+            
+if (userChatAvailable == true && chatUserName != ''){
+
+                productDetailsUI += `<div class="row">
+<button type="button" class="btn btn-secondary ml-2" onclick="gotoDirectMessage('${chatUserName}')"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-dots-fill" viewBox="0 0 16 16">
+<path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4.414a1 1 0 0 0-.707.293L.854 15.146A.5.5 0 0 1 0 14.793V2zm5 4a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm4 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0zm3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+</svg>
+Direct Message
+</button>
 
 
-</div>
+
+</div>`;
+
+            }
+
+
+            productDetailsUI += `</div>
 
 
 <div class="row border-0 shadow-sm rounded  align-items-center justify-content-center mt-2 p-2 cursor-pointer bring-to-front" onclick="gotoProducerDetails(${producerId})">
@@ -352,8 +370,8 @@ ${ppCity} - ${ppZip}</p>
             //            productDetailsUI += `</div>`;
 
             document.getElementById('productDetails').innerHTML = productDetailsUI;
-//            document.getElementById('sideBarContent').innerHTML = productDetailsUI;
-//            $('#productDetails').remove();
+            //            document.getElementById('sideBarContent').innerHTML = productDetailsUI;
+            //            $('#productDetails').remove();
         }
     }
 }

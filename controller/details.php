@@ -649,8 +649,9 @@ function getUserData($userId){
     ob_start();
     global $dbConnection;
 
-    $userQuery = "SELECT * FROM user u
+    $userQuery = "SELECT u.*, i.*, cu.id, cu.chat_user_name FROM user u
                 LEFT JOIN images i on i.entity_id = u.user_id and i.image_type = 1
+                LEFT JOIN chat_user_credentials cu on u.user_id = cu.user_id
                 WHERE u.user_id = $userId
                 GROUP BY u.user_id;";
 
@@ -792,7 +793,7 @@ function getCategoriesInBounds(){
     ob_start();
     global $dbConnection;
 
-    $categoryQuery = "SELECT pc.* FROM product_category pc
+    $categoryQuery = "SELECT pc.*, count(p.product_id) as product_count FROM product_category pc
                     LEFT JOIN products p ON p.product_category = pc.category_id 
                     LEFT JOIN farm_land f ON f.farm_id = p.production_location 
                     LEFT JOIN product_sellers ps ON ps.product_id = p.product_id 

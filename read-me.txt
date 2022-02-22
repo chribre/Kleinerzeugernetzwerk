@@ -1,0 +1,11 @@
+Installation Guide
+-------------------------------------------------------------
+1. Copy files into the server folder.
+2. create a folder with name 'kleinerzeugernetzwerk_uploads' in the server to store files.
+3. update the server address in /js/config -> constant.js -> update getServerRootAddress() with address of the server
+4. update the server address in /src -> functions.js -> update getServerRootAddress() with address of the server
+5. update file path address in  /js/config -> constant.js -> getFilePath() with 'kleinerzeugernetzwerk_uploads' folder address.
+6. Verify getText() is installed to get translation feature.
+7. Install Rocekt Chat refer: https://docs.rocket.chat/installing-and-updating
+8. set rocket chat server address in /js/config -> constant.js -> getChatServerURL()
+9. set rocket chat server address in /config -> constant.php -> getChatServerURL()

@@ -156,7 +156,16 @@ for (let i = 0; i < file_data.length; i++) {
     data: {user_id: userId},
     success: function( data ) {
     console.log(data)
+    const feedData = [];
+    try {
     const feedData = JSON.parse(data);
+    } catch (e) {
+    const feedData = [];
+    }
+    if (feedData.length == 0){
+    noDataAvailable('feed', 'user-feed-list')
+    return;
+    }
     setFeedListByUser(feedData);
     },
     error: function (request, status, error) {               

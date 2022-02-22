@@ -101,6 +101,11 @@ require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ma
         if (categories){
             categories.forEach(function (category, i) {
                 const categoryId = category.category_id ? category.category_id : 0;
+                const productCount = category.product_count ? category.product_count : 0;
+                var sProductCount = ''
+                if (productCount > 0){
+                    sProductCount = '(' + productCount + ')'
+                }
                 switch (locale){
                     case ENGLISH:
                         categoryName = category.category_name ? category.category_name : '';
@@ -113,7 +118,7 @@ require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ma
 <div class="fab-icon-holder">
 <img class="icon-image fab-icon-holder-img" src="${getServerRootAddress()}/kleinerzeugernetzwerk_uploads/others/categories/${categoryImage}" alt="">
     </div>
-<span class="fab-label">${categoryName}</span>
+<span class="fab-label">${categoryName} ${sProductCount}</span>
     </li>`;
 
             });

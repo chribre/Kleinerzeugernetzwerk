@@ -86,12 +86,12 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                     <li class="nav-item active ml-3">
                         <a href="#" class="nav-link" data-toggle="modal" data-target="#"><?php echo _('Events') ?><span class="sr-only">(current)</span></a>
                     </li>
-                    
+
                     <li class="nav-item active ml-3">
                         <a href="/kleinerzeugernetzwerk/src/feeds.php" class="nav-link"><?php echo _('News Feeds') ?><span class="sr-only">(current)</span></a>
                     </li>
-                    
-                    
+
+
                     <li class="nav-item active ml-3">
                         <a href="/kleinerzeugernetzwerk/src/contact_us.php" class="nav-link"><?php echo _('Contact Us') ?><span class="sr-only">(current)</span></a>
                     </li>
@@ -122,14 +122,14 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
 
                 <div class="dropdown p-1 ml-3" id="languageSwitch"> 
                     <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > 
-                        <img id="preferedLanguageImg" src="">
+                        <img id="preferedLanguageImg" height="25px" src="">
                     </div> 
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel"> 
-                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('de_DE')"><img class="mr-3" style="height:30px;" src="images/icons/oecolor/1F1E9-1F1EA.svg">Deutsch</a>  
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel" style="z-index:10000"> 
+                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('de_DE')"><img class="mr-3" src="images/icons/oecolor/1F1E9-1F1EA.svg" height="25px">Deutsch</a>  
                         <div class="dropdown-divider">
 
                         </div>  
-                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('en_GB')"><img class="mr-3" style="height:30px;" src="images/icons/oecolor/1F1EC-1F1E7.svg">English</a> 
+                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('en_GB')"><img class="mr-3" src="images/icons/oecolor/1F1EC-1F1E7.svg" height="25px">English</a> 
                     </div> 
                 </div>
 
@@ -146,7 +146,11 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
         //        };
 
 
-
+        /*
+    FUNCTION    :   search keyword on user press enter key on keyboard
+    INPUT       :   event
+    OUTPUT      :   go to search result screen
+*/
         $("#searchTextBox").keyup(function(event) {
             if (event.keyCode === 13) {
                 const searchText = document.getElementById("searchTextBox").value;
@@ -155,28 +159,41 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                 }
             }
         });
-
+/*
+    FUNCTION    :   set language prefeerence into local storage
+    INPUT       :   language
+    OUTPUT      :   store language in local storage
+*/
         function setLanguage(language){
             if (language){
                 localStorage.setItem("language", language); 
             }
         }
 
+/*
+    FUNCTION    :   set language prefeerence on navigation bar as icon
+    INPUT       :   language(from local storage)
+    OUTPUT      :   returns flag of language and set it to navigation bar
+*/
         function setLanguagePreferenceOnNav(){
             var languagePreference = localStorage.getItem("language");
             switch (languagePreference){
                 case 'de_DE':
-                    document.getElementById("preferedLanguageImg").src = "https://www.countryflags.io/DE/shiny/24.png";
+                    document.getElementById("preferedLanguageImg").src = "images/icons/oecolor/1F1E9-1F1EA.svg";
                     break;
                 case 'en_GB':
-                    document.getElementById("preferedLanguageImg").src = "https://www.countryflags.io/GB/shiny/24.png";
+                    document.getElementById("preferedLanguageImg").src = "images/icons/oecolor/1F1EC-1F1E7.svg";
                     break;
                 default:
-                    document.getElementById("preferedLanguageImg").src = "https://www.countryflags.io/DE/shiny/24.png";
+                    document.getElementById("preferedLanguageImg").src = "images/icons/oecolor/1F1E9-1F1EA.svg";
                     break;
             }        
         }
-
+/*
+    FUNCTION    :   ajax call to set language prefeerence
+    INPUT       :   language
+    OUTPUT      :   set language if success
+*/
         function setLanguagePreferenceServer(language){
             $.ajax({
                 type: "POST",
@@ -201,7 +218,11 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
         }
 
 
-
+/*
+    FUNCTION    :   set login button or profile button on navigation bar
+    INPUT       :   logged in or not
+    OUTPUT      :   set login button if not logged in, set profile picture if already logged in
+*/
         function setLoginOrProfileButton(){
             const signInButton = '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right id="signInOrProfileBtn"><?php echo gettext("Sign In"); ?></button>';       
 
@@ -219,7 +240,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                 const viewProfilePath = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=personal';
                 const logOutImage = '/kleinerzeugernetzwerk/images/logout.png';
 
-                const profileBtn = `<div class="dropdown rounded-circle bg-info p-1 ml-3" id="signInOrProfileBtn"> <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="rounded-circle bg-info"> <img src="${profileImage}" class="d-block rounded-circle" width="36px" height="36px" style="object-fit: cover;"> </div> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel"> <a class="dropdown-item font-weight-bold text-uppercase" href="${viewProfilePath}">${userName}</br><span class=" text font-weight-light text-lowercase">${email}</span> </a> <div class="dropdown-divider"></div>  <a class="dropdown-item" href="javascript:logOut()"><img class="mr-2" src="${logOutImage}" width=20px, height=20px/><?php echo gettext("Log Out"); ?></a> </div> </div>`
+                const profileBtn = `<div class="dropdown rounded-circle bg-info p-1 ml-3" id="signInOrProfileBtn"> <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="rounded-circle bg-info"> <img src="${profileImage}" class="d-block rounded-circle" width="36px" height="36px" style="object-fit: cover;"> </div> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel" style="z-index:10000"> <a class="dropdown-item font-weight-bold text-uppercase" href="${viewProfilePath}">${userName}</br><span class=" text font-weight-light text-lowercase">${email}</span> </a> <div class="dropdown-divider"></div>  <a class="dropdown-item" href="javascript:logOut()"><img class="mr-2" src="${logOutImage}" width=20px, height=20px/><?php echo gettext("Log Out"); ?></a> </div> </div>`
 
 
                 $("#signInOrProfileBtn").replaceWith(profileBtn);
@@ -232,11 +253,39 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
 
             setLanguagePreferenceOnNav();
         }
+        
+/*
+    FUNCTION    :   logout user from chat as well as dashboard
+    INPUT       :   
+    OUTPUT      :   
+*/
         function logOut(){
+            if(localStorage.getItem('isChatLoggedIn') == 'true'){
+                logoutUserFromChat(logoutUser);
+            }else{
+                logoutUser();
+            }
+
+        }
+        
+        
+/*
+    FUNCTION    :   remove cache on logou success
+    INPUT       :   
+    OUTPUT      :   reload index page
+*/
+        function logoutUser(){
             console.log('log out');
             removeLoginCache();
             window.location.href = "/kleinerzeugernetzwerk/index.php";
         }
+        
+        
+/*
+    FUNCTION    :   remove values from local storage on logout
+    INPUT       :   
+    OUTPUT      :   
+*/
         function removeLoginCache(){
             localStorage.removeItem('userId');
             localStorage.removeItem('userName');
@@ -245,8 +294,16 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
             localStorage.removeItem('tokenId');
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('profileImage');
+            localStorage.removeItem('chatUserId');
+            localStorage.removeItem('chatAuthToken');
         }
 
+        
+/*
+    FUNCTION    :   ajax call to login a user into the system
+    INPUT       :   username and password
+    OUTPUT      :   return success if user crediantilas are correct
+*/
         function userLogin(userName, password){
 
             $.ajax({

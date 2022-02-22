@@ -65,22 +65,22 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
                         <label class="custom-control custom-checkbox">
                             <input id="filter-product" type="checkbox" class="custom-control-input search-filter-control">
                             <div class="custom-control-label"><?php echo gettext("Product"); ?>  
-                                <b class="badge badge-pill badge-light float-right">120</b>  </div>
+                                <b class="badge badge-pill badge-light float-right" id="productCount">120</b>  </div>
                         </label>
                         <label class="custom-control custom-checkbox">
                             <input id="filter-production-point" type="checkbox" class="custom-control-input search-filter-control">
                             <div class="custom-control-label"><?php echo gettext("Production Point"); ?> 
-                                <b class="badge badge-pill badge-light float-right">15</b>  </div>
+                                <b class="badge badge-pill badge-light float-right" id="productionPointCount">15</b>  </div>
                         </label>
                         <label class="custom-control custom-checkbox">
                             <input id="filter-seller" type="checkbox" class="custom-control-input search-filter-control">
                             <div class="custom-control-label"><?php echo gettext("Seller"); ?> 
-                                <b class="badge badge-pill badge-light float-right">35</b> </div>
+                                <b class="badge badge-pill badge-light float-right" id="sellerCount">35</b> </div>
                         </label>
                         <label class="custom-control custom-checkbox">
                             <input id="filter-user" type="checkbox" class="custom-control-input search-filter-control">
                             <div class="custom-control-label"><?php echo gettext("Producer"); ?> 
-                                <b class="badge badge-pill badge-light float-right">89</b> </div>
+                                <b class="badge badge-pill badge-light float-right" id="producerCount">89</b> </div>
                         </label>
                     </div> <!-- card-body.// -->
                 </div>

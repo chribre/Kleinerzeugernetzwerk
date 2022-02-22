@@ -13,56 +13,7 @@
 <div class="container" id="productionPointListContainer">
 
 
-
-
-
-
-
-    <!--
-<div class="blog-card">
-<div class="meta">
-<div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
-</div>
-<div class="description">
-<h1>Learning to Code</h1>
-<h2>Opening a door to the future</h2>
-<p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.</p>
-<div class="btn-group btn-group-sm mt-3 mr-auto float-right" role="group" aria-label="">
-<button type="button" class="btn btn-danger">Delete</button>
-<button type="button" class="btn btn-primary">Edit</button>
-<button type="button" class="btn btn-success">View</button>
-</div>
-</div>
-</div>
--->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <ul class="my-5" id="productionPointList">
-
-
-
 
 
         <?php 
@@ -181,6 +132,12 @@ Launch demo modal
 
 
 <script>
+    
+/*
+    FUNCTION    :   populate production point list from the data coming from getAllProductionPoints
+    INPUT       :   Array of dictionary of production points
+    OUTPUT      :   Populate data into HTML format
+*/
     function listAllProductionPoints(productionPointArray){
         document.getElementById("productionPointList").innerHTML = "";
         if (productionPointArray.length > 0){
@@ -204,35 +161,6 @@ Launch demo modal
 
                 const defaultImage = "https://lh3.googleusercontent.com/dG2c5YCNllE6dM2SVc0JFzfVBYA7IVoS_zdWbcniA5sDwIOkVZL_yGd65F1aKD2EVd7iUx6aH83fxVO96jbTAlbnS_o=w640-h400-e365-rj-sc0x00ffffff";
                 const imagePath = productionPoint.imagePath ? productionPoint.imagePath : defaultImage;
-
-
-                //                var productionPointListItem = `<li class="row p-2 farmLandLI">
-                //            <div class=" d-md-flex align-items-center w-100 justify-content-between">
-                //                <img class="rounded" id="farmImg" src="<?php echo $imagePath ?>" width="240" alt="">
-                //                <div id="farmDetails" class="flex-grow-1 mx-4">
-                //                    <h3>${pointName}</h3>
-                //                    <p>${pointDesc}</p>
-                //                    <p><small class="text-muted">${pointAddress}</small></p>
-                //                </div>
-                //                <div class="mr-0">
-                //                    <div class="ui teal vertical animated button m-2" tabindex="0">
-                //                        <div class="hidden content">Edit</div>
-                //                        <div class="visible content">
-                //                            <i class="edit icon"></i>
-                //                        </div>
-                //                    </div>
-                //                    <br>
-                //                    <div class="ui red vertical animated button m-2" tabindex="0">
-                //                        <div class="hidden content">Delete</div>
-                //                        <div class="visible content">
-                //                            <i class="trash icon"></i>
-                //                        </div>
-                //                    </div>
-                //
-                //                </div>
-                //
-                //            </div>
-                //        </li>`;
 
 
 
@@ -265,7 +193,11 @@ Launch demo modal
     
     
     
-    
+/*
+    FUNCTION    :   show a confirmation modal window when user trying to delete a production point from the list
+    INPUT       :   id of production point, production point name and address to ensure the correct point get deleted.
+    OUTPUT      :   
+*/    
     function productionPointDeleteConfirmation(id, pointName, address){
         const deleteMessage = `Are you sure want to delete ${pointName} at ${address}.`
         document.getElementById('deleteMessageText').innerHTML = deleteMessage;
@@ -275,7 +207,11 @@ Launch demo modal
 
         $('#productionPointDeleteModal').modal('toggle');
     }
-
+/*
+    FUNCTION    :   Ajax call to delete a production pont
+    INPUT       :   id of production point
+    OUTPUT      :   reload window to get the latest list on success
+*/
     function deleteProductionPoint(pointId){
         const formData = fetchProductionPointFormData();
         const userId = localStorage.getItem('userId');
@@ -311,7 +247,11 @@ Launch demo modal
 
 
     
-
+/*
+    FUNCTION    :   Ajax call to delete a production pont
+    INPUT       :   id of production point
+    OUTPUT      :   reload window to get the latest list on success
+*/
     function getProductionPointDetails(pointId, action){
         const formData = fetchProductionPointFormData();
         const userId = localStorage.getItem('userId');
@@ -358,7 +298,11 @@ Launch demo modal
     }
 
 
-
+/*
+    FUNCTION    :   set values to the production point modal form fields
+    INPUT       :   production point data dictionary
+    OUTPUT      :   set values into each fields
+*/
     function setProductionPointModalValue(productionPointData){
 
         const productionPoint = productionPointData[0] ? productionPointData[0] : [];
@@ -377,7 +321,12 @@ Launch demo modal
 
         setProductionPointImages(productionPointImageData);
     }
-
+    
+/*
+    FUNCTION    :   set production point images to the production point modal form
+    INPUT       :   list image paths
+    OUTPUT      :   set images into image gallery placeholder
+*/
     function setProductionPointImages(imageData){
         document.getElementById("production-point-gallery").innerHTML = '';
         var productionPointImageId = []; 

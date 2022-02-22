@@ -13,4 +13,14 @@ $LOG_OUT_IMG = '/kleinerzeugernetzwerk/images/logout.png';
 $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php';
 
 
+
+function getChatServerURL(){
+    return 'http://202.61.242.150:3000';
+}
+
+function getChatAPI(){
+    return  getChatServerURL().'/api/v1/';
+}
+
+
 ?>

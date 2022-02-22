@@ -168,7 +168,7 @@ function getUserDetails($userId){
     global $dbConnection;
 
     $userDetailsQuery = "SELECT * FROM `user` 
-    JOIN images i on (i.image_type = 1 AND i.entity_id = $userId)
+    LEFT JOIN images i on (i.image_type = 1 AND i.entity_id = $userId)
     WHERE `user_id` = '$userId'";
 
     $userSelectQuery = mysqli_query($dbConnection, $userDetailsQuery);

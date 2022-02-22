@@ -9,6 +9,7 @@
 session_start();
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php";
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/userAuthModel.php";
+require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/controller/chat_auth.php";
 
 switch ($_SERVER['REQUEST_METHOD']) {
     case 'GET':
@@ -64,6 +65,16 @@ function loginUser($email, $password){
             $_SESSION["userId"] = $userId;
 
             $_SESSION["token"] = $token;
+
+            $chatUserCredentials = getChatUserCredentials($userId);
+            $chatUserName = $chatUserCredentials['chat_user_name'] ? $chatUserCredentials['chat_user_name'] : '';
+            $chatUserPasswordHashed = $chatUserCredentials['chat_user_password'] ? $chatUserCredentials['chat_user_password'] : '';
+            if ($chatUserName != '' && $chatUserPasswordHashed != ''){
+                $chatPassword = encrypt_decrypt_password($chatUserPasswordHashed, $action = 'decrypt');
+                $chatAuth = loginUserToChat($chatUserName, $chatPassword);
+                $loginData = array_merge($loginData, $chatAuth);
+            }
+
 
 
             http_response_code(200); //OK
