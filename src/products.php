@@ -134,17 +134,19 @@ Add a new product
                             featureArray.forEach(feature =>{
                                 const featureName = featureJson.forEach(featureDict => {
                                     const id = featureDict.feature_type_id;
+                                    const featImage = featureDict.image_name ? featureDict.image_name : '';
+                                    const featImagePath = getFilePath(6, featImage);
                                     if(id == feature){
                                         //                                        return featureDict.feature_name;
                                         featureUI += `<div class="rounded-pill border border-secondary align-items-center mb-1 mr-1">
-<img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
+<img class="rounded-circle ml-1" src=${featImagePath} width="20" height="20">
 <h class="text-gray mx-1">${featureDict.feature_name}</h>
         </div>`;
                                     }                                    
                                 },"");
-
-                                card += featureUI;
+                                
                             })
+                            card += featureUI;
 
                             card += `</div> <div id="manipulationBtnProducts" class="btn-group btn-group-sm mt-3 mr-auto float-right" role="group" aria-label="" value=${productId}>
 <button type="button" class="btn btn-danger" id="deleteProductBtn" onclick="showDeleteProductModal(${productId})" value="${productId}"><?php echo gettext("Delete"); ?></button>
@@ -165,82 +167,6 @@ Add a new product
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            //
-                            //
-                            //                            var productCard = `<div class="w3-card-4 m-4 shadow bg-white rounded productCard" id="productCard">
-                            //<div class="overflow-hidden" width="280" height="180">
-                            //<img src="${imageName}" alt="Avatar" width="280">
-                            //        </div>
-                            //<div class="p-2">
-                            //<h4><b>${productName}</b></h4>   
-                            //<p id="productDesc" class="overflow-hidden" style="line-height: 1.4">${productDesc}</p> 
-                            //<div class="row mx-0 mb-2 d-flex justify-content-between">`;
-                            //
-                            //                            var featureUI = ``;
-                            //                            featureArray.forEach(feature =>{
-                            //                                const featureName = featureJson.forEach(featureDict => {
-                            //                                    const id = featureDict.feature_type_id;
-                            //                                    if(id == feature){
-                            //                                        //                                        return featureDict.feature_name;
-                            //                                        featureUI += `<div class="rounded-pill border border-secondary align-items-center mb-1">
-                            //<img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
-                            //<h class="text-gray mx-1">${featureDict.feature_name}</h>
-                            //        </div>`;
-                            //                                    }                                    
-                            //                                },"");
-                            //                                console.log(featureName);
-                            //                                //                                featureUI += `<div class="rounded-pill border border-secondary align-items-center mb-1">
-                            //                                //<img class="rounded-circle ml-1" src="/kleinerzeugernetzwerk/images/bio.jpg" width="20" height="20">
-                            //                                //<h class="text-gray mx-1">${featureName}</h>
-                            //                                //        </div>`;
-                            //                            })
-                            //
-                            //                            productCard += featureUI;
-                            //
-                            //
-                            //                            productCard += `</div>
-                            //<div class="row justify-content-between align-items-center px-3">
-                            //<button type="button" class="btn btn-primary btn-sm col-3" onclick="openAddProductModal(${productId})" value="${productId}">Edit</button>
-                            //<button type="button" class="btn btn-danger btn-sm col-3" onclick="showDeleteProductModal(${productId})" value="${productId}">Delete</button>
-                            //
-                            //        </div>
-                            //
-                            //        </div>
-                            //        </div>`;
-                            //                            document.getElementById("productContainer").innerHTML += productCard;
-                            //                            document.getElementById("productContainer").innerHTML += card;
-
                             var productListObj = document.getElementById("productListContainer");
                             productListObj.innerHTML = productListObj.innerHTML + card;
                         })
@@ -258,42 +184,6 @@ Add a new product
             });
         }
 
-
-
-
-
-        //        //Ajax call to get all the farms of a producer to list in add product screen
-        //        $('#addNewProduct').on('shown.bs.modal', function (e) {
-        //            $.ajax({
-        //                url:"/kleinerzeugernetzwerk/src/getFarmData.php",    //the page containing php script
-        //                type: "get",    //request type,
-        //                contentType: "application/json",
-        //                dataType: 'json',
-        //                success:function(result){
-        //                    console.log(result)     
-        //                     $("#productionPointOptions").attr('disabled', false);
-        //                    $.each(result,function(i,obj){
-        //                        console.log(obj)
-        //                        const fName = obj.farm_name;
-        //                        const fAddress = obj.farm_address;
-        //                        const fId = obj.farm_id;
-        //
-        //                        
-        //                        
-        //                        var div_data="<div class='item' data-value="+fId+"><h5>"+fName+"</h5><div>"+fAddress+"</div></div>";
-        //                        var productionPointOptions="<option value="+fId+" >"+fName+ "-"+fAddress+"</option>";
-        //
-        //                        $("#productionPointOptions").append(productionPointOptions);
-        ////                        $(div_data).appendTo('#productionPointMenu');
-        //                    })
-        ////                                        $("#productionPointOptions").load(" #productionPointOptions");
-        //                },
-        //                error: function (request, status, error) {
-        //                    alert(request.responseText);
-        //                    console.log(error)
-        //                }
-        //            });
-        //        })
 
 
         /*

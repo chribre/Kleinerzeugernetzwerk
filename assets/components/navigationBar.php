@@ -37,7 +37,7 @@ $loginFailAlert = '<div class="alert alert-success" id="success-alert">
 //}
 
 $SIGN_UP_LOC = '/kleinerzeugernetzwerk/src/signUp.php';
-$LOGO_LOC = '/kleinerzeugernetzwerk/images/logo.svg';
+$LOGO_LOC = '/kleinerzeugernetzwerk/images/logo/logo.svg';
 $HOME_LOC = '/kleinerzeugernetzwerk/index.php';
 $PROFILE_IMAGE_DEFAULT = '/kleinerzeugernetzwerk/images/profile_placeholder.png';
 $LOG_OUT_IMG = '/kleinerzeugernetzwerk/images/logout.png';
@@ -121,15 +121,15 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
 
 
                 <div class="dropdown p-1 ml-3" id="languageSwitch"> 
-                    <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > 
-                        <img id="preferedLanguageImg" width="22px" height="18px" src="">
+                    <div class="m-auto" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" > 
+                        <img id="preferedLanguageImg" width="44px" height="32px" src="">
                     </div> 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel" style="z-index:10000"> 
-                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('de_DE')"><img class="mr-3" src="http://localhost/kleinerzeugernetzwerk_uploads/country/de.svg" width="22px" height="18px">Deutsch</a>  
+                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('de_DE')"><img class="mr-3" src="http://localhost/kleinerzeugernetzwerk/images/country/de.svg" width="44px" height="32px">Deutsch</a>  
                         <div class="dropdown-divider">
 
                         </div>  
-                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('en_GB')"><img class="mr-3" src="http://localhost/kleinerzeugernetzwerk_uploads/country/gb.svg" width="22px" height="18px">English</a> 
+                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('en_GB')"><img class="mr-3" src="http://localhost/kleinerzeugernetzwerk/images/country/gb.svg" width="44px" height="32px">English</a> 
                     </div> 
                 </div>
 
@@ -179,13 +179,13 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
             var languagePreference = localStorage.getItem("language");
             switch (languagePreference){
                 case 'de_DE':
-                    document.getElementById("preferedLanguageImg").src = "http://localhost/kleinerzeugernetzwerk_uploads/country/de.svg";
+                    document.getElementById("preferedLanguageImg").src = "/kleinerzeugernetzwerk/images/country/de.svg";
                     break;
                 case 'en_GB':
-                    document.getElementById("preferedLanguageImg").src = "http://localhost/kleinerzeugernetzwerk_uploads/country/gb.svg";
+                    document.getElementById("preferedLanguageImg").src = "/kleinerzeugernetzwerk/images/country/gb.svg";
                     break;
                 default:
-                    document.getElementById("preferedLanguageImg").src = "http://localhost/kleinerzeugernetzwerk_uploads/country/de.svg";
+                    document.getElementById("preferedLanguageImg").src = "/kleinerzeugernetzwerk/images/country/de.svg";
                     break;
             }        
         }
@@ -238,7 +238,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                 const profileImageName = localStorage.getItem('profileImageName') != null && localStorage.getItem('profileImageName') != "" ? localStorage.getItem('profileImageName') : DEFAULT_USER_IMAGE;
                 const profileImage = getFilePath(1, profileImageName);
                 const viewProfilePath = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=personal';
-                const logOutImage = '/kleinerzeugernetzwerk/images/logout.png';
+                const logOutImage = '/kleinerzeugernetzwerk/images/icons/logout.png';
 
                 const profileBtn = `<div class="dropdown rounded-circle bg-info p-1 ml-3" id="signInOrProfileBtn"> <div id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="rounded-circle bg-info"> <img src="${profileImage}" class="d-block rounded-circle" width="36px" height="36px" style="object-fit: cover;"> </div> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel" style="z-index:10000"> <a class="dropdown-item font-weight-bold text-uppercase" href="${viewProfilePath}">${userName}</br><span class=" text font-weight-light text-lowercase">${email}</span> </a> <div class="dropdown-divider"></div>  <a class="dropdown-item" href="javascript:logOut()"><img class="mr-2" src="${logOutImage}" width=20px, height=20px/><?php echo gettext("Log Out"); ?></a> </div> </div>`
 

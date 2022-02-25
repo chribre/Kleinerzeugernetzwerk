@@ -408,7 +408,11 @@ Please provide Date of Birth.
                 //                document.getElementById("mobile").value = userData.mobile ? userData.mobile : ""; 
                 document.getElementById("phone").value = userData.phone ? userData.phone : "";
                 document.getElementById("userId").value = userData.userId ? userData.userId : "";
-                document.getElementById("profileImage").src=userData.imagePath ? userData.imagePath : "";
+                
+                const profileImageName = userData.imageName ? userData.imageName : DEFAULT_USER_IMAGE;
+                const profileImage = getFilePath(1, profileImageName);
+                
+                document.getElementById("profileImage").src=profileImage ? profileImage : "";
                 document.getElementById("profileImageId").value=userData.imageId ? userData.imageId : 0;
             }
             function getUserDetails(){
@@ -485,6 +489,8 @@ Please provide Date of Birth.
                 const name = firstName + ' ' + lastName;
                 localStorage['userName'] = name;
                 localStorage['profileImagePath'] = data.imagePath ? data.imagePath : "";
+                localStorage['profileImageName'] = data.imageName ? data.imageName : "";
+                
             }
         </script>
     </div>

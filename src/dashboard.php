@@ -74,7 +74,9 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/sideBar
         document.getElementById("mobileNumber").innerHTML = userDetails.mobile ? userDetails.mobile : "";
         document.getElementById("emailAddress").innerHTML = userDetails.email ? userDetails.email : "";
         document.getElementById("aboutMe").innerHTML = userDetails.description ? userDetails.description : "";
-        document.getElementById("profileImage").src=userDetails.imagePath ? userDetails.imagePath : "";
+        const profileImageName = localStorage.getItem('profileImageName') != null && localStorage.getItem('profileImageName') != "" ? localStorage.getItem('profileImageName') : DEFAULT_USER_IMAGE;
+        const profileImage = getFilePath(1, profileImageName);
+        document.getElementById("profileImage").src=profileImage ? profileImage : "";
     }
 
     function fetchFullName(data){

@@ -53,7 +53,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
 */    
 function createUser($userId, $firstName, $lastName, $dob, $street, $houseNumber, $zip, $city, $country, $phone, $email, $mobile, $userType, $isActive, $isBlocked, $password, $description,$profileImageIdArray, $profileImageNameArray){
     global $dbConnection;
-    $profileUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(1);
+//    $profileUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(1);
+    $profileUplaodLocation = getImagePath(1);
     $profileImagepath = getServerRootAddress().getImagePath(1);
     if (!isUserAlreadyExist($email)){
         $sql = "INSERT INTO user (salutations, first_name, last_name, dob, street, house_number, zip, city, country, phone, mobile, email, profile_image_name, user_type, is_active, is_blocked, description)"
@@ -189,7 +190,8 @@ function getUser($userId){
 */
 function updateUserDetails($userId, $salutation, $firstName, $lastName, $dob, $street, $houseNumber, $zip, $city, $country, $phone, $mobile, $description,$profileImageIdArray, $profileImageNameArray){
     global $dbConnection;
-    $profileUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(1);
+//    $profileUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(1);
+    $profileUplaodLocation = getImagePath(1);
     $profileImagepath = getServerRootAddress().getImagePath(1);
 
 

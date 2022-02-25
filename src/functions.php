@@ -8,7 +8,7 @@
 ****************************************************************/
 
 require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/config.php");
-//include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/ftp_config.php");
+require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/ftp_config.php");
 
 /*
     FUNCTION    :   To redirect to different location.
@@ -107,7 +107,6 @@ function redirect($location){
 function confirmQuery($result) {
 
     global $dbConnection;
-
     if(!$result ) {
 
         die("QUERY FAILED ." . mysqli_error($connection));
@@ -567,6 +566,7 @@ function getAllProducersAndSellers(){
 */
 function uploadPictures($fileNames, $fileUploadLocation){
     $fileNameArray = [];
+//    $fileUploadLocation = '';
     $productPictures = $_FILES['files']['name'] ? $_FILES: [];
     if (count($productPictures['files']['name']) > 0){
         $totalFiles = count($_FILES['files']['name']);
@@ -583,16 +583,67 @@ function uploadPictures($fileNames, $fileUploadLocation){
                 $newFilePath = $fileUploadLocation . $newFileName;
 
                 //Upload the file into the temp dir
-                if(move_uploaded_file($tmpFilePath, $newFilePath)) {
+//                uplaodFileToFTP($tmpFilePath, $newFilePath);
+                if(uplaodFileToFTP($tmpFilePath, $newFilePath)) {
                     array_push($fileNameArray, $newFileName);
                     //Handle other code here
 
+                }else{
+                    return false;
                 }
+//                if(move_uploaded_file($tmpFilePath, $newFilePath)) {
+//                    array_push($fileNameArray, $newFileName);
+//                    //Handle other code here
+//
+//                }
             }
         }
     }
     return $fileNameArray;
 }
+
+
+
+
+function uplaodFileToFTP($file, $targetFile){
+//    $ftp_server="202.61.242.150";
+//    $ftp_user_name="kn_uploads";
+//    $ftp_user_pass="kleinerzeugernetzwerk";
+    
+    $ftp_server=FTP_SERVER;
+    $ftp_user_name=FTP_USER_NAME;
+    $ftp_user_pass=FTP_USER_PASS;
+    
+//    ($FTP_SERVER, $FTP_USER_NAME, $FTP_USER_PASS) = ftpConfig();
+    $file = $file;//tobe uploaded
+    $remote_file = $targetFile;
+
+    // set up basic connection
+    $conn_id = ftp_connect($ftp_server) or die("Couldn't connect to $ftp_server"); 
+
+    // login with username and password
+    $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+    ftp_pasv($conn_id, true);
+    // upload a file
+    if (ftp_put($conn_id, $remote_file, $file, FTP_BINARY)) {
+        echo "successfully uploaded $file\n";
+        return true;
+    } else {
+        echo "There was a problem while uploading $file\n";
+        return false;
+    }
+    // close the connection
+    ftp_close($conn_id);
+    return false;
+}
+
+
+
+
+
+
+
+
 /*
     FUNCTION    :   to add product image path and file names into database
     INPUT       :   file names and product id
@@ -670,17 +721,18 @@ function getServerRootAddress(){
     OUTPUT      :   returns imagePath where the images stored as string
 */
 function getImagePath($imageType){
+    $basePath = FTP_BASE_PATH;
     switch($imageType){
         case 1:
-            return "/kleinerzeugernetzwerk_uploads/profile_img/";
+            return $basePath . "/kleinerzeugernetzwerk_uploads/profile_img/";
         case 2:
-            return "/kleinerzeugernetzwerk_uploads/product_img/";
+            return $basePath . "/kleinerzeugernetzwerk_uploads/product_img/";
         case 3:
-            return "/kleinerzeugernetzwerk_uploads/production_point_img/";
+            return $basePath . "/kleinerzeugernetzwerk_uploads/production_point_img/";
         case 4:
-            return "/kleinerzeugernetzwerk_uploads/seller_img/";
+            return $basePath . "/kleinerzeugernetzwerk_uploads/seller_img/";
         case 5:
-            return "/kleinerzeugernetzwerk_uploads/news_feeds/";
+            return $basePath . "/kleinerzeugernetzwerk_uploads/news_feeds/";
         default:
             return "";
     }

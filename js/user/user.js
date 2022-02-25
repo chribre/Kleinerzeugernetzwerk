@@ -161,8 +161,8 @@ function showProducerInDetailScreen(producerData){
                 });
                 if (feature != null && feature.length > 0){
                     const featureObj = feature[0] ? feature[0] : [];
-                    const featureImagePath = featureObj.image_path ? featureObj.image_path : '';
-                    const featureName = featureObj.feature_name ? featureObj.feature_name : '';
+                    const featImage = featureObj.image_name ? featureObj.image_name : '';
+                    const featureImagePath = getFilePath(6, featImage);
                     producerUI += `<img class="img-responsive feature-img ml-3" src="${featureImagePath}" />`;
                 }
             })
