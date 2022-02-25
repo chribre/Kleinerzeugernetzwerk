@@ -2,7 +2,7 @@ function noDataAvailable(content, element){
     const message = `No ${content} data available<br>Try adding ${content} using add button.`;
     const noDataUI = `<div class="container mx-auto mt-5">
 <div class="text-center">
-<img class="text-center" height="120px" width="120px" src="http://localhost/kleinerzeugernetzwerk_uploads/others/no_data.jpg">
+<img class="text-center" height="120px" width="120px" src="kleinerzeugernetzwerk_uploads/others/no_data.jpg">
 </div>
 <p class="m-auto text-center">${message}</p>
 </div>`
