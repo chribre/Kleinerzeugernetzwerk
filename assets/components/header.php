@@ -6,7 +6,7 @@
 
    PURPOSE          :   file containg all dependencies and header files
 ****************************************************************/
-session_start(); 
+//session_start(); 
 ?>
 
 <?php 

@@ -547,11 +547,9 @@ function showSellerSidebar(sellerData){
 <div class="row mx-auto justify-content-between">
 
 <div class="row ml-2">
-<img class="rounded-circle" src="https://image.flaticon.com/icons/png/128/1384/1384053.png" id="socialImage" alt="">
-<!--
-<img class="rounded-circle" src="https://www.flaticon.com/svg/vstatic/svg/733/733579.svg?token=exp=1620563776~hmac=db6f2d43cd6da2272e3e5cc0c9dd4d18" id="socialImage" alt="">
-<img class="rounded-circle" src="https://www.flaticon.com/svg/vstatic/svg/1384/1384055.svg?token=exp=1619102525~hmac=05c3613c4bd211205f4445a5e04188b2" id="socialImage" alt="">
--->
+<img class="rounded-circle" src="images/icons/oecolor/E042.svg" id="socialImage" alt="">
+<img class="rounded-circle" src="images/icons/oecolor/E043.svg" id="socialImage" alt="">
+<img class="rounded-circle" src="images/icons/oecolor/E040.svg" id="socialImage" alt="">
 </div>
 <div>
 <p class="text-dark my-auto">${productsCount} products</p>

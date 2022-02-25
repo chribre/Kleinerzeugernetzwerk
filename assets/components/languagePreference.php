@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 clearstatcache();
 //language support configuration
 
@@ -10,7 +10,7 @@ if (!function_exists("gettext")){
     //    echo "gettext is supported\n"; 
 }
 
-//get language preference from post request
+// get language preference from post request
 if ($_POST['language'] != null){
     $_SESSION['languagePreference'] = $_POST['language'];
 }
@@ -47,5 +47,5 @@ $results = textdomain($locale);
 
 $language['language'] = $locale;
 //echo _("Good Morning");
-print json_encode($language, JSON_UNESCAPED_SLASHES);
+//print json_encode($language, JSON_UNESCAPED_SLASHES);
 ?>

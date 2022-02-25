@@ -15,6 +15,8 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 
 <link rel="stylesheet" type="text/css" href="/kleinerzeugernetzwerk/css/custom/fab.css" />
+<link rel="stylesheet" type="text/css" href="/kleinerzeugernetzwerk/css/custom/leaflet_custom.css" />
+
 
 <link rel="stylesheet" type="text/css" href="<?php echo $leaflet_sidebar_css ?>" />
 <script type="text/javascript" src="/kleinerzeugernetzwerk/js/production_point_api/production_point_api.js"></script>
@@ -36,12 +38,14 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         cursor: pointer;
     }
 
+
+
     .cst-desc {
         text-align: justify;
     }
     #socialImage{
-        width: 28px;
-        height: 28px;
+        width: 40px;
+        height: 40px;
         object-fit: cover;
         margin-right: 5px;
     }
@@ -127,12 +131,161 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     </div>
 
     <ul class="fab-options" id="category-options">
+<!--
+        <li>
+            <div class="fab-icon-holder">
+                <img class="icon-image" src="http://localhost/kleinerzeugernetzwerk_uploads/others/categories/fruit.png" alt="">
+            </div>
+            <span class="fab-label">Documentation</span>
+        </li>
+        <li>
 
+            <div class="fab-icon-holder">
+                <i class="fas fa-video"></i>
+            </div>
+            <span class="fab-label">Video Tutorials</span>
+        </li>
+        <li>
+
+            <div class="fab-icon-holder">
+                <i class="fas fa-comments"></i>
+            </div>
+            <span class="fab-label">Live Chat</span>
+        </li>
+        <li>
+
+            <div class="fab-icon-holder">
+                <i class="fas fa-comment-alt"></i>
+            </div>
+            <span class="fab-label">Feedback</span>
+        </li>
+-->
     </ul>
 </div>
 
 
+<!--
+
+<div id="mapSidebar">
+<ul style="list-style-type: none; padding: 0" class="mx-auto" id="productList">
+<li class="">
+<div>
+<div class="overflow-hidden" width="100%">
+<img src="/kleinerzeugernetzwerk/images/default_products.jpg" alt="" width="240" class="img-rounded">
+</div>
+<div>
+<h3>Product Name</h3>
+<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+<p>Category Name</p>
+<div class="row p-3">
+<p>Feature 1</p>
+<p>Feature 2</p>
+<p>Feature 3</p>
+<p>Feature 4</p>
+</div>
+</div>
+</div>
+</li>
+</ul>
+</div>
+
+-->
+
 <div class="p-0" id="mapSidebar">
+
+
+
+
+    <!--
+<img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80" width="100%" height="220px"  style="object-fit: cover;" alt="">
+<div class="p-2">
+<h4>John Doe James</h4>
+<p class="text-dark cst-desc">In the tranquil idyll of the family game My Farm Shopplayers can experience just that without leaving their home. In turn, three dice are thrown each turn. The active player uses one die to choose a new expansion for his farm. The combination of the other two dice determines which field is activated on the farm - not only for the active player, but also for everyone else. The extensions improve the actions with which the players milk cows, shear sheep, harvest honey or collect eggs. These raw materials can then be sold. Whoever made the most money in the end wins.</p>
+
+<div class="row px-4 align-items-center justify-content-between">
+<div class="">
+<h5>+91 9846 194 609</h5>
+<h5>knfse@gmail.com</h5>
+</div>
+<div class="row justify-content-around">
+<img class="rounded-circle" src="https://image.flaticon.com/icons/png/128/1384/1384053.png" id="socialImage" alt="">
+<img class="rounded-circle" src="https://www.flaticon.com/svg/vstatic/svg/1384/1384065.svg?token=exp=1619102216~hmac=5208539dcadea913c800c5be1ae781bd" id="socialImage" alt="">
+<img class="rounded-circle" src="https://www.flaticon.com/svg/vstatic/svg/1384/1384055.svg?token=exp=1619102525~hmac=05c3613c4bd211205f4445a5e04188b2" id="socialImage" alt="">
+</div>
+<div>
+<p class="text-dark">20 products</p>
+</div>
+</div>
+
+<div class="my-3">
+<div class="rounded bg-white py-2 px-4">
+<div class="row">
+
+<img class="cst-image-cover" src="https://www.jessicagavin.com/wp-content/uploads/2019/04/types-of-lemons-1-1200.jpg" width="30%" height="160px" alt="">
+
+<div class="mx-3">
+<h5>Lemon Home Made</h5>
+<p>Vegetable</p>
+<h5>€2,5/kg</h5>
+<div class="row justify-content-between mx-1">
+<img class="cst-image-cover cst-feature-images" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg/1200px-Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg.png" alt="">
+<img class="cst-image-cover cst-feature-images" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg/1200px-Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg.png" alt="">
+<img class="cst-image-cover cst-feature-images" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg/1200px-Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg.png" alt="">
+<img class="cst-image-cover cst-feature-images" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg/1200px-Bio-Siegel-EG-%C3%96ko-VO-Deutschland.svg.png" alt="">
+</div>
+</div>
+</div>
+<div class="">
+<p class="mt-2 cst-desc cst-product-desc">The lemon, Citrus limon, is a species of small evergreen tree in the flowering plant family Rutaceae, native to South Asia, primarily Northeast India. The tree's ellipsoidal yellow fruit is used for culinary and non-culinary purposes throughout the world, primarily for its juice, which has both culinary and cleaning uses.</p>
+</div>
+
+
+<div class="cst-page-break">
+<div class="row rounded-pill mb-1 cst-bg-gray">
+<div>
+<img class="cst-feature-images rounded-circle m-1" src="https://www.eu-startups.com/wp-content/uploads/2020/05/supermarket-vegetables-fruits.jpg" alt="">
+</div>
+<div>
+<h5 class="text-white align-self-center">Bio Markt</h5>
+</div>
+
+</div>
+<div class="row rounded-pill mb-1 cst-bg-gray">
+<div>
+<img class="cst-feature-images rounded-circle m-1" src="https://www.eu-startups.com/wp-content/uploads/2020/05/supermarket-vegetables-fruits.jpg" alt="">
+</div>
+<div>
+<h5 class="text-white align-self-center">Bio Markt</h5>
+</div>
+
+</div>
+<div class="row rounded-pill mb-1 cst-bg-gray">
+<div>
+<img class="cst-feature-images rounded-circle m-1" src="https://www.eu-startups.com/wp-content/uploads/2020/05/supermarket-vegetables-fruits.jpg" alt="">
+</div>
+<div>
+<h5 class="text-white align-self-center">Bio Markt</h5>
+</div>
+
+</div>
+<div class="row rounded-pill mb-1 cst-bg-gray">
+<div>
+<img class="cst-feature-images rounded-circle m-1" src="https://www.eu-startups.com/wp-content/uploads/2020/05/supermarket-vegetables-fruits.jpg" alt="">
+</div>
+<div>
+<h5 class="text-white align-self-center">Bio Markt</h5>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+-->
+
 
 
     <!--Selling point side bar-->
@@ -175,11 +328,9 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         <div class="row mx-auto justify-content-between">
 
             <div class="row ml-2">
-                <img class="rounded-circle" src="https://image.flaticon.com/icons/png/128/1384/1384053.png" id="socialImage" alt="">
-<!--
+                <img class="rounded-circle" src="images/icons/oecolor/E042.svg" id="socialImage" alt="">
                 <img class="rounded-circle" src="https://www.flaticon.com/svg/vstatic/svg/733/733579.svg?token=exp=1620563776~hmac=db6f2d43cd6da2272e3e5cc0c9dd4d18" id="socialImage" alt="">
                 <img class="rounded-circle" src="https://www.flaticon.com/svg/vstatic/svg/1384/1384055.svg?token=exp=1619102525~hmac=05c3613c4bd211205f4445a5e04188b2" id="socialImage" alt="">
--->
             </div>
             <div>
                 <p class="text-dark my-auto">20 products</p>
@@ -258,34 +409,22 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     var productionPointLocations = [];
 
     var sellerIcon = L.icon({
-        iconUrl: '/kleinerzeugernetzwerk/images/shopping.png',
-        iconSize: [25, 25],
+        iconUrl: '/kleinerzeugernetzwerk/images/icons/oecolor/1F6CD.png',
+        iconSize: [30, 30],
     });
 
     var productionPointIcon = L.icon({
-        iconUrl: '/kleinerzeugernetzwerk/images/greenhouse.png',
-        iconSize: [25, 25],
+        iconUrl: '/kleinerzeugernetzwerk/images/icons/oecolor/E344.png',
+        iconSize: [30, 30],
     });
 
 
-
-
-/*
-    FUNCTION    :   filter map based on the cateory user selects
-    INPUT       :   category id
-    OUTPUT      :   show selling points/production point which produces or 
-                    selles the selected category products
-*/
     function filterMapByCategory(category){
         cancelBubbleEvent();
         window.location = "/kleinerzeugernetzwerk/index.php?category="+category;
     }
 
-/*
-    FUNCTION    :   get name of the category from id to show in category filter pop up
-    INPUT       :   category id
-    OUTPUT      :   returns name of the category
-*/
+
     function getCategoryName(categoryId){
         const categories = localStorage.getItem("productCategories");
         const categoryJson = JSON.parse(categories);
@@ -307,11 +446,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     }
 
 
-/*
-    FUNCTION    :   ajax call on window load to get all production points and selling points to show in map
-    INPUT       :   category id; category id 0 return all points
-    OUTPUT      :   returns list of production point and selling points in array of dictionaries
-*/
+
     $(document).ready(function(){
         var categoryId = 0;
         var url_string = window.location;
@@ -362,21 +497,11 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         });
     });
 
-/*
-    FUNCTION    :   show all categories of production points and selling points
-                    on hiding no data alert on selected category
-    INPUT       :   category id as zero
-    OUTPUT      :   returns list of all production point and selling points in array of dictionaries
-*/
+
     $('#no-map-data-modal').on('hide.bs.modal', function (e) {
         filterMapByCategory(0)
     })
 
-/*
-    FUNCTION    :   add a production points as markers to map
-    INPUT       :   production points array
-    OUTPUT      :   mark location of production points on map
-*/
     function addProductionPointsToMap(productionPoints){
         productionPointMarker = {
             "type": "FeatureCollection",
@@ -461,11 +586,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     }
 
 
-/*
-    FUNCTION    :   add a selling points as markers to map
-    INPUT       :   selling points array
-    OUTPUT      :   mark location of selling points on map
-*/
+
     function addSellersToMap(sellingPoints){
         $.each(sellingPoints,function(i,sellingPoint){
 
@@ -560,11 +681,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 
 
-/*
-    FUNCTION    :   function to split string into array on , delimiter
-    INPUT       :   comma separated string of values
-    OUTPUT      :   array of values
-*/
+
     function createArrayFromString(stringValues){
         var array = stringValues.split(',') ? stringValues.split(',') : [];
         return array;
@@ -572,12 +689,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 
 
     var connectingPolyline = null;
-/*
-    FUNCTION    :   creates connection between selling point and production point on 
-                    clicking a production point or selling point
-    INPUT       :   latitude, longitude of seller and production point
-    OUTPUT      :   create a polyline on map that connects selling points and production point
-*/
+
     function createConnectionBetweenSellerAndProductionPoint(latseller, longseller, latProductionPoint, longProductionPoint){
         var pointA = new L.LatLng(latseller, longseller);
         var pointB = new L.LatLng(latProductionPoint, longProductionPoint);
@@ -594,11 +706,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         //        L.featureGroup(getArrows(pointList, 'red', 6,mymap)).addTo(mymap);
     }
 
-/*
-    FUNCTION    :   to remove all existing polyline from the map on user clicks a new point
-    INPUT       :   
-    OUTPUT      :   map with production points and selling point without polyline connection
-*/
+
     function clearMapPolylines() {
         for(i in mymap._layers) {
             if(mymap._layers[i]._path != undefined) {
@@ -611,6 +719,112 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
             }
         }
     }
+
+
+    //
+    //
+    //
+    //    $(document).ready(function(){
+    //        $.ajax({
+    //            url:"/kleinerzeugernetzwerk/src/getProductsToMap.php",    //the page containing php script
+    //            type: "get",    //request type,
+    //            contentType: "application/json",
+    //            dataType: 'json',
+    //            success:function(result){
+    //                console.log(result)
+    //                products = {
+    //                    "type": "FeatureCollection",
+    //                    "features": []
+    //                }
+    //                $.each(result,function(i,obj){
+    //                    console.log(obj)
+    //                    const productName = obj.product_name;
+    //                    const productDesc = obj.product_description;
+    //                    const productAddr = obj.farm_address;
+    //                    const latitude = parseFloat(obj.Lat);
+    //                    const longitude = parseFloat(obj.Lon);
+    //                    const productId = parseInt(obj.product_id);
+    //
+    //
+    //
+    //                    const farmId = obj.farm_id;
+    //                    const farmName = obj.farm_name;
+    //                    const farmAddress = obj.farm_address;
+    //
+    //                    const geom = {
+    //                        "type": "Point",
+    //                        "coordinates": [
+    //                            longitude, latitude
+    //                        ]
+    //                    }
+    //
+    //                    const farmPopupContent = `<a data-id="${farmId}" style="text-decoration: none" id="productionPointLoc" onclick='return showProductsInProductionPoint()'><div class="d-inline-flex m-1 p-1"> <img src="<?php echo $imagePath ?>" alt="" width="90" height="60" class="m-auto"> <div class="pl-2"> <div id="productTitle">${farmName}</div> <div>${farmAddress}</div> </div> </div></a>`
+    //
+    //                    if (products.features.some((e) => {
+    //                        console.log(e.geometry)
+    //                        return JSON.stringify(e.geometry) === JSON.stringify(geom)
+    //                    })) {
+    //                        console.log('Exists');
+    //                        products.features.some((feats) => {
+    //                            feats.properties.popupContent += farmPopupContent   
+    //                        })
+    //                    }else{
+    //                        const tempProductPoints = {
+    //                            "geometry": {
+    //                                "type": "Point",
+    //                                "coordinates": [
+    //                                    longitude, latitude
+    //                                ]
+    //                            },
+    //                            "type": "Feature",
+    //                            "properties": {
+    //                                "popupContent": farmPopupContent
+    //                            },
+    //                            "id": productId
+    //                        };
+    //                        products.features = [...products.features, tempProductPoints];
+    //                    }
+    //                })
+    //                console.log(products)
+    //                L.geoJSON([products], {
+    //
+    //                    style: function (feature) {
+    //                        return feature.properties && feature.properties.style;
+    //                    },
+    //
+    //                    onEachFeature: onEachFeature,
+    //
+    //                    pointToLayer: function (feature, latlng) {
+    //                        return L.circleMarker(latlng, {
+    //                            radius: 6,
+    //                            fillColor: "#ff7800",
+    //                            color: "#000",
+    //                            weight: 1,
+    //                            opacity: 1,
+    //                            fillOpacity: 0.8
+    //                        });
+    //                    }
+    //                }).addTo(mymap);
+    //            },
+    //            error: function (request, status, error) {
+    //                alert(request.responseText);
+    //                console.log(error)
+    //            }
+    //        });
+    //    });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -723,11 +937,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         return null;
     }
 
-/*
-    FUNCTION    :   get list of categories of producs in the current map boundary
-    INPUT       :   bounday envelope cordinates
-    OUTPUT      :   list of categories
-*/
+
     async function fetchProductCategoriesInMapBound(boundEnvelope){
         $.ajax({
             url: "/kleinerzeugernetzwerk/controller/details.php",    //the page containing php script
@@ -756,12 +966,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         });
     }
 
-/*
-    FUNCTION    :   show products from a production point on sidebar 
-                    when user clicks on a production point on map
-    INPUT       :   id of production point
-    OUTPUT      :   list of products
-*/
+
     function showProductsInProductionPoint(){
         console.log('farming location clicked')
         const farmId = $("#productionPointLoc").data("id")
@@ -770,11 +975,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     }
 
 
-/*
-    FUNCTION    :   ajax call to get list of products from a production point
-    INPUT       :   id of production point
-    OUTPUT      :   list of products
-*/
+
     function getProductsFromFarmLand(farmId){
         const userId = localStorage.getItem('userId');
         document.getElementById("productList").innerHTML = "";
@@ -832,6 +1033,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
             }
         });
     }
+
 
 
 

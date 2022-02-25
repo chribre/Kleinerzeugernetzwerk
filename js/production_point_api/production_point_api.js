@@ -97,9 +97,9 @@ function listproductsOnSideBar(productsData){
 
 <div class="row px-4 align-items-center justify-content-between">
 <div class="row justify-content-around">
-<img class="rounded-circle" src="https://image.flaticon.com/icons/png/128/1384/1384053.png" id="socialImage" alt="">
-<img class="rounded-circle" src="https://www.flaticon.com/svg/vstatic/svg/1384/1384065.svg?token=exp=1619102216~hmac=5208539dcadea913c800c5be1ae781bd" id="socialImage" alt="">
-<img class="rounded-circle" src="https://www.flaticon.com/svg/vstatic/svg/1384/1384055.svg?token=exp=1619102525~hmac=05c3613c4bd211205f4445a5e04188b2" id="socialImage" alt="">
+<img class="rounded-circle" src="images/icons/oecolor/E042.svg" id="socialImage" alt="">
+<img class="rounded-circle" src="images/icons/oecolor/E043.svg" id="socialImage" alt="">
+<img class="rounded-circle" src="images/icons/oecolor/E040.svg" id="socialImage" alt="">
 </div>
 <div>
 <p class="text-dark">${productsCount} products</p>

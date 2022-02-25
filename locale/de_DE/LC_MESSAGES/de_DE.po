@@ -355,7 +355,7 @@ msgstr ""
 
 #: assets/components/navigationBar.php:216
 msgid "Log Out"
-msgstr "A bmelden"
+msgstr "Abmelden"
 
 #: assets/components/personalProfile.php:56
 msgid "Address"
