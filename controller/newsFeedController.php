@@ -84,7 +84,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
 */
 function createNewsFeed($feed){
     global $dbConnection;
-    $feedUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(5);
+//    $feedUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(5);
+    $feedUplaodLocation = getImagePath(5);
     $feedImagepath = getServerRootAddress().getImagePath(5);
 
     $feedInsertQuery = "INSERT INTO news_feed (title, article, author_first_name, author_last_name, user_id)"
@@ -132,7 +133,8 @@ function createNewsFeed($feed){
 */
 function editFeedPost($feed){
     global $dbConnection;
-    $feedUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(5);
+//    $feedUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(5);
+    $feedUplaodLocation = getImagePath(5);
     $feedImagepath = getServerRootAddress().getImagePath(5);
     /* Start transaction */
     mysqli_begin_transaction($dbConnection);

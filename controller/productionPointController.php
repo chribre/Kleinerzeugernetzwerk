@@ -9,7 +9,7 @@
 ****************************************************************/
 session_start();
 require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/src/functions.php";
-include "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/productionPointModel.php";
+require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/model/productionPointModel.php";
 
 
 switch ($_SERVER['REQUEST_METHOD']) {
@@ -79,7 +79,8 @@ function addProductionPoint($productionPoint){
         http_response_code(412);
         return false;
     }
-    $productionPointUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(3);
+//    $productionPointUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(3);
+    $productionPointUplaodLocation = getImagePath(3);
     $productionPointImagepath = getServerRootAddress().getImagePath(3);
     /* Start transaction */
     //    mysqli_begin_transaction($dbConnection);
@@ -140,7 +141,8 @@ function addProductionPoint($productionPoint){
 */
 function editProductionPoint($productionPoint){
     global $dbConnection;
-    $productionPointUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(3);
+//    $productionPointUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(3);
+    $productionPointUplaodLocation = getImagePath(3);
     $productionPointImagepath = getServerRootAddress().getImagePath(3);
     /* Start transaction */
     //    mysqli_begin_transaction($dbConnection);

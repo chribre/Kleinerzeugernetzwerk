@@ -60,9 +60,17 @@ class product{
         $this->unit = isset($productDataDict['unit']) ? escapeSQLString($productDataDict['unit']): 0;
 
         //        $productFeaturesString = isset($_POST['productFeatures']) ? escapeSQLString($_POST['productFeatures']) : "";
-        $productFeatures = isset($productDataDict['product_features']) ? $productDataDict['product_features'] : [];
-        $productFeaturesId = isset($productDataDict['product_features_id']) ? $productDataDict['product_features_id'] : [];
+        $productFeatures = (isset($productDataDict['product_features'])) && ($productDataDict['product_features'] != null) ? $productDataDict['product_features'] : [];
+        $productFeaturesId = (isset($productDataDict['product_features_id'])) && ($productDataDict['product_features_id'] != null) ? $productDataDict['product_features_id'] : [];
 
+        if ((is_array($productFeatures) == false) && ($productFeatures != null)){
+            $productFeatures = explode(',', $productFeatures);
+        }
+        
+        if ((is_array($productFeaturesId) == false) && ($productFeaturesId != null)){
+            $productFeaturesId = explode(',', $productFeaturesId);
+        }
+        
         $featureCount = count($productFeatures);
         $featureIdCount = count($productFeaturesId);
 
@@ -86,15 +94,17 @@ class product{
         $this->isAvailable = true;
 
         $this->isDelete = isset($_POST['is_delete']) ? $_POST['is_delete'] : false;
-        $sellingPoints = isset($productDataDict['selling_points']) ? $productDataDict['selling_points'] : [];
-        $productSellerIds = isset($productDataDict['product_seller_ids']) ? $productDataDict['product_seller_ids'] : [];
+        $sellingPoints = (isset($productDataDict['selling_points'])) && ($productDataDict['selling_points'] != null) ? $productDataDict['selling_points'] : [];
+        $productSellerIds = (isset($productDataDict['product_seller_ids'])) && ($productDataDict['product_seller_ids'] != null) ? $productDataDict['product_seller_ids'] : [];
 
         if ((is_array($sellingPoints) == false) && ($sellingPoints != null)){
-            $sellingPoints = [$sellingPoints];
+            $sellingPoints = explode(',', $sellingPoints);
+//            $sellingPoints = [$sellingPoints];
         }
         
         if ((is_array($productSellerIds) == false) && ($productSellerIds != null)){
-            $productSellerIds = [$productSellerIds];
+            $productSellerIds = explode(',', $productSellerIds);
+//            $productSellerIds = [$productSellerIds];
         }
         
         $sellerCount = count($sellingPoints);

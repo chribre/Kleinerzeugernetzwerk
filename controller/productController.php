@@ -116,7 +116,8 @@ function fetchAllProducts($userId){
 */
 function insertNewProduct($productDetails){
     global $dbConnection;
-    $productUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(2);
+//    $productUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(2);
+    $productUplaodLocation = getImagePath(2);
     $productImagepath = getServerRootAddress().getImagePath(2);
 
     if (isAccessTokenValid()){
@@ -241,7 +242,8 @@ function updateProducts($producerId, $productId, $productName, $productDesc, $pr
 
     ob_start();
     global $dbConnection;
-    $productUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(2);
+//    $productUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(2);
+    $productUplaodLocation = getImagePath(2);
     $productImagepath = getServerRootAddress().getImagePath(2);
 
     if (isAccessTokenValid()){

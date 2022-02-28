@@ -97,7 +97,13 @@ Add a new product
                             const categoryDict = categoryJson.filter(
                                 function(data){ return data.category_id == productCategory }
                             );
-                            const categoryName = categoryDict.category_name;
+                            var categoryName = '';
+                            try{
+                                categoryName = categoryDict[0].category_name;
+                            }catch(error){
+                                log('category not found')
+                            }
+//                            const categoryName = categoryDict.category_name;
                             const productPrice = productData.price_per_unit != null ? productData.price_per_unit : "";
                             const productQuantity = productData.quantity_of_price != null ? productData.quantity_of_price : "";
                             const productUnit = productData.unit != null ? productData.unit : 0;

@@ -91,7 +91,8 @@ switch ($_SERVER['REQUEST_METHOD']) {
 */
 function addSeller($sellerDetails){
     global $dbConnection;
-    $sellerUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(4);
+//    $sellerUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(4);
+    $sellerUplaodLocation = getImagePath(4);
     $sellerImagepath = getServerRootAddress().getImagePath(4);
     /* Start transaction */
     //    mysqli_begin_transaction($dbConnection);
@@ -159,7 +160,8 @@ function addSeller($sellerDetails){
 */
 function editSellingPoint($sellerDetails){
     global $dbConnection;
-    $sellerUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(4);
+//    $sellerUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(4);
+    $sellerUplaodLocation = getImagePath(4);
     $sellerImagepath = getServerRootAddress().getImagePath(4);
     /* Start transaction */
     mysqli_begin_transaction($dbConnection);

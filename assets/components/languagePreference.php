@@ -5,9 +5,9 @@ clearstatcache();
 
 //checks whether gettext function installed or not
 if (!function_exists("gettext")){ 
-    //    echo "gettext is not installed\n"; 
+        echo "gettext is not installed\n"; 
 } else{ 
-    //    echo "gettext is supported\n"; 
+        echo "gettext is supported\n"; 
 }
 
 //get language preference from post request
@@ -39,7 +39,7 @@ if (defined('LC_MESSAGES')) {
 }
 
 
-bindtextdomain($locale, "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/locale/nocache");
+//bindtextdomain($locale, "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/locale/nocache");
 $results = bindtextdomain($locale, "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/locale");
 $results = textdomain($locale);
 
@@ -47,5 +47,6 @@ $results = textdomain($locale);
 
 $language['language'] = $locale;
 //echo _("Good Morning");
-print json_encode($language, JSON_UNESCAPED_SLASHES);
+ob_end_clean();
+echo json_encode($language, JSON_UNESCAPED_SLASHES);
 ?>
