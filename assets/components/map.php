@@ -258,12 +258,12 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     var productionPointLocations = [];
 
     var sellerIcon = L.icon({
-        iconUrl: '/kleinerzeugernetzwerk/images/icons/shopping_1.png',
-        iconSize: [20, 20],
+        iconUrl: 'images/icons/oecolor/1F6CD.png',
+        iconSize: [35, 35],
     });
 
     var productionPointIcon = L.icon({
-        iconUrl: '/kleinerzeugernetzwerk/images/icons/greenhouse_1.png',
+        iconUrl: 'images/icons/oecolor/E344.png',
         iconSize: [35, 35],
     });
 
