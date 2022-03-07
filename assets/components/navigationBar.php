@@ -2,7 +2,7 @@
 /****************************************************************
    FILE             :   navigationBar.php
    AUTHOR           :   Fredy Davis
-   LAST EDIT DATE   :   11.02.2021
+   LAST EDIT DATE   :   07.03.2022 (Christian)
 
    PURPOSE          :   navigation bar containing project logo, menu and search bar. 
                         it is incorporated into header.php to get it in all pages
@@ -125,11 +125,11 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
                         <img id="preferedLanguageImg" width="44px" height="32px" src="">
                     </div> 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dLabel" style="z-index:10000"> 
-                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('de_DE')"><img class="mr-3" src="http://localhost/kleinerzeugernetzwerk/images/country/de.svg" width="44px" height="32px">Deutsch</a>  
+                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('de_DE')"><img class="mr-3" src="images/icons/oecolor/1F1E9-1F1EA.svg" width="44px" height="32px">Deutsch</a>  
                         <div class="dropdown-divider">
 
                         </div>  
-                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('en_GB')"><img class="mr-3" src="http://localhost/kleinerzeugernetzwerk/images/country/gb.svg" width="44px" height="32px">English</a> 
+                        <a class="dropdown-item align-middle" href="javascript:setLanguagePreferenceServer('en_GB')"><img class="mr-3" src="images/icons/oecolor/1F1EC-1F1E7.svg" width="44px" height="32px">English</a> 
                     </div> 
                 </div>
 
@@ -179,13 +179,13 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
             var languagePreference = localStorage.getItem("language");
             switch (languagePreference){
                 case 'de_DE':
-                    document.getElementById("preferedLanguageImg").src = "/kleinerzeugernetzwerk/images/country/de.svg";
+                    document.getElementById("preferedLanguageImg").src = "images/icons/oecolor/1F1E9-1F1EA.svg";
                     break;
                 case 'en_GB':
-                    document.getElementById("preferedLanguageImg").src = "/kleinerzeugernetzwerk/images/country/gb.svg";
+                    document.getElementById("preferedLanguageImg").src = "images/icons/oecolor/1F1EC-1F1E7.svg";
                     break;
                 default:
-                    document.getElementById("preferedLanguageImg").src = "/kleinerzeugernetzwerk/images/country/de.svg";
+                    document.getElementById("preferedLanguageImg").src = "images/icons/oecolor/1F1E9-1F1EA.svg";
                     break;
             }        
         }
