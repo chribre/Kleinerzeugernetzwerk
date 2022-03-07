@@ -116,7 +116,7 @@ require_once "$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/ma
 
                 categoryOptionsUI += `<li onclick="filterMapByCategory(${categoryId})">
 <div class="fab-icon-holder">
-<img class="icon-image fab-icon-holder-img" src="${getServerRootAddress()}/kleinerzeugernetzwerk_uploads/others/categories/${categoryImage}" alt="">
+<img class="icon-image fab-icon-holder-img" src="images/icons/categories/${categoryImage}" alt="">
     </div>
 <span class="fab-label">${categoryName} ${sProductCount}</span>
     </li>`;
