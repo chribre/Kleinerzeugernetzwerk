@@ -110,7 +110,6 @@ function listproductsOnSideBar(productsData){
             <p class="my-auto font-weight-bold text-dark">${productsCount} products</p>
         
         </div>
-
 </div>`;
 
 
@@ -142,17 +141,16 @@ function listproductsOnSideBar(productsData){
             const productSellerIdArray = productSellerIds.split(',');
 
 
-            productCard = `<div class="my-3 cursor-pointer" onClick="goToProductDetailsPage(${productId})">
-<div class="rounded bg-light py-2 px-4">
-<div class="row">
-
-<img class="cst-image-cover" src="${productImagePath}" width="30%" height="160px" alt="">
-
-<div class="mx-3">
-<h5>${productName}</h5>
-<p>${productCategory}</p>
-<h5>€${price}/${productUnit}</h5>
-<div class="row justify-content-between mx-1">`,
+            productCard = 
+                `<div class="my-3 cursor-pointer" onClick="goToProductDetailsPage(${productId})">
+                    <div class="rounded bg-light py-2 px-4">
+                        <div class="row">
+                            <img class="cst-image-cover" src="${productImagePath}" width="30%" height="160px" alt="">
+                                <div class="mx-3">
+                                    <h5>${productName}</h5>
+                                    <p>${productCategory}</p>
+                                    <h5>€${price}/${productUnit}</h5>
+                                    <div class="row justify-content-between mx-1">`,
 
 
                 productFeatureArray.forEach(function(featureType){
