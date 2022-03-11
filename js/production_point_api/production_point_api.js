@@ -70,9 +70,10 @@ function listproductsOnSideBar(productsData){
     sideBarUI = `<img src="${ppImagePath}" width="100%" height="220px"  style="object-fit: cover;" alt="">
 
 <div id="sidebar-details" class="p-1">
-
-    <h4>${ppName}</h4>
-    <p class="text-secondary cst-desc">${ppDesc}</p>
+    <div class="">
+        <h4>${ppName}</h4>
+        <p class="text-secondary cst-desc">${ppDesc}</p>
+    </div>
 
     <ul class="list-group">
         <li class="list-group-item list-group-item-light list-group-item-action" class="list-group-item list-group-item-action">
@@ -141,35 +142,32 @@ function listproductsOnSideBar(productsData){
             const productSellerIdArray = productSellerIds.split(',');
 
 
-            productCard = 
-                `<div class="my-3 cursor-pointer" onClick="goToProductDetailsPage(${productId})">
-                    <div class="rounded bg-light py-2 px-4">
-                        <div class="row">
-                            <img class="cst-image-cover" src="${productImagePath}" width="30%" height="160px" alt="">
-                                <div class="mx-3">
-                                    <h5>${productName}</h5>
-                                    <p>${productCategory}</p>
-                                    <h5>€${price}/${productUnit}</h5>
-                                    <div class="row justify-content-between mx-1">`,
+            productCard = `<div class="card my-3 cursor-pointer" onClick="goToProductDetailsPage(${productId})">
+                                <div class="rounded bg-light">
+                                    <div class="row justify-content-start p-2 mx-1">
+                                        <img class="cst-image-cover" src="${productImagePath}" width="30%" height="30%" alt="">
+                                        <div class="d-flex flex-column justify-content-between mx-3">
+                                            <h5 class="text-primary card-title">${productName}</h5>
+                                            <p class="text-secondary">${productCategory}</p>
+                                            <h5class="text-secondary">€${price}/${productUnit}</h5></div>
+                                            <div class="align-self-center mx-1 p-3">`,
 
 
-                productFeatureArray.forEach(function(featureType){
-                var feature = $.map( productFeaturesMasterArray, function(e,i){
-                    if( e.feature_type_id == featureType ) return e; 
-                });
-                if (feature != null && feature.length > 0){
-                    const featureObj = feature[0] ? feature[0] : [];
-                    const featImage = featureObj.image_name ? featureObj.image_name : '';
-                    const featureImagePath = getFilePath(6, featImage);
-                    productCard += `<img class="cst-image-cover cst-feature-images" src="${featureImagePath}" alt="">`
-                }
-            })
-            productCard += `</div>
-</div>
-</div>
+                                                productFeatureArray.forEach(function(featureType){
+                                                var feature = $.map( productFeaturesMasterArray, function(e,i){
+                                                    if( e.feature_type_id == featureType ) return e; 
+                                                });
+                                                if (feature != null && feature.length > 0){
+                                                    const featureObj = feature[0] ? feature[0] : [];
+                                                    const featImage = featureObj.image_name ? featureObj.image_name : '';
+                                                    const featureImagePath = getFilePath(6, featImage);
+                                                    productCard += `<img class="cst-feature-images" src="${featureImagePath}" alt="">`
+                                                }
+                                            })
+                                            productCard += `</div>
+                                        </div>
 <div class="">
-<p class="mt-2 cst-desc cst-product-desc">${productDesc}</p>
-</div><div class="cst-page-break">`;
+<p class="p-2 card-text">${productDesc}</p>`;
 
             const sellerArray = productsData.sellerDetails ? productsData.sellerDetails : [];
 
@@ -195,15 +193,18 @@ function listproductsOnSideBar(productsData){
                     }
 
                     const sellerAddress = sStreet + ' ' + sBuildingNum + ', ' + sCity + ' ' + sZip;
-                    productCard += `<div class="row rounded-pill mb-1 cst-bg-gray cursor-pointer bring-to-front" onclick="gotoSellerDetailsScreen(${sellerId})">
-<div>
-<img class="cst-feature-images rounded-circle m-1" src="${sImagePath}" alt="">
-</div>
-<div>
-<h5 class="text-white align-self-center">${sellerName}</h5>
-</div>
 
-</div>`;
+
+                    productCard += 
+                    `<div class="d-inline-flex justify-content-start rounded-pill cst-bg-gray cursor-pointer mb-2 ml-2 mr-2 text-truncate" style="max-height:48px;" onclick="gotoSellerDetailsScreen(${sellerId})">
+                        <div>
+                            <img class="cst-feature-images rounded-circle m-1" src="${sImagePath}" alt="">
+                        </div>
+                        <div class="my-auto mr-4">
+                            <h5 class="my-auto text-secondary text-truncate">${sellerName}</h5>
+                        </div>
+                    </div>
+                </div>`;
                 }
             })
             productCard += '</div>';

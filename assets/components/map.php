@@ -60,12 +60,24 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         width: fit-content;
         color: green;
     }
+    .card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+   
+
     .cst-image-cover{
+        max-height: 150px;
+        max-width: 150px;
+        margin-top: -5px;
+        margin-left: -8px;
         object-fit: cover;
+        border-radius: 3px;
     }
     .cst-feature-images{
-        width: 30px;
-        height: 30px;
+        padding-right: 5px;
+        border-radius: 10%;
+        width: 40px;
+        height: 40px;
     }
     .cst-page-break {
         display: flex;
