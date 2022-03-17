@@ -66,15 +66,15 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
    
 
     .cst-image-cover{
-        max-height: 150px;
-        max-width: 150px;
-        margin-top: -5px;
+        max-height: 120px;
+        max-width: 120px;
+        margin-top: -4px;
         margin-left: -8px;
         object-fit: cover;
         border-radius: 3px;
     }
     .cst-feature-images{
-        padding-right: 5px;
+        margin-right: 5px;
         border-radius: 10%;
         width: 40px;
         height: 40px;
@@ -97,6 +97,10 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         line-height: 1.5em;
     }
 
+    #mapid  {
+        padding-top: 20px;
+        padding-bottom: 40px; 
+    }
 
     #mapid .leaflet-popup-content-wrapper {
         background: #dfeeea;

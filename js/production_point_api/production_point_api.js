@@ -140,17 +140,19 @@ function listproductsOnSideBar(productsData){
 
             const productSellerIds = product.sellers ? product.sellers : '';
             const productSellerIdArray = productSellerIds.split(',');
-
+            // let imageUpperPath= productCategory;
+            // let imageLowerPath = imageUpperPath.toLowerCase();
+            // <img class="cst-feature-images" src="images/icons/categories/${imageLowerPath}.png"></img>
 
             productCard = `<div class="card my-3 cursor-pointer" onClick="goToProductDetailsPage(${productId})">
                                 <div class="rounded bg-light">
-                                    <div class="row justify-content-start p-2 mx-1">
-                                        <img class="cst-image-cover" src="${productImagePath}" width="30%" height="30%" alt="">
-                                        <div class="d-flex flex-column justify-content-between mx-3">
-                                            <h5 class="text-primary card-title">${productName}</h5>
-                                            <p class="text-secondary">${productCategory}</p>
+                                    <div class="d-flex flex-row justify-content-start p-2 mx-1">
+                                        <img class="cst-image-cover" src="${productImagePath}">
+                                        <div class="d-flex flex-column justify-content-around mx-3">
+                                            <h5 class="text-primary">${productName}</h5>                                             
+                                            <p class="font-italic my-auto text-secondary">${productCategory}</p>
                                             <h5class="text-secondary">€${price}/${productUnit}</h5></div>
-                                            <div class="align-self-center mx-1 p-3">`,
+                                                <div class="d-flex flex-wrap justify-content-around ml-auto">`,
 
 
                                                 productFeatureArray.forEach(function(featureType){
@@ -161,13 +163,13 @@ function listproductsOnSideBar(productsData){
                                                     const featureObj = feature[0] ? feature[0] : [];
                                                     const featImage = featureObj.image_name ? featureObj.image_name : '';
                                                     const featureImagePath = getFilePath(6, featImage);
-                                                    productCard += `<img class="cst-feature-images" src="${featureImagePath}" alt="">`
+                                                    productCard += `<img class="p-2 cst-feature-images" src="${featureImagePath}" alt="">`
                                                 }
                                             })
                                             productCard += `</div>
                                         </div>
-<div class="">
-<p class="p-2 card-text">${productDesc}</p>`;
+                                    <div class="">
+                                        <p class="p-2 card-text">${productDesc}</p>`;
 
             const sellerArray = productsData.sellerDetails ? productsData.sellerDetails : [];
 

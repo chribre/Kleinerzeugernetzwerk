@@ -58,7 +58,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
 <div id="nav_bar" class="shadow-sm">
 
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-fixed-top my-0">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top my-0">
         <a class="navbar-brand" href="<?php echo $HOME_LOC ?>">
 
 
