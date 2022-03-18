@@ -25,7 +25,9 @@
     CartoDB_Positron.addTo(mymap);
 
     var popup = L.popup();
-
+    window.setTimeout(function() {
+        mymap.invalidateSize();
+    }, 4000);
     
 /*
     FUNCTION    :   function returns address of latitude and logitude from osm using nominatim : geocoding

@@ -8,10 +8,16 @@
 ****************************************************************/
 ?>
 <div id="sellerMap"></div>
+<style>
+    #sellerMap { 
+        height: 300px; 
+    }
+</style>
 <script>
 
     // initialize the map
-    var sellerMap = L.map('sellerMap').setView([53.55657001703077, 13.246793875395099], 15);
+    var sellerMap = L.map('sellerMap').setView([53.55657001703077, 13.246793875395099], 12);
+         
     sellerMap.on('click', onSellerMapClick);
 
     // load a tile layer
@@ -34,7 +40,11 @@
     CartoDB_Positron.addTo(sellerMap);
 
     var popup = L.popup();
-
+    
+    window.setTimeout(function() {
+        sellerMap.invalidateSize();
+    }, 4000);
+    
 /*
     FUNCTION    :   function returns address of latitude and logitude from osm using nominatim : geocoding
     INPUT       :   event containing latitude and longitude
@@ -144,8 +154,3 @@
 
 </script>
 
-<style>
-    #sellerMap { 
-        height: 300px; 
-    }
-</style>
