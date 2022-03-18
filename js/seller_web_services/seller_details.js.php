@@ -512,9 +512,9 @@ function showSellerSidebar(sellerData){
     const productsCount = productDetails.length;
 
 
-    sellerSideBarUI += `<img src="${sImagePath}" width="100%" height="220px"  style="object-fit: cover;" alt="">
+    sellerSideBarUI += `<img class="cursor-pointer" onclick="gotoSellerDetailsScreen(${sellerId})" src="${sImagePath}" width="100%" height="220px"  style="object-fit: cover;" alt="">
 <div class="p-2">
-<h4>${sellerName}</h4>
+<h4 class="cursor-pointer" onclick="gotoSellerDetailsScreen(${sellerId})">${sellerName}</h4>
 <p class="text-dark cst-desc">${sDesc}</p>
 
 
