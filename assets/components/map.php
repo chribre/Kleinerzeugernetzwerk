@@ -126,7 +126,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         <!--        <img class="category-icon" width="30px" height="30px" src="https://img-premium.flaticon.com/png/512/847/847581.png?token=exp=1621266229~hmac=6a680992b11ab1c9b1631dbde5800e7c" alt="">-->
     </div>
 
-    <ul class="fab-options" id="category-options">
+    <ul class="fab-options category-list" id="category-options">
 
     </ul>
 </div>
@@ -972,6 +972,12 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         min-width: 100 px !important;
         max-height: 300px;
         overflow: auto;
+    }
+    
+    .category-list {
+        height:auto;
+        max-height: 60vh;
+        overflow:auto;   
     }
 
 </style>
