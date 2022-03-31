@@ -79,10 +79,11 @@
         left: 460px; }
       .leaflet-sidebar.right.visible ~ .leaflet-right {
         right: 460px; } }
+        
   .leaflet-sidebar .close {
     position: absolute;
-    right: 20px;
-    top: 20px;
+    right: 30px;
+    top: 70px;
     width: 31px;
     height: 31px;
     color: #333;
@@ -90,10 +91,11 @@
     line-height: 1em;
     text-align: center;
     background: white;
-    -webkit-border-radius: 16px;
-    border-radius: 16px;
+    border: 2px solid;
+    border-color: gainsboro;
+    border-radius: 50%;
     cursor: pointer;
-    z-index: 8; }
+    z-index: 800; }
 
 .leaflet-left {
   transition: left 0.5s; }

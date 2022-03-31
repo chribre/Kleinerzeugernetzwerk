@@ -34,9 +34,7 @@ $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min
         <link rel="stylesheet" type="text/css" href="<?php echo $SIDE_BAR_CSS ?>" />
 
         <!--    LEAFLET JS-->
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-              integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-              crossorigin=""/>
+        <link rel="stylesheet" href="assets/leaflet/leaflet.css">
 
         <!-- Make sure you put this AFTER Leaflet's CSS -->
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"

@@ -107,9 +107,8 @@ function listproductsOnSideBar(productsData){
                 <img class="rounded-circle" src="images/icons/oecolor/E040.svg" id="socialImage" alt="twitter">
             </div>
 
-        <div class= "p-2">
+        <div class= "my-auto p-2">
             <p class="my-auto font-weight-bold text-dark">${productsCount} products</p>
-        
         </div>
 </div>`;
 

@@ -52,13 +52,14 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         background-color: gainsboro;
     }
     #mapSidebar{
+        top: 40px;
         font-family: roboto;
         font-size: 1.2em;
         background-color: gainsboro;
     }
     #sidebar-details {
-        width: fit-content;
-        color: green;
+        
+        
     }
     .card:hover {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -105,7 +106,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     #mapid .leaflet-popup-content-wrapper {
         background: #dfeeea;
         border: 1px solid #dfeeea;
-        border-radius: 5px;
+        border-radius: 50px;
     }
 
 </style>
@@ -157,14 +158,14 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
 </div>
 
 
-<div class="p-0" id="mapSidebar">
+<div class="p-1" id="mapSidebar">
 
 
     <!--Selling point side bar-->
 
 
 
-    <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80" width="100%" height="220px"  style="object-fit: cover;" alt="">
+    <img class="nopadding" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2134&q=80" width="100%" height="220px"  style="object-fit: cover;" alt="">
     <div class="p-2">
         <h4>Selling Point Name</h4>
         <p class="text-dark cst-desc">In the tranquil idyll of the family game My Farm Shopplayers can experience just that without leaving their home. In turn, three dice are thrown each turn. The active player uses one die to choose a new expansion for his farm. The combination of the other two dice determines which field is activated on the farm - not only for the active player, but also for everyone else. The extensions improve the actions with which the players milk cows, shear sheep, harvest honey or collect eggs. These raw materials can then be sold. Whoever made the most money in the end wins.</p>
@@ -434,7 +435,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
             }
 
 
-            const farmPopupContent = `<div class="hover-background"><a data-id="${productionPointId}" onclick="viewProductionPointInDetail(${productionPointId}, listproductsOnSideBar)" style="text-decoration: none" id="productionPointLoc"><div class="d-inline-flex m-1 p-1"> <img src="${imagePath}" alt="" width="90px" height="60px" style="object-fit: cover;" class="m-auto"> <div class="pl-2"> <div id="productTitle">${productionPointName}</div> <div>${productionPointAddress}</div> </div> </div></a></div>`;
+            const farmPopupContent = `<a data-id="${productionPointId}" onclick="viewProductionPointInDetail(${productionPointId}, listproductsOnSideBar)" style="text-decoration: none" id="productionPointLoc"><div class="d-inline-flex m-1 p-1"> <img src="${imagePath}" alt="" width="60px" height="60px" style="object-fit: cover; border-radius:50%" class="m-auto"> <div class="my-auto pl-2"> <div id="productTitle">${productionPointName}</div> <div>${productionPointAddress}</div> </div> </div></a>`;
 
 
 
@@ -530,7 +531,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
             }
 
 
-            const sellerPopupContent = `<div class="hover-background"><a data-id="${sellerId}" style="text-decoration: none" id="sellerLoc" onclick="viewSellerInDetail(${sellerId}, showSellerSidebar)"><div class="d-inline-flex m-1 p-1"> <img src="${imagePath}" alt="" width="90px" height="60px" style="object-fit: cover;" class="m-auto"> <div class="pl-2"> <div id="productTitle">${sellerName}</div> <div>${sellerAddress}</div> </div> </div></a></div>`;
+            const sellerPopupContent = `<a data-id="${sellerId}" style="text-decoration: none" id="sellerLoc" onclick="viewSellerInDetail(${sellerId}, showSellerSidebar)"><div class="d-inline-flex m-1 p-1"> <img src="${imagePath}" alt="" width="60px" height="60px" style="object-fit: cover; border-radius:50%" class="m-auto"> <div class="my-auto pl-2"> <div id="productTitle">${sellerName}</div> <div>${sellerAddress}</div> </div> </div></a>`;
 
 
 
@@ -978,23 +979,13 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
         box-shadow: none;
     }
 
-    .leaflet-popup-content-wrapper {
-        background: #e7e7e7;
-        border-radius: 2px;
-    }
+ 
 
     .leaflet-popup {
         position: absolute;
         text-align: center;
     }
 
-    .leaflet-popup-content {
-        margin-top: 20px;
-        margin-right: 2px;
-        padding-right: 12px;
-        min-width: 100 px !important;
-        max-height: 300px;
-        overflow: auto;
-    }
+
 
 </style>

@@ -366,7 +366,7 @@ function showSellerSidebar(sellerData){
             <img class="rounded-circle" src="images/icons/oecolor/E040.svg" id="socialImage" alt="twitter">
         </div>
     <div>
-        <p class="text-dark my-auto">${productsCount} products</p>
+        <p class="my-auto text-dark my-auto">${productsCount} products</p>
     </div>
 </div>`;
 
