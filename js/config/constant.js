@@ -2,7 +2,7 @@ function getServerRootAddress(){
     const localServer = 'http://localhost';
     const testServer = 'http://202.61.242.150'
 
-    return testServer;
+    return localServer;
 }
 
 function getChatServerURL(){
@@ -47,8 +47,8 @@ function getFilePath(fileType, fileName){
     }
 
 
-//    const filePath = localServer + folderPath + file;
-    const filePath = testServer + folderPath + file;
+   const filePath = localServer + folderPath + file;
+    // const filePath = testServer + folderPath + file;
 
     return filePath;
 }

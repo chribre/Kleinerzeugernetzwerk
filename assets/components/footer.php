@@ -28,8 +28,7 @@ $POPPER_JS = '/kleinerzeugernetzwerk/js/popper.js';
 <!--Enjoy hint in project-->
 <script src="/kleinerzeugernetzwerk/js/onboarding/onboarding.js"></script>
 
-<hr class="rounded">
-<div class="d-flex col-md-12 mx-auto">
+<footer class="d-flex col-md-8 mx-auto">
 <!--
     <div class="row justify-content-around d-flex col-md-12 mx-auto">
         <div class="col-md-4 mx-auto">
@@ -73,7 +72,7 @@ $POPPER_JS = '/kleinerzeugernetzwerk/js/popper.js';
         </div>
     </div>
 -->
-</div>
+</footer>
 <p class="text-center"><?php echo gettext("Copyright"); ?> &copy; 2021 Kleinerzeugernetzwerk. <?php echo gettext("All rights reserved."); ?> <a href="" data-toggle="modal" data-target="#termsAndConditionsModal"><?php echo gettext("Terms of Use"); ?></a> | <a href="" data-toggle="modal" data-target="#privacyPolicyModal"><?php echo gettext("Privacy Policy"); ?></a></p>
 </body>
 </html>
