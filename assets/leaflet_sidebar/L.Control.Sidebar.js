@@ -31,7 +31,7 @@ L.Control.Sidebar = L.Control.extend({
         if (this.options.closeButton) {
             var close = this._closeButton =
                 L.DomUtil.create('a', 'close', container);
-            close.innerHTML = '&times;';
+            close.innerHTML = '<img src="images/icons/oecolor/274C.svg">';
         }
     },
 
