@@ -332,11 +332,10 @@ function showSellerSidebar(sellerData){
     const productsCount = productDetails.length;
 
 
-    sellerSideBarUI += `<img src="${sImagePath}" width="100%" height="220px"  style="object-fit: cover;" alt="">
-
+    sellerSideBarUI += `<img class="cursor-pointer" onclick="gotoSellerDetailsScreen(${sellerId})" src="${sImagePath}" width="100%" height="220px"  style="object-fit: cover;" alt="">
 <div class="p-2">
-    <h4>${sellerName}</h4>
-    <p class="text-dark cst-desc">${sDesc}</p>
+<h4 class="cursor-pointer" onclick="gotoSellerDetailsScreen(${sellerId})">${sellerName}</h4>
+<p class="text-dark cst-desc">${sDesc}</p>
 
 <ul class="list-group" id="outerdiv">
         <li class="list-group-item  list-group-item-light list-group-item-action">
@@ -420,6 +419,7 @@ $(document).ready(function() {
             if (productionPointLat > 0 && productionPointLong > 0 && latitude > 0 && longitude > 0){
                 createConnectionBetweenSellerAndProductionPoint(latitude, longitude, productionPointLat, productionPointLong);
             }
+
 
             sellerSideBarUI += `<div class="card my-3 cursor-pointer" onClick="goToProductDetailsPage(${productId})">
                                     <div class="rounded bg-light">

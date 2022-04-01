@@ -208,7 +208,7 @@ function changePassword($email, $password, $token){
         var_dump($exception);
         throw $exception;
     }        
-    http_response_code(409);
+    http_response_code(10000);
     return false;
 }
 ?>

@@ -1,16 +1,20 @@
 <?php 
 
 /****************************************************************
-   FILE             :   getCache.php
+   FILE             :   chat_auth.php
    AUTHOR           :   Fredy Davis
    LAST EDIT DATE   :   11.02.2021
 
-   PURPOSE          :   CRUD operations on product model. 
-                        add new products, edit product details, delete a product.
+   PURPOSE          :   CRUD operations on rocket chat. 
+                        add new user to chat, login user to chat system.
 ****************************************************************/
 require_once("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/config/constants.php");
 
 function registerUserToChat($userId, $email, $name, $password){
+    $isChatEnabled = isRocketChatEnabled();
+    if ($isChatEnabled == false){
+        return false;
+    }
     $chatUserData = [];
     $data = [
         "username" => createUserName($email),
