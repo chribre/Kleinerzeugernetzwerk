@@ -25,13 +25,9 @@ function showError(errorCode, title, message){
         case 409:
             errorTitle = 'User already exist!';
             errorMessage = 'A user with the email address exists. Try sign in';
-        case 10000:
+        case 460:
             errorTitle = 'Error reset password';
             errorMessage = 'Unable to reset password due to an unknown error. PLease check the inforamtion provided and try again.';
-        default:
-            errorTitle = 'Error';
-            errorMessage = 'Oops! Something went wrong. Try again.';
-            
     }
     document.getElementById('error-title').innerHTML = errorTitle;
     document.getElementById('error-message').innerHTML = errorMessage;

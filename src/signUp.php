@@ -50,18 +50,6 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
     <!--Form to capure data from user for registration-->
     <div class="registration_form">
         <form enctype="multipart/form-data" class="" onsubmit="event.preventDefault()">
-           
-<div class="image_container mb-5">
-   <div class="image_outer">
-   <img id="profileImage" src="../images_1/profile_placeholder.png" class="mx-auto d-block rounded-circle" width="150px" height="150px" style="object-fit: cover;">
-    <div class="image_inner">
-    <input class="image_inputfile" type="file" name="file" accept="image/*" onchange="document.getElementById('profileImage').src = window.URL.createObjectURL(this.files[0])">
-    <label><img id="editprofileImage" src="../images/icons/camera.svg" class="mx-auto my-auto rounded-circle" width="18px" height="28px" style="object-fit: cover;"></label>
-    <input type="hidden" name="profileImageId" value=0 id="profileImageId">
-    </div>
-  </div>
-</div>
-<!--
             <div  class="rounded-circle pb-4" width="152px" height="152px">
                 <img id="profileImage" src="../images/profile_placeholder.png" class="mx-auto d-block rounded-circle" width="150px" height="150px" style="object-fit: cover;">
                 <label class="btn btn-default">
@@ -69,7 +57,6 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
                 </label>
                 <input type="hidden" name="profileImageId" value=0 id="profileImageId">
             </div>
--->
 
             <div class="form-row">
 
@@ -509,62 +496,6 @@ Please provide Date of Birth.
     </div>
 
 </div>
-<style>
-.image_container {
-  width: 150px;
-  height: 150px;
-  display: block;
-  margin: 0 auto;
-}
 
-.image_outer {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 150px !important; /* any size */
-  max-height: 150px !important; /* any size */
-  margin: auto;
-  background-color: #6eafd4;
-  border-radius: 100%;
-  position: relative;
-  }
-  
-.image_inner {
-  background-color: white;
-  width: 32px;
-  height: 32px;
-  border-radius: 100%;
-  position: absolute;
-  bottom: 0;
-  right: 0;
-}
-
-.image_inner:hover {
-  background-color: gainsboro;
-}
-.image_inputfile {
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: 1;
-    width: 32px;
-    height: 32px;
-}
-.image_inputfile + label {
-    font-size: 1.25rem;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: inline-block;
-    overflow: hidden;
-    width: 32px;
-    height: 32px;
-    pointer-events: none;
-    cursor: pointer;
-    line-height: 32px;
-    text-align: center;
-}
-.image_inputfile + label svg {
-    fill: #fff;
-}
-</style>
 <?php include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/footer.php");?>
 

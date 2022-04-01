@@ -224,7 +224,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php?menu=profile&data=pers
     OUTPUT      :   set login button if not logged in, set profile picture if already logged in
 */
         function setLoginOrProfileButton(){
-            const signInButton = '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right" id="signInOrProfileBtn"><?php echo gettext("Sign In"); ?></button>';       
+            const signInButton = '<button data-toggle="modal" data-target="#elegantModalForm" type="button" class="btn btn-primary rounded-pill font-weight-bold text-white px-4 mx-3 float-right id="signInOrProfileBtn"><?php echo gettext("Sign In"); ?></button>';       
 
 
             //        if (!$('#signInOrProfileBtn').length > 0) {

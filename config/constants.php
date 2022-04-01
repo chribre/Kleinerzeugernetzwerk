@@ -14,9 +14,7 @@ $VIEW_PROFILE = '/kleinerzeugernetzwerk/src/dashboard.php';
 
 
 
-function isRocketChatEnabled(){
-    return false;
-}
+
 
 function getChatServerURL(){
     return 'http://202.61.242.150:3000';

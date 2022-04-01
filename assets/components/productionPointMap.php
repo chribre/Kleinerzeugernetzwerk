@@ -25,9 +25,7 @@
     CartoDB_Positron.addTo(mymap);
 
     var popup = L.popup();
-    window.setTimeout(function() {
-        mymap.invalidateSize();
-    }, 4000);
+
     
 /*
     FUNCTION    :   function returns address of latitude and logitude from osm using nominatim : geocoding
@@ -37,20 +35,17 @@
     function onMapClick(e) {
         const lat = e.latlng.lat;
         const lon = e.latlng.lng;
-        var displayAddr = 'Address not found!'
         let url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=27&addressdetails=1`
         fetch(url)
             .then(response => response.json())
             .then(data => {
             console.log(data)
             if (data != null){
-                let street = data.address.road ? data.address.road : '';
-                let houseNum = data.address.house_number ? data.address.house_number : '';
-                let city = data.address.city ? data.address.city : '';
-                let zip = data.address.postcode ? data.address.postcode : '';
+                let street = data.address.road
+                let houseNum = data.address.house_number
+                let city = data.address.town
+                let zip = data.address.postcode
 
-                displayAddr = data.display_name ? data.display_name : displayAddr;
-                
                 console.log(street)
                 console.log(houseNum)
                 console.log(city)
@@ -65,8 +60,6 @@
 
                 document.getElementById('latitude').value = lat;
                 document.getElementById('longitude').value = lon;
-                
-                popup.setContent(displayAddr)
             }else{
                 document.getElementById('latitude').value = "";
                 document.getElementById('longitude').value = "";
@@ -77,7 +70,7 @@
 
         popup
             .setLatLng(e.latlng)
-            .setContent(displayAddr)
+            .setContent("You clicked the map at " + e.latlng.toString())
             .openOn(mymap);
     }
 
@@ -93,8 +86,6 @@
         const street = houseNumber + " " + document.getElementById("street").value;
         const city = document.getElementById("city").value;
         const zip = document.getElementById("zipCode").value;
-        
-        var displayAddr = 'Address not found!'
 
         let url = `https://nominatim.openstreetmap.org/search?format=json&street=${street}&city=${city}&postalcode=${zip}&zoom=27&addressdetails=1`
         fetch(url)
@@ -107,14 +98,13 @@
                 let latitude = data[0].lat
                 let longitude = data[0].lon
                 let address = data[0].address
-                displayAddr = data[0].display_name ? data[0].display_name : displayAddr;
                 console.log(latitude)
                 console.log(longitude)
 
                 let latlong = {lat: latitude, lng: longitude}
                 popup
                     .setLatLng(latlong)
-                    .setContent(displayAddr)
+                    .setContent("You clicked the map at " + latlong.toString())
                     .openOn(mymap);
                 document.getElementById('latitude').value = latitude;
                 document.getElementById('longitude').value = longitude;

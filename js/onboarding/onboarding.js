@@ -14,7 +14,6 @@ function isOnboardingShown(){
 
 function storeOnboardingShown(){
     localStorage.setItem('onboardingShown', true);
-    location.reload();
 }
 
 
@@ -64,10 +63,10 @@ function createOnBoarding(elementsExists){
             'next #signInOrProfileBtn' : 'Click the "Sign In" button to sign up or sign in into the system and <br> access your dashboard to manage your products, production points, selling points other profile informations.'
         },
         {
-            'next #search-bar': 'Type here to search products, production points, seller or producers.'
+            "next #search-bar": "Type here to search products, production points, seller or producers."
         },
         {
-            'next #category-menu': 'Click here to filter data in the map based on product categories.'
+            "next #category-menu": "Click here to filter data in the map based on product categories."
         },
     ];
 

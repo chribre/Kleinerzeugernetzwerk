@@ -67,8 +67,7 @@ function listproductsOnSideBar(productsData){
     const products = productsData.productDetails ? productsData.productDetails : [];
     const productsCount = products.length;
 
-
-    sideBarUI = `<img class="cursor-pointer" onclick="goToProductionPointDeatailsScreen(${ppId})" src="${ppImagePath}" width="100%" height="220px"  style="object-fit: cover;" alt="">
+    sideBarUI = `<img src="${ppImagePath}" width="100%" height="220px"  style="object-fit: cover;" alt="">
 
 <div id="sidebar-details" class="p-1">
     <div class="">

@@ -71,7 +71,7 @@
                                         $profileHead = $profileHead . '<a class="btn btn-success" href="/kleinerzeugernetzwerk/src/editProfile.php" ><i class="edit icon"></i>'.gettext("Edit profile").'</a>';
                                     }elseif ($_GET['data'] == 'productionPoint'){
                                         $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'. gettext("PRODUCTION POINTS") . '</text></div>';
-                                        $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddProductionPointModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>'.gettext("Add Production Point").'</button>';
+                                        $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddProductionPointModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>'.gettext("Add Farm Land").'</button>';
                                     }elseif ($_GET['data'] == 'seller'){
                                         $profileHead = '<text style="font-size: 25px; font-weight: 700; vertical-align: middle;" id="dashboardTitle" class="ml-3">'.gettext("SELLERS").'</text></div>';
                                         $profileHead = $profileHead . '<button class="btn btn-success" data-toggle="modal" onclick="openAddSellarModal()" data-backdrop="static" data-keyboard="false"><i class="plus icon"></i>'.gettext("Add Selling Point").'</button>';
