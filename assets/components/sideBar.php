@@ -13,7 +13,8 @@
 
             <ul class="list-unstyled components mb-5">
                 <li class="active">
-                    <a href='dashboard.php?menu=profile&data=personal'><span class="fa fa-user"></span> <?php echo gettext("Profile"); ?></a>
+                    <a href='dashboard.php?menu=profile&data=personal'><span class="fa fa-user">
+                    </span> <?php echo gettext("Profile"); ?></a>
                 </li>
                 <li>
                     <a href='dashboard.php?menu=products'><span class="fa fa-shopping-basket"></span> <?php echo gettext("Products"); ?></a>

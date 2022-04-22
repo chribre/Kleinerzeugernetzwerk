@@ -15,7 +15,7 @@ if (session_status() == PHP_SESSION_NONE) {
 //$HOME_CSS_LOC = '/kleinerzeugernetzwerk/css/custom/home.css';
 include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.php");
 ?>
-
+<link rel="stylesheet" href="/kleinerzeugernetzwerk/css/custom/roundCheckbox.css">
 <div class="modal" id="registerSuccessModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -55,7 +55,7 @@ include("$_SERVER[DOCUMENT_ROOT]/kleinerzeugernetzwerk/assets/components/header.
    <div class="image_outer">
    <img id="profileImage" src="../images_1/profile_placeholder.png" class="mx-auto d-block rounded-circle" width="150px" height="150px" style="object-fit: cover;">
     <div class="image_inner">
-    <input class="image_inputfile" type="file" name="file" accept="image/*" onchange="document.getElementById('profileImage').src = window.URL.createObjectURL(this.files[0])">
+    <input id="profileImageFile"  class="image_inputfile" type="file" name="file" accept="image/*" onchange="document.getElementById('profileImage').src = window.URL.createObjectURL(this.files[0])">
     <label><img id="editprofileImage" src="../images/icons/camera.svg" class="mx-auto my-auto rounded-circle" width="18px" height="28px" style="object-fit: cover;"></label>
     <input type="hidden" name="profileImageId" value=0 id="profileImageId">
     </div>
@@ -198,6 +198,19 @@ Please provide Date of Birth.
                     </div>
                 </div>
             </div>
+           
+           
+            <div class="form-row">
+                <div class="col-md-11 mb-3 my-auto font-weight-bold">
+                    <label for="professionaProducer"><?php echo gettext("Are you a professional producer"); ?></label>
+                </div>
+                <div class="col-md-1 mb-3 my-auto">
+                    <label class="switch"> 
+                        <input id="professionalProducer" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
 
             <div class="form-row">
                 <div class="col-md-12 mb-3">
@@ -274,7 +287,7 @@ Please provide Date of Birth.
             }
 
             function fetchValueFromForm(){
-                const ids = ['first_name', 'last_name', 'bio', 'street', 'house_number', 'zip', 'city', 'country', 'phone', 'r_email', 'r_password', 'psw_repeat', 'userId','profileImageId'];
+                const ids = ['first_name', 'last_name', 'bio', 'street', 'house_number', 'zip', 'city', 'country', 'phone', 'r_email', 'r_password', 'psw_repeat', 'userId','profileImageId', 'professionalProducer'];
                 var formData = [];
 
                 ids.forEach(function(element) {
@@ -284,8 +297,13 @@ Please provide Date of Birth.
                             const imageId = [parseInt(value)];
                             formData[element] = imageId;
                         default:
-                            const value1 = document.getElementById(element).value != null ? document.getElementById(element).value: "";
-                            formData[element] = value1;
+                            if (document.getElementById(element).type == "checkbox"){
+                                const value = document.getElementById(element).checked != null ? document.getElementById(element).checked: false;
+                                formData[element] = value;
+                            }else{
+                                const value1 = document.getElementById(element).value != null ? document.getElementById(element).value: "";
+                                formData[element] = value1;
+                            }
 
                     }
                 }); 
@@ -299,22 +317,6 @@ Please provide Date of Birth.
             function signUp(){
                 const formData = fetchValueFromForm();
                 const profielFormData = createProfileFormData(formData);
-
-
-                //                const firstName = document.getElementById("first_name").value != null ? document.getElementById("first_name").value: "";
-                //                const lastName = document.getElementById("last_name").value != null ? document.getElementById("last_name").value: "";
-                //                const description = document.getElementById("bio").value != null ? document.getElementById("bio").value: "";
-                //                const dob = document.getElementById("dob_date_picker").value != null ? document.getElementById("dob_date_picker").value: "";
-                //                const street = document.getElementById("street").value != null ? document.getElementById("street").value: "";
-                //                const houseNumber = document.getElementById("house_number").value != null ? document.getElementById("house_number").value: "";
-                //                const zip = document.getElementById("zip").value != null ? document.getElementById("zip").value: "";
-                //                const city = document.getElementById("city").value != null ? document.getElementById("city").value: "";
-                //                const country = document.getElementById("country").value != null ? document.getElementById("country").value: "";
-                //                const mobile = document.getElementById("mobile").value != null ? document.getElementById("mobile").value: "";
-                //                const phone = document.getElementById("phone").value != null ? document.getElementById("phone").value: "";
-                //                const email = document.getElementById("r_email").value != null ? document.getElementById("r_email").value: "";
-                //                const password = document.getElementById("r_password").value != null ? document.getElementById("r_password").value: "";
-                //                const repeatPassword = document.getElementById("psw_repeat").value != null ? document.getElementById("psw_repeat").value: "";
 
                 $.ajax({
                     type: "POST",
@@ -386,6 +388,7 @@ Please provide Date of Birth.
                 formDataCollection.append("password", profileData.r_password);
 
                 formDataCollection.append("profile_image_id", JSON.stringify([parseInt(profileImageId)]));
+                formDataCollection.append("is_professional", profileData.professionalProducer ? 1 : 0);
 
                 return formDataCollection;
             }
@@ -421,6 +424,7 @@ Please provide Date of Birth.
                 //                document.getElementById("mobile").value = userData.mobile ? userData.mobile : ""; 
                 document.getElementById("phone").value = userData.phone ? userData.phone : "";
                 document.getElementById("userId").value = userData.userId ? userData.userId : "";
+                document.getElementById("professionalProducer").checked = checkboxStatus(userData.isProfessional ? userData.isProfessional : 0);
                 
                 const profileImageName = userData.imageName ? userData.imageName : DEFAULT_USER_IMAGE;
                 const profileImage = getFilePath(1, profileImageName);
@@ -459,6 +463,15 @@ Please provide Date of Birth.
                     }
                 });
             }
+            
+            function checkboxStatus(value){
+                if (value){
+                    if (value == 1 || value == 'on'){
+                        return true;
+                        }
+                    }
+                return false;
+}
 
             function saveUserProfile(){
                 const formData = fetchValueFromForm();
@@ -503,6 +516,7 @@ Please provide Date of Birth.
                 localStorage['userName'] = name;
                 localStorage['profileImagePath'] = data.imagePath ? data.imagePath : "";
                 localStorage['profileImageName'] = data.imageName ? data.imageName : "";
+                localStorage['isProfessional'] = data.isProfessional ? data.isProfessional : 0;
                 
             }
         </script>

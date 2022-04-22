@@ -25,17 +25,17 @@
 
 <?php ob_start();
 
-//$db['db_host'] = "localhost";
-//$db['db_user'] = "root";
-//$db['db_pass'] = "";
-//$db['db_name'] = "kleinerzeugernetzwerk";
+$db['db_host'] = "localhost";
+$db['db_user'] = "root";
+$db['db_pass'] = "";
+$db['db_name'] = "kleinerzeugernetzwerk";
 
 
 //Production test server config
-$db['db_host'] = "202.61.242.150";
-$db['db_user'] = "kn";
-$db['db_pass'] = "kleinerzeugernetzwerk";
-$db['db_name'] = "kleinerzeugernetzwerk";
+//$db['db_host'] = "202.61.242.150";
+//$db['db_user'] = "kn";
+//$db['db_pass'] = "kleinerzeugernetzwerk";
+//$db['db_name'] = "kleinerzeugernetzwerk";
 
 
 foreach($db as $key => $value){

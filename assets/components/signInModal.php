@@ -182,6 +182,7 @@ href="#forgot-password-modal"><?php echo gettext("Forgot password?"); ?></a>
             localStorage['profileImagePath'] = data.imagePath ? data.imagePath : '';
             localStorage['profileImageName'] = data.imageName ? data.imageName : '';
             localStorage['isChatLoggedIn'] = false;
+            localStorage['isProfessional'] = data.isProfessional ? data.isProfessional : 0;
             if (data.chatUserId && data.chatAuthToken){
                 localStorage['isChatLoggedIn'] = true;
                 localStorage['chatUserId'] = data.chatUserId;

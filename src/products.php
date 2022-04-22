@@ -205,7 +205,7 @@ Add a new product
                     const categoryId = element['category_id'] != null ? element['category_id'] : 0;
                     const categoryName = element['category_name'] != null ? element['category_name'] : "";
                     const categoryDesc = element['category_description'] != null ? element['category_description'] : "";
-
+                    
                     categoryOptions += `<option value="${categoryId}" >${categoryName}</option>`
 
                 })
@@ -228,8 +228,16 @@ Add a new product
                     const featureId = element['feature_type_id'] != null ? element['feature_type_id'] : 0;
                     const featureName = element['feature_name'] != null ? element['feature_name'] : "";
                     const featureDesc = element['feature_description'] != null ? element['feature_description'] : "";
-
-                    featureOptions += `<option value="${featureId}" >${featureName}</option>`
+                    const isProfessional = element['is_professional_feature'] != null ? element['is_professional_feature'] : false;
+                    
+                    if (localStorage['isProfessional'] == 1){
+                        featureOptions += `<option value="${featureId}" >${featureName}</option>`
+                    }else{
+                        if (isProfessional != 1){
+                            featureOptions += `<option value="${featureId}" >${featureName}</option>`
+                        }
+                    }
+                    
                 })
             }
             document.getElementById("productFeatures").innerHTML = featureOptions;

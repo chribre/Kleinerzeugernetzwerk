@@ -182,7 +182,7 @@ function getUserDetails($userId){
         $_SESSION["email"] = $email;
         $userData["userName"] = $fName." ".$mName." ".$lName;
         $userData["email"] = $email;
-
+        $userData['isProfessional'] = $row['is_professional'];
         $userData['imagePath'] = $row['image_path'];
         $userData['imageName'] = $row['image_name'];
         return $userData;
@@ -679,6 +679,10 @@ function parseFileData($files, $fileIds){
 
     $productImageFileName = [];
     $imageIds = $fileIds;
+    
+    $deleteImageCount = 0;
+    $addNewImageCount = 0;
+
 
     if ($imageCount > 0){
         foreach ($files as &$name) {
@@ -687,15 +691,21 @@ function parseFileData($files, $fileIds){
             array_push($productImageFileName,$newFileName);
 
         }
-    }
+    
     $deleteImageCount = $imageIdCount - $imageCount;
     $addNewImageCount = $imageCount - $imageIdCount; 
+    
+    }
 
     if ($deleteImageCount > 0){
         $productImageFileName = array_pad($productImageFileName, $imageIdCount, "");
+    }else{
+        $productImageFileName = [];
     }
     if ($addNewImageCount > 0){
         $imageIds = array_pad($imageIds, $imageCount, 0);
+    }else{
+        $imageIds = [];
     }
 
     return ['fileName' => $productImageFileName, 'fileIds' => $imageIds];

@@ -23,6 +23,7 @@ class user{
     public $isActive;
     public $isBlocked;
     public $description;
+    public $isProfessional;
     
     public $imagePath;
     public $imageName;
@@ -49,8 +50,8 @@ class user{
         $this->isActive = isset($userData['is_active']) ? escapeSQLString($userData['is_active']) : 0;
         $this->isBlocked = isset($userData['is_blocked']) ? escapeSQLString($userData['is_blocked']) : 0;
         $this->description = isset($userData['description']) ? escapeSQLString($userData['description']) : "";
-        
-        
+        $this->isProfessional = isset($userData['is_professional']) ? escapeSQLString($userData['is_professional']) : false;
+    
         $this->imagePath = isset($userData['image_path']) ? escapeSQLString($userData['image_path']) : "";
         $this->imageName = isset($userData['image_name']) ? escapeSQLString($userData['image_name']) : "";
         $this->imageId = isset($userData['image_id']) ? escapeSQLString($userData['image_id']) : 0;

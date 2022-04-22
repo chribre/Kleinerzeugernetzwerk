@@ -23,7 +23,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
         switch ($action){
             case 'CREATE':
                 $password = $_POST["password"] != null ? $_POST["password"] : "";
-                echo createUser($user->userId, $user->firstName, $user->lastName, $user->dob, $user->street, $user->houseNumber, $user->zip, $user->city, $user->country, $user->phone, $user->email, $user->mobile, $user->userType, $user->isActive, $user->isBlocked,$password, $user->description, $user->profileImageIdArray, $user->profileImageNameArray);
+                echo createUser($user->userId, $user->firstName, $user->lastName, $user->dob, $user->street, $user->houseNumber, $user->zip, $user->city, $user->country, $user->phone, $user->email, $user->mobile, $user->userType, $user->isActive, $user->isBlocked,$password, $user->description, $user->profileImageIdArray, $user->profileImageNameArray, $user->isProfessional);
                 break;
             case 'READ':
                 if (isAccessTokenValid()){
@@ -34,7 +34,7 @@ switch ($_SERVER['REQUEST_METHOD']) {
                 break;
             case 'UPDATE':
                 if (isAccessTokenValid()){
-                    echo updateUserDetails($user->userId, $user->salutation, $user->firstName, $user->lastName, $user->dob, $user->street, $user->houseNumber, $user->zip, $user->city, $user->country, $user->phone, $user->mobile, $user->description, $user->profileImageIdArray, $user->profileImageNameArray);
+                    echo updateUserDetails($user->userId, $user->salutation, $user->firstName, $user->lastName, $user->dob, $user->street, $user->houseNumber, $user->zip, $user->city, $user->country, $user->phone, $user->mobile, $user->description, $user->profileImageIdArray, $user->profileImageNameArray, $user->isProfessional);
                 }else{
                     http_response_code(401);
                 }
@@ -51,14 +51,14 @@ switch ($_SERVER['REQUEST_METHOD']) {
     INPUT       :   user details -> sign up form data.
     OUTPUT      :   return true if the user is successfully registered otherwise false
 */    
-function createUser($userId, $firstName, $lastName, $dob, $street, $houseNumber, $zip, $city, $country, $phone, $email, $mobile, $userType, $isActive, $isBlocked, $password, $description,$profileImageIdArray, $profileImageNameArray){
+function createUser($userId, $firstName, $lastName, $dob, $street, $houseNumber, $zip, $city, $country, $phone, $email, $mobile, $userType, $isActive, $isBlocked, $password, $description,$profileImageIdArray, $profileImageNameArray, $isProfessional){
     global $dbConnection;
 //    $profileUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(1);
     $profileUplaodLocation = getImagePath(1);
     $profileImagepath = getServerRootAddress().getImagePath(1);
     if (!isUserAlreadyExist($email)){
-        $sql = "INSERT INTO user (salutations, first_name, last_name, dob, street, house_number, zip, city, country, phone, mobile, email, profile_image_name, user_type, is_active, is_blocked, description)"
-            . "VALUES ('$salutation', '$firstName', '$lastName', '$dob', '$street', '$houseNumber', '$zip', '$city', '$country', '$phone', '$mobile', '$email', '$profileImageName', $userType, $isActive, $isBlocked, '$description')";
+        $sql = "INSERT INTO user (salutations, first_name, last_name, dob, street, house_number, zip, city, country, phone, mobile, email, profile_image_name, user_type, is_active, is_blocked, description, is_professional)"
+            . "VALUES ('$salutation', '$firstName', '$lastName', '$dob', '$street', '$houseNumber', '$zip', '$city', '$country', '$phone', '$mobile', '$email', '$profileImageName', $userType, $isActive, $isBlocked, '$description', $isProfessional)";
 
         try{
             //            echo "trying to insert";
@@ -188,7 +188,7 @@ function getUser($userId){
     INPUT       :   user details as an array
     OUTPUT      :   returns json dictionary with all details of the user.
 */
-function updateUserDetails($userId, $salutation, $firstName, $lastName, $dob, $street, $houseNumber, $zip, $city, $country, $phone, $mobile, $description,$profileImageIdArray, $profileImageNameArray){
+function updateUserDetails($userId, $salutation, $firstName, $lastName, $dob, $street, $houseNumber, $zip, $city, $country, $phone, $mobile, $description,$profileImageIdArray, $profileImageNameArray, $isProfessional){
     global $dbConnection;
 //    $profileUplaodLocation = "$_SERVER[DOCUMENT_ROOT]".getImagePath(1);
     $profileUplaodLocation = getImagePath(1);
@@ -207,7 +207,8 @@ SET salutations = '$salutation',
     country = '$country',
     phone = '$phone',
     mobile = '$mobile',
-    description = '$description'
+    description = '$description',
+    is_professional = $isProfessional
 WHERE user_id = $userId;";
 
     try{

@@ -56,6 +56,7 @@ function loginUser($email, $password){
         $row = mysqli_fetch_array($select_user);
         if (password_verify($password, $row['password'])){
             $userId = $row['user_id'];
+            
             $token = insertSignInToken($userId);
             $userData = getUserDetails($userId);
             $loginData = $token + $userData;
