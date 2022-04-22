@@ -32,10 +32,12 @@ $db['db_name'] = "kleinerzeugernetzwerk";
 
 
 //Production test server config
+
 //$db['db_host'] = "202.61.242.150";
 //$db['db_user'] = "kn";
 //$db['db_pass'] = "kleinerzeugernetzwerk";
 //$db['db_name'] = "kleinerzeugernetzwerk";
+
 
 
 foreach($db as $key => $value){

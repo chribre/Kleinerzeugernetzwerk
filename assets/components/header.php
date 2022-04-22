@@ -26,6 +26,7 @@ $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min
 
         <!--         Bootstrap CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="css/bootstrap.css"> -->
 
         <script type="text/javascript" src="/kleinerzeugernetzwerk/js/constants.js"></script>
         <script type="text/javascript" src="/kleinerzeugernetzwerk/js/custom/common_functions.js"></script>
@@ -34,6 +35,7 @@ $DATE_PICKER_JS = '/kleinerzeugernetzwerk/assets/date_picker/datedropper.pro.min
         <link rel="stylesheet" type="text/css" href="<?php echo $SIDE_BAR_CSS ?>" />
 
         <!--    LEAFLET JS-->
+        <!-- <link rel="stylesheet" href="assets/leaflet/leaflet.css"> -->
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
               integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
               crossorigin=""/>
