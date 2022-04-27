@@ -264,7 +264,7 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     //        "features": []
     //    }
 
-
+    var noData = true;
 
     var productionPointMarker = {
         "type": "FeatureCollection",
@@ -374,6 +374,11 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
                 if (sellerCount > 0){
                     addSellersToMap(sellerData);
                 }
+                if (ppCount == 0 && sellerCount == 0 && categoryId == 0){
+                    noData = true
+                }else{
+                    noData = false
+                }
                 if (ppCount == 0 && sellerCount == 0){
                     document.getElementById('no-data-content').innerHTML = `No products available under the category '${categoryName}'`
                     $('#no-map-data-modal').modal('toggle')
@@ -393,7 +398,9 @@ $imagePath = "/kleinerzeugernetzwerk/images/default_products.jpg";
     OUTPUT      :   returns list of all production point and selling points in array of dictionaries
 */
     $('#no-map-data-modal').on('hide.bs.modal', function (e) {
-        filterMapByCategory(0)
+        if (noData == false){
+            filterMapByCategory(0)
+        }
     })
 
 /*

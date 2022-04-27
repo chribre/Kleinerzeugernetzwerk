@@ -699,13 +699,9 @@ function parseFileData($files, $fileIds){
 
     if ($deleteImageCount > 0){
         $productImageFileName = array_pad($productImageFileName, $imageIdCount, "");
-    }else{
-        $productImageFileName = [];
     }
     if ($addNewImageCount > 0){
         $imageIds = array_pad($imageIds, $imageCount, 0);
-    }else{
-        $imageIds = [];
     }
 
     return ['fileName' => $productImageFileName, 'fileIds' => $imageIds];
